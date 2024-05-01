@@ -30,6 +30,7 @@ deploy_to_development:
        - sudo rm /usr/share/nginx/client/tmp-init
        - sudo chown -R netplace:netplace /usr/share/nginx/client-backup-$(date "+%Y-%m-%d")
     # deploy
+       - sudo mkdir -p build
        - sudo rsync -av --progress build/* /usr/share/nginx/client
         # - cd /usr/share/nginx/client && sudo npm install
         # execute app
@@ -58,6 +59,7 @@ deploy_to_production:
        - sudo rm /usr/share/nginx/client/tmp-init
        - sudo chown -R netplace:netplace /usr/share/nginx/client-backup-$(date "+%Y-%m-%d")
     # deploy
+       - sudo mkdir -p build
        - sudo rsync -av --progress build/* /usr/share/nginx/client
     tags:
         - production-ec2-instance
