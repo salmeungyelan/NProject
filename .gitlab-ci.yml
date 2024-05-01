@@ -30,11 +30,9 @@ deploy_to_development:
        - sudo rm /usr/share/nginx/client/tmp-init
        - sudo chown -R netplace:netplace /usr/share/nginx/client-backup-$(date "+%Y-%m-%d")
     # deploy
-       - sudo mkdir -p build
+       - sudo mkdir -p build && sudo touch build/tmp-init
        - sudo rsync -av --progress build/* /usr/share/nginx/client
-        # - cd /usr/share/nginx/client && sudo npm install
-        # execute app
-        # - PM2_HOME=/etc/pm2daemon pm2 reload all
+       - sudo rm build/tmp-init && sudo rm /usr/share/nginx/client/tmp-init
     tags:
         - development-ec2-instance
 ## PRODUCTION STAGE, CONNECTED TO PATH /usr/share/nginx/client AT 13.237.145.229(172.31.44.90)
@@ -59,7 +57,8 @@ deploy_to_production:
        - sudo rm /usr/share/nginx/client/tmp-init
        - sudo chown -R netplace:netplace /usr/share/nginx/client-backup-$(date "+%Y-%m-%d")
     # deploy
-       - sudo mkdir -p build
+       - sudo mkdir -p build && sudo touch build/tmp-init
        - sudo rsync -av --progress build/* /usr/share/nginx/client
+       - sudo rm build/tmp-init && sudo rm /usr/share/nginx/client/tmp-init
     tags:
         - production-ec2-instance
