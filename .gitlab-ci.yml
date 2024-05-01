@@ -16,7 +16,7 @@ test:
         - echo "TEST STAGE END"
     tags:
         - development-ec2-instance
-## DEVELOPMENT STAGE, CONNECTED TO PATH /usr/src/app/netplace-api AT 13.54.155.55(172.31.43.75)
+## DEVELOPMENT STAGE, CONNECTED TO PATH /usr/share/nginx/client AT 13.54.155.55(172.31.43.75)
 deploy_to_development:
     stage: development
     only: 
