@@ -40,14 +40,6 @@ deploy_to_production:
     stage: production
     only: 
       - main
-    #before_script:
-    #    - 'command -v ssh-agent >/dev/null || ( apk add --update openssh )' 
-    #    - eval $(ssh-agent -s)
-    #    - echo "$SSH_PRIVATE_KEY_DEV" | tr -d '\r' | ssh-add -
-    #    - mkdir -p ~/.ssh
-    #    - chmod 700 ~/.ssh
-    #    - ssh-keyscan $EC2_PRIVATE_IP_DEV >> ~/.ssh/known_hosts
-    #    - chmod 644 ~/.ssh/known_hosts
     script:
     # backup
        - sudo rm -rf /usr/share/nginx/client-backup-*
