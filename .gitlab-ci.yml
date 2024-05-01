@@ -1,0 +1,63 @@
+stages:
+    - test
+    - development
+    - production
+# FEATURE TEST STAGE, NOT DEPLOYING TO SERVER
+test:
+    stage: test
+    except:
+        - main
+        - release
+    before_script:
+        - echo "TEST STAGE START"
+    script:
+        - curl ifconfig.me && hostname -I && whoami && pwd && ls -la
+    after_script:
+        - echo "TEST STAGE END"
+    tags:
+        - development-ec2-instance
+## DEVELOPMENT STAGE, CONNECTED TO PATH /usr/src/app/netplace-api AT 13.54.155.55(172.31.43.75)
+deploy_to_development:
+    stage: development
+    only: 
+      - release
+    script:
+    # backup
+       - sudo rm -rf /usr/share/nginx/client-backup-*
+       - sudo mkdir -p /usr/share/nginx/client-backup-$(date "+%Y-%m-%d")
+       - sudo mkdir -p /usr/share/nginx/client && sudo touch /usr/share/nginx/client/tmp-init
+       - sudo cp -r /usr/share/nginx/client/* /usr/share/nginx/client-backup-$(date "+%Y-%m-%d")
+       - sudo rm /usr/share/nginx/client/tmp-init
+       - sudo chown -R netplace:netplace /usr/share/nginx/client-backup-$(date "+%Y-%m-%d")
+    # deploy
+       - sudo rsync -av --progress build/* /usr/share/nginx/client
+        # - cd /usr/share/nginx/client && sudo npm install
+        # execute app
+        # - PM2_HOME=/etc/pm2daemon pm2 reload all
+    tags:
+        - development-ec2-instance
+## PRODUCTION STAGE, CONNECTED TO PATH /usr/share/nginx/client AT 13.237.145.229(172.31.44.90)
+deploy_to_production:
+    stage: production
+    only: 
+      - main
+    #before_script:
+    #    - 'command -v ssh-agent >/dev/null || ( apk add --update openssh )' 
+    #    - eval $(ssh-agent -s)
+    #    - echo "$SSH_PRIVATE_KEY_DEV" | tr -d '\r' | ssh-add -
+    #    - mkdir -p ~/.ssh
+    #    - chmod 700 ~/.ssh
+    #    - ssh-keyscan $EC2_PRIVATE_IP_DEV >> ~/.ssh/known_hosts
+    #    - chmod 644 ~/.ssh/known_hosts
+    script:
+    # backup
+       - sudo rm -rf /usr/share/nginx/client-backup-*
+       - sudo mkdir -p /usr/share/nginx/client-backup-$(date "+%Y-%m-%d")
+       - sudo mkdir -p /usr/share/nginx/client && sudo touch /usr/share/nginx/client/tmp-init
+       - sudo cp -r /usr/share/nginx/client/* /usr/share/nginx/client-backup-$(date "+%Y-%m-%d")
+       - sudo rm /usr/share/nginx/client/tmp-init
+       - sudo chown -R netplace:netplace /usr/share/nginx/client-backup-$(date "+%Y-%m-%d")
+    # deploy
+       - sudo rsync -av --progress build/* /usr/share/nginx/client
+    tags:
+        - production-ec2-instance
