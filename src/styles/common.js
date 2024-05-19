@@ -11,11 +11,18 @@ export const ModalBackground = css`
 
 export const bodyContainer = css`
 	margin: 0 auto;
-	width: 1080px;
+	width: 1200px;
 `;
 
 export const flexCenter = css`
 	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
+
+export const flexColumnCenter = css`
+	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 `;

@@ -5,50 +5,54 @@ const GlobalStyles = createGlobalStyle`
     ${reset}
 
     @font-face {
-        font-family: 'Pretendard-ExtraLight';
-        src: url('/assets/font/Pretendard-ExtraLight.otf') format('opentype');
+      font-family: 'NotoSansKR';
+      src: url('/assets/fonts/NotoSansKR-Light.ttf') format('truetype');
+      font-weight: 300;
     }
 
     @font-face {
-        font-family: 'Pretendard-Light';
-        src: url('/assets/font/Pretendard-Light.otf') format('opentype');
+      font-family: 'NotoSansKR';
+      src: url('/assets/fonts/NotoSansKR-Regular.ttf') format('truetype');
+      font-weight: 400;
     }
 
     @font-face {
-        font-family: 'Pretendard-Regular';
-        src: url('/assets/font/Pretendard-Regular.otf') format('opentype');
+      font-family: 'NotoSansKR';
+      src: url('/assets/fonts/NotoSansKR-Medium.ttf') format('truetype');
+      font-weight: 500;
     }
 
     @font-face {
-        font-family: 'Pretendard-Medium';
-        src: url('/assets/font/Pretendard-Medium.otf') format('opentype');
+      font-family: 'NotoSansKR';
+      src: url('/assets/fonts/NotoSansKR-SemiBold.ttf') format('truetype');
+      font-weight: 600;
     }
-
-    @font-face {
-        font-family: 'Pretendard-Bold';
-        src: url('/assets/font/Pretendard-Bold.otf') format('opentype');
-    }    
 
     * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+      font-family: 'NotoSansKR' !important;
     }
     
     body {
-        font-family: ${({ theme }) => theme.FONT_WEIGHT.regular};
+      font-family: 'NotoSansKR', sans-serif;
+      color: ${({ theme }) => theme.PALETTE.black};
     }
 
     button {
-        border: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    input, textarea {
+      font-family: inherit;
     }
 
     ul > li {
-        list-style: none;
-    }
-
-    ::-webkit-scrollbar {
-        display: none;
+      list-style: none;
     }
 `;
 
