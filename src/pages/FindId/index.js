@@ -57,6 +57,7 @@ function FindId() {
 						</S.InputBox>
 
 						<S.ButtonBox>
+
 							<Notice />
 
 							<Button

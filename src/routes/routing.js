@@ -16,6 +16,7 @@ const Register = lazy(() => import('pages/Register'));
 // Main
 const Main = lazy(() => import('pages/Main'));
 
+
 const router = createBrowserRouter([
 	{
 		path: '/',
