@@ -1,14 +1,15 @@
 import { Link } from 'react-router-dom';
 
 import useLayout from 'hooks/useLayout';
+import useModal from 'hooks/useModal';
 
 import * as S from './index.styles';
+
 import Logo from 'components/@common/Logo';
 import Input from 'components/@common/Input';
 import Button from 'components/@common/Button';
 import Line from 'components/@common/Line';
 import TermsModal from 'components/pages/Register/TermsModal';
-import { useModal } from 'hooks/useModal';
 
 function Register() {
 	useLayout();
@@ -105,7 +106,7 @@ function Register() {
 						required
 					/>
 
-					<p>이메일 미입력 시 가입이 불가능합니다.</p>
+					{/* <p>이메일 미입력 시 가입이 불가능합니다.</p> */}
 				</S.InputBox>
 
 				<S.InputBox>
@@ -117,8 +118,6 @@ function Register() {
 						placeholder="아이디는 영어와 숫자로만 입력해 주세요."
 						required
 					/>
-
-					{/* <p>아이디 미입력 시 가입이 불가능합니다.</p> */}
 				</S.InputBox>
 
 				<S.InputBox>
@@ -130,8 +129,6 @@ function Register() {
 						placeholder="비밀번호를 입력해 주세요."
 						required
 					/>
-
-					<p>비밀번호 미입력 시 가입이 불가능합니다.</p>
 				</S.InputBox>
 
 				<S.InputBox>
@@ -143,8 +140,6 @@ function Register() {
 						placeholder="비밀번호를 한 번 더 입력해 주세요."
 						required
 					/>
-
-					<p>비밀번호 미입력 시 가입이 불가능합니다.</p>
 				</S.InputBox>
 
 				<S.InputBox>
@@ -156,8 +151,6 @@ function Register() {
 						placeholder="전화번호를 입력해 주세요."
 						required
 					/>
-
-					<p>전화번호 미입력 시 가입이 불가능합니다.</p>
 				</S.InputBox>
 
 				<S.InputBox>
@@ -169,8 +162,6 @@ function Register() {
 						placeholder="업체명을 입력해 주세요."
 						required
 					/>
-
-					<p>업체명 미입력 시 가입이 불가능합니다.</p>
 				</S.InputBox>
 
 				<S.InputBox>
@@ -182,8 +173,6 @@ function Register() {
 						placeholder="사업자 등록 번호를 입력해 주세요."
 						required
 					/>
-
-					<p>사업자 등록 번호 미입력 시 가입이 불가능합니다.</p>
 				</S.InputBox>
 
 				<S.CheckBox>
@@ -193,7 +182,7 @@ function Register() {
 							<input type="checkbox" name="" id="" />
 							<h1>전체동의</h1>
 						</S.CheckItem>
-						<Line size={'width'} />
+						<Line size={'width'} variant={'gray'} />
 						<S.CheckItem>
 							<input type="checkbox" name="" id="" />
 							<p onClick={handleOpenModal}>
@@ -207,8 +196,6 @@ function Register() {
 							<span className="text_color">(필수)</span>
 						</S.CheckItem>
 					</S.Check>
-
-					<p>약관 미동의 시 가입이 불가능합니다.</p>
 				</S.CheckBox>
 
 				<TermsModal />

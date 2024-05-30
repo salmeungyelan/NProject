@@ -8,19 +8,19 @@ import {
 
 export const Body = styled.div`
 	${flexColumnCenter}
-	gap: 2.5rem;
-	padding: 4rem 0;
+	gap: 40px;
+	padding: 64px 0;
 `;
 
 export const LogoBox = styled.div`
 	${flexCenter}
-	gap: 1rem;
+	gap: 16px;
 `;
 
 export const FormBox = styled.form`
 	width: 320px;
 	${flexColumnCenter}
-	gap: 0.75rem;
+	gap: 12px;
 `;
 
 export const InputBox = styled.div`
@@ -38,7 +38,7 @@ export const H1 = styled.h1`
 	font-weight: 400;
 	font-size: ${({ theme }) => theme.FONT_SIZE.re};
 	color: ${({ theme }) => theme.PALETTE.orange[100]};
-	margin-bottom: 0.625rem;
+	margin-bottom: 10px;
 `;
 
 export const CheckBox = styled.div`
@@ -47,7 +47,7 @@ export const CheckBox = styled.div`
 	> div {
 		height: 120px;
 		border: 1px solid ${({ theme }) => theme.PALETTE.gray[100]};
-		border-radius: 0.5rem;
+		border-radius: 8px;
 		padding: 14px 22px;
 	}
 
@@ -62,12 +62,12 @@ export const CheckBox = styled.div`
 export const Check = styled.div`
 	${flexColumn}
 	justify-content: center;
-	gap: 0.7rem;
+	gap: 13px;
 `;
 
 export const CheckItem = styled.div`
 	${flexAlignCenter}
-	gap: 0.5rem;
+	gap: 8px;
 	font-weight: 400;
 
 	> h1 {
@@ -92,5 +92,5 @@ export const CheckItem = styled.div`
 `;
 
 export const ButtonBox = styled.div`
-	margin-top: 1rem;
+	margin-top: 16px;
 `;

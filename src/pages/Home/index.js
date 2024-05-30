@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import useLayout from 'hooks/useLayout';
 
 import * as S from './index.styles';
-import Line from 'components/@common/Line';
+
+import Logo from 'components/@common/Logo';
 import Input from 'components/@common/Input';
 import Button from 'components/@common/Button';
-import Logo from 'components/@common/Logo';
+import Line from 'components/@common/Line';
 
 function Home() {
 	useLayout();
@@ -62,9 +63,9 @@ function Home() {
 
 							<S.LinkBox>
 								<Link to="/find/id">아이디 찾기</Link>
-								<Line size={'height'} />
+								<Line size={'height'} variant={'gray'} />
 								<Link to="/find/password">비밀번호 찾기</Link>
-								<Line size={'height'} />
+								<Line size={'height'} variant={'gray'} />
 								<Link to="/register">회원가입</Link>
 							</S.LinkBox>
 						</div>
@@ -73,7 +74,7 @@ function Home() {
 			</S.LoginBox>
 
 			<S.Bottom>
-				<img src="./assets/images/login-bottom-image.png" />
+				<img src="./assets/images/login-bottom-img.png" />
 			</S.Bottom>
 		</S.Body>
 	);

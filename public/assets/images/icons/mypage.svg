@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 25.12 25.12">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #999;
+        stroke-width: 0px;
+      }
+
+      .cls-2 {
+        isolation: isolate;
+      }
+    </style>
+  </defs>
+  <g id="_그룹_1075" data-name="그룹 1075">
+    <g id="_패스_77" data-name="패스 77">
+      <path class="cls-1" d="M12.56,25.12C5.64,25.12,0,19.49,0,12.56S5.64,0,12.56,0c6.93,0,12.56,5.64,12.56,12.56s-5.64,12.56-12.56,12.56ZM12.56,1C6.19,1,1,6.19,1,12.56s5.19,11.56,11.56,11.56,11.56-5.19,11.56-11.56S18.94,1,12.56,1Z"/>
+    </g>
+    <g id="MY" class="cls-2">
+      <g class="cls-2">
+        <path class="cls-1" d="M7.33,9.7l2.28,5.47h.06l2.27-5.47h.74v6.36h-.6v-5.07h-.05l-2.11,5.07h-.56l-2.11-5.07h-.05v5.07h-.59v-6.36h.73Z"/>
+        <path class="cls-1" d="M14.32,9.7l1.86,3.01h.05l1.86-3.01h.72l-2.29,3.64v2.72h-.63v-2.72l-2.29-3.64h.72Z"/>
+      </g>
+    </g>
+  </g>
+</svg>

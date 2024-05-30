@@ -25,7 +25,7 @@ export const Input = styled.input`
 	padding: 0px 16px;
 
 	outline: none;
-	border-radius: 0.25rem;
+	border-radius: 4px;
 	border: 1px solid ${({ theme }) => theme.PALETTE.gray[100]};
 
 	& :focus {

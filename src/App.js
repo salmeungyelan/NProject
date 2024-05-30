@@ -8,7 +8,7 @@ import theme from 'styles/theme';
 import GlobalStyles from 'styles/global';
 
 import router from 'routes/routing';
-import Loading from 'components/@common/Loading';
+import Loading from 'components/@common/Loading/Loading';
 import ErrorFallback from 'components/@common/Error';
 
 function App() {

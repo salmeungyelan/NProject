@@ -12,12 +12,35 @@ const variantCSS = {
 			background: ${({ theme }) => theme.PALETTE.gray[100]};
 			color: rgba(0, 0, 0, 0.1);
 		}
+
+		&:hover {
+			background-color: ${({ theme }) => theme.PALETTE.orange[200]};
+		}
+	`,
+	white: css`
+		background: ${({ theme }) => theme.PALETTE.white[100]};
+		color: ${({ theme }) => theme.PALETTE.gray[100]};
+		border: 1px solid ${({ theme }) => theme.PALETTE.gray[0]};
+		font-weight: 500;
+
+		&:hover {
+			color: ${({ theme }) => theme.PALETTE.gray[200]};
+			border: 1px solid ${({ theme }) => theme.PALETTE.gray[100]};
+		}
+	`,
+	orange: css`
+		background: ${({ theme }) => theme.PALETTE.orange[100]};
+		color: ${({ theme }) => theme.PALETTE.white[100]};
+
+		&:hover {
+			background-color: ${({ theme }) => theme.PALETTE.orange[200]};
+		}
 	`,
 };
 
 const shapeCSS = {
 	default: css`
-		border-radius: 0.25rem;
+		border-radius: 4px;
 	`,
 };
 
@@ -29,6 +52,10 @@ const sizeCSS = {
 		font-size: ${({ theme }) => theme.FONT_SIZE.re};
 		font-weight: 500;
 	`,
+	twice: css`
+		width: 276px;
+		height: 40px;
+	`,
 };
 
 export const Button = styled.button`
@@ -37,9 +64,4 @@ export const Button = styled.button`
 	${({ $shape }) => shapeCSS[$shape]};
 	${({ $variant }) => variantCSS[$variant]};
 	${({ size }) => sizeCSS[size]};
-
-	&:hover,
-	&:active {
-		background-color: ${({ theme }) => theme.PALETTE.orange[200]};
-	}
 `;

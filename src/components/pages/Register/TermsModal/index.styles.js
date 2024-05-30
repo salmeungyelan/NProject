@@ -16,10 +16,12 @@ export const Container = styled.div`
 	top: 50%;
 	transform: translate(-50%, -50%);
 	background-color: ${({ theme }) => theme.PALETTE.white[100]};
-	width: 400px;
-	padding: 2rem 1.875rem;
+	max-width: 400px;
+	width: 85%;
+	padding: 32px 30px;
 `;
 
+// 모바일 -> 폰트 헤더 및 본문 2px 줄이기
 export const Header = styled.div`
 	${flexSpaceBetweenCenter}
 	color: ${({ theme }) => theme.PALETTE.gray[200]};
@@ -29,6 +31,9 @@ export const Title = styled.p`
 	color: ${({ theme }) => theme.PALETTE.gray[200]};
 	font-size: ${({ theme }) => theme.FONT_SIZE.md};
 	font-weight: 600;
+
+	@media screen and (min-width: 768px) {
+	}
 `;
 
 const buttonBgReset = css`
@@ -43,12 +48,12 @@ const buttonBgReset = css`
 
 export const CloseBtn = styled.button`
 	${buttonBgReset}
-	background-image: url('/assets/images/x_button.svg');
+	background-image: url('/assets/images/icons/modal-x-btn.svg');
 `;
 
 export const Body = styled.div`
-	margin: 2rem 0 1rem 0;
-	padding: 0 1.25rem 1rem 0;
+	margin: 32px 0 16px 0;
+	padding: 0 20px 16px 0;
 	font-size: ${({ theme }) => theme.FONT_SIZE.sm};
 	font-weight: 400;
 	color: ${({ theme }) => theme.PALETTE.gray[200]};
@@ -74,10 +79,10 @@ export const Body = styled.div`
 `;
 
 export const CheckBox = styled.div`
-	margin-top: 1.25rem;
+	margin-top: 20px;
 	${flexCenter}
 	cursor: pointer;
-	gap: 0.5rem;
+	gap: 8px;
 	font-size: ${({ theme }) => theme.FONT_SIZE.sm};
 	color: ${({ theme }) => theme.PALETTE.gray[200]};
 `;

@@ -13,16 +13,16 @@ export const LoginBox = styled.div`
 
 	${flexCenter}
 	flex-direction: column;
-	gap: 3.75rem;
+	gap: 60px;
 `;
 
 export const FormBox = styled.form`
 	${flexColumn}
-	gap: 2rem;
+	gap: 32px;
 
 	> div {
 		${flexColumn}
-		gap: 1rem;
+		gap: 16px;
 	}
 `;
 
@@ -71,9 +71,9 @@ export const Text = styled.div`
 `;
 
 export const LinkBox = styled.div`
-	margin-top: 2.8rem;
+	margin-top: 58px;
 	${flexCenter}
-	gap: 0.5rem;
+	gap: 8px;
 
 	> :link {
 		color: ${({ theme }) => theme.PALETTE.gray[200]};

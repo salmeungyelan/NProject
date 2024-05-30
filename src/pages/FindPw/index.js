@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import useLayout from 'hooks/useLayout';
 
 import * as S from './index.styles';
-import Input from 'components/@common/Input';
+
 import Logo from 'components/@common/Logo';
+import Input from 'components/@common/Input';
+import Notice from 'components/@common/Notice';
 import Button from 'components/@common/Button';
 
 function FindPw() {
@@ -54,10 +56,7 @@ function FindPw() {
 					</S.InputBox>
 
 					<S.ButtonBox>
-						<S.Notice>
-							<img src="/assets/images/x_button.svg" alt="" />
-							<p>올바르지 않은 계정 정보입니다.</p>
-						</S.Notice>
+						<Notice />
 
 						<Button
 							shape={'default'}
@@ -72,7 +71,7 @@ function FindPw() {
 			</S.Top>
 
 			<S.Bottom>
-				<img src="/assets/images/Pw-bottom-image.png" />
+				<img src="/assets/images/pw-bottom-img.png" />
 			</S.Bottom>
 		</S.Body>
 	);

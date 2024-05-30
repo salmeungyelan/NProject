@@ -9,10 +9,25 @@ const sizeCSS = {
 		width: 1px;
 		height: 16px;
 	`,
+	default: css`
+		width: 4px;
+		height: 28px;
+	`,
+};
+
+const variantCSS = {
+	lightGray: css`
+		background-color: ${({ theme }) => theme.PALETTE.gray[0]};
+	`,
+	gray: css`
+		background-color: ${({ theme }) => theme.PALETTE.gray[200]};
+	`,
+	orange: css`
+		background-color: ${({ theme }) => theme.PALETTE.orange[100]};
+	`,
 };
 
 export const Lines = styled.div`
 	${({ size }) => sizeCSS[size]}
-
-	background-color: ${({ theme }) => theme.PALETTE.gray[200]};
+	${({ variant }) => variantCSS[variant]}
 `;

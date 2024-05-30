@@ -1,4 +1,5 @@
-import { useModal } from 'hooks/useModal';
+import useModal from 'hooks/useModal';
+
 import * as S from './index.styles';
 
 function TermsModal() {

@@ -2,7 +2,7 @@ import { useCallback, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { modalState } from 'recoil/atom/modal.atom';
 
-export function useModal() {
+const useModal = () => {
 	const [modalDataState, setModalDataState] = useRecoilState(modalState);
 
 	useEffect(() => {
@@ -33,4 +33,6 @@ export function useModal() {
 	);
 
 	return { modalDataState, closeModal, openModal };
-}
+};
+
+export default useModal;
