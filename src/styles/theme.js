@@ -26,15 +26,15 @@ const PALETTE = {
 };
 
 const FONT_SIZE = {
-	es: '0.625rem', // 10
-	xs: '0.75rem', // 12
-	sm: '0.875rem', // 14
-	re: '1rem', // 16
-	md: '1.125rem', // 18
-	big: '1.25rem', // 20
-	mb: '1.375rem', // 22
-	lg: '1.5rem', // 24
-	xl: '2.25rem', // 36
+	es: '10px', // 10
+	xs: '12px', // 12
+	sm: '14px', // 14
+	re: '16px', // 16
+	md: '18px', // 18
+	big: '20px', // 20
+	mb: '22px', // 22
+	lg: '24px', // 24
+	xl: '36px', // 36
 };
 
 const theme = {
