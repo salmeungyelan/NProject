@@ -15,6 +15,7 @@ const variantCSS = {
 
 		&:hover {
 			background-color: ${({ theme }) => theme.PALETTE.orange[200]};
+			transform: scale(1.02);
 		}
 	`,
 	white: css`
@@ -26,6 +27,7 @@ const variantCSS = {
 		&:hover {
 			color: ${({ theme }) => theme.PALETTE.gray[200]};
 			border: 1px solid ${({ theme }) => theme.PALETTE.gray[100]};
+			transform: scale(1.02);
 		}
 	`,
 	orange: css`
@@ -34,6 +36,7 @@ const variantCSS = {
 
 		&:hover {
 			background-color: ${({ theme }) => theme.PALETTE.orange[200]};
+			transform: scale(1.02);
 		}
 	`,
 };
