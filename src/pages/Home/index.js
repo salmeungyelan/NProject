@@ -28,6 +28,7 @@ function Home() {
 									id="id"
 									autoComplete="off"
 									size={'default'}
+									variant={'login'}
 									required
 								/>
 								<S.Label htmlFor="id">이메일 또는 아이디 입력</S.Label>
@@ -39,16 +40,13 @@ function Home() {
 									id="pw"
 									autoComplete="off"
 									size={'default'}
+									variant={'login'}
 									required
 								/>
 								<S.Label htmlFor="password">비밀번호 입력</S.Label>
 							</S.InputBox>
 
-							<S.Text>
-								아이디 또는 비밀번호를 잘못 입력했습니다.
-								<br />
-								입력한 내용을 다시 확인해 주세요.
-							</S.Text>
+							<S.Text></S.Text>
 						</div>
 
 						<div>
@@ -62,9 +60,9 @@ function Home() {
 							</Button>
 
 							<S.LinkBox>
-								<Link to="/find/id">아이디 찾기</Link>
+								<Link to="/find_id">아이디 찾기</Link>
 								<Line size={'height'} variant={'gray'} />
-								<Link to="/find/password">비밀번호 찾기</Link>
+								<Link to="/find_password">비밀번호 찾기</Link>
 								<Line size={'height'} variant={'gray'} />
 								<Link to="/register">회원가입</Link>
 							</S.LinkBox>

@@ -35,7 +35,7 @@ const GlobalStyles = createGlobalStyle`
       font-family: sans-serif;
       font-family: 'NotoSansKR' !important;
     }
-    
+
     body {
       font-family: 'NotoSansKR', sans-serif;
       color: ${({ theme }) => theme.PALETTE.black};

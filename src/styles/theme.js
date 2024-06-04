@@ -10,6 +10,7 @@ const PALETTE = {
 	},
 
 	gray: {
+		0: '#DDD',
 		100: '#999',
 		200: '#666',
 		300: '#333',
@@ -36,6 +37,11 @@ const FONT_SIZE = {
 	lg: '24px', // 24
 	xl: '36px', // 36
 };
+
+// light 300
+// regular 400
+// medium 500
+// semi-bold 600
 
 const theme = {
 	PALETTE,
