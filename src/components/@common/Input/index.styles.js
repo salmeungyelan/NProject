@@ -1,5 +1,24 @@
 import { css, styled } from 'styled-components';
 
+const variantCSS = {
+	default: css`
+		color: ${({ theme }) => theme.PALETTE.gray[200]};
+		border: 1px solid ${({ theme }) => theme.PALETTE.gray[0]};
+
+		&:focus {
+			border: 1px solid ${({ theme }) => theme.PALETTE.gray[100]};
+		}
+	`,
+	login: css`
+		color: ${({ theme }) => theme.PALETTE.gray[200]};
+		border: 1px solid ${({ theme }) => theme.PALETTE.gray[0]};
+
+		&:focus {
+			border: 1px solid ${({ theme }) => theme.PALETTE.orange[100]};
+		}
+	`,
+};
+
 const sizeCSS = {
 	default: css`
 		width: 100%;
@@ -17,18 +36,18 @@ const sizeCSS = {
 
 export const Input = styled.input`
 	${({ size }) => sizeCSS[size]};
+	${({ variant }) => variantCSS[variant]}
 
-	color: ${({ theme }) => theme.PALETTE.gray[300]};
 	font-size: ${({ theme }) => theme.FONT_SIZE.sm};
 	font-weight: 400;
 
 	padding: 0px 16px;
+	border-radius: 4px;
 
 	outline: none;
-	border-radius: 4px;
-	border: 1px solid ${({ theme }) => theme.PALETTE.gray[100]};
 
-	& :focus {
-		border: 2px solid ${({ theme }) => theme.PALETTE.orange[100]};
+	&::placeholder {
+		color: ${({ theme }) => theme.PALETTE.gray[100]};
+		font-weight: 400;
 	}
 `;
