@@ -3,7 +3,6 @@ import * as S from './index.styles';
 import Input from 'components/@common/Input';
 import Notice from 'components/@common/Notice';
 import Button from 'components/@common/Button';
-import MESSAGE from 'constants/message';
 
 function IdLookup() {
 	return (
@@ -18,7 +17,7 @@ function IdLookup() {
 						placeholder="업체명을 입력해 주세요."
 						required
 					/>
-					<p>{MESSAGE.JOIN.COMPANY}</p>
+					<p></p>
 				</div>
 			</S.InputBox>
 
@@ -32,7 +31,7 @@ function IdLookup() {
 						placeholder="전화번호를 입력해 주세요."
 						required
 					/>
-					<p>{MESSAGE.JOIN.NUMBER}</p>
+					<p></p>
 				</div>
 			</S.InputBox>
 
@@ -46,7 +45,7 @@ function IdLookup() {
 						placeholder="업체의 사업자 등록 번호를 입력해 주세요."
 						required
 					/>
-					<p>{MESSAGE.JOIN.CO_NUMBER}</p>
+					<p></p>
 				</div>
 			</S.InputBox>
 
