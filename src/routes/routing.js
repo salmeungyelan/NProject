@@ -1,21 +1,13 @@
 import { lazy } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
-const Layout = lazy(() => import('components/@common/Layout'));
+import Layout from 'components/@common/Layout';
 
-// Home = Login
 const Home = lazy(() => import('pages/Home'));
-
-// Find ID & PW
+const Register = lazy(() => import('pages/Register'));
 const FindId = lazy(() => import('pages/FindId'));
 const FindPw = lazy(() => import('pages/FindPw'));
-
-// Register
-const Register = lazy(() => import('pages/Register'));
-
-// Main
 const Main = lazy(() => import('pages/Main'));
-
 
 const router = createBrowserRouter([
 	{
@@ -27,16 +19,16 @@ const router = createBrowserRouter([
 				element: <Home />,
 			},
 			{
-				path: '/find/id',
+				path: '/register',
+				element: <Register />,
+			},
+			{
+				path: '/find_id',
 				element: <FindId />,
 			},
 			{
-				path: '/find/password',
+				path: '/find_password',
 				element: <FindPw />,
-			},
-			{
-				path: '/register',
-				element: <Register />,
 			},
 			{
 				path: '/main',
