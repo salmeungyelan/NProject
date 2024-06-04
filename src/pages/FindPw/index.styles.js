@@ -13,6 +13,7 @@ export const Top = styled.div`
 	${flexColumnCenter}
 	gap: 40px;
 `;
+
 export const LogoBox = styled.div`
 	${flexCenter}
 `;
