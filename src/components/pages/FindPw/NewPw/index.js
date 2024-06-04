@@ -1,10 +1,9 @@
-import MESSAGE from 'constants/message';
+import useModal from 'hooks/useModal';
 
 import * as S from './index.styles';
 
 import Input from 'components/@common/Input';
 import Button from 'components/@common/Button';
-import useModal from 'hooks/useModal';
 import Modal from 'components/@common/Modal';
 
 function NewPw() {
@@ -27,7 +26,6 @@ function NewPw() {
 						size={'default'}
 						variant={'default'}
 						type="password"
-						autoComplete="off"
 						placeholder="비밀번호를 입력해 주세요."
 						required
 					/>
@@ -35,7 +33,7 @@ function NewPw() {
 						<img src="/assets/icons/check.svg" />
 						<span>8자 이상 32자 이하 입력 (공백 제외)</span>
 					</S.EX>
-					<p>{MESSAGE.JOIN.PW}</p>
+					<p></p>
 				</S.InputBox>
 
 				<S.InputBox>
@@ -44,11 +42,10 @@ function NewPw() {
 						size={'default'}
 						variant={'default'}
 						type="password"
-						autoComplete="off"
 						placeholder="비밀번호를 한 번 더 입력해 주세요."
 						required
 					/>
-					<p>{MESSAGE.JOIN.PW}</p>
+					<p></p>
 				</S.InputBox>
 			</div>
 
