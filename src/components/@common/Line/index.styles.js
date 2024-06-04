@@ -20,7 +20,7 @@ const variantCSS = {
 		background-color: ${({ theme }) => theme.PALETTE.gray[0]};
 	`,
 	gray: css`
-		background-color: ${({ theme }) => theme.PALETTE.gray[200]};
+		background-color: ${({ theme }) => theme.PALETTE.gray[100]};
 	`,
 	orange: css`
 		background-color: ${({ theme }) => theme.PALETTE.orange[100]};

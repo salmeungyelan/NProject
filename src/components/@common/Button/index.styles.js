@@ -4,9 +4,7 @@ const variantCSS = {
 	default: css`
 		background: ${({ theme }) => theme.PALETTE.orange[100]};
 		color: ${({ theme }) => theme.PALETTE.white[100]};
-		box-shadow:
-			0 2px 4px 0 rgba(0, 0, 0, 0.2),
-			0 3px 10px 0 rgba(0, 0, 0, 0.19);
+		box-shadow: 0 2px 4px 0 #00000026;
 
 		&:disabled {
 			background: ${({ theme }) => theme.PALETTE.gray[100]};
@@ -49,7 +47,7 @@ const shapeCSS = {
 
 const sizeCSS = {
 	default: css`
-		width: 320px;
+		width: 100%;
 		height: 40px;
 
 		font-size: ${({ theme }) => theme.FONT_SIZE.re};
