@@ -18,34 +18,6 @@ export const LogoBox = styled.div`
 	${flexCenter}
 `;
 
-export const FormBox = styled.form`
-	width: 320px;
-	${flexColumn}
-	gap: 20px;
-
-	> div:nth-child(3) {
-		margin-bottom: -20px;
-	}
-`;
-
-export const InputBox = styled.div`
-	width: 100%;
-	${flexColumn}
-	gap: 16px;
-`;
-
-export const Title = styled.h1`
-	font-weight: 400;
-	font-size: ${({ theme }) => theme.FONT_SIZE.re};
-	color: ${({ theme }) => theme.PALETTE.orange[100]};
-`;
-
-export const ButtonBox = styled.div`
-	margin-top: 8px;
-	${flexColumnCenter}
-	gap: 20px;
-`;
-
 export const Bottom = styled.div`
 	width: 100%;
 
