@@ -22,9 +22,10 @@ const useModal = () => {
 	);
 
 	const openModal = useCallback(
-		({ title, content, callback }) =>
+		({ img, title, content, callback }) =>
 			setModalDataState({
 				isOpen: true,
+				img,
 				title,
 				content,
 				callBack: callback,
