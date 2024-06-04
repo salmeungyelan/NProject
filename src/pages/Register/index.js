@@ -10,7 +10,6 @@ import Input from 'components/@common/Input';
 import Button from 'components/@common/Button';
 import Line from 'components/@common/Line';
 import TermsModal from 'components/pages/Register/TermsModal';
-import MESSAGE from 'constants/message';
 
 function Register() {
 	useLayout();
@@ -137,7 +136,7 @@ function Register() {
 						<img src="/assets/icons/check.svg" />
 						<span>8자 이상 32자 이하 입력 (공백 제외)</span>
 					</S.EX>
-					<p>{MESSAGE.JOIN.PW}</p>
+					<p></p>
 				</S.InputBox>
 
 				<S.InputBox>

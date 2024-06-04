@@ -1,6 +1,7 @@
 import useModal from 'hooks/useModal';
 
 import * as S from './index.styles';
+
 import Button from 'components/@common/Button';
 
 function TermsModal() {
