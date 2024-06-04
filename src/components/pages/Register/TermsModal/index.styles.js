@@ -16,19 +16,18 @@ export const Container = styled.div`
 	top: 50%;
 	transform: translate(-50%, -50%);
 	background-color: ${({ theme }) => theme.PALETTE.white[100]};
-	max-width: 400px;
-	width: 85%;
+	max-width: 1200px;
+	width: 70%;
 	padding: 32px 30px;
 `;
 
 // 모바일 -> 폰트 헤더 및 본문 2px 줄이기
 export const Header = styled.div`
 	${flexSpaceBetweenCenter}
-	color: ${({ theme }) => theme.PALETTE.gray[200]};
 `;
 
 export const Title = styled.p`
-	color: ${({ theme }) => theme.PALETTE.gray[200]};
+	color: ${({ theme }) => theme.PALETTE.gray[300]};
 	font-size: ${({ theme }) => theme.FONT_SIZE.md};
 	font-weight: 600;
 
@@ -48,7 +47,7 @@ const buttonBgReset = css`
 
 export const CloseBtn = styled.button`
 	${buttonBgReset}
-	background-image: url('/assets/images/icons/modal-x-btn.svg');
+	background-image: url('/assets/icons/modal-x-btn.svg');
 `;
 
 export const Body = styled.div`
@@ -66,23 +65,37 @@ export const Body = styled.div`
 	}
 
 	&::-webkit-scrollbar {
-		width: 5px;
+		display: none;
 	}
 
-	&::-webkit-scrollbar-thumb {
-		background-color: ${({ theme }) => theme.PALETTE.gray[100]};
-	}
+	@media only screen and (min-width: 769px) {
+		&::-webkit-scrollbar {
+			display: inherit;
+			width: 5px;
+		}
 
-	&::-webkit-scrollbar-track {
-		background-color: ${({ theme }) => theme.PALETTE.white[200]};
+		&::-webkit-scrollbar-thumb {
+			background-color: ${({ theme }) => theme.PALETTE.gray[100]};
+		}
+
+		&::-webkit-scrollbar-track {
+			background-color: ${({ theme }) => theme.PALETTE.white[200]};
+		}
 	}
 `;
 
-export const CheckBox = styled.div`
-	margin-top: 20px;
-	${flexCenter}
+export const ButtonBox = styled.div`
+	margin-top: 24px;
 	cursor: pointer;
-	gap: 8px;
-	font-size: ${({ theme }) => theme.FONT_SIZE.sm};
-	color: ${({ theme }) => theme.PALETTE.gray[200]};
+	${flexCenter}
+
+	> button {
+		width: 100%;
+	}
+
+	@media screen and (min-width: 369px) {
+		> button {
+			width: 180px;
+		}
+	}
 `;

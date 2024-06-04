@@ -10,6 +10,7 @@ import Input from 'components/@common/Input';
 import Button from 'components/@common/Button';
 import Line from 'components/@common/Line';
 import TermsModal from 'components/pages/Register/TermsModal';
+import MESSAGE from 'constants/message';
 
 function Register() {
 	useLayout();
@@ -100,98 +101,161 @@ function Register() {
 					<S.H1>이메일 입력</S.H1>
 					<Input
 						size={'default'}
+						variant={'default'}
 						type="text"
 						autoComplete="off"
 						placeholder="이메일을 입력해 주세요."
 						required
 					/>
-
-					{/* <p>이메일 미입력 시 가입이 불가능합니다.</p> */}
+					<p></p>
 				</S.InputBox>
 
 				<S.InputBox>
 					<S.H1>아이디 입력</S.H1>
 					<Input
 						size={'default'}
+						variant={'default'}
 						type="text"
 						autoComplete="off"
 						placeholder="아이디는 영어와 숫자로만 입력해 주세요."
 						required
 					/>
+					<p></p>
 				</S.InputBox>
 
 				<S.InputBox>
 					<S.H1>비밀번호 입력</S.H1>
 					<Input
 						size={'default'}
+						variant={'default'}
 						type="password"
 						autoComplete="off"
 						placeholder="비밀번호를 입력해 주세요."
 						required
 					/>
+					<S.EX>
+						<img src="/assets/icons/check.svg" />
+						<span>8자 이상 32자 이하 입력 (공백 제외)</span>
+					</S.EX>
+					<p>{MESSAGE.JOIN.PW}</p>
 				</S.InputBox>
 
 				<S.InputBox>
 					<S.H1>비밀번호 확인</S.H1>
 					<Input
 						size={'default'}
+						variant={'default'}
 						type="password"
 						autoComplete="off"
 						placeholder="비밀번호를 한 번 더 입력해 주세요."
 						required
 					/>
-				</S.InputBox>
-
-				<S.InputBox>
-					<S.H1>전화번호</S.H1>
-					<Input
-						size={'default'}
-						type="text"
-						autoComplete="off"
-						placeholder="전화번호를 입력해 주세요."
-						required
-					/>
+					<p></p>
 				</S.InputBox>
 
 				<S.InputBox>
 					<S.H1>업체명</S.H1>
 					<Input
 						size={'default'}
+						variant={'default'}
 						type="text"
 						autoComplete="off"
 						placeholder="업체명을 입력해 주세요."
 						required
 					/>
+					<p></p>
 				</S.InputBox>
+
+				<S.InputBox>
+					<S.H1>전화번호</S.H1>
+					<Input
+						size={'default'}
+						variant={'default'}
+						type="text"
+						autoComplete="off"
+						placeholder="전화번호를 입력해 주세요."
+						required
+					/>
+					<p></p>
+				</S.InputBox>
+
+				<S.Address>
+					<S.H1>주소</S.H1>
+					<div>
+						<Input
+							size={'default'}
+							variant={'default'}
+							type="text"
+							placeholder="우편번호"
+							required
+						/>
+						<Button variant={'orange'} size={'default'} shape={'default'}>
+							주소 찾기
+						</Button>
+					</div>
+					<Input
+						size={'default'}
+						variant={'default'}
+						type="text"
+						placeholder="주소"
+						required
+					/>
+					<Input
+						size={'default'}
+						variant={'default'}
+						type="text"
+						placeholder="상세 주소"
+						required
+					/>
+					<p></p>
+				</S.Address>
 
 				<S.InputBox>
 					<S.H1>사업자 등록 번호</S.H1>
 					<Input
 						size={'default'}
+						variant={'default'}
 						type="text"
 						autoComplete="off"
 						placeholder="사업자 등록 번호를 입력해 주세요."
 						required
 					/>
+					<p></p>
+				</S.InputBox>
+
+				<S.InputBox>
+					<S.H1>스마트 플레이스 링크</S.H1>
+					<Input
+						size={'default'}
+						variant={'default'}
+						type="text"
+						autoComplete="off"
+						placeholder="링크를 입력해 주세요."
+						required
+					/>
+					<p></p>
 				</S.InputBox>
 
 				<S.CheckBox>
 					<S.H1>약관동의</S.H1>
 					<S.Check>
-						<S.CheckItem>
-							<input type="checkbox" name="" id="" />
+						<S.CheckAll>
+							<input type="checkbox" name="" id="check" />
+							<label htmlFor="check" />
 							<h1>전체동의</h1>
-						</S.CheckItem>
-						<Line size={'width'} variant={'gray'} />
+						</S.CheckAll>
+						<Line size={'width'} variant={'lightGray'} />
 						<S.CheckItem>
-							<input type="checkbox" name="" id="" />
+							<input type="checkbox" name="" id="check_1" />
+							<label htmlFor="check_1" />
 							<p onClick={handleOpenModal}>
 								개인정보 제공 및 활용에 동의합니다.
 							</p>
 							<span className="text_color">(필수)</span>
 						</S.CheckItem>
 						<S.CheckItem>
-							<input type="checkbox" name="" id="" />
+							<input type="checkbox" name="" id="check_2" />
+							<label htmlFor="check_2" />
 							<p onClick={handleOpenModal}>서비스 이용 약관에 동의합니다.</p>
 							<span className="text_color">(필수)</span>
 						</S.CheckItem>

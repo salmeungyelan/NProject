@@ -1,6 +1,7 @@
 import useModal from 'hooks/useModal';
 
 import * as S from './index.styles';
+import Button from 'components/@common/Button';
 
 function TermsModal() {
 	const { modalDataState, closeModal } = useModal();
@@ -17,10 +18,11 @@ function TermsModal() {
 					<S.CloseBtn onClick={closeModal} />
 				</S.Header>
 				<S.Body>{modalDataState.content}</S.Body>
-				<S.CheckBox>
-					<input type="checkbox" />
-					<p>동의합니다.</p>
-				</S.CheckBox>
+				<S.ButtonBox>
+					<Button variant={'orange'} shape={'default'} size={'default'}>
+						동의
+					</Button>
+				</S.ButtonBox>
 			</S.Container>
 		</S.Background>
 	);
