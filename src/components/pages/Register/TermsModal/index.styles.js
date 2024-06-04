@@ -30,9 +30,6 @@ export const Title = styled.p`
 	color: ${({ theme }) => theme.PALETTE.gray[300]};
 	font-size: ${({ theme }) => theme.FONT_SIZE.md};
 	font-weight: 600;
-
-	@media screen and (min-width: 768px) {
-	}
 `;
 
 const buttonBgReset = css`
