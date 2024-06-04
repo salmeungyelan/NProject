@@ -20,8 +20,8 @@ function FindId() {
 					</Link>
 				</S.LogoBox>
 
-				<IdResult />
-				{/* <IdLookup /> */}
+				<IdLookup />
+				{/* <IdResult /> */}
 			</S.Top>
 
 			<S.Bottom>
