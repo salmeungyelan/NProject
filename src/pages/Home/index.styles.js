@@ -9,8 +9,6 @@ export const Body = styled.div`
 
 export const LoginBox = styled.div`
 	height: 100%;
-	margin: 0 auto;
-
 	${flexCenter}
 	flex-direction: column;
 	gap: 60px;
@@ -28,12 +26,7 @@ export const FormBox = styled.form`
 
 export const InputBox = styled.div`
 	width: 320px;
-	max-width: 100%;
 	position: relative;
-
-	> input {
-		position: relative;
-	}
 
 	> input:focus {
 		border: 1.5px solid ${({ theme }) => theme.PALETTE.orange[100]};
@@ -43,7 +36,6 @@ export const InputBox = styled.div`
 	input:valid + label {
 		color: ${({ theme }) => theme.PALETTE.orange[100]};
 		font-size: ${({ theme }) => theme.FONT_SIZE.es};
-
 		top: 4px;
 		transform: translate(0px, -10px);
 		background-color: ${({ theme }) => theme.PALETTE.white[100]};
@@ -51,8 +43,8 @@ export const InputBox = styled.div`
 `;
 
 export const Label = styled.label`
-	top: 10px;
-	left: 12px;
+	top: 12px;
+	left: 16px;
 	padding: 0 4px;
 
 	color: ${({ theme }) => theme.PALETTE.gray[100]};
@@ -64,6 +56,7 @@ export const Label = styled.label`
 `;
 
 export const Text = styled.div`
+	height: 24px;
 	font-weight: 400;
 	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 	color: ${({ theme }) => theme.PALETTE.red[100]};
@@ -75,21 +68,16 @@ export const LinkBox = styled.div`
 	${flexCenter}
 	gap: 8px;
 
-	> :link {
-		color: ${({ theme }) => theme.PALETTE.gray[200]};
+	> :link,
+	:visited {
+		color: ${({ theme }) => theme.PALETTE.gray[100]};
 		font-size: ${({ theme }) => theme.FONT_SIZE.re};
 		font-weight: 400;
 		text-decoration: none;
 	}
-
-	> :visited {
-		color: ${({ theme }) => theme.PALETTE.gray[200]};
-	}
 `;
 
 export const Bottom = styled.div`
-	width: 100%;
-
 	& img {
 		width: 100%;
 		height: 84px;
