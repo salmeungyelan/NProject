@@ -3,7 +3,6 @@ import * as S from './index.styles';
 import Input from 'components/@common/Input';
 import Button from 'components/@common/Button';
 import Notice from 'components/@common/Notice';
-import MESSAGE from 'constants/message';
 
 function PwLookup() {
 	return (
@@ -19,7 +18,7 @@ function PwLookup() {
 						placeholder="아이디 또는 아이디를 입력해 주세요."
 						required
 					/>
-					<p>{MESSAGE.JOIN.COMPANY}</p>
+					<p></p>
 				</div>
 			</S.InputBox>
 
@@ -34,7 +33,7 @@ function PwLookup() {
 						placeholder="전화번호를 입력해 주세요."
 						required
 					/>
-					<p>{MESSAGE.JOIN.COMPANY}</p>
+					<p></p>
 				</div>
 			</S.InputBox>
 
@@ -49,7 +48,7 @@ function PwLookup() {
 						placeholder="업체의 사업자 등록 번호를 입력해 주세요."
 						required
 					/>
-					<p>{MESSAGE.JOIN.COMPANY}</p>
+					<p></p>
 				</div>
 			</S.InputBox>
 

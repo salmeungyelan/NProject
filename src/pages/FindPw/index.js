@@ -7,7 +7,6 @@ import * as S from './index.styles';
 import Logo from 'components/@common/Logo';
 import PwLookup from 'components/pages/FindPw/PwLookup';
 import NewPw from 'components/pages/FindPw/NewPw';
-import Modal from 'components/@common/Modal';
 
 function FindPw() {
 	useLayout();
@@ -21,9 +20,8 @@ function FindPw() {
 					</Link>
 				</S.LogoBox>
 
-				<NewPw />
-				{/* <PwLookup /> */}
-				<Modal />
+				<PwLookup />
+				{/* <NewPw /> */}
 			</S.Top>
 
 			<S.Bottom>
