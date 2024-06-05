@@ -10,8 +10,6 @@ import Button from 'components/@common/Button';
 import Line from 'components/@common/Line';
 
 function Home() {
-	useLayout();
-
 	return (
 		<S.Body>
 			<S.LoginBox>
