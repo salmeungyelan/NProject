@@ -11,7 +11,7 @@ const sizeCSS = {
 	`,
 	default: css`
 		width: 4px;
-		height: 28px;
+		height: 100%;
 	`,
 };
 

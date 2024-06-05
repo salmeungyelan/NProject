@@ -12,9 +12,7 @@ function Card() {
 			<S.MainBox>
 				<S.Title>
 					<div>리뷰 제목</div>
-					<Progress variant={'ing'} shape={'default'}>
-						진행중
-					</Progress>
+					<Progress variant={'ing'}>진행중</Progress>
 				</S.Title>
 
 				<S.Writer>작성자</S.Writer>
