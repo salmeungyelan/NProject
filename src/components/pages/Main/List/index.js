@@ -6,7 +6,6 @@ import Card from 'components/@common/Card';
 function List() {
 	return (
 		<S.Body>
-			{/* <S.Iphone></S.Iphone> */}
 			<Iphone />
 
 			<S.ReviewIng>
