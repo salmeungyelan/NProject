@@ -9,8 +9,6 @@ import PwLookup from 'components/pages/FindPw/PwLookup';
 import NewPw from 'components/pages/FindPw/NewPw';
 
 function FindPw() {
-	useLayout();
-
 	return (
 		<S.Body>
 			<S.Top>
