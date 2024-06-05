@@ -4,20 +4,22 @@ import Progress from '../Progress';
 
 function Card() {
 	return (
-		<div>
+		<S.Card>
 			<div>
-				<img />
+				<img src="/assets/images/example.png" />
 			</div>
 
-			<div>
-				<div>
+			<S.MainBox>
+				<S.Title>
 					<div>리뷰 제목</div>
-					<Progress variant={'ing'}>진행중</Progress>
-				</div>
+					<Progress variant={'ing'} shape={'default'}>
+						진행중
+					</Progress>
+				</S.Title>
 
 				<S.Writer>작성자</S.Writer>
-			</div>
-		</div>
+			</S.MainBox>
+		</S.Card>
 	);
 }
 
