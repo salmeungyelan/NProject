@@ -9,8 +9,6 @@ import IdLookup from 'components/pages/FindId/IdLookup';
 import IdResult from 'components/pages/FindId/IdResult';
 
 function FindId() {
-	useLayout();
-
 	return (
 		<S.Body>
 			<S.Top>
