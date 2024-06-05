@@ -1,6 +1,8 @@
-import Logo from 'components/@common/Logo';
-import * as S from './index.styles';
 import { Link } from 'react-router-dom';
+
+import * as S from './index.styles';
+
+import Logo from 'components/@common/Logo';
 
 function Header() {
 	return (

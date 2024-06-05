@@ -34,6 +34,7 @@ const GlobalStyles = createGlobalStyle`
       box-sizing: border-box;
       font-family: sans-serif;
       font-family: 'NotoSansKR' !important;
+      font-weight: 400;
     }
 
     body {

@@ -6,7 +6,6 @@ import Footer from './Footer';
 import Header from './Header';
 
 function Layout() {
-	// include***가 true일 때만 ***가 나타나도록 설정
 	const includeHeader = useRecoilValue(includeHeaderState);
 	const includeFooter = useRecoilValue(includeFooterState);
 
