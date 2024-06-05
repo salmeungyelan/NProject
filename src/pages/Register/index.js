@@ -12,8 +12,6 @@ import Line from 'components/@common/Line';
 import TermsModal from 'components/pages/Register/TermsModal';
 
 function Register() {
-	useLayout();
-
 	const { openModal } = useModal();
 	const handleOpenModal = () => {
 		openModal({
