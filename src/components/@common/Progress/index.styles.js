@@ -10,15 +10,26 @@ const variantCSS = {
 	`,
 };
 
-export const CheckProgress = styled.div`
-	${({ variant }) => variantCSS[variant]};
+const shapeCSS = {
+	default: css`
+		width: 40px;
+		height: 16px;
+		font-size: ${({ theme }) => theme.FONT_SIZE.es};
+	`,
+	big: css`
+		width: 73px;
+		height: 28px;
+		font-size: ${({ theme }) => theme.FONT_SIZE.re};
+	`,
+};
 
-	width: 40px;
-	height: 16px;
+export const CheckProgress = styled.div`
 	${flexCenter}
+	${({ variant }) => variantCSS[variant]};
+	${({ shape }) => shapeCSS[shape]}
 
 	color: ${({ theme }) => theme.PALETTE.white[100]};
-	font-size: ${({ theme }) => theme.FONT_SIZE.es};
+
 	font-weight: 500;
 	border-radius: 4px;
 `;

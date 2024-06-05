@@ -1,26 +1,26 @@
 import * as S from './index.styles';
 
-import Progress from '../Progress';
+import Progress from 'components/@common/Progress';
 
-function Card() {
+function Iphone() {
 	return (
-		<S.Card>
-			<div>
+		<S.Iphone>
+			<S.ImgBox>
 				<img src="/assets/images/example.png" />
-			</div>
+			</S.ImgBox>
 
 			<S.MainBox>
 				<S.Title>
 					<div>리뷰 제목</div>
-					<Progress variant={'ing'} shape={'default'}>
+					<Progress variant={'ing'} shape={'big'}>
 						진행중
 					</Progress>
 				</S.Title>
 
 				<S.Writer>작성자</S.Writer>
 			</S.MainBox>
-		</S.Card>
+		</S.Iphone>
 	);
 }
 
-export default Card;
+export default Iphone;
