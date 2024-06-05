@@ -27,7 +27,7 @@ function More(props) {
 					el.title.includes('중요') ? (
 						<S.Important key={idx}>
 							<div>
-								<img src="/assets/images/icons/pin.svg" alt="pin" />
+								<img src="/assets/icons/pin.svg" alt="pin" />
 								<S.ImportantBtn>중요</S.ImportantBtn>
 								<S.ListTitle>{el.title}</S.ListTitle>
 							</div>

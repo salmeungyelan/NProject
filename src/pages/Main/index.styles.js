@@ -5,7 +5,7 @@ export const Body = styled.div`
 	${bodyContainer}
 	padding: 50px 0;
 	${flexColumn}
-	gap: 30px;
+	gap: 36px;
 `;
 
 export const Mores = styled.div`
