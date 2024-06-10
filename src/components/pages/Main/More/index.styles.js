@@ -24,17 +24,17 @@ export const TitleBox = styled.div`
 
 export const Title = styled.div`
 	color: ${({ theme }) => theme.PALETTE.gray[300]};
-	font-size: ${({ theme }) => theme.FONT_SIZE.sm};
+	font-size: ${({ theme }) => theme.FONT_SIZE.m};
 	font-weight: 600;
 
 	@media screen and (min-width: 386px) {
-		font-size: ${({ theme }) => theme.FONT_SIZE.big};
+		font-size: ${({ theme }) => theme.FONT_SIZE.xj};
 	}
 `;
 
 export const MoreClick = styled.div`
 	color: ${({ theme }) => theme.PALETTE.navy};
-	font-size: ${({ theme }) => theme.FONT_SIZE.sm};
+	font-size: ${({ theme }) => theme.FONT_SIZE.m};
 	font-weight: 400;
 	cursor: pointer;
 `;
@@ -50,20 +50,20 @@ export const Commons = styled.div`
 
 export const ListTitle = styled.div`
 	font-weight: 400;
-	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+	font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 	color: ${({ theme }) => theme.PALETTE.gray[200]};
 
 	@media screen and (min-width: 386px) {
-		font-size: ${({ theme }) => theme.FONT_SIZE.re};
+		font-size: ${({ theme }) => theme.FONT_SIZE.ml};
 	}
 `;
 
 export const Date = styled(ListTitle)`
-	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+	font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 	color: ${({ theme }) => theme.PALETTE.gray[100]};
 
 	@media screen and (min-width: 386px) {
-		font-size: ${({ theme }) => theme.FONT_SIZE.sm};
+		font-size: ${({ theme }) => theme.FONT_SIZE.m};
 	}
 `;
 
@@ -79,13 +79,19 @@ export const Important = styled(Commons)`
 `;
 
 export const ImportantBtn = styled.div`
-	width: 32px;
-	height: 16px;
+	width: 28px;
+	height: 14px;
 	text-align: center;
 	${flexCenter}
 	background-color: ${({ theme }) => theme.PALETTE.orange[100]};
 	color: ${({ theme }) => theme.PALETTE.white[100]};
 	border-radius: 15px;
 	font-weight: 500;
-	font-size: ${({ theme }) => theme.FONT_SIZE.es};
+	font-size: ${({ theme }) => theme.FONT_SIZE.ss};
+
+	@media screen and (min-width: 376px) {
+		width: 41px;
+		height: 20px;
+		font-size: ${({ theme }) => theme.FONT_SIZE.s};
+	}
 `;

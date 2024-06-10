@@ -13,25 +13,25 @@ export const Iphone = styled.div`
 	border: 3px solid ${({ theme }) => theme.PALETTE.gray[300]};
 	border-radius: 34px;
 	${flexColumn}
-	gap: 10px;
+	gap: 14px;
 	overflow: hidden;
 
 	@media screen and (min-width: 376px) {
 		width: 203px;
 		height: 418px;
-		gap: 15px;
+		gap: 16px;
 	}
 
 	@media screen and (min-width: 769px) {
 		width: 262px;
 		height: 510px;
-		gap: 20px;
+		gap: 18px;
 	}
 `;
 
 export const ImgBox = styled.div`
 	${flexColumnCenter}
-	min-height: 160px;
+	min-height: 150px;
 	position: relative;
 
 	> img {
@@ -71,35 +71,43 @@ export const Circle = styled.div`
 export const MainBox = styled.div`
 	padding: 0 16px;
 	${flexColumn}
-	gap: 10px;
+	gap: 12px;
 	height: 120px;
+
+	@media screen and (min-width: 376px) {
+		gap: 14px;
+	}
+
+	@media screen and (min-width: 769px) {
+		gap: 16px;
+	}
 `;
 
 export const Title = styled.div`
 	${flexSpaceBetweenCenter}
 	color: ${({ theme }) => theme.PALETTE.gray[300]};
-	font-size: ${({ theme }) => theme.FONT_SIZE.sm};
+	font-size: ${({ theme }) => theme.FONT_SIZE.m};
 	font-weight: 600;
 
 	@media screen and (min-width: 376px) {
-		font-size: ${({ theme }) => theme.FONT_SIZE.re};
+		font-size: ${({ theme }) => theme.FONT_SIZE.ml};
 	}
 
 	@media screen and (min-width: 769px) {
-		font-size: ${({ theme }) => theme.FONT_SIZE.mb};
+		font-size: ${({ theme }) => theme.FONT_SIZE.xxl};
 	}
 `;
 
 export const Writer = styled(Title)`
-	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+	font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 	color: ${({ theme }) => theme.PALETTE.gray[100]};
 
 	@media screen and (min-width: 376px) {
-		font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+		font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 	}
 
 	@media screen and (min-width: 769px) {
-		font-size: ${({ theme }) => theme.FONT_SIZE.sm};
+		font-size: ${({ theme }) => theme.FONT_SIZE.m};
 	}
 `;
 
@@ -114,17 +122,37 @@ export const CheckProgress = styled.div`
 
 	width: 40px;
 	height: 16px;
-	font-size: ${({ theme }) => theme.FONT_SIZE.es};
+	font-size: ${({ theme }) => theme.FONT_SIZE.s};
 
 	@media screen and (min-width: 376px) {
 		width: 56px;
 		height: 21px;
-		font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+		font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 	}
 
 	@media screen and (min-width: 769px) {
 		width: 73px;
 		height: 28px;
-		font-size: ${({ theme }) => theme.FONT_SIZE.sm};
+		font-size: ${({ theme }) => theme.FONT_SIZE.m};
+	}
+`;
+
+export const Rate = styled.div`
+	${flexSpaceBetweenCenter}
+	gap: 4px;
+
+	font-size: ${({ theme }) => theme.FONT_SIZE.s};
+	color: ${({ theme }) => theme.PALETTE.gray[200]};
+
+	> div > img {
+		width: 8px;
+	}
+
+	@media screen and (min-width: 376px) {
+		font-size: ${({ theme }) => theme.FONT_SIZE.ms};
+
+		> div > img {
+			width: 12px;
+		}
 	}
 `;

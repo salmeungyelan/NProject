@@ -38,7 +38,7 @@ export const Title = styled.div`
 
 	& span {
 		font-weight: 600;
-		font-size: ${({ theme }) => theme.FONT_SIZE.sm};
+		font-size: ${({ theme }) => theme.FONT_SIZE.m};
 	}
 
 	& img {
@@ -47,13 +47,13 @@ export const Title = styled.div`
 	}
 
 	@media screen and (min-width: 376px) {
-		font-size: ${({ theme }) => theme.FONT_SIZE.re};
+		font-size: ${({ theme }) => theme.FONT_SIZE.ml};
 		height: 27px;
 		padding: 5px 8px;
 	}
 
 	@media screen and (min-width: 769px) {
-		font-size: ${({ theme }) => theme.FONT_SIZE.md};
+		font-size: ${({ theme }) => theme.FONT_SIZE.l};
 		height: 30px;
 		padding: 7px 11px;
 	}
