@@ -10,28 +10,28 @@ export const Card = styled.div`
 
 	> div > img {
 		width: 100%;
-		height: 88px;
+		height: 78px;
 	}
 
 	@media screen and (min-width: 376px) {
 		width: 162px;
 		height: 151px;
-		gap: 8px;
+		gap: 10px;
 
 		> div > img {
 			width: 100%;
-			height: 100px;
+			height: 85px;
 		}
 	}
 
 	@media screen and (min-width: 769px) {
 		width: 214px;
 		height: 200px;
-		gap: 10px;
+		gap: 15px;
 
 		> div > img {
 			width: 100%;
-			height: 130px;
+			height: 120px;
 		}
 	}
 `;
@@ -39,35 +39,55 @@ export const Card = styled.div`
 export const MainBox = styled.div`
 	padding: 0 10px;
 	${flexColumn}
-	gap: 4px;
+	gap: 10px;
 
 	@media screen and (min-width: 376px) {
 		padding: 0 16px;
-		gap: 6px;
+		gap: 12px;
 	}
 
 	@media screen and (min-width: 769px) {
 		padding: 0 16px;
-		gap: 8px;
+		gap: 14px;
 	}
 `;
 
 export const Title = styled.div`
 	${flexSpaceBetweenCenter}
 	color: ${({ theme }) => theme.PALETTE.gray[300]};
-	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+	font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 	font-weight: 600;
 
 	@media screen and (min-width: 376px) {
-		font-size: ${({ theme }) => theme.FONT_SIZE.sm};
+		font-size: ${({ theme }) => theme.FONT_SIZE.m};
 	}
 `;
 
 export const Writer = styled(Title)`
-	font-size: ${({ theme }) => theme.FONT_SIZE.es};
+	font-size: ${({ theme }) => theme.FONT_SIZE.s};
 	color: ${({ theme }) => theme.PALETTE.gray[100]};
 
 	@media screen and (min-width: 376px) {
-		font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+		font-size: ${({ theme }) => theme.FONT_SIZE.ms};
+	}
+`;
+
+export const Rate = styled.div`
+	${flexSpaceBetweenCenter}
+	gap: 4px;
+
+	font-size: ${({ theme }) => theme.FONT_SIZE.s};
+	color: ${({ theme }) => theme.PALETTE.gray[200]};
+
+	> div > img {
+		width: 8px;
+	}
+
+	@media screen and (min-width: 376px) {
+		font-size: ${({ theme }) => theme.FONT_SIZE.ms};
+
+		> div > img {
+			width: 10px;
+		}
 	}
 `;
