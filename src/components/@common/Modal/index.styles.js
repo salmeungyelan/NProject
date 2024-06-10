@@ -36,12 +36,12 @@ export const Header = styled.div`
 
 export const Title = styled.p`
 	color: ${({ theme }) => theme.PALETTE.gray[300]};
-	font-size: ${({ theme }) => theme.FONT_SIZE.md};
+	font-size: ${({ theme }) => theme.FONT_SIZE.l};
 	font-weight: 500;
 `;
 
 export const Body = styled.div`
-	font-size: ${({ theme }) => theme.FONT_SIZE.sm};
+	font-size: ${({ theme }) => theme.FONT_SIZE.m};
 	font-weight: 400;
 	color: ${({ theme }) => theme.PALETTE.gray[200]};
 `;
