@@ -16,7 +16,7 @@ export const Titles = styled.div`
 		height: 25px;
 
 		> span {
-			font-size: ${({ theme }) => theme.FONT_SIZE.j};
+			font-size: ${({ theme }) => theme.FONT_SIZE.xj};
 		}
 	}
 `;

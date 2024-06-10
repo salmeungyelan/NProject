@@ -1,14 +1,14 @@
-import Line from 'components/@common/Line';
 import * as S from './index.styles';
 
 import Title from 'components/@common/Title';
+import Line from 'components/@common/Line';
 import Button from 'components/@common/Button';
 
 function GuideDetail() {
 	return (
 		<S.Body>
 			<S.TopBox>
-				<Title>USAGE</Title>
+				<Title>GUIDE</Title>
 				<span>넷플레이스 이용안내</span>
 			</S.TopBox>
 
@@ -17,7 +17,7 @@ function GuideDetail() {
 
 				<S.Info>
 					<span>넷플레이스</span>
-					<span>2024년 04월 24일</span>
+					<p>2024년 04월 24일</p>
 				</S.Info>
 
 				<S.Description>

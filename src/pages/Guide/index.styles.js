@@ -13,8 +13,12 @@ export const TopBox = styled.div`
 	gap: 8px;
 
 	> span {
-		font-size: ${({ theme }) => theme.FONT_SIZE.ms};
+		font-size: ${({ theme }) => theme.FONT_SIZE.s};
 		color: ${({ theme }) => theme.PALETTE.gray[100]};
+
+		@media screen and (min-width: 376px) {
+			font-size: ${({ theme }) => theme.FONT_SIZE.ml};
+		}
 	}
 `;
 
