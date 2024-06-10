@@ -9,6 +9,7 @@ export const Header = styled.div`
 	${flexCenter}
 	background-color: #001219;
 	height: 80px;
+	width: auto;
 `;
 
 export const TopBox = styled.div`
@@ -18,7 +19,7 @@ export const TopBox = styled.div`
 
 export const WelcomeText = styled.div`
 	color: ${({ theme }) => theme.PALETTE.white[100]};
-	font-size: ${({ theme }) => theme.FONT_SIZE.big};
+	font-size: ${({ theme }) => theme.FONT_SIZE.xj};
 
 	> p > strong {
 		color: ${({ theme }) => theme.PALETTE.orange[100]};
@@ -35,7 +36,7 @@ export const Logout = styled.button`
 	color: ${({ theme }) => theme.PALETTE.white[100]};
 	border-radius: 26px;
 	background-color: ${({ theme }) => theme.PALETTE.orange[100]};
-	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+	font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 	width: 74px;
 	height: 23px;
 	font-size: 500;
@@ -51,7 +52,7 @@ export const Nav = styled.nav`
 	height: 60px;
 	background-color: ${({ theme }) => theme.PALETTE.white[100]};
 	box-shadow: 0 2px 4px 0 #00000029;
-	font-size: ${({ theme }) => theme.FONT_SIZE.re};
+	font-size: ${({ theme }) => theme.FONT_SIZE.ml};
 	font-weight: 500;
 
 	> ul {
