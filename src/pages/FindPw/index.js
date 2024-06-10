@@ -1,12 +1,10 @@
 import { Link } from 'react-router-dom';
 
-import useLayout from 'hooks/useLayout';
-
 import * as S from './index.styles';
 
 import Logo from 'components/@common/Logo';
 import PwLookup from 'components/pages/FindPw/PwLookup';
-import NewPw from 'components/pages/FindPw/NewPw';
+import TempPwd from 'components/pages/FindPw/TempPwd';
 
 function FindPw() {
 	return (
@@ -19,7 +17,7 @@ function FindPw() {
 				</S.LogoBox>
 
 				<PwLookup />
-				{/* <NewPw /> */}
+				{/* <TempPwd /> */}
 			</S.Top>
 
 			<S.Bottom>

@@ -55,13 +55,8 @@ function PwLookup() {
 			<S.ButtonBox>
 				<Notice />
 
-				<Button
-					shape={'default'}
-					variant={'default'}
-					size={'default'}
-					type="submit"
-				>
-					비밀번호 찾기
+				<Button variant={'default'} size={'default'} type="submit">
+					임시 비밀번호 발급
 				</Button>
 			</S.ButtonBox>
 		</S.FormBox>
