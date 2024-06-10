@@ -2,6 +2,9 @@ import { styled, css } from 'styled-components';
 import { flexCenter } from 'styles/common';
 
 const variantCSS = {
+	wait: css`
+		background: ${({ theme }) => theme.PALETTE.blue};
+	`,
 	ing: css`
 		background: ${({ theme }) => theme.PALETTE.orange[100]};
 	`,
@@ -21,5 +24,5 @@ export const CheckProgress = styled.div`
 
 	width: 40px;
 	height: 16px;
-	font-size: ${({ theme }) => theme.FONT_SIZE.es};
+	font-size: ${({ theme }) => theme.FONT_SIZE.s};
 `;

@@ -5,7 +5,7 @@ function Title({ children }) {
 	return (
 		<S.Titles>
 			<Line size={'default'} variant={'orange'} />
-			<div>{children}</div>
+			<span>{children}</span>
 		</S.Titles>
 	);
 }

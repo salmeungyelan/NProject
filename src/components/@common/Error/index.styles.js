@@ -24,12 +24,12 @@ export const ImgBox = styled.div`
 
 export const Title = styled.div`
 	margin-bottom: 16px;
-	font-size: ${({ theme }) => theme.FONT_SIZE.re};
+	font-size: ${({ theme }) => theme.FONT_SIZE.ml};
 	font-weight: 500;
 `;
 
 export const Content = styled.div`
-	font-size: ${({ theme }) => theme.FONT_SIZE.sm};
+	font-size: ${({ theme }) => theme.FONT_SIZE.m};
 	line-height: 24px;
 `;
 

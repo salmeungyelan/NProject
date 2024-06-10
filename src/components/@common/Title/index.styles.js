@@ -3,16 +3,20 @@ import { flexAlignCenter } from 'styles/common';
 
 export const Titles = styled.div`
 	${flexAlignCenter}
-	justify-content: left;
 	gap: 3px;
+	height: 20px;
 
-	font-size: ${({ theme }) => theme.FONT_SIZE.mb};
-	font-weight: 600;
-	text-align: center;
-	height: 22px;
+	> span {
+		font-size: ${({ theme }) => theme.FONT_SIZE.xxl};
+		font-weight: 600;
+	}
 
 	@media screen and (min-width: 376px) {
-		font-size: ${({ theme }) => theme.FONT_SIZE.xl};
-		height: 36px;
+		${flexAlignCenter}
+		height: 25px;
+
+		> span {
+			font-size: ${({ theme }) => theme.FONT_SIZE.j};
+		}
 	}
 `;

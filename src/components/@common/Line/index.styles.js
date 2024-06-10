@@ -13,6 +13,10 @@ const sizeCSS = {
 		width: 4px;
 		height: 100%;
 	`,
+	height2: css`
+		width: 1px;
+		height: 100%;
+	`,
 };
 
 const variantCSS = {
