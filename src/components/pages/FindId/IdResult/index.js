@@ -28,7 +28,7 @@ function IdResult() {
 				</S.InputBox>
 			</div>
 
-			<Button size={'default'} variant={'default'} shape={'default'}>
+			<Button size={'default'} variant={'default'}>
 				로그인
 			</Button>
 		</S.Body>

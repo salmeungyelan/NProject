@@ -52,12 +52,7 @@ function IdLookup() {
 			<S.ButtonBox>
 				<Notice />
 
-				<Button
-					shape={'default'}
-					variant={'default'}
-					size={'default'}
-					type="submit"
-				>
+				<Button variant={'default'} size={'default'} disabled>
 					아이디 찾기
 				</Button>
 			</S.ButtonBox>
