@@ -63,17 +63,17 @@ function NoticeList() {
 		<S.Body>
 			{notice.map(el => (
 				<S.Box key={el.id}>
-					<S.Important>
+					<S.ImportantBox>
 						{el.important ? (
 							<>
 								<img src="/assets/icons/pin.svg" alt="pin" />
-								<S.ImportantBtn>중요</S.ImportantBtn>
+								<S.Important>중요</S.Important>
 								<S.Title>{el.title}</S.Title>
 							</>
 						) : (
 							<S.Title>{el.title}</S.Title>
 						)}
-					</S.Important>
+					</S.ImportantBox>
 
 					<S.Content>
 						<S.Description>{el.description}</S.Description>
