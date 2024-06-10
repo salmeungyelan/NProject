@@ -18,8 +18,12 @@ export const TopBox = styled.div`
 	gap: 8px;
 
 	> span {
-		font-size: ${({ theme }) => theme.FONT_SIZE.ms};
+		font-size: ${({ theme }) => theme.FONT_SIZE.s};
 		color: ${({ theme }) => theme.PALETTE.gray[100]};
+
+		@media screen and (min-width: 376px) {
+			font-size: ${({ theme }) => theme.FONT_SIZE.ml};
+		}
 	}
 `;
 
@@ -46,13 +50,23 @@ export const Title = styled.span`
 
 export const Info = styled.div`
 	${flexSpaceBetweenCenter}
+	color: ${({ theme }) => theme.PALETTE.gray[300]};
 
 	> span {
 		font-size: ${({ theme }) => theme.FONT_SIZE.s};
-		color: ${({ theme }) => theme.PALETTE.gray[300]};
+	}
 
-		@media screen and (min-width: 376px) {
+	> p {
+		font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+	}
+
+	@media screen and (min-width: 376px) {
+		> span {
 			font-size: ${({ theme }) => theme.FONT_SIZE.ml};
+		}
+
+		> p {
+			font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 		}
 	}
 `;
