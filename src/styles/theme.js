@@ -22,21 +22,24 @@ const PALETTE = {
 		200: '#E0E0E0',
 	},
 
+	blue: '#448EF8',
 	navy: '#003E53',
 	ivory: '#F7F1E8',
 	black: '#111111',
 };
 
 const FONT_SIZE = {
-	es: '10px', // 10
-	xs: '12px', // 12
-	sm: '14px', // 14
-	re: '16px', // 16
-	md: '18px', // 18
-	big: '20px', // 20
-	mb: '22px', // 22
-	lg: '24px', // 24
-	xl: '36px', // 36
+	xxs: '6px',
+	xs: '8px',
+	s: '10px',
+	ms: '12px',
+	m: '14px',
+	ml: '16px',
+	l: '18px',
+	xl: '20px',
+	xxl: '22px',
+	j: '24px',
+	xj: '36px',
 };
 
 // light 300
