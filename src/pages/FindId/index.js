@@ -1,7 +1,5 @@
 import { Link } from 'react-router-dom';
 
-import useLayout from 'hooks/useLayout';
-
 import * as S from './index.styles';
 
 import Logo from 'components/@common/Logo';

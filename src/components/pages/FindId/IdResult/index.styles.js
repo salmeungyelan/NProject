@@ -15,11 +15,11 @@ export const Body = styled.div`
 export const InputBox = styled.div`
 	width: 100%;
 	${flexColumn}
-	gap: 16px;
+	gap: 12px;
 `;
 
 export const Title = styled.h1`
 	font-weight: 400;
-	font-size: ${({ theme }) => theme.FONT_SIZE.re};
+	font-size: ${({ theme }) => theme.FONT_SIZE.ml};
 	color: ${({ theme }) => theme.PALETTE.orange[100]};
 `;

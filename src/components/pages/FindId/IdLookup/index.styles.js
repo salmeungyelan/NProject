@@ -14,20 +14,20 @@ export const FormBox = styled.form`
 export const InputBox = styled.div`
 	width: 100%;
 	${flexColumn}
-	gap: 16px;
+	gap: 12px;
 
 	> div > p {
 		height: 16px;
 		margin-top: 4px;
 		font-weight: 400;
-		font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+		font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 		color: ${({ theme }) => theme.PALETTE.red[100]};
 	}
 `;
 
 export const Title = styled.h1`
 	font-weight: 400;
-	font-size: ${({ theme }) => theme.FONT_SIZE.re};
+	font-size: ${({ theme }) => theme.FONT_SIZE.ml};
 	color: ${({ theme }) => theme.PALETTE.orange[100]};
 `;
 
