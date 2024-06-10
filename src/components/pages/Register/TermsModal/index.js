@@ -18,11 +18,15 @@ function TermsModal() {
 					<S.Title>{modalDataState.title}</S.Title>
 					<S.CloseBtn onClick={closeModal} />
 				</S.Header>
+
 				<S.Body>{modalDataState.content}</S.Body>
+
 				<S.ButtonBox>
-					<Button variant={'orange'} shape={'default'} size={'default'}>
-						동의
-					</Button>
+					<div>
+						<Button variant={'default'} size={'default'}>
+							동의
+						</Button>
+					</div>
 				</S.ButtonBox>
 			</S.Container>
 		</S.Background>
