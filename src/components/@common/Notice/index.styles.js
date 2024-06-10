@@ -10,7 +10,7 @@ export const Notice = styled.div`
 
 	> p {
 		color: ${({ theme }) => theme.PALETTE.gray[200]};
-		font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+		font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 		font-weight: 400;
 	}
 

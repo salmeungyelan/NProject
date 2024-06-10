@@ -1,68 +1,67 @@
 import styled, { css } from 'styled-components';
 
-const variantCSS = {
-	default: css`
-		background: ${({ theme }) => theme.PALETTE.orange[100]};
-		color: ${({ theme }) => theme.PALETTE.white[100]};
-		box-shadow: 0 2px 4px 0 #00000026;
-
-		&:disabled {
-			background: ${({ theme }) => theme.PALETTE.gray[100]};
-			color: rgba(0, 0, 0, 0.1);
-		}
-
-		&:hover {
-			background-color: ${({ theme }) => theme.PALETTE.orange[200]};
-			transform: scale(1.02);
-		}
-	`,
-	white: css`
-		background: ${({ theme }) => theme.PALETTE.white[100]};
-		color: ${({ theme }) => theme.PALETTE.gray[100]};
-		border: 1px solid ${({ theme }) => theme.PALETTE.gray[0]};
-		font-weight: 500;
-
-		&:hover {
-			color: ${({ theme }) => theme.PALETTE.gray[200]};
-			border: 1px solid ${({ theme }) => theme.PALETTE.gray[100]};
-			transform: scale(1.02);
-		}
-	`,
-	orange: css`
-		background: ${({ theme }) => theme.PALETTE.orange[100]};
-		color: ${({ theme }) => theme.PALETTE.white[100]};
-
-		&:hover {
-			background-color: ${({ theme }) => theme.PALETTE.orange[200]};
-			transform: scale(1.02);
-		}
-	`,
-};
-
-const shapeCSS = {
-	default: css`
-		border-radius: 4px;
-	`,
-};
-
 const sizeCSS = {
 	default: css`
 		width: 100%;
 		height: 40px;
-
-		font-size: ${({ theme }) => theme.FONT_SIZE.re};
-		font-weight: 500;
 	`,
-	twice: css`
+	height: css`
+		width: 100%;
+		height: 28px;
+
+		@media screen and (min-width: 376px) {
+			height: 32px;
+		}
+
+		@media screen and (min-width: 769px) {
+			height: 40px;
+		}
+	`,
+	error: css`
 		width: 276px;
 		height: 40px;
 	`,
 };
 
-export const Button = styled.button`
-	cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
+const variantCSS = {
+	default: css`
+		color: ${({ theme }) => theme.PALETTE.white[100]};
+		background: ${({ theme }) => theme.PALETTE.orange[100]};
 
-	${({ $shape }) => shapeCSS[$shape]};
-	${({ $variant }) => variantCSS[$variant]};
+		&:hover {
+			background-color: ${({ theme }) => theme.PALETTE.orange[200]};
+		}
+	`,
+	white: css`
+		color: ${({ theme }) => theme.PALETTE.gray[100]};
+		background: ${({ theme }) => theme.PALETTE.white[100]};
+		border: 1px solid ${({ theme }) => theme.PALETTE.gray[0]};
+
+		&:hover {
+			color: ${({ theme }) => theme.PALETTE.gray[200]};
+		}
+	`,
+	orange: css`
+		color: ${({ theme }) => theme.PALETTE.white[100]};
+		background: ${({ theme }) => theme.PALETTE.orange[100]};
+
+		&:hover {
+			background-color: ${({ theme }) => theme.PALETTE.orange[200]};
+		}
+	`,
+};
+
+export const Button = styled.button`
+	border-radius: 4px;
+	font-weight: 500;
+	font-size: ${({ theme }) => theme.FONT_SIZE.ml};
+	cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
+	box-shadow: 0 2px 4px 0 #00000026;
+
 	${({ size }) => sizeCSS[size]};
+	${({ $variant }) => variantCSS[$variant]};
+
+	&:hover {
+		transform: scale(1.02);
+	}
 `;
