@@ -31,7 +31,7 @@ export const Title = styled.span`
 	}
 `;
 
-export const Important = styled.div`
+export const ImportantBox = styled.div`
 	display: flex;
 	align-items: center;
 	gap: 6px;
@@ -41,10 +41,9 @@ export const Important = styled.div`
 	}
 `;
 
-export const ImportantBtn = styled.div`
+export const Important = styled.div`
 	width: 28px;
 	height: 14px;
-	text-align: center;
 	${flexCenter}
 	background-color: ${({ theme }) => theme.PALETTE.orange[100]};
 	color: ${({ theme }) => theme.PALETTE.white[100]};
