@@ -24,13 +24,17 @@ const sizeCSS = {
 		width: 100%;
 		height: 40px;
 	`,
-	medium: css`
-		height: 2px;
-		width: 1080px;
-	`,
 	height: css`
-		width: 1px;
-		height: 16px;
+		width: 100%;
+		height: 28px;
+
+		@media screen and (min-width: 376px) {
+			height: 32px;
+		}
+
+		@media screen and (min-width: 769px) {
+			height: 40px;
+		}
 	`,
 };
 
