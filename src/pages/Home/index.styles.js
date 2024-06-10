@@ -35,7 +35,7 @@ export const InputBox = styled.div`
 	> input:focus + label,
 	input:valid + label {
 		color: ${({ theme }) => theme.PALETTE.orange[100]};
-		font-size: ${({ theme }) => theme.FONT_SIZE.es};
+		font-size: ${({ theme }) => theme.FONT_SIZE.s};
 		top: 4px;
 		transform: translate(0px, -10px);
 		background-color: ${({ theme }) => theme.PALETTE.white[100]};
@@ -48,7 +48,7 @@ export const Label = styled.label`
 	padding: 0 4px;
 
 	color: ${({ theme }) => theme.PALETTE.gray[100]};
-	font-size: ${({ theme }) => theme.FONT_SIZE.sm};
+	font-size: ${({ theme }) => theme.FONT_SIZE.m};
 	font-weight: 400;
 
 	position: absolute;
@@ -58,7 +58,7 @@ export const Label = styled.label`
 export const Text = styled.div`
 	height: 24px;
 	font-weight: 400;
-	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+	font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 	color: ${({ theme }) => theme.PALETTE.red[100]};
 	line-height: 18px;
 `;
@@ -71,7 +71,7 @@ export const LinkBox = styled.div`
 	> :link,
 	:visited {
 		color: ${({ theme }) => theme.PALETTE.gray[100]};
-		font-size: ${({ theme }) => theme.FONT_SIZE.re};
+		font-size: ${({ theme }) => theme.FONT_SIZE.ml};
 		font-weight: 400;
 		text-decoration: none;
 	}

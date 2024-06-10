@@ -1,7 +1,5 @@
 import { Link } from 'react-router-dom';
 
-import useLayout from 'hooks/useLayout';
-
 import * as S from './index.styles';
 
 import Logo from 'components/@common/Logo';
@@ -48,12 +46,7 @@ function Home() {
 						</div>
 
 						<div>
-							<Button
-								variant={'default'}
-								shape={'default'}
-								size={'default'}
-								type="submit"
-							>
+							<Button variant={'default'} size={'default'}>
 								로그인
 							</Button>
 
