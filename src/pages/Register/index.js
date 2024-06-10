@@ -1,21 +1,20 @@
 import { Link } from 'react-router-dom';
 
-import useLayout from 'hooks/useLayout';
 import useModal from 'hooks/useModal';
 
 import * as S from './index.styles';
 
 import Logo from 'components/@common/Logo';
 import Input from 'components/@common/Input';
-import Button from 'components/@common/Button';
 import Line from 'components/@common/Line';
+import Button from 'components/@common/Button';
 import TermsModal from 'components/pages/Register/TermsModal';
 
 function Register() {
 	const { openModal } = useModal();
 	const handleOpenModal = () => {
 		openModal({
-			title: '넷플레이스 - 메타 서비스 이용약관',
+			title: '넷플레이스 - 메타 서비스 이용 약관',
 			content: (
 				<pre>
 					대통령·국무총리·국무위원·행정각부의 장·헌법재판소
@@ -186,7 +185,7 @@ function Register() {
 							placeholder="우편번호"
 							required
 						/>
-						<Button variant={'orange'} size={'default'} shape={'default'}>
+						<Button variant={'orange'} size={'default'} shadow>
 							주소 찾기
 						</Button>
 					</div>
@@ -214,13 +213,13 @@ function Register() {
 						variant={'default'}
 						type="text"
 						autoComplete="off"
-						placeholder="사업자 등록 번호를 입력해 주세요."
+						placeholder="업체의 사업자 등록 번호를 입력해 주세요."
 						required
 					/>
 					<p></p>
 				</S.InputBox>
 
-				<S.InputBox>
+				{/* <S.InputBox>
 					<S.H1>스마트 플레이스 링크</S.H1>
 					<Input
 						size={'default'}
@@ -231,7 +230,7 @@ function Register() {
 						required
 					/>
 					<p></p>
-				</S.InputBox>
+				</S.InputBox> */}
 
 				<S.CheckBox>
 					<S.H1>약관동의</S.H1>
@@ -262,12 +261,7 @@ function Register() {
 				<TermsModal />
 
 				<S.ButtonBox>
-					<Button
-						size={'default'}
-						variant={'default'}
-						shape={'default'}
-						type="submit"
-					>
+					<Button size={'default'} variant={'default'} type="submit">
 						회원가입
 					</Button>
 				</S.ButtonBox>

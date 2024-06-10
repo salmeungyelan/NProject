@@ -1,6 +1,7 @@
 import { styled, css } from 'styled-components';
 import {
 	ModalBackground,
+	bodyContainer,
 	flexCenter,
 	flexSpaceBetweenCenter,
 } from 'styles/common';
@@ -16,9 +17,12 @@ export const Container = styled.div`
 	top: 50%;
 	transform: translate(-50%, -50%);
 	background-color: ${({ theme }) => theme.PALETTE.white[100]};
-	max-width: 1200px;
-	width: 70%;
-	padding: 32px 30px;
+	padding: 32px 24px;
+	${bodyContainer}
+
+	@media only screen and (min-width: 376px) {
+		padding: 46px 40px;
+	}
 `;
 
 // 모바일 -> 폰트 헤더 및 본문 2px 줄이기
@@ -28,8 +32,12 @@ export const Header = styled.div`
 
 export const Title = styled.p`
 	color: ${({ theme }) => theme.PALETTE.gray[300]};
-	font-size: ${({ theme }) => theme.FONT_SIZE.md};
+	font-size: ${({ theme }) => theme.FONT_SIZE.ml};
 	font-weight: 600;
+
+	@media only screen and (min-width: 376px) {
+		font-size: ${({ theme }) => theme.FONT_SIZE.l};
+	}
 `;
 
 const buttonBgReset = css`
@@ -50,7 +58,7 @@ export const CloseBtn = styled.button`
 export const Body = styled.div`
 	margin: 32px 0 16px 0;
 	padding: 0 20px 16px 0;
-	font-size: ${({ theme }) => theme.FONT_SIZE.sm};
+	font-size: ${({ theme }) => theme.FONT_SIZE.m};
 	font-weight: 400;
 	color: ${({ theme }) => theme.PALETTE.gray[200]};
 	overflow-y: auto;
@@ -84,14 +92,15 @@ export const Body = styled.div`
 export const ButtonBox = styled.div`
 	margin-top: 24px;
 	cursor: pointer;
-	${flexCenter}
 
-	> button {
-		width: 100%;
+	> div {
+		width: 246px;
 	}
 
-	@media screen and (min-width: 369px) {
-		> button {
+	@media screen and (min-width: 376px) {
+		${flexCenter};
+
+		> div {
 			width: 180px;
 		}
 	}
