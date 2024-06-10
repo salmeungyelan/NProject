@@ -10,8 +10,16 @@ export const ModalBackground = css`
 `;
 
 export const bodyContainer = css`
+	width: 294px;
 	margin: 0 auto;
-	width: 1200px;
+
+	@media screen and (min-width: 376px) {
+		width: 568px;
+	}
+
+	@media screen and (min-width: 769px) {
+		width: 1200px;
+	}
 `;
 
 export const flexCenter = css`
