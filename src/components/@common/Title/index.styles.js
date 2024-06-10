@@ -1,10 +1,24 @@
 import styled from 'styled-components';
-import { flexAlignCenter } from 'styles/common';
+import { flexAlignCenter, flexColumn } from 'styles/common';
 
-export const Titles = styled.div`
+export const TitleBox = styled.div`
+	${flexColumn}
+	gap: 8px;
+
+	> p {
+		font-size: ${({ theme }) => theme.FONT_SIZE.s};
+		color: ${({ theme }) => theme.PALETTE.gray[100]};
+
+		@media screen and (min-width: 376px) {
+			font-size: ${({ theme }) => theme.FONT_SIZE.ml};
+		}
+	}
+`;
+
+export const Title = styled.div`
+	height: 22px;
 	${flexAlignCenter}
 	gap: 3px;
-	height: 20px;
 
 	> span {
 		font-size: ${({ theme }) => theme.FONT_SIZE.xxl};
@@ -12,8 +26,7 @@ export const Titles = styled.div`
 	}
 
 	@media screen and (min-width: 376px) {
-		${flexAlignCenter}
-		height: 25px;
+		height: 36px;
 
 		> span {
 			font-size: ${({ theme }) => theme.FONT_SIZE.xj};

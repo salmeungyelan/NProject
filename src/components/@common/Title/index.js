@@ -1,12 +1,18 @@
 import * as S from './index.styles';
 import Line from '../Line';
 
-function Title({ children }) {
+function Title(props) {
+	const { children, title } = props;
+
 	return (
-		<S.Titles>
-			<Line size={'default'} variant={'orange'} />
-			<span>{children}</span>
-		</S.Titles>
+		<S.TitleBox>
+			<S.Title>
+				<Line size={'default'} variant={'orange'} />
+				<span>{title}</span>
+			</S.Title>
+
+			<p>{children}</p>
+		</S.TitleBox>
 	);
 }
 
