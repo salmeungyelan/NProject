@@ -20,7 +20,7 @@ function ErrorFallback({ error }) {
 		<S.Body>
 			<S.Top>
 				<S.ImgBox>
-					<img src="/assets/images/error.svg" />
+					<img src="/assets/icons/error.svg" />
 				</S.ImgBox>
 
 				<div>
@@ -37,20 +37,10 @@ function ErrorFallback({ error }) {
 			</S.Top>
 
 			<S.ButtonBox>
-				<Button
-					variant={'white'}
-					shape={'default'}
-					size={'twice'}
-					onClick={HandleClickToBack}
-				>
+				<Button variant={'white'} size={'error'} onClick={HandleClickToBack}>
 					이전으로
 				</Button>
-				<Button
-					variant={'orange'}
-					shape={'default'}
-					size={'twice'}
-					onClick={HandleClickToMain}
-				>
+				<Button variant={'orange'} size={'error'} onClick={HandleClickToMain}>
 					메인으로
 				</Button>
 			</S.ButtonBox>
