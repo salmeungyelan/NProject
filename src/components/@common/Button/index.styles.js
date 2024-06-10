@@ -41,14 +41,6 @@ const variantCSS = {
 			color: ${({ theme }) => theme.PALETTE.gray[200]};
 		}
 	`,
-	orange: css`
-		color: ${({ theme }) => theme.PALETTE.white[100]};
-		background: ${({ theme }) => theme.PALETTE.orange[100]};
-
-		&:hover {
-			background-color: ${({ theme }) => theme.PALETTE.orange[200]};
-		}
-	`,
 };
 
 export const Button = styled.button`

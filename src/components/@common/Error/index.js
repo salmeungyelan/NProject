@@ -40,7 +40,7 @@ function ErrorFallback({ error }) {
 				<Button variant={'white'} size={'error'} onClick={HandleClickToBack}>
 					이전으로
 				</Button>
-				<Button variant={'orange'} size={'error'} onClick={HandleClickToMain}>
+				<Button variant={'default'} size={'error'} onClick={HandleClickToMain}>
 					메인으로
 				</Button>
 			</S.ButtonBox>

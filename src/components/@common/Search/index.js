@@ -11,7 +11,7 @@ function Search() {
 			</S.SearchBox>
 
 			<S.ButtonBox>
-				<Button variant={'orange'} size={'height'}>
+				<Button variant={'default'} size={'height'}>
 					검색
 				</Button>
 			</S.ButtonBox>
