@@ -5,26 +5,26 @@ const GlobalStyles = createGlobalStyle`
     ${reset}
 
     @font-face {
-      font-family: 'NotoSansKR';
-      src: url('/assets/fonts/NotoSansKR-Light.ttf') format('truetype');
+      font-family: 'Pretendard';
+      src: url('/assets/font/Pretendard-Light.otf') format('opentype');
       font-weight: 300;
     }
 
     @font-face {
-      font-family: 'NotoSansKR';
-      src: url('/assets/fonts/NotoSansKR-Regular.ttf') format('truetype');
+      font-family: 'Pretendard';
+      src: url('/assets/font/Pretendard-Regular.otf') format('opentype');
       font-weight: 400;
     }
 
     @font-face {
-      font-family: 'NotoSansKR';
-      src: url('/assets/fonts/NotoSansKR-Medium.ttf') format('truetype');
+      font-family: 'Pretendard';
+      src: url('/assets/font/Pretendard-Medium.otf') format('opentype');
       font-weight: 500;
     }
 
     @font-face {
-      font-family: 'NotoSansKR';
-      src: url('/assets/fonts/NotoSansKR-SemiBold.ttf') format('truetype');
+      font-family: 'Pretendard';
+      src: url('/assets/font/Pretendard-SemiBold.otf') format('opentype');
       font-weight: 600;
     }
 
@@ -33,12 +33,12 @@ const GlobalStyles = createGlobalStyle`
       padding: 0;
       box-sizing: border-box;
       font-family: sans-serif;
-      font-family: 'NotoSansKR' !important;
+      font-family: 'Pretendard' !important;
       font-weight: 400;
     }
 
     body {
-      font-family: 'NotoSansKR', sans-serif;
+      font-family: 'Pretendard', sans-serif;
       color: ${({ theme }) => theme.PALETTE.black};
     }
 
@@ -55,6 +55,10 @@ const GlobalStyles = createGlobalStyle`
     ul > li {
       list-style: none;
     }
+
+    ::-webkit-scrollbar {
+        display: none;
+      }
 `;
 
 export default GlobalStyles;
