@@ -1,5 +1,8 @@
-import Iphone from '../Iphone';
+import { Link } from 'react-router-dom';
+
 import * as S from './index.styles';
+
+import Iphone from '../Iphone';
 
 import Card from 'components/@common/Card';
 
@@ -10,8 +13,10 @@ function List() {
 
 			<S.ReviewIng>
 				<S.Title>
-					<span>현재 진행 중인 리뷰 보러 가기</span>
-					<img src="/assets/icons/pagination-right.svg" />
+					<Link to={'/review'}>
+						<span>현재 진행 중인 리뷰 보러 가기</span>
+						<img src="/assets/icons/pagination-right.svg" />
+					</Link>
 				</S.Title>
 
 				<S.CardList>
@@ -24,8 +29,10 @@ function List() {
 
 			<S.ReviewFin>
 				<S.Title>
-					<span>완료된 리뷰 보러 가기</span>
-					<img src="/assets/icons/pagination-right.svg" />
+					<Link to={'/review'}>
+						<span>완료된 리뷰 보러 가기</span>
+						<img src="/assets/icons/pagination-right.svg" />
+					</Link>
 				</S.Title>
 
 				<S.CardList>

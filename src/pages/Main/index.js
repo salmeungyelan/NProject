@@ -1,14 +1,15 @@
 import * as S from './index.styles';
 
-import Line from 'components/@common/Line';
-import Title from 'components/@common/Title';
 import List from 'components/pages/Main/List';
 import More from 'components/pages/Main/More';
+
+import Line from 'components/@common/Line';
+import Title from 'components/@common/Title';
 
 function Main() {
 	return (
 		<S.Body>
-			<Title>MAIN</Title>
+			<Title title={'MAIN'} />
 
 			<List />
 
