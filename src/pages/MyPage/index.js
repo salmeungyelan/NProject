@@ -1,12 +1,29 @@
+import useModal from 'hooks/useModal';
+
 import * as S from './index.styles';
+
+import PwdChangeModal from 'components/pages/MyPage/PwdChangeModal';
 
 import Title from 'components/@common/Title';
 import Input from 'components/@common/Input';
 import Button from 'components/@common/Button';
 
 function MyPage() {
+	const { openModal } = useModal();
+
+	const handleOpenPwdModal = () => {
+		openModal({
+			img: '',
+			title: '',
+			content: '',
+			callback: () => console.log('closed'),
+		});
+	};
+
 	return (
 		<S.Body>
+			<PwdChangeModal />
+
 			<Title title={'MY PAGE'}>회원 정보를 수정할 수 있습니다.</Title>
 
 			<div>
@@ -40,9 +57,15 @@ function MyPage() {
 							type="password"
 							readOnly
 						/>
-						<Button size={'height'} variant={'default'}>
-							비밀번호 변경하기
-						</Button>
+						<div>
+							<Button
+								size={'height'}
+								variant={'default'}
+								onClick={handleOpenPwdModal}
+							>
+								비밀번호 변경하기
+							</Button>
+						</div>
 					</S.InfoBox>
 
 					<S.InfoBox>

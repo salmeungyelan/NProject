@@ -1,7 +1,8 @@
+import { useNavigate } from 'react-router-dom';
+
 import * as S from './index.styles';
 
 import Button from '../Button';
-import { useNavigate } from 'react-router-dom';
 
 function ErrorFallback({ error }) {
 	console.log(error);
