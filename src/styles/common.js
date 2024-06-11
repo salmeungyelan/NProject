@@ -12,13 +12,16 @@ export const ModalBackground = css`
 export const bodyContainer = css`
 	width: 294px;
 	margin: 0 auto;
+	padding: 50px 0;
 
 	@media screen and (min-width: 376px) {
 		width: 568px;
+		padding: 60px 0;
 	}
 
 	@media screen and (min-width: 769px) {
 		width: 1200px;
+		padding: 70px 0;
 	}
 `;
 

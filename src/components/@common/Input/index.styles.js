@@ -24,13 +24,17 @@ const sizeCSS = {
 		width: 100%;
 		height: 40px;
 	`,
-	medium: css`
-		height: 2px;
-		width: 1080px;
-	`,
 	height: css`
-		width: 1px;
-		height: 16px;
+		width: 100%;
+		height: 28px;
+
+		@media screen and (min-width: 768px) {
+			height: 32px;
+		}
+
+		@media screen and (min-width: 1200px) {
+			height: 40px;
+		}
 	`,
 };
 
@@ -41,7 +45,7 @@ export const Input = styled.input`
 	font-size: ${({ theme }) => theme.FONT_SIZE.m};
 	font-weight: 400;
 
-	padding: 0px 16px;
+	padding: 0px 10px;
 	border-radius: 4px;
 
 	outline: none;

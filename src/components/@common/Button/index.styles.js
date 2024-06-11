@@ -9,11 +9,11 @@ const sizeCSS = {
 		width: 100%;
 		height: 28px;
 
-		@media screen and (min-width: 376px) {
+		@media screen and (min-width: 768px) {
 			height: 32px;
 		}
 
-		@media screen and (min-width: 769px) {
+		@media screen and (min-width: 1200px) {
 			height: 40px;
 		}
 	`,
@@ -39,14 +39,6 @@ const variantCSS = {
 
 		&:hover {
 			color: ${({ theme }) => theme.PALETTE.gray[200]};
-		}
-	`,
-	orange: css`
-		color: ${({ theme }) => theme.PALETTE.white[100]};
-		background: ${({ theme }) => theme.PALETTE.orange[100]};
-
-		&:hover {
-			background-color: ${({ theme }) => theme.PALETTE.orange[200]};
 		}
 	`,
 };

@@ -22,7 +22,7 @@ function Modal() {
 				</S.Header>
 
 				<S.ButtonBox>
-					<Button variant={'orange'} size={'default'} onClick={closeModal}>
+					<Button variant={'default'} size={'default'} onClick={closeModal}>
 						확인
 					</Button>
 				</S.ButtonBox>

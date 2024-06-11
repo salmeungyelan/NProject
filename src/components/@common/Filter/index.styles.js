@@ -5,7 +5,7 @@ export const Body = styled.div`
 	${flexAlignCenter}
 	gap: 10px;
 
-	@media screen and (min-width: 376px) {
+	@media screen and (min-width: 768px) {
 		gap: 16px;
 	}
 `;
@@ -15,6 +15,7 @@ export const Sort = styled.div`
 	${flexCenter}
 	gap: 3px;
 	color: ${({ theme }) => theme.PALETTE.gray[100]};
+	cursor: pointer;
 
 	/* 클릭 시 변경 색
 	color: ${({ theme }) => theme.PALETTE.gray[300]};
@@ -22,7 +23,11 @@ export const Sort = styled.div`
 		color: ${({ theme }) => theme.PALETTE.orange[100]};
 	} */
 
-	@media screen and (min-width: 376px) {
+	&:hover {
+		color: ${({ theme }) => theme.PALETTE.orange[100]};
+	}
+
+	@media screen and (min-width: 768px) {
 		font-size: ${({ theme }) => theme.FONT_SIZE.m};
 	}
 `;

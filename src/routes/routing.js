@@ -13,6 +13,7 @@ const Guide = lazy(() => import('pages/Guide'));
 const GuideDetail = lazy(() => import('pages/Guide/Detail'));
 const Notice = lazy(() => import('pages/Notice'));
 const NoticeDetail = lazy(() => import('pages/Notice/Detail'));
+const MyPage = lazy(() => import('pages/MyPage'));
 
 const router = createBrowserRouter([
 	{
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
 			{
 				path: '/notice/detail',
 				element: <NoticeDetail />,
+			},
+			{
+				path: '/my_page',
+				element: <MyPage />,
 			},
 		],
 	},
