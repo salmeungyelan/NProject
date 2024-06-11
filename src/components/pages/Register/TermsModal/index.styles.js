@@ -1,7 +1,6 @@
 import { styled, css } from 'styled-components';
 import {
 	ModalBackground,
-	bodyContainer,
 	flexCenter,
 	flexSpaceBetweenCenter,
 } from 'styles/common';
@@ -17,15 +16,15 @@ export const Container = styled.div`
 	top: 50%;
 	transform: translate(-50%, -50%);
 	background-color: ${({ theme }) => theme.PALETTE.white[100]};
+	width: 294px;
 	padding: 32px 24px;
-	${bodyContainer}
 
-	@media only screen and (min-width: 376px) {
+	@media only screen and (min-width: 768px) {
+		width: 568px;
 		padding: 46px 40px;
 	}
 `;
 
-// 모바일 -> 폰트 헤더 및 본문 2px 줄이기
 export const Header = styled.div`
 	${flexSpaceBetweenCenter}
 `;
@@ -35,7 +34,7 @@ export const Title = styled.p`
 	font-size: ${({ theme }) => theme.FONT_SIZE.ml};
 	font-weight: 600;
 
-	@media only screen and (min-width: 376px) {
+	@media only screen and (min-width: 768px) {
 		font-size: ${({ theme }) => theme.FONT_SIZE.l};
 	}
 `;
@@ -52,7 +51,7 @@ const buttonBgReset = css`
 
 export const CloseBtn = styled.button`
 	${buttonBgReset}
-	background-image: url('/assets/icons/modal-x-btn.svg');
+	background-image: url('/assets/icons/modal-x.svg');
 `;
 
 export const Body = styled.div`
@@ -73,7 +72,7 @@ export const Body = styled.div`
 		display: none;
 	}
 
-	@media only screen and (min-width: 769px) {
+	@media only screen and (min-width: 1200px) {
 		&::-webkit-scrollbar {
 			display: inherit;
 			width: 5px;
@@ -97,7 +96,7 @@ export const ButtonBox = styled.div`
 		width: 246px;
 	}
 
-	@media screen and (min-width: 376px) {
+	@media screen and (min-width: 768px) {
 		${flexCenter};
 
 		> div {
