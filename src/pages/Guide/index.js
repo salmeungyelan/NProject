@@ -1,18 +1,15 @@
 import * as S from './index.styles';
 
+import GuideList from 'components/pages/Guide/GuideList';
+
 import Search from 'components/@common/Search';
 import Title from 'components/@common/Title';
 import Filter from 'components/@common/Filter';
 
-import GuideList from 'components/pages/Guide/GuideList';
-
 function Guide() {
 	return (
 		<S.Body>
-			<S.TopBox>
-				<Title>GUIDE</Title>
-				<span>넷플레이스 이용안내</span>
-			</S.TopBox>
+			<Title title={'GUIDE'}>넷플레이스 이용안내</Title>
 
 			<S.MainBox>
 				<Search />
