@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import * as S from './index.styles';
 
 const notice = [
@@ -63,22 +65,24 @@ function NoticeList() {
 		<S.Body>
 			{notice.map(el => (
 				<S.Box key={el.id}>
-					<S.ImportantBox>
-						{el.important ? (
-							<>
-								<img src="/assets/icons/pin.svg" alt="pin" />
-								<S.Important>중요</S.Important>
+					<Link to={'/notice/detail'}>
+						<S.ImportantBox>
+							{el.important ? (
+								<>
+									<img src="/assets/icons/pin.svg" alt="pin" />
+									<S.Important>중요</S.Important>
+									<S.Title>{el.title}</S.Title>
+								</>
+							) : (
 								<S.Title>{el.title}</S.Title>
-							</>
-						) : (
-							<S.Title>{el.title}</S.Title>
-						)}
-					</S.ImportantBox>
+							)}
+						</S.ImportantBox>
 
-					<S.Content>
-						<S.Description>{el.description}</S.Description>
-						<S.Date>{el.date}</S.Date>
-					</S.Content>
+						<S.Content>
+							<S.Description>{el.description}</S.Description>
+							<S.Date>{el.date}</S.Date>
+						</S.Content>
+					</Link>
 				</S.Box>
 			))}
 		</S.Body>
