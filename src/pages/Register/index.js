@@ -4,11 +4,12 @@ import useModal from 'hooks/useModal';
 
 import * as S from './index.styles';
 
+import TermsModal from 'components/pages/Register/TermsModal';
+
 import Logo from 'components/@common/Logo';
 import Input from 'components/@common/Input';
 import Line from 'components/@common/Line';
 import Button from 'components/@common/Button';
-import TermsModal from 'components/pages/Register/TermsModal';
 
 function Register() {
 	const { openModal } = useModal();
@@ -185,7 +186,7 @@ function Register() {
 							placeholder="우편번호"
 							required
 						/>
-						<Button variant={'orange'} size={'default'} shadow>
+						<Button variant={'default'} size={'default'} shadow>
 							주소 찾기
 						</Button>
 					</div>
