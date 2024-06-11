@@ -6,11 +6,11 @@ export const Body = styled.div`
 	gap: 5px;
 	height: 28px;
 
-	@media screen and (min-width: 376px) {
+	@media screen and (min-width: 768px) {
 		height: 32px;
 	}
 
-	@media screen and (min-width: 769px) {
+	@media screen and (min-width: 1200px) {
 		height: 40px;
 	}
 `;
@@ -26,7 +26,7 @@ export const SearchBox = styled.div`
 		left: 8px;
 	}
 
-	@media screen and (min-width: 376px) {
+	@media screen and (min-width: 768px) {
 		> img {
 			width: 12px;
 			top: 35%;
@@ -54,23 +54,23 @@ export const Input = styled.input`
 		outline: none;
 	}
 
-	@media screen and (min-width: 376px) {
+	@media screen and (min-width: 768px) {
 		width: 384px;
 		padding: 8px 28px;
-		font-size: ${({ theme }) => theme.FONT_SIZE.ms};
+		font-size: ${({ theme }) => theme.FONT_SIZE.m};
 
 		&::placeholder {
-			font-size: ${({ theme }) => theme.FONT_SIZE.ms};
+			font-size: ${({ theme }) => theme.FONT_SIZE.m};
 		}
 	}
 
-	@media screen and (min-width: 769px) {
+	@media screen and (min-width: 1200px) {
 		width: 1016px;
 		padding: 8px 28px;
-		font-size: ${({ theme }) => theme.FONT_SIZE.ms};
+		font-size: ${({ theme }) => theme.FONT_SIZE.m};
 
 		&::placeholder {
-			font-size: ${({ theme }) => theme.FONT_SIZE.ms};
+			font-size: ${({ theme }) => theme.FONT_SIZE.m};
 		}
 	}
 `;
@@ -84,17 +84,18 @@ export const ButtonBox = styled.div`
 		height: 100%;
 	}
 
-	@media screen and (min-width: 376px) {
+	@media screen and (min-width: 768px) {
 		width: 84px;
 
 		> button {
-			font-size: ${({ theme }) => theme.FONT_SIZE.ms};
+			box-shadow: none;
+			font-size: ${({ theme }) => theme.FONT_SIZE.m};
 		}
 	}
 `;
 
 export const ResetBox = styled(ButtonBox)`
-	@media screen and (min-width: 376px) {
+	@media screen and (min-width: 768px) {
 		width: 84px;
 	}
 `;
@@ -113,7 +114,7 @@ export const Button = styled.button`
 		margin-right: 4px;
 	}
 
-	@media screen and (min-width: 376px) {
+	@media screen and (min-width: 768px) {
 		> img {
 			width: 14px;
 			margin-right: 6px;

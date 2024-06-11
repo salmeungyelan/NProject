@@ -8,23 +8,8 @@ import {
 
 export const Body = styled.div`
 	${bodyContainer}
-	padding: 50px 0;
 	${flexColumn}
 	gap: 32px;
-`;
-
-export const TopBox = styled.div`
-	${flexColumn};
-	gap: 8px;
-
-	> span {
-		font-size: ${({ theme }) => theme.FONT_SIZE.s};
-		color: ${({ theme }) => theme.PALETTE.gray[100]};
-
-		@media screen and (min-width: 376px) {
-			font-size: ${({ theme }) => theme.FONT_SIZE.ml};
-		}
-	}
 `;
 
 export const Content = styled.div`
@@ -33,7 +18,7 @@ export const Content = styled.div`
 	width: 100%;
 	height: auto;
 
-	@media screen and (min-width: 376px) {
+	@media screen and (min-width: 768px) {
 		gap: 18px;
 	}
 `;
@@ -43,7 +28,7 @@ export const Title = styled.span`
 	font-size: ${({ theme }) => theme.FONT_SIZE.ml};
 	color: ${({ theme }) => theme.PALETTE.gray[300]};
 
-	@media screen and (min-width: 376px) {
+	@media screen and (min-width: 768px) {
 		font-size: ${({ theme }) => theme.FONT_SIZE.j};
 	}
 `;
@@ -60,7 +45,7 @@ export const Info = styled.div`
 		font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 	}
 
-	@media screen and (min-width: 376px) {
+	@media screen and (min-width: 768px) {
 		> span {
 			font-size: ${({ theme }) => theme.FONT_SIZE.ml};
 		}
@@ -82,7 +67,7 @@ export const Description = styled.pre`
 	padding: 12px 0 40px 0;
 	width: 100%;
 
-	@media screen and (min-width: 376px) {
+	@media screen and (min-width: 768px) {
 		font-size: ${({ theme }) => theme.FONT_SIZE.m};
 	}
 `;
@@ -103,15 +88,21 @@ export const Next = styled.div`
 	color: ${({ theme }) => theme.PALETTE.gray[200]};
 	cursor: pointer;
 
-	> div {
+	& a,
+	:visited {
+		text-decoration: none;
+		color: ${({ theme }) => theme.PALETTE.gray[200]};
+	}
+
+	& div {
 		height: 12px;
 	}
 
-	> span {
+	& span {
 		font-weight: 500;
 	}
 
-	@media screen and (min-width: 376px) {
+	@media screen and (min-width: 768px) {
 		font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 	}
 `;
@@ -123,7 +114,7 @@ export const ButtonBox = styled.div`
 		font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 	}
 
-	@media screen and (min-width: 376px) {
+	@media screen and (min-width: 768px) {
 		${flexCenter}
 		justify-content: right;
 

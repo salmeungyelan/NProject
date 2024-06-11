@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import * as S from './index.styles';
 
 const guide = [
@@ -56,12 +58,14 @@ function GuideList() {
 		<S.Body>
 			{guide.map(el => (
 				<S.Box key={el.id}>
-					<S.Title>{el.title}</S.Title>
+					<Link to={'/user_guide/detail'}>
+						<S.Title>{el.title}</S.Title>
 
-					<S.Content>
-						<S.Description>{el.description}</S.Description>
-						<S.Date>{el.date}</S.Date>
-					</S.Content>
+						<S.Content>
+							<S.Description>{el.description}</S.Description>
+							<S.Date>{el.date}</S.Date>
+						</S.Content>
+					</Link>
 				</S.Box>
 			))}
 		</S.Body>
