@@ -8,11 +8,11 @@ export const Body = styled.div`
 	flex: 1 1 100%;
 	box-sizing: border-box;
 
-	@media screen and (min-width: 376px) {
+	@media screen and (min-width: 768px) {
 		width: 568px;
 	}
 
-	@media screen and (min-width: 769px) {
+	@media screen and (min-width: 1200px) {
 		flex: 1 1 calc(50% - 23px);
 		width: 589px;
 	}
@@ -28,7 +28,7 @@ export const Title = styled.div`
 	font-weight: 600;
 
 	@media screen and (min-width: 386px) {
-		font-size: ${({ theme }) => theme.FONT_SIZE.xj};
+		font-size: ${({ theme }) => theme.FONT_SIZE.l};
 	}
 `;
 
@@ -45,7 +45,11 @@ export const List = styled.div`
 `;
 
 export const Commons = styled.div`
-	${flexSpaceBetweenCenter}
+	> a,
+	:visited {
+		text-decoration: none;
+		${flexSpaceBetweenCenter}
+	}
 `;
 
 export const ListTitle = styled.div`
@@ -68,11 +72,12 @@ export const Date = styled(ListTitle)`
 `;
 
 export const Important = styled(Commons)`
+	${flexSpaceBetweenCenter}
 	& img {
 		width: 15px;
 	}
 
-	> div:first-child {
+	> a {
 		${flexCenter}
 		gap: 6px;
 	}
@@ -87,9 +92,9 @@ export const ImportantBtn = styled.div`
 	color: ${({ theme }) => theme.PALETTE.white[100]};
 	border-radius: 15px;
 	font-weight: 500;
-	font-size: ${({ theme }) => theme.FONT_SIZE.ss};
+	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 
-	@media screen and (min-width: 376px) {
+	@media screen and (min-width: 768px) {
 		width: 41px;
 		height: 20px;
 		font-size: ${({ theme }) => theme.FONT_SIZE.s};

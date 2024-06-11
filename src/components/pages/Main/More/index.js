@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import * as S from './index.styles';
 
 import Line from 'components/@common/Line';
@@ -13,6 +15,9 @@ const List = [
 function More(props) {
 	const { children } = props;
 
+	const links =
+		children === '공지사항' ? '/notice/detail' : '/user_guide/detail';
+
 	return (
 		<S.Body>
 			<S.TitleBox>
@@ -26,17 +31,20 @@ function More(props) {
 				{List.map((el, idx) =>
 					el.title.includes('중요') ? (
 						<S.Important key={idx}>
-							<div>
+							<Link to={links}>
 								<img src="/assets/icons/pin.svg" alt="pin" />
 								<S.ImportantBtn>중요</S.ImportantBtn>
 								<S.ListTitle>{el.title}</S.ListTitle>
-							</div>
+							</Link>
+
 							<S.Date>{el.date}</S.Date>
 						</S.Important>
 					) : (
 						<S.Commons key={idx}>
-							<S.ListTitle>{el.title}</S.ListTitle>
-							<S.Date>{el.date}</S.Date>
+							<Link to={links}>
+								<S.ListTitle>{el.title}</S.ListTitle>
+								<S.Date>{el.date}</S.Date>
+							</Link>
 						</S.Commons>
 					),
 				)}

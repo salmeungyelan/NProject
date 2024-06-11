@@ -1,4 +1,5 @@
 import * as S from './index.styles';
+
 import Line from '../Line';
 
 function Title(props) {

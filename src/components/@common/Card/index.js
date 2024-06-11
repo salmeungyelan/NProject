@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import * as S from './index.styles';
 
 import Progress from '../Progress';
@@ -5,31 +7,33 @@ import Progress from '../Progress';
 function Card() {
 	return (
 		<S.Card>
-			<div>
-				<img src="/assets/images/example.png" />
-			</div>
+			<Link to={'/review/detail'}>
+				<div>
+					<img src="/assets/images/example.png" />
+				</div>
 
-			<S.MainBox>
-				<S.Title>
-					<div>리뷰 제목</div>
-					<Progress variant={'fin'}>완료</Progress>
-				</S.Title>
-
-				<S.Rate>
-					<S.Writer>작성자</S.Writer>
+				<S.MainBox>
+					<S.Title>
+						<div>리뷰 제목</div>
+						<Progress variant={'fin'}>완료</Progress>
+					</S.Title>
 
 					<S.Rate>
-						<div>
-							<img src="/assets/icons/star-color.svg" />
-							<img src="/assets/icons/star-color.svg" />
-							<img src="/assets/icons/star-color.svg" />
-							<img src="/assets/icons/star-half.svg" />
-							<img src="/assets/icons/star.svg" />
-						</div>
-						4.9
+						<S.Writer>작성자</S.Writer>
+
+						<S.Rate>
+							<div>
+								<img src="/assets/icons/star-color.svg" />
+								<img src="/assets/icons/star-color.svg" />
+								<img src="/assets/icons/star-color.svg" />
+								<img src="/assets/icons/star-half.svg" />
+								<img src="/assets/icons/star.svg" />
+							</div>
+							4.9
+						</S.Rate>
 					</S.Rate>
-				</S.Rate>
-			</S.MainBox>
+				</S.MainBox>
+			</Link>
 		</S.Card>
 	);
 }
