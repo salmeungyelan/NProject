@@ -9,11 +9,11 @@ const sizeCSS = {
 		width: 100%;
 		height: 28px;
 
-		@media screen and (min-width: 376px) {
+		@media screen and (min-width: 768px) {
 			height: 32px;
 		}
 
-		@media screen and (min-width: 769px) {
+		@media screen and (min-width: 1200px) {
 			height: 40px;
 		}
 	`,

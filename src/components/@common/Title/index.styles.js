@@ -9,14 +9,14 @@ export const TitleBox = styled.div`
 		font-size: ${({ theme }) => theme.FONT_SIZE.s};
 		color: ${({ theme }) => theme.PALETTE.gray[100]};
 
-		@media screen and (min-width: 376px) {
+		@media screen and (min-width: 768px) {
 			font-size: ${({ theme }) => theme.FONT_SIZE.ml};
 		}
 	}
 `;
 
 export const Title = styled.div`
-	height: 22px;
+	height: 17px;
 	${flexAlignCenter}
 	gap: 3px;
 
@@ -25,8 +25,8 @@ export const Title = styled.div`
 		font-weight: 600;
 	}
 
-	@media screen and (min-width: 376px) {
-		height: 36px;
+	@media screen and (min-width: 768px) {
+		height: 27px;
 
 		> span {
 			font-size: ${({ theme }) => theme.FONT_SIZE.xj};
