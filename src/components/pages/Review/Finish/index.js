@@ -1,11 +1,33 @@
-import Button from 'components/@common/Button';
+import { useState } from 'react';
+
+import useModal from 'hooks/useModal';
+
 import * as S from './index.styles';
+
+import RatingSubModal from '../RatingSubModal';
+
+import Button from 'components/@common/Button';
 
 const img = [1, 2, 3, 4, 5];
 
 function Finish() {
+	const [stars, setStars] = useState(false);
+
+	const { openModal } = useModal();
+
+	const handleOpenPwdModal = () => {
+		openModal({
+			img: '',
+			title: stars ? '별점 등록' : '별점 수정',
+			content: '이용에 만족하셨다면 별점을 등록해 주세요.',
+			callback: () => console.log('closed'),
+		});
+	};
+
 	return (
 		<S.Body>
+			<RatingSubModal />
+
 			<S.Box>
 				<S.Title>링크</S.Title>
 				<S.ReadOnly>https://hwangeumOliveYou.naver.blog.com</S.ReadOnly>
@@ -52,7 +74,11 @@ function Finish() {
 
 					{/* 별점이 0점이라면 ? '등록' : '수정' */}
 					<div>
-						<Button size={'height'} variant={'default'}>
+						<Button
+							size={'height'}
+							variant={'default'}
+							onClick={handleOpenPwdModal}
+						>
 							별점 등록하기
 						</Button>
 					</div>
