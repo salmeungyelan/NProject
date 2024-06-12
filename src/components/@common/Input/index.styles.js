@@ -40,7 +40,7 @@ const sizeCSS = {
 
 export const Input = styled.input`
 	${({ size }) => sizeCSS[size]};
-	${({ variant }) => variantCSS[variant]}
+	${({ $variant }) => variantCSS[$variant]}
 
 	font-size: ${({ theme }) => theme.FONT_SIZE.m};
 	font-weight: 400;

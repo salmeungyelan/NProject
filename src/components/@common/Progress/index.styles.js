@@ -2,6 +2,9 @@ import { styled, css } from 'styled-components';
 import { flexCenter } from 'styles/common';
 
 const variantCSS = {
+	tempSave: css`
+		background: ${({ theme }) => theme.PALETTE.gray[100]};
+	`,
 	wait: css`
 		background: ${({ theme }) => theme.PALETTE.blue};
 	`,
@@ -15,7 +18,7 @@ const variantCSS = {
 
 export const CheckProgress = styled.div`
 	${flexCenter};
-	${({ variant }) => variantCSS[variant]};
+	${({ $variant }) => variantCSS[$variant]};
 
 	color: ${({ theme }) => theme.PALETTE.white[100]};
 
