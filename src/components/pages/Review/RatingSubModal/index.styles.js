@@ -78,6 +78,7 @@ export const Body = styled.div`
 	}
 
 	& img {
+		cursor: pointer;
 		width: 40px;
 	}
 
