@@ -104,7 +104,6 @@ export const ButtonBox = styled.div`
 
 	> button {
 		width: 66px;
-		font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 	}
 
 	@media only screen and (min-width: 768px) {
@@ -112,7 +111,6 @@ export const ButtonBox = styled.div`
 
 		> button {
 			width: 130px;
-			font-size: ${({ theme }) => theme.FONT_SIZE.ml};
 		}
 	}
 `;
