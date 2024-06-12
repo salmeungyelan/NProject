@@ -46,7 +46,7 @@ const variantCSS = {
 export const Button = styled.button`
 	border-radius: 4px;
 	font-weight: 500;
-	font-size: ${({ theme }) => theme.FONT_SIZE.ml};
+	font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 	cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
 	box-shadow: 0 2px 4px 0 #00000026;
 
@@ -55,5 +55,9 @@ export const Button = styled.button`
 
 	&:hover {
 		transform: scale(1.02);
+	}
+
+	@media screen and (min-width: 768px) {
+		font-size: ${({ theme }) => theme.FONT_SIZE.ml};
 	}
 `;

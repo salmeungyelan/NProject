@@ -10,7 +10,7 @@ function Card() {
 
 	return (
 		<S.Card $main={main}>
-			<Link to={'/review/detail'}>
+			<Link to={'/review/post/1'}>
 				<div>
 					<img src="/assets/images/example.png" />
 				</div>
