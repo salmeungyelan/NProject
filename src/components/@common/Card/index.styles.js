@@ -16,11 +16,26 @@ export const Card = styled.div`
 	> a > div > img {
 		width: 100%;
 		height: 78px;
+		object-fit: cover;
 	}
 
 	@media screen and (min-width: 768px) {
-		width: 162px;
-		height: 151px;
+		width: 182px;
+		height: 170px;
+
+		> a {
+			gap: 6px;
+		}
+
+		> a > div > img {
+			width: 100%;
+			height: 110px;
+		}
+	}
+
+	@media screen and (min-width: 1200px) {
+		width: 228px;
+		height: 213px;
 
 		> a {
 			gap: 10px;
@@ -28,21 +43,7 @@ export const Card = styled.div`
 
 		> a > div > img {
 			width: 100%;
-			height: 85px;
-		}
-	}
-
-	@media screen and (min-width: 1200px) {
-		width: 214px;
-		height: 200px;
-
-		> a {
-			gap: 15px;
-		}
-
-		> a > div > img {
-			width: 100%;
-			height: 120px;
+			height: 140px;
 		}
 	}
 `;
@@ -86,7 +87,7 @@ export const Writer = styled(Title)`
 		font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 	}
 
-	@media screen and (min-width: 768px) {
+	@media screen and (min-width: 1200px) {
 		font-size: ${({ theme }) => theme.FONT_SIZE.m};
 	}
 `;
@@ -110,7 +111,7 @@ export const Rate = styled.div`
 		}
 	}
 
-	@media screen and (min-width: 768px) {
+	@media screen and (min-width: 1200px) {
 		font-size: ${({ theme }) => theme.FONT_SIZE.m};
 
 		> div > img {
