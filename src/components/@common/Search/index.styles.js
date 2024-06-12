@@ -80,6 +80,7 @@ export const ButtonBox = styled.div`
 	height: 100%;
 
 	> button {
+		box-shadow: none;
 		font-size: ${({ theme }) => theme.FONT_SIZE.s};
 		height: 100%;
 	}
@@ -88,7 +89,6 @@ export const ButtonBox = styled.div`
 		width: 84px;
 
 		> button {
-			box-shadow: none;
 			font-size: ${({ theme }) => theme.FONT_SIZE.m};
 		}
 	}

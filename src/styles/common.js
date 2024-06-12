@@ -43,6 +43,12 @@ export const flexAlignCenter = css`
 	align-items: center;
 `;
 
+export const flexLeftCenter = css`
+	display: flex;
+	align-items: center;
+	justify-content: left;
+`;
+
 export const flexColumn = css`
 	display: flex;
 	flex-direction: column;

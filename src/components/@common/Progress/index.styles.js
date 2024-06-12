@@ -2,6 +2,9 @@ import { styled, css } from 'styled-components';
 import { flexCenter } from 'styles/common';
 
 const variantCSS = {
+	tempSave: css`
+		background: ${({ theme }) => theme.PALETTE.gray[100]};
+	`,
 	wait: css`
 		background: ${({ theme }) => theme.PALETTE.blue};
 	`,
@@ -15,7 +18,7 @@ const variantCSS = {
 
 export const CheckProgress = styled.div`
 	${flexCenter};
-	${({ variant }) => variantCSS[variant]};
+	${({ $variant }) => variantCSS[$variant]};
 
 	color: ${({ theme }) => theme.PALETTE.white[100]};
 
@@ -23,6 +26,13 @@ export const CheckProgress = styled.div`
 	border-radius: 4px;
 
 	width: 40px;
-	height: 16px;
-	font-size: ${({ theme }) => theme.FONT_SIZE.s};
+	height: ${({ $review }) => ($review ? '18px' : '16px')};
+	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+
+	@media screen and (min-width: 768px) {
+		width: ${({ $review }) => ($review ? '68px' : '40px')};
+		height: ${({ $review }) => ($review ? '28px' : '18px')};
+		font-size: ${({ theme, $review }) =>
+			$review ? theme.FONT_SIZE.m : theme.FONT_SIZE.s};
+	}
 `;

@@ -3,7 +3,7 @@ import * as S from './index.styles';
 import Line from '../Line';
 
 function Title(props) {
-	const { children, title } = props;
+	const { title, children } = props;
 
 	return (
 		<S.TitleBox>

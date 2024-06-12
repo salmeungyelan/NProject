@@ -33,5 +33,5 @@ const variantCSS = {
 
 export const Lines = styled.div`
 	${({ size }) => sizeCSS[size]}
-	${({ variant }) => variantCSS[variant]}
+	${({ $variant }) => variantCSS[$variant]}
 `;

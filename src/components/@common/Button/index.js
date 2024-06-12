@@ -1,10 +1,10 @@
 import * as S from './index.styles';
 
 function Button(props) {
-	const { variant, size, disabled, children, ...rest } = props;
+	const { size, variant, disabled, children, ...rest } = props;
 
 	return (
-		<S.Button $variant={variant} size={size} disabled={disabled} {...rest}>
+		<S.Button size={size} $variant={variant} disabled={disabled} {...rest}>
 			{children}
 		</S.Button>
 	);

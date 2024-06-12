@@ -19,6 +19,7 @@ const PALETTE = {
 	white: {
 		0: '#FAFAFA80',
 		100: '#FFFFFF',
+		150: '#EEEEEE',
 		200: '#E0E0E0',
 	},
 
