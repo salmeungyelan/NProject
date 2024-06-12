@@ -81,11 +81,11 @@ export const ImgTitle = styled.div`
 export const Thumbnail = styled.div`
 	${flexCenter}
 	gap: 2px;
-	font-size: 4px;
+	font-size: ${({ theme }) => theme.FONT_SIZE.xxs};
 	position: absolute;
 	background-color: ${({ theme }) => theme.PALETTE.navy};
-	width: 24px;
-	height: 11px;
+	width: 28px;
+	height: 14px;
 	color: ${({ theme }) => theme.PALETTE.white[100]};
 	top: 5%;
 	left: 7%;
@@ -96,10 +96,13 @@ export const Thumbnail = styled.div`
 	}
 
 	@media screen and (min-width: 768px) {
-		font-size: ${({ theme }) => theme.FONT_SIZE.xxs};
 		gap: 3px;
 		width: 38px;
 		height: 18px;
+
+		> span {
+			font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+		}
 
 		> img {
 			width: 7px;
@@ -108,10 +111,13 @@ export const Thumbnail = styled.div`
 	}
 
 	@media screen and (min-width: 1200px) {
-		font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 		gap: 3px;
 		width: 46px;
 		height: 20px;
+
+		> span {
+			font-size: ${({ theme }) => theme.FONT_SIZE.s};
+		}
 
 		> img {
 			width: 8px;
