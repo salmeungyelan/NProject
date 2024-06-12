@@ -1,24 +1,19 @@
-import { Link, useNavigate } from 'react-router-dom';
-
 import * as S from './index.styles';
 
 import Title from 'components/@common/Title';
-import Line from 'components/@common/Line';
-import Button from 'components/@common/Button';
+import PreviousPost from 'components/@common/PreviousPost';
 
-function GuideDetail() {
-	const navigate = useNavigate();
-
-	const handleBackBtn = () => {
-		navigate(-1);
-	};
-
+function NoticeDetail() {
 	return (
 		<S.Body>
-			<Title title={'GUIDE'}>넷플레이스 이용안내</Title>
+			<Title title={'NOTICE'}>넷플레이스 공지사항 안내</Title>
 
 			<S.Content>
-				<S.Title>이제 그만 STOP</S.Title>
+				<S.TitleBox>
+					<img src="/assets/icons/pin.svg" />
+					<S.Important>중요</S.Important>
+					<S.Title>이제 그만 STOP</S.Title>
+				</S.TitleBox>
 
 				<S.Info>
 					<span>넷플레이스</span>
@@ -41,31 +36,9 @@ function GuideDetail() {
 				</S.Description>
 			</S.Content>
 
-			<S.NextBox>
-				<S.Next>
-					<span>이전</span>
-					<Line size={'height2'} variant={'gray'} />
-					<Link to={'/user_guide/detail'}>이전 게시글이 없습니다.</Link>
-				</S.Next>
-
-				<Line size={'width'} variant={'lightGray'} />
-
-				<S.Next>
-					<span>다음</span>
-					<Line size={'height2'} variant={'gray'} />
-					<Link to={'/user_guide/detail'}>다음 이용 안내 제목</Link>
-				</S.Next>
-			</S.NextBox>
-
-			<S.ButtonBox>
-				<div>
-					<Button variant={'white'} size={'height'} onClick={handleBackBtn}>
-						뒤로 가기
-					</Button>
-				</div>
-			</S.ButtonBox>
+			<PreviousPost />
 		</S.Body>
 	);
 }
 
-export default GuideDetail;
+export default NoticeDetail;
