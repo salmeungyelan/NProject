@@ -12,10 +12,10 @@ const FindPw = lazy(() => import('pages/FindPw'));
 const Main = lazy(() => import('pages/Main'));
 
 const Guide = lazy(() => import('pages/Guide'));
-const GuideDetail = lazy(() => import('pages/Guide/Detail'));
+const GuideDetail = lazy(() => import('pages/Guide/GuideDetail'));
 
 const Notice = lazy(() => import('pages/Notice'));
-const NoticeDetail = lazy(() => import('pages/Notice/Detail'));
+const NoticeDetail = lazy(() => import('pages/Notice/NoticeDetail'));
 
 const MyPage = lazy(() => import('pages/MyPage'));
 
