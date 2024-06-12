@@ -1,12 +1,15 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import * as S from './index.styles';
 
 import Progress from '../Progress';
 
 function Card() {
+	const { pathname } = useLocation();
+	const main = pathname.split('/')[1] === 'main';
+
 	return (
-		<S.Card>
+		<S.Card $main={main}>
 			<Link to={'/review/detail'}>
 				<div>
 					<img src="/assets/images/example.png" />

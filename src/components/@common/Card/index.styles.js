@@ -20,8 +20,8 @@ export const Card = styled.div`
 	}
 
 	@media screen and (min-width: 768px) {
-		width: 182px;
-		height: 170px;
+		width: ${({ $main }) => ($main ? '162px' : '182px')};
+		height: ${({ $main }) => ($main ? '170px' : '182px')};
 
 		> a {
 			gap: 6px;
@@ -34,8 +34,8 @@ export const Card = styled.div`
 	}
 
 	@media screen and (min-width: 1200px) {
-		width: 228px;
-		height: 213px;
+		width: ${({ $main }) => ($main ? '214px' : '228px')};
+		height: ${({ $main }) => ($main ? '200px' : '213px')};
 
 		> a {
 			gap: 10px;
@@ -43,7 +43,7 @@ export const Card = styled.div`
 
 		> a > div > img {
 			width: 100%;
-			height: 140px;
+			height: ${({ $main }) => ($main ? '130px' : '140px')};
 		}
 	}
 `;
