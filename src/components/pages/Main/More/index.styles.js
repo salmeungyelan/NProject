@@ -37,6 +37,12 @@ export const MoreClick = styled.div`
 	font-size: ${({ theme }) => theme.FONT_SIZE.m};
 	font-weight: 400;
 	cursor: pointer;
+
+	a:link,
+	a:visited {
+		color: ${({ theme }) => theme.PALETTE.navy};
+		text-decoration: none;
+	}
 `;
 
 export const List = styled.div`
