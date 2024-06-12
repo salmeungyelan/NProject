@@ -38,12 +38,12 @@ export const Card = styled.div`
 		height: ${({ $main }) => ($main ? '200px' : '213px')};
 
 		> a {
-			gap: 10px;
+			gap: 8px;
 		}
 
 		> a > div > img {
 			width: 100%;
-			height: ${({ $main }) => ($main ? '130px' : '140px')};
+			height: ${({ $main }) => ($main ? '130px' : '135px')};
 		}
 	}
 `;

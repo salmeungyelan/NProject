@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import {
 	bodyContainer,
+	flexCenter,
 	flexColumn,
 	flexSpaceBetweenCenter,
 } from 'styles/common';
@@ -27,6 +28,11 @@ export const Main = styled.div`
 	@media screen and (min-width: 768px) {
 		gap: 18px;
 	}
+`;
+
+export const MultiSelect = styled.div`
+	${flexCenter}
+	gap: 10px;
 `;
 
 export const SelectBox = styled.div`

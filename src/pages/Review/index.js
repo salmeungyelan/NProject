@@ -6,6 +6,7 @@ import DropDown from 'components/pages/Review/DropDown';
 import Title from 'components/@common/Title';
 import Search from 'components/@common/Search';
 import Card from 'components/@common/Card';
+import MultiSelectDropdown from 'components/pages/Review/MultiSelectDropDown';
 
 function Review() {
 	return (
@@ -20,7 +21,11 @@ function Review() {
 				<S.Main>
 					<S.SelectBox>
 						<Category />
-						<DropDown />
+
+						<S.MultiSelect>
+							<MultiSelectDropdown />
+							<DropDown />
+						</S.MultiSelect>
 					</S.SelectBox>
 
 					<S.CardBox>

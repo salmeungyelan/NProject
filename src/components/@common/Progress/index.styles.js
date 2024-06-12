@@ -30,9 +30,8 @@ export const CheckProgress = styled.div`
 	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 
 	@media screen and (min-width: 768px) {
-		width: ${({ $review }) => ($review ? '68px' : '40px')};
-		height: ${({ $review }) => ($review ? '28px' : '18px')};
-		font-size: ${({ theme, $review }) =>
-			$review ? theme.FONT_SIZE.m : theme.FONT_SIZE.s};
+		width: ${({ $review }) => ($review ? '50px' : '40px')};
+		height: ${({ $review }) => ($review ? '20px' : '18px')};
+		font-size: ${({ theme }) => theme.FONT_SIZE.s};
 	}
 `;
