@@ -18,11 +18,15 @@ function More(props) {
 	const links =
 		children === '공지사항' ? '/notice/detail' : '/user_guide/detail';
 
+	const moreLink = children === '공지사항' ? '/notice' : '/user_guide';
+
 	return (
 		<S.Body>
 			<S.TitleBox>
 				<S.Title>{children}</S.Title>
-				<S.MoreClick>더보기</S.MoreClick>
+				<S.MoreClick>
+					<Link to={moreLink}>더보기</Link>
+				</S.MoreClick>
 			</S.TitleBox>
 
 			<Line size={'width'} variant={'lightGray'} />

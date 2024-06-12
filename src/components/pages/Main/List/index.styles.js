@@ -10,7 +10,7 @@ export const Body = styled.div`
 
 	@media screen and (min-width: 768px) {
 		grid-template-areas: 'iphone iphone reviewIng' 'iphone iphone reviewFin' 'iphone iphone reviewFin';
-		gap: 20px 40px;
+		gap: 20px 30px;
 	}
 `;
 
@@ -74,5 +74,9 @@ export const Title = styled.div`
 export const CardList = styled.div`
 	margin-top: 12px;
 	${flexSpaceBetweenCenter};
-	gap: 14px;
+	gap: 8px;
+
+	@media screen and (min-width: 768px) {
+		gap: 10px;
+	}
 `;
