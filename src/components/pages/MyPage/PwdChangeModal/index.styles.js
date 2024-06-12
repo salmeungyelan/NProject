@@ -1,5 +1,4 @@
-import { css } from '@emotion/react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { ModalBackground, flexCenter, flexColumn } from 'styles/common';
 
 export const Background = styled.div`
