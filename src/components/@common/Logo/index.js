@@ -1,8 +1,14 @@
 import * as S from './index.styles';
 
-function Logo({ size }) {
+function Logo({ size, white }) {
+	const logoSrc = '/assets/images/Logo-white.png';
+
 	return (
-		<S.LogoImg size={size} src="/assets/images/Logo.png" alt="NetPlace Logo" />
+		<S.LogoImg
+			size={size}
+			src={white ? logoSrc : '/assets/images/Logo.png'}
+			alt="NetPlace Logo"
+		/>
 	);
 }
 
