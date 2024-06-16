@@ -1,10 +1,11 @@
+import { useState } from 'react';
+
 import * as S from './index.styles';
 
 import Title from 'components/@common/Title';
 import Input from 'components/@common/Input';
 import Textarea from 'components/@common/Textarea';
 import Button from 'components/@common/Button';
-import { useState } from 'react';
 
 const hashTag = [
 	'#요가',
