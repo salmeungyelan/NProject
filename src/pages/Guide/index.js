@@ -1,10 +1,9 @@
 import * as S from './index.styles';
 
-import GuideList from 'components/pages/Guide/GuideList';
-
 import Search from 'components/@common/Search';
 import Title from 'components/@common/Title';
 import Filter from 'components/@common/Filter';
+import GuideList from 'components/pages/Guide/GuideList';
 
 function Guide() {
 	return (
