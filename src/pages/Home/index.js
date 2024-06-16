@@ -51,9 +51,9 @@ function Home() {
 							</Button>
 
 							<S.LinkBox>
-								<Link to="/find_id">아이디 찾기</Link>
+								<Link to="/find/id">아이디 찾기</Link>
 								<Line size={'height'} variant={'gray'} />
-								<Link to="/find_password">비밀번호 찾기</Link>
+								<Link to="/find/password">비밀번호 찾기</Link>
 								<Line size={'height'} variant={'gray'} />
 								<Link to="/register">회원가입</Link>
 							</S.LinkBox>
