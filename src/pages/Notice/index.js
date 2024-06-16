@@ -1,10 +1,9 @@
 import * as S from './index.styles';
 
-import NoticeList from 'components/pages/Notice/NoticeList';
-
 import Title from 'components/@common/Title';
 import Search from 'components/@common/Search';
 import Filter from 'components/@common/Filter';
+import NoticeList from 'components/pages/Notice/NoticeList';
 
 function Notice() {
 	return (
