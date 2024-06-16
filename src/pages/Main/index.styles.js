@@ -4,7 +4,7 @@ import { bodyContainer, flexAlignCenter, flexColumn } from 'styles/common';
 export const Body = styled.div`
 	${bodyContainer}
 	${flexColumn}
-	gap: 36px;
+	gap: 32px;
 `;
 
 export const Mores = styled.div`
