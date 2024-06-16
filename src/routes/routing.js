@@ -6,8 +6,7 @@ import ErrorFallback from 'components/@common/Error';
 
 const Home = lazy(() => import('pages/Home'));
 const Register = lazy(() => import('pages/Register'));
-const FindId = lazy(() => import('pages/FindId'));
-const FindPw = lazy(() => import('pages/FindPw'));
+const FindAccounts = lazy(() => import('pages/FindAccounts'));
 
 const Main = lazy(() => import('pages/Main'));
 
@@ -23,6 +22,8 @@ const Review = lazy(() => import('pages/Review'));
 const ReviewPost = lazy(() => import('pages/Review/ReviewPost'));
 const ReviewApply = lazy(() => import('pages/Review/ReviewApply'));
 
+const OtherTabs = lazy(() => import('pages/OtherTabs'));
+
 const router = createBrowserRouter([
 	{
 		path: '',
@@ -33,12 +34,12 @@ const router = createBrowserRouter([
 		element: <Register />,
 	},
 	{
-		path: '/find_id',
-		element: <FindId />,
+		path: '/find/id',
+		element: <FindAccounts />,
 	},
 	{
-		path: '/find_password',
-		element: <FindPw />,
+		path: '/find/password',
+		element: <FindAccounts />,
 	},
 	{
 		path: '/error',
@@ -83,6 +84,18 @@ const router = createBrowserRouter([
 			{
 				path: '/review/apply',
 				element: <ReviewApply />,
+			},
+			{
+				path: '/review_team',
+				element: <OtherTabs />,
+			},
+			{
+				path: '/view_instagram',
+				element: <OtherTabs />,
+			},
+			{
+				path: '/web_creation',
+				element: <OtherTabs />,
 			},
 		],
 	},

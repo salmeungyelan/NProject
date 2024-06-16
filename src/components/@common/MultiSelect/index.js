@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 
 import * as S from './index.styles';
 
-function MultiSelectDropdown() {
+function MultiSelect() {
 	const CheckBox = useRef(null);
 	const [expanded, setExpanded] = useState(false);
 	const [selectedPositions, setSelectedPositions] = useState([]);
@@ -71,4 +71,4 @@ function MultiSelectDropdown() {
 	);
 }
 
-export default MultiSelectDropdown;
+export default MultiSelect;
