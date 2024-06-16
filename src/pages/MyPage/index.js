@@ -2,11 +2,11 @@ import useModal from 'hooks/useModal';
 
 import * as S from './index.styles';
 
-import PwdChangeModal from 'components/pages/MyPage/PwdChangeModal';
-
 import Title from 'components/@common/Title';
-import Input from 'components/@common/Input';
 import Button from 'components/@common/Button';
+import InputBox from 'components/@common/InputBox';
+import Address from 'components/@common/Address';
+import PwdChangeModal from 'components/pages/MyPage/PwdChangeModal';
 
 function MyPage() {
 	const { openModal } = useModal();
@@ -27,37 +27,19 @@ function MyPage() {
 			<Title title={'MY PAGE'}>회원 정보를 수정할 수 있습니다.</Title>
 
 			<div>
-				<S.Information>
+				<S.Account>
 					<S.InfoBox>
-						<S.Title>이메일</S.Title>
-						<Input
-							size={'height'}
-							variant={'default'}
-							value={'olive@hawngum.com'}
-							disabled
-						/>
+						<InputBox title="이메일" value="olive@hawngum.com" disabled />
 					</S.InfoBox>
 
 					<S.InfoBox>
-						<S.Title>아이디</S.Title>
-						<Input
-							size={'height'}
-							variant={'default'}
-							value={'olive'}
-							disabled
-						/>
+						<InputBox title="아이디" value="olive" disabled />
 					</S.InfoBox>
 
 					<S.InfoBox>
-						<S.Title>비밀번호</S.Title>
-						<Input
-							size={'height'}
-							variant={'default'}
-							value={'olive'}
-							type="password"
-							readOnly
-						/>
-						<div>
+						<InputBox title="비밀번호" value="olive" check readOnly />
+
+						<S.PwBtn>
 							<Button
 								size={'height'}
 								variant={'default'}
@@ -65,71 +47,38 @@ function MyPage() {
 							>
 								비밀번호 변경하기
 							</Button>
-						</div>
+						</S.PwBtn>
 					</S.InfoBox>
 
 					<S.InfoBox>
-						<S.Title>업체명</S.Title>
-						<Input
-							size={'height'}
-							variant={'default'}
-							value={'황금올리브'}
-							disabled
-						/>
+						<InputBox title="업체명" value="황금올리브" disabled />
 					</S.InfoBox>
 
 					<S.InfoBox>
-						<S.Title>전화번호</S.Title>
-						<Input
-							size={'height'}
-							variant={'default'}
-							value={'010-1234-1234'}
+						<InputBox title="전화번호" value="010-1234-1234" disabled />
+					</S.InfoBox>
+
+					<S.InfoBox>
+						<Address
+							number="12345"
+							address="삼각지"
+							detail="107호, 108호"
 							disabled
 						/>
 					</S.InfoBox>
 
 					<S.InfoBox>
-						<S.Title>주소</S.Title>
-						<Input
-							size={'height'}
-							variant={'default'}
-							value={'12345'}
-							disabled
-						/>
-						<Input
-							size={'height'}
-							variant={'default'}
-							value={'서울특별시 가산디지털단지'}
-							disabled
-						/>
-						<Input
-							size={'height'}
-							variant={'default'}
-							value={'넷플레이스 메타'}
-							disabled
-						/>
+						<InputBox title="사업자 등록 번호" value="123-12-12345" disabled />
 					</S.InfoBox>
 
 					<S.InfoBox>
-						<S.Title>사업자 등록 번호</S.Title>
-						<Input
-							size={'height'}
-							variant={'default'}
-							value={'123-12-12345'}
+						<InputBox
+							title="스마트 플레이스 링크"
+							value="https://naver.com"
 							disabled
 						/>
 					</S.InfoBox>
-
-					<S.InfoBox>
-						<S.Title>스마트 플레이스 링크</S.Title>
-						<Input
-							size={'height'}
-							variant={'default'}
-							value={'https://naver.com'}
-							disabled
-						/>
-					</S.InfoBox>
-				</S.Information>
+				</S.Account>
 
 				<S.Notice>
 					비밀번호를 제외한 나머지 정보 변경은 관리자에게 문의해 주세요.

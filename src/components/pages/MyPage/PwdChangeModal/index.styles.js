@@ -59,7 +59,7 @@ const buttonBgReset = css`
 
 export const CloseBtn = styled.button`
 	${buttonBgReset}
-	background-image: url('/assets/icons/modal-excl.svg');
+	background-image: url('/assets/icons/modal-x.svg');
 `;
 
 export const Body = styled.div`

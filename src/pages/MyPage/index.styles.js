@@ -16,7 +16,7 @@ export const Body = styled.div`
 	}
 `;
 
-export const Information = styled.div`
+export const Account = styled.div`
 	${flexColumn}
 	gap: 12px;
 
@@ -30,12 +30,12 @@ export const InfoBox = styled.div`
 	gap: 8px;
 	box-shadow: 0 2px 4px 0 #00000026;
 	padding: 14px 16px;
+`;
 
-	& div {
-		${flexCenter}
-	}
+export const PwBtn = styled.div`
+	${flexCenter}
 
-	> div > button {
+	> button {
 		font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 
 		@media screen and (min-width: 768px) {
@@ -43,11 +43,6 @@ export const InfoBox = styled.div`
 			font-size: ${({ theme }) => theme.FONT_SIZE.ml};
 		}
 	}
-`;
-
-export const Title = styled.span`
-	color: ${({ theme }) => theme.PALETTE.orange[100]};
-	font-size: ${({ theme }) => theme.FONT_SIZE.m};
 `;
 
 export const Notice = styled.div`
