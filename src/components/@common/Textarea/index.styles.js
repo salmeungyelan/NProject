@@ -20,6 +20,30 @@ const sizeCSS = {
 			height: 146px;
 		}
 	`,
+	modal: css`
+		width: 100%;
+		height: 52px;
+
+		@media screen and (min-width: 768px) {
+			height: 58px;
+		}
+
+		@media screen and (min-width: 1200px) {
+			height: 74px;
+		}
+	`,
+	web: css`
+		width: 100%;
+		height: 160px;
+
+		@media screen and (min-width: 768px) {
+			height: 138px;
+		}
+
+		@media screen and (min-width: 1200px) {
+			height: 210px;
+		}
+	`,
 };
 
 export const Textarea = styled.textarea`
@@ -30,7 +54,7 @@ export const Textarea = styled.textarea`
 	font-weight: 400;
 	line-height: 1.5;
 	white-space: pre-wrap;
-	padding: 10px;
+	padding: 7px;
 	border-radius: 4px;
 	resize: none;
 	outline: none;
