@@ -23,55 +23,6 @@ export const FormBox = styled.form`
 	gap: 6px;
 `;
 
-export const InputBox = styled.div`
-	width: 320px;
-
-	> p {
-		height: 16px;
-		margin-top: 4px;
-		font-weight: 400;
-		font-size: ${({ theme }) => theme.FONT_SIZE.ms};
-		color: ${({ theme }) => theme.PALETTE.red[100]};
-	}
-`;
-
-export const EX = styled.div`
-	${flexAlignCenter}
-	margin-top: 4px;
-
-	> span {
-		font-weight: 400;
-		font-size: ${({ theme }) => theme.FONT_SIZE.m};
-		color: ${({ theme }) => theme.PALETTE.gray[100]};
-	}
-
-	> img {
-		width: 21px;
-	}
-`;
-
-export const Address = styled(InputBox)`
-	${flexColumn}
-	gap: 6px;
-
-	> div {
-		${flexAlignCenter}
-		gap: 6px;
-
-		> button {
-			font-size: ${({ theme }) => theme.FONT_SIZE.m};
-			font-weight: 400;
-		}
-	}
-`;
-
-export const H1 = styled.h1`
-	font-weight: 400;
-	font-size: ${({ theme }) => theme.FONT_SIZE.ml};
-	color: ${({ theme }) => theme.PALETTE.orange[100]};
-	margin-bottom: 10px;
-`;
-
 export const CheckBox = styled.div`
 	width: 100%;
 
@@ -87,6 +38,13 @@ export const CheckBox = styled.div`
 		font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 		color: ${({ theme }) => theme.PALETTE.red[100]};
 	}
+`;
+
+export const H1 = styled.h1`
+	font-weight: 400;
+	font-size: ${({ theme }) => theme.FONT_SIZE.ml};
+	color: ${({ theme }) => theme.PALETTE.orange[100]};
+	margin-bottom: 10px;
 `;
 
 export const Check = styled.div`

@@ -4,12 +4,12 @@ import useModal from 'hooks/useModal';
 
 import * as S from './index.styles';
 
-import TermsModal from 'components/pages/Register/TermsModal';
-
 import Logo from 'components/@common/Logo';
-import Input from 'components/@common/Input';
 import Line from 'components/@common/Line';
+import Address from 'components/@common/Address';
+import InputBox from 'components/@common/InputBox';
 import Button from 'components/@common/Button';
+import TermsModal from 'components/pages/Register/TermsModal';
 
 function Register() {
 	const { openModal } = useModal();
@@ -94,144 +94,58 @@ function Register() {
 			</S.LogoBox>
 
 			<S.FormBox action="">
-				<S.InputBox>
-					<S.H1>이메일 입력</S.H1>
-					<Input
-						size={'default'}
-						variant={'default'}
-						type="text"
-						autoComplete="off"
-						placeholder="이메일을 입력해 주세요."
-						required
-					/>
-					<p></p>
-				</S.InputBox>
+				<InputBox
+					title="이메일 입력"
+					placeholder="이메일을 입력해 주세요."
+					message
+					register
+				/>
 
-				<S.InputBox>
-					<S.H1>아이디 입력</S.H1>
-					<Input
-						size={'default'}
-						variant={'default'}
-						type="text"
-						autoComplete="off"
-						placeholder="아이디는 영어와 숫자로만 입력해 주세요."
-						required
-					/>
-					<p></p>
-				</S.InputBox>
+				<InputBox
+					title="아이디 입력"
+					placeholder="아이디는 영어와 숫자로만 입력해 주세요."
+					message
+					register
+				/>
 
-				<S.InputBox>
-					<S.H1>비밀번호 입력</S.H1>
-					<Input
-						size={'default'}
-						variant={'default'}
-						type="password"
-						autoComplete="off"
-						placeholder="비밀번호를 입력해 주세요."
-						required
-					/>
-					<S.EX>
-						<img src="/assets/icons/check.svg" />
-						<span>8자 이상 32자 이하 입력 (공백 제외)</span>
-					</S.EX>
-					<p></p>
-				</S.InputBox>
+				<InputBox
+					title="비밀번호 입력"
+					placeholder="비밀번호를 입력해 주세요."
+					message
+					password
+					register
+				/>
 
-				<S.InputBox>
-					<S.H1>비밀번호 확인</S.H1>
-					<Input
-						size={'default'}
-						variant={'default'}
-						type="password"
-						autoComplete="off"
-						placeholder="비밀번호를 한 번 더 입력해 주세요."
-						required
-					/>
-					<p></p>
-				</S.InputBox>
+				<InputBox
+					title="비밀번호 확인"
+					placeholder="비밀번호를 입력해 주세요."
+					message
+					check
+					register
+				/>
 
-				<S.InputBox>
-					<S.H1>업체명</S.H1>
-					<Input
-						size={'default'}
-						variant={'default'}
-						type="text"
-						autoComplete="off"
-						placeholder="업체명을 입력해 주세요."
-						required
-					/>
-					<p></p>
-				</S.InputBox>
+				<InputBox
+					title="업체명"
+					placeholder="업체명을 입력해 주세요."
+					message
+					register
+				/>
 
-				<S.InputBox>
-					<S.H1>전화번호</S.H1>
-					<Input
-						size={'default'}
-						variant={'default'}
-						type="text"
-						autoComplete="off"
-						placeholder="전화번호를 입력해 주세요."
-						required
-					/>
-					<p></p>
-				</S.InputBox>
+				<InputBox
+					title="전화번호"
+					placeholder="전화번호를 입력해 주세요."
+					message
+					register
+				/>
 
-				<S.Address>
-					<S.H1>주소</S.H1>
-					<div>
-						<Input
-							size={'default'}
-							variant={'default'}
-							type="text"
-							placeholder="우편번호"
-							required
-						/>
-						<Button variant={'default'} size={'default'} shadow>
-							주소 찾기
-						</Button>
-					</div>
-					<Input
-						size={'default'}
-						variant={'default'}
-						type="text"
-						placeholder="주소"
-						required
-					/>
-					<Input
-						size={'default'}
-						variant={'default'}
-						type="text"
-						placeholder="상세 주소"
-						required
-					/>
-					<p></p>
-				</S.Address>
+				<Address message register button />
 
-				<S.InputBox>
-					<S.H1>사업자 등록 번호</S.H1>
-					<Input
-						size={'default'}
-						variant={'default'}
-						type="text"
-						autoComplete="off"
-						placeholder="업체의 사업자 등록 번호를 입력해 주세요."
-						required
-					/>
-					<p></p>
-				</S.InputBox>
-
-				{/* <S.InputBox>
-					<S.H1>스마트 플레이스 링크</S.H1>
-					<Input
-						size={'default'}
-						variant={'default'}
-						type="text"
-						autoComplete="off"
-						placeholder="링크를 입력해 주세요."
-						required
-					/>
-					<p></p>
-				</S.InputBox> */}
+				<InputBox
+					title="사업자 등록 번호"
+					placeholder="업체의 사업자 등록 번호를 입력해 주세요."
+					message
+					register
+				/>
 
 				<S.CheckBox>
 					<S.H1>약관동의</S.H1>
