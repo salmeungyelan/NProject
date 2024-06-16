@@ -1,12 +1,11 @@
 import * as S from './index.styles';
 
-import Keyword from 'components/pages/Review/Keyword';
-import ImgList from 'components/pages/Review/ImgList';
-import Finish from 'components/pages/Review/Finish';
-
 import Title from 'components/@common/Title';
 import PreviousPost from 'components/@common/PreviousPost';
 import Progress from 'components/@common/Progress';
+import Keyword from 'components/pages/Review/Keyword';
+import ImgList from 'components/pages/Review/ImgList';
+import Finish from 'components/pages/Review/Finish';
 
 function ReviewPost() {
 	const fin = '완료';
