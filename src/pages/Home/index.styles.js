@@ -75,6 +75,10 @@ export const LinkBox = styled.div`
 		font-weight: 400;
 		text-decoration: none;
 	}
+
+	> a:hover {
+		color: ${({ theme }) => theme.PALETTE.gray[200]};
+	}
 `;
 
 export const Bottom = styled.div`
