@@ -1,9 +1,21 @@
 import styled from 'styled-components';
-import { flexCenter, flexSpaceBetweenCenter } from 'styles/common';
+import {
+	flexCenter,
+	flexColumn,
+	flexColumnCenter,
+	flexSpaceBetweenCenter,
+} from 'styles/common';
 
 export const Body = styled.div`
-	display: grid;
-	grid-template-areas: 'iphone iphone iphone' 'reviewIng reviewIng reviewIng' 'reviewFin reviewFin reviewFin';
+	display: ${({ $data }) => ($data ? 'grid' : 'flex')};
+	flex-direction: ${({ $data }) => !$data && 'column'};
+	grid-template-areas: ${({ $data }) =>
+		$data &&
+		`
+    "iphone iphone iphone"
+    "reviewIng reviewIng reviewIng"
+    "reviewFin reviewFin reviewFin"
+    `};
 	gap: 24px 0;
 	grid-auto-rows: auto;
 	grid-auto-columns: auto;
@@ -21,6 +33,8 @@ export const Iphone = styled.div`
 
 export const ReviewIng = styled.div`
 	grid-area: reviewIng;
+	${flexColumn}
+	gap: 12px;
 `;
 
 export const ReviewFin = styled(ReviewIng)`
@@ -28,11 +42,12 @@ export const ReviewFin = styled(ReviewIng)`
 `;
 
 export const Title = styled.div`
-	display: inline-flex;
+	display: flex;
 	height: 27px;
 	padding: 3px 7px;
 	border-radius: 8px;
 	background-color: ${({ theme }) => theme.PALETTE.white[200]};
+	width: fit-content;
 
 	& a,
 	:visited {
@@ -68,6 +83,35 @@ export const Title = styled.div`
 
 		height: 30px;
 		padding: 7px 11px;
+	}
+`;
+
+export const NoPost = styled.div`
+	width: 100%;
+	height: 133px;
+	box-shadow: 0 2px 4px 0 #00000029;
+	${flexColumnCenter}
+	gap: 19px;
+
+	> span {
+		font-weight: 600;
+		font-size: ${({ theme }) => theme.FONT_SIZE.m};
+	}
+
+	& button {
+		width: 100px;
+	}
+
+	@media screen and (min-width: 768px) {
+		height: 150px;
+
+		> span {
+			font-size: ${({ theme }) => theme.FONT_SIZE.ml};
+		}
+	}
+
+	@media screen and (min-width: 1200px) {
+		height: 200px;
 	}
 `;
 
