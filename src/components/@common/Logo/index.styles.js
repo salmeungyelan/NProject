@@ -6,8 +6,13 @@ const sizeCSS = {
 		height: 130px;
 	`,
 	header: css`
-		width: 62px;
-		height: 64px;
+		width: 46px;
+		height: 47px;
+
+		@media screen and (min-width: 768px) {
+			width: 62px;
+			height: 64px;
+		}
 	`,
 };
 
