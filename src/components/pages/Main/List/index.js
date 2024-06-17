@@ -7,6 +7,7 @@ import Iphone from '../Iphone';
 
 import Card from 'components/@common/Card';
 import Button from 'components/@common/Button';
+import LINK from 'constants/link';
 
 function List() {
 	const [data, setData] = useState(3);
@@ -17,7 +18,7 @@ function List() {
 
 			<S.ReviewIng>
 				<S.Title>
-					<Link to={'/review'}>
+					<Link to={LINK.REVIEW}>
 						<span>현재 진행 중인 리뷰 보러 가기</span>
 						<img src="/assets/icons/pagination-right.svg" />
 					</Link>
@@ -42,7 +43,7 @@ function List() {
 
 			<S.ReviewFin>
 				<S.Title>
-					<Link to={'/review'}>
+					<Link to={LINK.REVIEW}>
 						<span>완료된 리뷰 보러 가기</span>
 						<img src="/assets/icons/pagination-right.svg" />
 					</Link>

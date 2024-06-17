@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 
+import LINK from 'constants/link';
+
 import * as S from './index.styles';
 
 import Line from 'components/@common/Line';
@@ -16,9 +18,8 @@ function More(props) {
 	const { children } = props;
 
 	const links =
-		children === '공지사항' ? '/notice/detail' : '/user_guide/detail';
-
-	const moreLink = children === '공지사항' ? '/notice' : '/user_guide';
+		children === '공지사항' ? LINK.NOTICE + '/1' : LINK.GUIDE + '/1';
+	const moreLink = children === '공지사항' ? LINK.NOTICE : LINK.GUIDE;
 
 	return (
 		<S.Body>
