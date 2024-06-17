@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import * as S from './index.styles';
@@ -5,13 +6,20 @@ import * as S from './index.styles';
 import Logo from 'components/@common/Logo';
 
 function Header() {
+	const [isChecked, setIsChecked] = useState(false);
+
+	const handleCheckboxChange = () => {
+		setIsChecked(prev => !prev);
+	};
 	return (
 		<>
 			<S.Header>
 				<S.TopBox>
-					<div>
-						<Logo size={'header'} />
-					</div>
+					<S.ImgBox>
+						<Link to={'/main'}>
+							<Logo size={'header'} white />
+						</Link>
+					</S.ImgBox>
 
 					<S.WelcomeText>
 						<p>
@@ -24,63 +32,63 @@ function Header() {
 						<S.MyPage>MY PAGE</S.MyPage>
 					</S.ButtonBox>
 				</S.TopBox>
+
+				<S.Nav>
+					<ul>
+						<S.Li>
+							<label htmlFor="home">
+								<input type="radio" />
+								<Link to={'/main'}>홈</Link>
+							</label>
+						</S.Li>
+						<S.Li>
+							<label htmlFor="review">
+								<input type="radio" />
+								<Link to={'/review'}>리뷰</Link>
+							</label>
+						</S.Li>
+						<S.Li>
+							<label htmlFor="review-team">
+								<input type="radio" />
+								<Link to={'/review_team'}>체험단</Link>
+							</label>
+						</S.Li>
+						<S.Li>
+							<label htmlFor="view-Instagram">
+								<input type="radio" />
+								<Link to={'/view_instagram'}>뷰탭&인스타</Link>
+							</label>
+						</S.Li>
+						<S.Li>
+							<label htmlFor="web-creation">
+								<input type="radio" />
+								<Link to={'/web_creation'}>홈페이지 제작</Link>
+							</label>
+						</S.Li>
+						<S.Li>
+							<label htmlFor="help">
+								<input type="radio" />
+								<span>고객센터</span>
+							</label>
+
+							<S.MoreNav>
+								<li>
+									<label htmlFor="notice">
+										<input type="radio" />
+										<Link to={'/main'}>공지사항</Link>
+									</label>
+								</li>
+								<li>
+									<label htmlFor="guide">
+										<input type="radio" />
+										<Link to={'/main'}>이용안내</Link>
+									</label>
+								</li>
+							</S.MoreNav>
+						</S.Li>
+					</ul>
+				</S.Nav>
 			</S.Header>
-
-			<S.Nav>
-				<ul>
-					<S.Li>
-						<label htmlFor="home">
-							<input type="radio" />
-							<Link to={'/main'}>홈</Link>
-						</label>
-					</S.Li>
-					<S.Li>
-						<label htmlFor="review">
-							<input type="radio" />
-							<Link to={'/main'}>리뷰</Link>
-						</label>
-					</S.Li>
-					<S.Li>
-						<label htmlFor="example">
-							<input type="radio" />
-							<Link to={'/main'}>체험단</Link>
-						</label>
-					</S.Li>
-					<S.Li>
-						<label htmlFor="view-Insta">
-							<input type="radio" />
-							<Link to={'/main'}>뷰탭&인스타</Link>
-						</label>
-					</S.Li>
-					<S.Li>
-						<label htmlFor="homepage">
-							<input type="radio" />
-							<Link to={'/main'}>홈페이지 제작</Link>
-						</label>
-					</S.Li>
-					<S.Li>
-						<label htmlFor="help">
-							<input type="radio" />
-							<Link to={'/main'}>고객센터</Link>
-						</label>
-
-						<S.MoreNav>
-							<li>
-								<label htmlFor="rhdwltkgkd">
-									<input type="radio" />
-									<Link to={'/main'}>공지사항</Link>
-								</label>
-							</li>
-							<li>
-								<label htmlFor="dldyddksso">
-									<input type="radio" />
-									<Link to={'/main'}>이용안내</Link>
-								</label>
-							</li>
-						</S.MoreNav>
-					</S.Li>
-				</ul>
-			</S.Nav>
 		</>
 	);
 }

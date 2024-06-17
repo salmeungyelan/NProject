@@ -1,29 +1,52 @@
-import styled from 'styled-components';
-import {
-	bodyContainer,
-	flexCenter,
-	flexSpaceBetweenCenter,
-} from 'styles/common';
+import styled, { css } from 'styled-components';
+import { flexCenter, flexSpaceBetweenCenter } from 'styles/common';
+
+const MediaQuery = css`
+	@media screen and (max-width: 767px) {
+		display: none;
+	}
+`;
 
 export const Header = styled.div`
 	${flexCenter}
 	background-color: #001219;
 	height: 80px;
 	width: auto;
+	${MediaQuery}
 `;
 
 export const TopBox = styled.div`
-	${bodyContainer}
+	width: 568px;
 	${flexSpaceBetweenCenter}
+	position: relative;
+
+	@media screen and (min-width: 1200px) {
+		width: 1200px;
+	}
+`;
+
+export const ImgBox = styled.div`
+	& img {
+		width: 60px;
+		height: 62px;
+	}
 `;
 
 export const WelcomeText = styled.div`
 	color: ${({ theme }) => theme.PALETTE.white[100]};
-	font-size: ${({ theme }) => theme.FONT_SIZE.xj};
+	font-size: ${({ theme }) => theme.FONT_SIZE.m};
 
 	> p > strong {
 		color: ${({ theme }) => theme.PALETTE.orange[100]};
 		font-weight: 500;
+	}
+
+	@media screen and (min-width: 768px) {
+		font-size: ${({ theme }) => theme.FONT_SIZE.ml};
+	}
+
+	@media screen and (min-width: 1200px) {
+		font-size: ${({ theme }) => theme.FONT_SIZE.xl};
 	}
 `;
 
@@ -54,6 +77,9 @@ export const Nav = styled.nav`
 	box-shadow: 0 2px 4px 0 #00000029;
 	font-size: ${({ theme }) => theme.FONT_SIZE.ml};
 	font-weight: 500;
+	position: absolute;
+	/* top: 100%; */
+	left: 0;
 
 	> ul {
 		${flexCenter}
@@ -61,7 +87,8 @@ export const Nav = styled.nav`
 	}
 
 	& a:link,
-	a:visited {
+	a:visited,
+	span {
 		color: ${({ theme }) => theme.PALETTE.gray[100]};
 		text-decoration: none;
 	}
@@ -70,7 +97,8 @@ export const Nav = styled.nav`
 export const Li = styled.li`
 	position: relative;
 
-	&:hover {
+	&:hover,
+	span:hover {
 		color: ${({ theme }) => theme.PALETTE.orange[100]};
 
 		> ul {
@@ -101,6 +129,6 @@ export const MoreNav = styled.ul`
 	display: none;
 	position: absolute;
 	transform: translate(-62.5%, 38%);
-	background-color: #fafafa80;
+	background-color: ${({ theme }) => theme.PALETTE.white[0]};
 	font-weight: 400;
 `;

@@ -5,8 +5,10 @@ const PALETTE = {
 	},
 
 	orange: {
+		50: '#F7F1E8',
 		100: '#DE5000',
 		200: '#EA5400',
+		300: '#FF6C19',
 	},
 
 	gray: {
@@ -26,6 +28,7 @@ const PALETTE = {
 
 	blue: '#448EF8',
 	navy: '#003E53',
+	navyHover: '#015977',
 	ivory: '#F7F1E8',
 	black: '#111111',
 };

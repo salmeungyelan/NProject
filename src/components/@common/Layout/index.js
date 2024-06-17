@@ -4,6 +4,7 @@ import { includeFooterState, includeHeaderState } from 'recoil/atom/index.atom';
 
 import Footer from './Footer';
 import Header from './Header';
+import MobileHeader from './Mobile/Header';
 
 function Layout() {
 	const includeHeader = useRecoilValue(includeHeaderState);
@@ -12,6 +13,7 @@ function Layout() {
 	return (
 		<>
 			{includeHeader && <Header />}
+			{includeHeader && <MobileHeader />}
 			<Outlet />
 			{includeFooter && <Footer />}
 		</>
