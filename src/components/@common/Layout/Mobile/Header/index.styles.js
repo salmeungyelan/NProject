@@ -59,18 +59,22 @@ export const BottomNav = styled.div`
 	z-index: 5;
 	${flexCenter}
 	padding: 0;
+	z-index: 19;
 	box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.08);
-	box-shadow: -10px 20px rgba(0, 0, 0, 0.3);
 `;
 
 export const MoreNav = styled.div`
-	position: absolute;
+	position: fixed;
 	width: 100%;
 	${flexCenter}
+	display: ${({ $moreBtn }) => ($moreBtn ? 'flex' : 'none')};
 	gap: 33px;
-	top: -100%;
+	top: 84%;
+	z-index: 4;
+	left: 0;
 	height: 66px;
 	background-color: ${({ theme }) => theme.PALETTE.white[100]};
+	box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.08);
 `;
 
 export const BottomNavList = styled.ul`
@@ -79,6 +83,7 @@ export const BottomNavList = styled.ul`
 	max-width: 576px;
 	padding: 0 28px;
 	z-index: 4;
+	height: 100%;
 `;
 
 export const MoreNavList = styled(BottomNavList)`
@@ -88,8 +93,25 @@ export const MoreNavList = styled(BottomNavList)`
 `;
 
 export const BottomNavContent = styled.li`
+	height: 100%;
+	${flexCenter}
+
 	& input {
 		display: none;
+	}
+
+	&:hover {
+		& label {
+			color: ${({ theme }) => theme.PALETTE.orange[100]};
+		}
+
+		& a {
+			color: ${({ theme }) => theme.PALETTE.orange[100]};
+		}
+
+		& svg {
+			fill: ${({ theme }) => theme.PALETTE.orange[100]};
+		}
 	}
 `;
 
@@ -110,7 +132,7 @@ export const NavLabel = styled.label`
 		}
 	}
 
-	&:hover {
+	&:has(input:checked) {
 		color: ${({ theme }) => theme.PALETTE.orange[100]};
 
 		& a {
@@ -203,6 +225,26 @@ export const SideMenu = styled.div`
 			background-image: url('/assets/icons/oright-arrow.svg');
 		}
 	}
+
+	${({ $navClicked }) =>
+		$navClicked &&
+		css`
+			color: ${({ theme }) => theme.PALETTE.orange[100]};
+			background-color: ${({ theme }) => theme.PALETTE.orange[50]};
+		`}
+`;
+
+export const Help = styled(SideMenu)`
+	${({ $help }) =>
+		$help &&
+		css`
+			color: ${({ theme }) => theme.PALETTE.orange[100]};
+			background-color: ${({ theme }) => theme.PALETTE.orange[50]};
+
+			> button {
+				background-image: url('/assets/icons/oright-arrow.svg');
+			}
+		`}
 `;
 
 export const MyPage = styled(SideMenu)`
