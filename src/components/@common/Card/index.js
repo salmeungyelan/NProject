@@ -1,5 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 
+import LINK from 'constants/link';
+
 import * as S from './index.styles';
 
 import Progress from '../Progress';
@@ -16,7 +18,7 @@ function Card(props) {
 
 	return (
 		<S.Card $main={main}>
-			<Link to={'/review/post/1'}>
+			<Link to={LINK.REVIEW_POST + '/1'}>
 				<div>
 					<img src={imgSrc} />
 				</div>

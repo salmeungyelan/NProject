@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 
 import * as S from './index.styles';
+import LINK from 'constants/link';
 
 function Iphone() {
 	return (
 		<S.Iphone>
-			<Link to={'/review/detail'}>
+			<Link to={LINK.REVIEW_POST + '/:_id'}>
 				<S.ImgBox>
 					<S.Circle />
 					<img src="/assets/images/example.png" />
