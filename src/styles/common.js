@@ -16,12 +16,12 @@ export const bodyContainer = css`
 
 	@media screen and (min-width: 768px) {
 		width: 568px;
-		padding: 120px 0 50px 0;
+		padding: 180px 0 50px 0;
 	}
 
 	@media screen and (min-width: 1200px) {
 		width: 1200px;
-		padding: 120px 0 60px 0;
+		padding: 180px 0 60px 0;
 	}
 `;
 
