@@ -9,28 +9,26 @@ const MediaQuery = css`
 
 export const Header = styled.div`
 	${flexCenter}
+	flex-direction: column;
 	background-color: #001219;
-	height: 80px;
-	width: auto;
+	height: max-content;
+	width: 100%;
+	position: fixed;
+	z-index: 10;
 	${MediaQuery}
 `;
 
 export const TopBox = styled.div`
+	padding: 10px 0;
 	width: 568px;
 	${flexSpaceBetweenCenter}
-	position: relative;
 
 	@media screen and (min-width: 1200px) {
 		width: 1200px;
 	}
 `;
 
-export const ImgBox = styled.div`
-	& img {
-		width: 60px;
-		height: 62px;
-	}
-`;
+export const ImgBox = styled.div``;
 
 export const WelcomeText = styled.div`
 	color: ${({ theme }) => theme.PALETTE.white[100]};
@@ -77,13 +75,11 @@ export const Nav = styled.nav`
 	box-shadow: 0 2px 4px 0 #00000029;
 	font-size: ${({ theme }) => theme.FONT_SIZE.ml};
 	font-weight: 500;
-	position: absolute;
-	top: 10%;
-	left: 0;
 
 	> ul {
 		${flexCenter}
 		gap: 32px;
+		height: 100%;
 	}
 
 	& a:link,
@@ -95,14 +91,16 @@ export const Nav = styled.nav`
 `;
 
 export const Li = styled.li`
-	position: relative;
+	height: 100%;
+	${flexCenter}
 
-	&:hover,
-	span:hover {
-		color: ${({ theme }) => theme.PALETTE.orange[100]};
+	&:hover {
+		& span {
+			color: ${({ theme }) => theme.PALETTE.orange[100]};
+		}
 
 		> ul {
-			display: inline-block;
+			display: flex;
 		}
 	}
 
@@ -119,16 +117,58 @@ export const Li = styled.li`
 			}
 		}
 	}
+
+	&:has(input:checked) {
+		> label > a {
+			color: ${({ theme }) => theme.PALETTE.orange[100]};
+		}
+	}
 `;
 
 export const MoreNav = styled.ul`
-	width: 100vw;
+	width: 100%;
 	height: 60px;
 	${flexCenter}
 	gap: 32px;
 	display: none;
 	position: absolute;
-	transform: translate(-62.5%, 38%);
-	background-color: ${({ theme }) => theme.PALETTE.white[0]};
+	top: 99%;
+	left: 0;
+	right: 0;
+	background-color: #fafafa80;
 	font-weight: 400;
+	font-size: ${({ theme }) => theme.FONT_SIZE.ml};
+	color: ${({ theme }) => theme.PALETTE.gray[100]};
+
+	& input {
+		display: none;
+	}
+
+	& li:hover {
+		& a {
+			color: ${({ theme }) => theme.PALETTE.orange[100]};
+		}
+	}
+`;
+
+export const Help = styled.label`
+	&:has(input:checked) {
+		& span {
+			color: ${({ theme }) => theme.PALETTE.orange[100]};
+		}
+	}
+`;
+
+export const MoreLi = styled.li`
+	&:hover {
+		& a {
+			color: ${({ theme }) => theme.PALETTE.orange[100]};
+		}
+	}
+
+	&:has(input:checked) {
+		& a {
+			color: ${({ theme }) => theme.PALETTE.orange[100]};
+		}
+	}
 `;

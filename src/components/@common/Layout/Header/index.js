@@ -4,19 +4,23 @@ import { Link } from 'react-router-dom';
 import * as S from './index.styles';
 
 import Logo from 'components/@common/Logo';
+import LINK from 'constants/link';
 
 function Header() {
-	const [isChecked, setIsChecked] = useState(false);
+	const [navClicked, setNavClicked] = useState(
+		'/' + (window.location.pathname.split('/')[1] ?? ''),
+	);
 
-	const handleCheckboxChange = () => {
-		setIsChecked(prev => !prev);
+	const handleClickNav = link => {
+		setNavClicked(link);
 	};
+
 	return (
 		<>
 			<S.Header>
 				<S.TopBox>
 					<S.ImgBox>
-						<Link to={'/main'}>
+						<Link to={LINK.HOME}>
 							<Logo size={'header'} white />
 						</Link>
 					</S.ImgBox>
@@ -36,54 +40,83 @@ function Header() {
 				<S.Nav>
 					<ul>
 						<S.Li>
-							<label htmlFor="home">
-								<input type="radio" />
-								<Link to={'/main'}>홈</Link>
+							<label>
+								<input type="radio" checked={LINK.HOME === navClicked} />
+								<Link to={LINK.HOME} onClick={() => handleClickNav(LINK.HOME)}>
+									홈
+								</Link>
 							</label>
 						</S.Li>
 						<S.Li>
-							<label htmlFor="review">
-								<input type="radio" />
-								<Link to={'/review'}>리뷰</Link>
+							<label>
+								<input type="radio" checked={LINK.REVIEW === navClicked} />
+								<Link
+									to={LINK.REVIEW}
+									onClick={() => handleClickNav(LINK.REVIEW)}
+								>
+									리뷰
+								</Link>
 							</label>
 						</S.Li>
 						<S.Li>
-							<label htmlFor="review-team">
-								<input type="radio" />
-								<Link to={'/review_team'}>체험단</Link>
+							<label>
+								<input type="radio" checked={LINK.TEAM === navClicked} />
+								<Link to={LINK.TEAM} onClick={() => handleClickNav(LINK.TEAM)}>
+									체험단
+								</Link>
 							</label>
 						</S.Li>
 						<S.Li>
-							<label htmlFor="view-Instagram">
-								<input type="radio" />
-								<Link to={'/view_instagram'}>뷰탭&인스타</Link>
+							<label>
+								<input type="radio" checked={LINK.VIEW === navClicked} />
+								<Link to={LINK.VIEW} onClick={() => handleClickNav(LINK.VIEW)}>
+									뷰탭&인스타
+								</Link>
 							</label>
 						</S.Li>
 						<S.Li>
-							<label htmlFor="web-creation">
-								<input type="radio" />
-								<Link to={'/web_creation'}>홈페이지 제작</Link>
+							<label>
+								<input type="radio" checked={LINK.DEVELOP === navClicked} />
+								<Link
+									to={LINK.DEVELOP}
+									onClick={() => handleClickNav(LINK.DEVELOP)}
+								>
+									홈페이지 제작
+								</Link>
 							</label>
 						</S.Li>
 						<S.Li>
-							<label htmlFor="help">
-								<input type="radio" />
+							<S.Help>
+								<input
+									type="radio"
+									checked={[LINK.NOTICE, LINK.GUIDE].includes(navClicked)}
+								/>
 								<span>고객센터</span>
-							</label>
+							</S.Help>
 
 							<S.MoreNav>
-								<li>
-									<label htmlFor="notice">
-										<input type="radio" />
-										<Link to={'/main'}>공지사항</Link>
+								<S.MoreLi>
+									<label>
+										<input type="radio" checked={LINK.NOTICE === navClicked} />
+										<Link
+											to={LINK.NOTICE}
+											onClick={() => setNavClicked(LINK.NOTICE)}
+										>
+											공지사항
+										</Link>
 									</label>
-								</li>
-								<li>
-									<label htmlFor="guide">
-										<input type="radio" />
-										<Link to={'/main'}>이용안내</Link>
+								</S.MoreLi>
+								<S.MoreLi>
+									<label>
+										<input type="radio" checked={LINK.GUIDE === navClicked} />
+										<Link
+											to={LINK.GUIDE}
+											onClick={() => setNavClicked(LINK.GUIDE)}
+										>
+											이용안내
+										</Link>
 									</label>
-								</li>
+								</S.MoreLi>
 							</S.MoreNav>
 						</S.Li>
 					</ul>
