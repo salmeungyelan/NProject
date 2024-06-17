@@ -27,7 +27,7 @@ export const Title = styled.div`
 	font-size: ${({ theme }) => theme.FONT_SIZE.m};
 	font-weight: 600;
 
-	@media screen and (min-width: 386px) {
+	@media screen and (min-width: 768px) {
 		font-size: ${({ theme }) => theme.FONT_SIZE.l};
 	}
 `;
@@ -63,7 +63,7 @@ export const ListTitle = styled.div`
 	font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 	color: ${({ theme }) => theme.PALETTE.gray[200]};
 
-	@media screen and (min-width: 386px) {
+	@media screen and (min-width: 768px) {
 		font-size: ${({ theme }) => theme.FONT_SIZE.ml};
 	}
 `;
@@ -72,7 +72,7 @@ export const Date = styled(ListTitle)`
 	font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 	color: ${({ theme }) => theme.PALETTE.gray[100]};
 
-	@media screen and (min-width: 386px) {
+	@media screen and (min-width: 768px) {
 		font-size: ${({ theme }) => theme.FONT_SIZE.m};
 	}
 `;
