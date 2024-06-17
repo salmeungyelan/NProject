@@ -78,7 +78,7 @@ export const Nav = styled.nav`
 	font-size: ${({ theme }) => theme.FONT_SIZE.ml};
 	font-weight: 500;
 	position: absolute;
-	/* top: 100%; */
+	top: 10%;
 	left: 0;
 
 	> ul {
