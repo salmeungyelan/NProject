@@ -10,8 +10,8 @@ const sizeCSS = {
 		height: 47px;
 
 		@media screen and (min-width: 768px) {
-			width: 62px;
-			height: 64px;
+			width: 50px;
+			height: 52px;
 		}
 	`,
 };
