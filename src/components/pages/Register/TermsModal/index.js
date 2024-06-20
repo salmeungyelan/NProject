@@ -1,35 +1,37 @@
-import useModal from 'hooks/useModal';
-
 import * as S from './index.styles';
 
 import Button from 'components/@common/Button';
 
-function TermsModal() {
-	const { modalDataState, closeModal } = useModal();
+function TermsModal(props) {
+	const { title, content, onClose } = props;
 
-	if (!modalDataState.isOpen) {
-		return null;
-	}
+	const handleClose = () => {
+		onClose();
+	};
 
 	return (
-		<S.Background>
-			<S.Container>
-				<S.Header>
-					<S.Title>{modalDataState.title}</S.Title>
-					<S.CloseBtn onClick={closeModal} />
-				</S.Header>
+		<>
+			<S.Background>
+				<S.Container>
+					<S.Header>
+						<S.Title>{title}</S.Title>
+						<S.CloseBtn onClick={handleClose} />
+					</S.Header>
 
-				<S.Body>{modalDataState.content}</S.Body>
+					<S.Body>
+						<pre>{content}</pre>
+					</S.Body>
 
-				<S.ButtonBox>
-					<div>
-						<Button variant={'default'} size={'default'}>
-							동의
-						</Button>
-					</div>
-				</S.ButtonBox>
-			</S.Container>
-		</S.Background>
+					<S.ButtonBox>
+						<div>
+							<Button variant="default" size="default">
+								동의
+							</Button>
+						</div>
+					</S.ButtonBox>
+				</S.Container>
+			</S.Background>
+		</>
 	);
 }
 

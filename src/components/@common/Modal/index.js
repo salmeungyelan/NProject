@@ -1,28 +1,22 @@
-import useModal from 'hooks/useModal';
-
 import * as S from './index.styles';
 
 import Button from '../Button';
 
-function Modal() {
-	const { modalDataState, closeModal } = useModal();
-
-	if (!modalDataState.isOpen) {
-		return null;
-	}
+function Modal(props) {
+	const { img, title, content, onClose } = props;
 
 	return (
 		<S.Background>
 			<S.Container>
 				<S.Header>
-					<img src={modalDataState.img} />
-					<S.Title>{modalDataState.title}</S.Title>
+					<img src={img} />
+					<S.Title>{title}</S.Title>
 
-					<S.Body>{modalDataState.content}</S.Body>
+					<S.Body>{content}</S.Body>
 				</S.Header>
 
 				<S.ButtonBox>
-					<Button variant={'default'} size={'default'} onClick={closeModal}>
+					<Button variant="default" size="default" onClick={onClose}>
 						확인
 					</Button>
 				</S.ButtonBox>

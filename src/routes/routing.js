@@ -4,11 +4,11 @@ import { createBrowserRouter } from 'react-router-dom';
 import Layout from 'components/@common/Layout';
 import ErrorFallback from 'components/@common/Error';
 
-const Home = lazy(() => import('pages/Home'));
+const Login = lazy(() => import('pages/Login'));
 const Register = lazy(() => import('pages/Register'));
 const FindAccounts = lazy(() => import('pages/FindAccounts'));
 
-const Main = lazy(() => import('pages/Main'));
+const Home = lazy(() => import('pages/Home'));
 
 const Guide = lazy(() => import('pages/Guide'));
 const GuideDetail = lazy(() => import('pages/Guide/GuideDetail'));
@@ -27,7 +27,7 @@ const OtherTabs = lazy(() => import('pages/OtherTabs'));
 const router = createBrowserRouter([
 	{
 		path: '/login',
-		element: <Home />,
+		element: <Login />,
 	},
 	{
 		path: '/register',
@@ -51,7 +51,7 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: '/',
-				element: <Main />,
+				element: <Home />,
 			},
 			{
 				path: '/user_guide',
