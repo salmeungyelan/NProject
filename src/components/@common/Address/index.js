@@ -22,7 +22,7 @@ function Address(props) {
 					{...rest}
 				/>
 				{button && (
-					<Button variant={'default'} size={size} shadow>
+					<Button variant={'default'} size={size}>
 						주소 찾기
 					</Button>
 				)}
