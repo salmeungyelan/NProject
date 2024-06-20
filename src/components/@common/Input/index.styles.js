@@ -56,6 +56,17 @@ export const Input = styled.input`
 		font-weight: 400;
 	}
 
+	/* 숫자 입력란의 증감키 숨기기 */
+	&[type='number']::-webkit-outer-spin-button,
+	&[type='number']::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
+	&[type='number'] {
+		-moz-appearance: textfield; /* Firefox에서 증감키 숨기기 */
+	}
+
 	@media screen and (min-width: 768px) {
 		font-size: ${({ theme }) => theme.FONT_SIZE.m};
 
