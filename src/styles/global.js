@@ -6,25 +6,25 @@ const GlobalStyles = createGlobalStyle`
 
     @font-face {
       font-family: 'Pretendard';
-      src: url('/assets/font/Pretendard-Light.otf') format('opentype');
+      src: url('/assets/fonts/Pretendard-Light.otf') format('opentype');
       font-weight: 300;
     }
 
     @font-face {
       font-family: 'Pretendard';
-      src: url('/assets/font/Pretendard-Regular.otf') format('opentype');
+      src: url('/assets/fonts/Pretendard-Regular.otf') format('opentype');
       font-weight: 400;
     }
 
     @font-face {
       font-family: 'Pretendard';
-      src: url('/assets/font/Pretendard-Medium.otf') format('opentype');
+      src: url('/assets/fonts/Pretendard-Medium.otf') format('opentype');
       font-weight: 500;
     }
 
     @font-face {
       font-family: 'Pretendard';
-      src: url('/assets/font/Pretendard-SemiBold.otf') format('opentype');
+      src: url('/assets/fonts/Pretendard-SemiBold.otf') format('opentype');
       font-weight: 600;
     }
 
