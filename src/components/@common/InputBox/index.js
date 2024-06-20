@@ -11,6 +11,7 @@ function InputBox(props) {
 		value,
 		placeholder,
 		message,
+		type,
 		...rest
 	} = props;
 
@@ -23,8 +24,8 @@ function InputBox(props) {
 			<Input
 				{...rest}
 				size={register ? 'default' : 'height'}
-				variant={'default'}
-				type={check ? 'password' : 'text'}
+				variant="default"
+				type={type}
 				value={value}
 				placeholder={placeholder}
 			/>
