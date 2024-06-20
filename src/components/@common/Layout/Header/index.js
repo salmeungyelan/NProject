@@ -1,12 +1,13 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import * as S from './index.styles';
 
 import Logo from 'components/@common/Logo';
 import LINK from 'constants/link';
 
-function Header() {
+function Header({ logout }) {
+	const navigate = useNavigate();
 	const [navClicked, setNavClicked] = useState(
 		'/' + (window.location.pathname.split('/')[1] ?? ''),
 	);
@@ -32,7 +33,7 @@ function Header() {
 					</S.WelcomeText>
 
 					<S.ButtonBox>
-						<S.Logout>LOGOUT</S.Logout>
+						<S.Logout onClick={logout}>LOGOUT</S.Logout>
 						<S.MyPage>MY PAGE</S.MyPage>
 					</S.ButtonBox>
 				</S.TopBox>

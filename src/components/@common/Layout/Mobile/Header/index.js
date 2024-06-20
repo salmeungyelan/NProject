@@ -7,7 +7,7 @@ import * as S from './index.styles';
 
 import Logo from 'components/@common/Logo';
 
-function MobileHeader() {
+function MobileHeader({ logout }) {
 	// 모바일 NAV
 	const [navClicked, setNavClicked] = useState(
 		'/' + (window.location.pathname.split('/')[1] ?? ''),
@@ -410,7 +410,7 @@ function MobileHeader() {
 							<S.MyPage>마이페이지</S.MyPage>
 						</Link>
 
-						<S.Logout>로그아웃</S.Logout>
+						<S.Logout onClick={logout}>로그아웃</S.Logout>
 					</div>
 
 					<S.HelpMenu $help={help}>
