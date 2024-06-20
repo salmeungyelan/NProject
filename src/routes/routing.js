@@ -26,7 +26,7 @@ const OtherTabs = lazy(() => import('pages/OtherTabs'));
 
 const router = createBrowserRouter([
 	{
-		path: '',
+		path: '/login',
 		element: <Home />,
 	},
 	{
@@ -50,7 +50,7 @@ const router = createBrowserRouter([
 		element: <Layout />,
 		children: [
 			{
-				path: '/main',
+				path: '/',
 				element: <Main />,
 			},
 			{

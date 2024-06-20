@@ -1,4 +1,9 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+import useInput from 'hooks/useInput';
+import useApi from 'hooks/useApi';
+import { setCookie } from 'utils/cookie';
+import LINK from 'constants/link';
 
 import * as S from './index.styles';
 
@@ -8,11 +13,39 @@ import Button from 'components/@common/Button';
 import Line from 'components/@common/Line';
 
 function Home() {
+	const { handleChange, inputData } = useInput();
+	const navigate = useNavigate();
+
+	const { trigger } = useApi({
+		path: '/auth/login',
+		shouldFetch: false,
+	});
+
+	const handleSubmitLogin = async e => {
+		e.preventDefault();
+
+		try {
+			const res = await trigger({
+				method: 'post',
+				data: inputData,
+			});
+
+			const accessToken = res.data.accessToken;
+			const refreshToken = res.data.refreshToken;
+
+			setCookie(accessToken, refreshToken);
+
+			navigate(LINK.HOME);
+		} catch (error) {
+			console.error('로그인 에러', error);
+		}
+	};
+
 	return (
 		<S.Body>
 			<S.LoginBox>
 				<div>
-					<Logo size={'default'} />
+					<Logo size="default" />
 				</div>
 
 				<div>
@@ -21,11 +54,11 @@ function Home() {
 							<S.InputBox>
 								<Input
 									type="text"
-									id="id"
-									autoComplete="off"
-									size={'default'}
-									variant={'login'}
+									name="username"
+									size="default"
+									variant="login"
 									required
+									onChange={handleChange}
 								/>
 								<S.Label htmlFor="id">이메일 또는 아이디 입력</S.Label>
 							</S.InputBox>
@@ -33,11 +66,11 @@ function Home() {
 							<S.InputBox>
 								<Input
 									type="password"
-									id="pw"
-									autoComplete="off"
-									size={'default'}
-									variant={'login'}
+									name="password"
+									size="default"
+									variant="login"
 									required
+									onChange={handleChange}
 								/>
 								<S.Label htmlFor="password">비밀번호 입력</S.Label>
 							</S.InputBox>
@@ -46,16 +79,20 @@ function Home() {
 						</div>
 
 						<div>
-							<Button variant={'default'} size={'default'}>
+							<Button
+								variant="default"
+								size="default"
+								onClick={handleSubmitLogin}
+							>
 								로그인
 							</Button>
 
 							<S.LinkBox>
-								<Link to="/find/id">아이디 찾기</Link>
-								<Line size={'height'} variant={'gray'} />
-								<Link to="/find/password">비밀번호 찾기</Link>
-								<Line size={'height'} variant={'gray'} />
-								<Link to="/register">회원가입</Link>
+								<Link to={LINK.FIND_ID}>아이디 찾기</Link>
+								<Line size="height" variant="gray" />
+								<Link to={LINK.FIND_PW}>비밀번호 찾기</Link>
+								<Line size="height" variant="gray" />
+								<Link to={LINK.REGISTER}>회원가입</Link>
 							</S.LinkBox>
 						</div>
 					</S.FormBox>
@@ -63,7 +100,10 @@ function Home() {
 			</S.LoginBox>
 
 			<S.Bottom>
-				<img src="./assets/images/login-bottom-img.png" />
+				<img
+					src="./assets/images/login-bottom-img.png"
+					alt="login bottom image"
+				/>
 			</S.Bottom>
 		</S.Body>
 	);
