@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getCookie } from 'utils/cookie';
 
 // post메서드로 통신할 때 기본값 설정
 axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -14,21 +15,48 @@ export const api = axios.create({
 	withCredentials: true,
 });
 
+// api.interceptors.request.use(
+// 	req => {
+// 		if (req.data instanceof FormData) {
+// 			req.headers['Content-Type'] = 'multipart/form-data';
+// 		} else if (
+// 			typeof req.data === 'object' &&
+// 			!(req.data instanceof FormData)
+// 		) {
+// 			req.data = JSON.stringify(req.data);
+// 			req.headers['Content-Type'] = 'application/json';
+// 		}
+// 		return req;
+// 	},
+// 	err => {
+// 		throw err;
+// 	},
+// );
+
 api.interceptors.request.use(
-	req => {
-		if (req.data instanceof FormData) {
-			req.headers['Content-Type'] = 'multipart/form-data';
-		} else if (
-			typeof req.data === 'object' &&
-			!(req.data instanceof FormData)
-		) {
-			req.data = JSON.stringify(req.data);
-			req.headers['Content-Type'] = 'application/json';
+	config => {
+		const accessToken = getCookie('accessToken');
+
+		if (accessToken) {
+			config.headers.Authorization = `Bearer ${accessToken}`;
 		}
-		return req;
+
+		// 데이터 형식에 따라 Content-Type 설정
+		if (config.data instanceof FormData) {
+			config.headers['Content-Type'] = 'multipart/form-data';
+			config.data = JSON.stringify(config.data);
+		} else if (
+			typeof config.data === 'object' &&
+			!(config.data instanceof FormData)
+		) {
+			config.headers['Content-Type'] = 'application/json';
+		}
+
+		return config;
 	},
-	err => {
-		throw err;
+
+	error => {
+		return Promise.reject(error);
 	},
 );
 
@@ -46,11 +74,7 @@ export const getApi = async (path, params) => {
 };
 
 export const postApi = async (path, data) => {
-	return await api.post(path, JSON.stringify(data), {
-		headers: {
-			'Content-Type': 'application/json',
-		},
-	});
+	return await api.post(path, JSON.stringify(data));
 };
 
 export const deleteApi = async (path, params) => {
@@ -62,5 +86,5 @@ export const putApi = async (path, data) => {
 };
 
 export const patchApi = async (path, data) => {
-	return await api.patch(path, JSON.stringify(data));
+	return await api.patch(path, data);
 };
