@@ -1,4 +1,8 @@
+import { useEffect, useState } from 'react';
+
 import useModal from 'hooks/useModal';
+import decodeJWT from 'utils/token';
+import useApi from 'hooks/useApi';
 
 import * as S from './index.styles';
 
@@ -6,43 +10,74 @@ import Title from 'components/@common/Title';
 import Button from 'components/@common/Button';
 import InputBox from 'components/@common/InputBox';
 import Address from 'components/@common/Address';
-import PwdChangeModal from 'components/pages/MyPage/PwdChangeModal';
+import PwdModal from 'components/pages/MyPage/PwdModal';
 
 function MyPage() {
-	const { openModal } = useModal();
+	const { modalState, openModal, closeModal } = useModal();
 
 	const handleOpenPwdModal = () => {
-		openModal({
-			img: '',
-			title: '',
-			content: '',
-			callback: () => console.log('closed'),
-		});
+		openModal();
 	};
+
+	const handleCloseModal = () => {
+		closeModal();
+	};
+
+	const decodedPayload = decodeJWT();
+	const { sub } = decodedPayload;
+
+	const { result, isLoading } = useApi({
+		path: `/users/${sub}`,
+		shouldFetch: true,
+	});
+
+	const [user, setUser] = useState({});
+
+	useEffect(() => {
+		closeModal();
+	}, []);
+
+	useEffect(() => {
+		if (result.data) {
+			setUser(result.data);
+		}
+	}, [result.data]);
+
+	const {
+		email,
+		username,
+		companyName,
+		contactNumber,
+		postalCode,
+		address,
+		addressDetail,
+		businessNumber,
+		smartplaceLink,
+	} = user;
 
 	return (
 		<S.Body>
-			<PwdChangeModal />
+			{modalState && <PwdModal onClose={handleCloseModal} userId={sub} />}
 
 			<Title title={'MY PAGE'}>회원 정보를 수정할 수 있습니다.</Title>
 
 			<div>
 				<S.Account>
 					<S.InfoBox>
-						<InputBox title="이메일" value="olive@hawngum.com" disabled />
+						<InputBox title="이메일" value={email || ''} disabled />
 					</S.InfoBox>
 
 					<S.InfoBox>
-						<InputBox title="아이디" value="olive" disabled />
+						<InputBox title="아이디" value={username || ''} disabled />
 					</S.InfoBox>
 
 					<S.InfoBox>
-						<InputBox title="비밀번호" value="olive" check readOnly />
+						<InputBox title="비밀번호" value="00000" type="password" readOnly />
 
 						<S.PwBtn>
 							<Button
-								size={'height'}
-								variant={'default'}
+								size="height"
+								variant="default"
 								onClick={handleOpenPwdModal}
 							>
 								비밀번호 변경하기
@@ -51,30 +86,34 @@ function MyPage() {
 					</S.InfoBox>
 
 					<S.InfoBox>
-						<InputBox title="업체명" value="황금올리브" disabled />
+						<InputBox title="업체명" value={companyName || ''} disabled />
 					</S.InfoBox>
 
 					<S.InfoBox>
-						<InputBox title="전화번호" value="010-1234-1234" disabled />
+						<InputBox title="전화번호" value={contactNumber || ''} disabled />
 					</S.InfoBox>
 
 					<S.InfoBox>
 						<Address
-							number="12345"
-							address="삼각지"
-							detail="107호, 108호"
+							number={postalCode || ''}
+							address={address || ''}
+							detail={addressDetail || ''}
 							disabled
 						/>
 					</S.InfoBox>
 
 					<S.InfoBox>
-						<InputBox title="사업자 등록 번호" value="123-12-12345" disabled />
+						<InputBox
+							title="사업자 등록 번호"
+							value={businessNumber || ''}
+							disabled
+						/>
 					</S.InfoBox>
 
 					<S.InfoBox>
 						<InputBox
 							title="스마트 플레이스 링크"
-							value="https://naver.com"
+							value={smartplaceLink || ''}
 							disabled
 						/>
 					</S.InfoBox>

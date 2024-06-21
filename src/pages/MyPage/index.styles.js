@@ -28,7 +28,7 @@ export const Account = styled.div`
 export const InfoBox = styled.div`
 	${flexColumn}
 	gap: 8px;
-	box-shadow: 0 2px 4px 0 #00000026;
+	box-shadow: 0 0 4px 0 #00000026;
 	padding: 14px 16px;
 `;
 

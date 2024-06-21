@@ -65,14 +65,15 @@ export const CloseBtn = styled.button`
 export const Body = styled.div`
 	${flexColumn}
 	gap: 3px;
+`;
 
-	& span {
-		font-size: ${({ theme }) => theme.FONT_SIZE.s};
-		color: ${({ theme }) => theme.PALETTE.orange[100]};
+export const Span = styled.span`
+	font-size: ${({ theme }) => theme.FONT_SIZE.s};
+	color: ${({ theme }) => theme.PALETTE.orange[100]};
+	height: 10px;
 
-		@media only screen and (min-width: 768px) {
-			font-size: ${({ theme }) => theme.FONT_SIZE.ms};
-		}
+	@media only screen and (min-width: 768px) {
+		font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 	}
 `;
 
