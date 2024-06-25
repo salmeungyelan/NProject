@@ -4,7 +4,7 @@ import { flexColumn, flexSpaceBetweenCenter } from 'styles/common';
 export const Card = styled.div`
 	width: 143px;
 	height: 133px;
-	box-shadow: 0 2px 4px 0 #00000029;
+	box-shadow: 0 0 4px 0 #00000029;
 
 	> a,
 	:visited {
@@ -66,16 +66,34 @@ export const MainBox = styled.div`
 
 export const Title = styled.div`
 	${flexSpaceBetweenCenter}
+	gap: 4px;
 	color: ${({ theme }) => theme.PALETTE.gray[300]};
 	font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 	font-weight: 600;
 
+	> div:first-child {
+		width: ${({ $main }) => ($main ? '78px' : '100%')};
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+
 	@media screen and (min-width: 768px) {
 		font-size: ${({ theme }) => theme.FONT_SIZE.m};
+		gap: 6px;
+
+		> div:first-child {
+			width: ${({ $main }) => ($main ? '84px' : '100%')};
+		}
 	}
 
 	@media screen and (min-width: 1200px) {
 		font-size: ${({ theme }) => theme.FONT_SIZE.ml};
+		gap: 10px;
+
+		> div:first-child {
+			width: ${({ $main }) => ($main ? '132px' : '100%')};
+		}
 	}
 `;
 
