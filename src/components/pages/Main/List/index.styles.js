@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
 	flexCenter,
 	flexColumn,
@@ -7,8 +7,8 @@ import {
 } from 'styles/common';
 
 export const Body = styled.div`
-	display: ${({ $data }) => ($data ? 'grid' : 'flex')};
-	flex-direction: ${({ $data }) => !$data && 'column'};
+	display: ${({ $data }) => ($data.length ? 'grid' : 'flex')};
+	flex-direction: ${({ $data }) => !$data.length && 'column'};
 	grid-template-areas: ${({ $data }) =>
 		$data &&
 		`
@@ -19,6 +19,7 @@ export const Body = styled.div`
 	gap: 24px 0;
 	grid-auto-rows: auto;
 	grid-auto-columns: auto;
+	width: 100%;
 
 	@media screen and (min-width: 768px) {
 		grid-template-areas: 'iphone iphone reviewIng' 'iphone iphone reviewFin' 'iphone iphone reviewFin';
@@ -35,6 +36,7 @@ export const ReviewIng = styled.div`
 	grid-area: reviewIng;
 	${flexColumn}
 	gap: 12px;
+	position: relative;
 `;
 
 export const ReviewFin = styled(ReviewIng)`
@@ -119,8 +121,48 @@ export const CardList = styled.div`
 	margin-top: 12px;
 	${flexSpaceBetweenCenter};
 	gap: 8px;
+	position: relative;
 
 	@media screen and (min-width: 768px) {
 		gap: 10px;
+	}
+`;
+
+const buttonBgReset = css`
+	background: none;
+	width: 25px;
+	height: 25px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 14px 14px;
+	background-color: ${({ theme }) => theme.PALETTE.white[100]};
+	border-radius: 50%;
+	box-shadow: 0 0 4px 0 #00000029;
+`;
+
+export const LeftArrowImg = styled.button`
+	${buttonBgReset}
+	background-image: url('/assets/icons/left-arrow.svg');
+
+	background-repeat: 0;
+	position: absolute;
+	top: 55%;
+	left: -3.5%;
+
+	@media screen and (min-width: 1200px) {
+		left: -1.5%;
+	}
+`;
+
+export const RightArrowImg = styled(LeftArrowImg)`
+	left: ${({ $currentData }) => ($currentData ? '96.5%' : '95.5%')};
+	background-image: url('/assets/icons/right-arrow.svg');
+
+	@media screen and (min-width: 768px) {
+		left: ${({ $currentData }) => ($currentData ? '96.5%' : '97.5%')};
+	}
+
+	@media screen and (min-width: 1200px) {
+		left: ${({ $currentData }) => ($currentData ? '98.5%' : '99%')};
 	}
 `;

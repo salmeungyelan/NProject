@@ -11,9 +11,10 @@ export const Mores = styled.div`
 	${flexAlignCenter}
 	display: flex;
 	flex-wrap: wrap;
-	gap: 23px;
+	gap: 25px;
 
 	@media screen and (min-width: 1200px) {
 		justify-content: space-between;
+		align-items: flex-start;
 	}
 `;

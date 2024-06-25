@@ -1,57 +1,118 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import LINK from 'constants/link';
+import useApi from 'hooks/useApi';
 
 import * as S from './index.styles';
 
 import Line from 'components/@common/Line';
 
-const List = [
-	{ title: '중요 공지사항 1', date: '2024년 05월 28일' },
-	{ title: '중요 공지다 tl...q...', date: '2024년 06월 02일' },
-	{ title: '이 플젝 끝나기를...', date: '2024년 05월 24일' },
-	{ title: '어렵네요 shit', date: '2024년 03월 23일' },
-	{ title: '공지사항은 적어야 간지임 ㅋ', date: '2024년 02월 12일' },
-];
+function More({ children }) {
+	// 공지사항이면 true / 이용안내 false
+	const title = children === '공지사항';
 
-function More(props) {
-	const { children } = props;
+	const [impData, setImpData] = useState([]);
 
-	const links =
-		children === '공지사항' ? LINK.NOTICE + '/1' : LINK.GUIDE + '/1';
-	const moreLink = children === '공지사항' ? LINK.NOTICE : LINK.GUIDE;
+	// 공지사항 중요 2개
+	const { result: impResult, isLoading: impLoading } = useApi({
+		path: `/notices?size=2&noticeContentType=NOTICE_CONTENT_TYPE_01`,
+		shouldFetch: true,
+	});
+
+	const [genData, setGenData] = useState([]);
+
+	// 공지사항 일반 3개 & 이용안내 5개
+	const {
+		result: genResult,
+		trigger: genTrigger,
+		isLoading: genLoading,
+	} = useApi({
+		path: '/guides?size=5',
+		shouldFetch: !title,
+	});
+
+	useEffect(() => {
+		if (genResult.data) {
+			const data = title ? genResult.data.noticeList : genResult.data.guideList;
+			setGenData(data);
+		}
+
+		if (
+			title &&
+			impResult.data?.noticeList &&
+			!impLoading &&
+			!genResult.data?.noticeList &&
+			!genLoading
+		) {
+			setImpData(impResult.data.noticeList);
+
+			const path = `/notices?size=${
+				5 - (impResult.data?.noticeList && impResult.data?.noticeList?.length)
+			}&noticeContentType=NOTICE_CONTENT_TYPE_02`;
+
+			genTrigger({
+				path,
+				applyResult: true,
+			});
+		}
+	}, [
+		genResult.data?.noticeList,
+		impResult.data?.noticeList,
+		impLoading,
+		genLoading,
+		genTrigger,
+	]);
+
+	// 더보기 주소
+	const link = title ? LINK.NOTICE : LINK.GUIDE;
 
 	return (
 		<S.Body>
 			<S.TitleBox>
 				<S.Title>{children}</S.Title>
 				<S.MoreClick>
-					<Link to={moreLink}>더보기</Link>
+					<Link to={link}>더보기</Link>
 				</S.MoreClick>
 			</S.TitleBox>
 
 			<Line size={'width'} variant={'lightGray'} />
 
-			<S.List>
-				{List.map((el, idx) =>
-					el.title.includes('중요') ? (
+			<S.List $genData={genData}>
+				{/* 공지사항 중요 2개 */}
+				{title &&
+					impData &&
+					impData.map((notice, idx) => (
 						<S.Important key={idx}>
-							<Link to={links}>
+							<Link to={link + `/${notice.id}`}>
 								<img src="/assets/icons/pin.svg" alt="pin" />
 								<S.ImportantBtn>중요</S.ImportantBtn>
-								<S.ListTitle>{el.title}</S.ListTitle>
+								<S.ImpTitle>{notice.title}</S.ImpTitle>
 							</Link>
 
-							<S.Date>{el.date}</S.Date>
+							<S.Date>{notice.createDate}</S.Date>
 						</S.Important>
-					) : (
+					))}
+
+				{/* 공지사항 일반 3개 & 이용안내 5개 */}
+				{genData &&
+					genData.map((guide, idx) => (
 						<S.Commons key={idx}>
-							<Link to={links}>
-								<S.ListTitle>{el.title}</S.ListTitle>
-								<S.Date>{el.date}</S.Date>
+							<Link to={link + `/${guide.id}`}>
+								<S.ListTitle>{guide.title}</S.ListTitle>
+								<S.Date>{guide.createDate}</S.Date>
 							</Link>
 						</S.Commons>
-					),
+					))}
+
+				{/* 이용안내 없을 때 */}
+				{!title && !genData.length && (
+					<S.NoData>등록된 게시글이 없습니다.</S.NoData>
+				)}
+
+				{/* 공지사항 없을 때 */}
+				{title && !genData && !impData && (
+					<S.NoData>등록된 게시글이 없습니다.</S.NoData>
 				)}
 			</S.List>
 		</S.Body>
