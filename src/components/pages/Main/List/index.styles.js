@@ -155,10 +155,14 @@ export const LeftArrowImg = styled.button`
 `;
 
 export const RightArrowImg = styled(LeftArrowImg)`
-	left: 96.5%;
+	left: ${({ $currentData }) => ($currentData ? '96.5%' : '95.5%')};
 	background-image: url('/assets/icons/right-arrow.svg');
 
+	@media screen and (min-width: 768px) {
+		left: ${({ $currentData }) => ($currentData ? '96.5%' : '97.5%')};
+	}
+
 	@media screen and (min-width: 1200px) {
-		left: 98.5%;
+		left: ${({ $currentData }) => ($currentData ? '98.5%' : '99%')};
 	}
 `;

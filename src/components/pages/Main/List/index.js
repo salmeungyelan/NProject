@@ -293,10 +293,12 @@ function List() {
 
 						{completedIndex !== 0 && (
 							<S.LeftArrowImg
+								$currentData={currentData.length}
 								onClick={() => handleSlider('completed', 'left')}
 							/>
 						)}
 						<S.RightArrowImg
+							$currentData={currentData.length}
 							onClick={() => handleSlider('completed', 'right')}
 						/>
 					</>
