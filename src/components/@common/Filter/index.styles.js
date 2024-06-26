@@ -14,14 +14,9 @@ export const Sort = styled.div`
 	font-size: ${({ theme }) => theme.FONT_SIZE.s};
 	${flexCenter}
 	gap: 3px;
-	color: ${({ theme }) => theme.PALETTE.gray[100]};
+	color: ${({ theme, selected }) =>
+		selected ? theme.PALETTE.orange[100] : theme.PALETTE.gray[100]};
 	cursor: pointer;
-
-	/* 클릭 시 변경 색
-	color: ${({ theme }) => theme.PALETTE.gray[300]};
-	> span {
-		color: ${({ theme }) => theme.PALETTE.orange[100]};
-	} */
 
 	&:hover {
 		color: ${({ theme }) => theme.PALETTE.orange[100]};
