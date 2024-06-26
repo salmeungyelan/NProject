@@ -58,7 +58,7 @@ const router = createBrowserRouter([
 				element: <Guide />,
 			},
 			{
-				path: '/user_guide/:_id',
+				path: '/user_guide/post/:_id',
 				element: <GuideDetail />,
 			},
 			{
@@ -66,7 +66,7 @@ const router = createBrowserRouter([
 				element: <Notice />,
 			},
 			{
-				path: '/notice/:_id',
+				path: '/notice/post/:_id',
 				element: <NoticeDetail />,
 			},
 			{
