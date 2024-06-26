@@ -27,7 +27,7 @@ function MyPage() {
 	const { sub } = decodedPayload;
 
 	const { result, isLoading } = useApi({
-		path: `/users/${sub}`,
+		path: `/client/users/${sub}`,
 		shouldFetch: true,
 	});
 

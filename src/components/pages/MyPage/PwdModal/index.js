@@ -24,12 +24,12 @@ function PwdModal({ onClose, userId }) {
 	const { password, newPassword, newPwCheck } = inputData;
 
 	const { trigger: matchTrigger } = useApi({
-		path: `/users/password-match/${userId}`,
+		path: `/client/users/password-match/${userId}`,
 		shouldFetch: false,
 	});
 
 	const { trigger: updateTrigger } = useApi({
-		path: `/users/update-password/${userId}`,
+		path: `/client/users/update-password/${userId}`,
 		shouldFetch: false,
 	});
 
