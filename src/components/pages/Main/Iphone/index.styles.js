@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
 	flexCenter,
 	flexColumn,
@@ -26,7 +26,7 @@ export const Iphone = styled.div`
 
 		> a {
 			height: 418px;
-			gap: 16px;
+			gap: 18px;
 		}
 	}
 
@@ -35,14 +35,14 @@ export const Iphone = styled.div`
 
 		> a {
 			height: 510px;
-			gap: 18px;
+			gap: 20px;
 		}
 	}
 `;
 
 export const ImgBox = styled.div`
 	${flexColumnCenter}
-	min-height: 150px;
+	min-height: 160px;
 	position: relative;
 
 	> img {
@@ -52,7 +52,7 @@ export const ImgBox = styled.div`
 	}
 
 	@media screen and (min-width: 768px) {
-		min-height: 320px;
+		min-height: 340px;
 	}
 
 	@media screen and (min-width: 1200px) {
@@ -86,11 +86,11 @@ export const MainBox = styled.div`
 	height: 120px;
 
 	@media screen and (min-width: 768px) {
-		gap: 14px;
+		gap: 16px;
 	}
 
 	@media screen and (min-width: 1200px) {
-		gap: 16px;
+		gap: 20px;
 	}
 `;
 
@@ -99,6 +99,13 @@ export const Title = styled.div`
 	color: ${({ theme }) => theme.PALETTE.gray[300]};
 	font-size: ${({ theme }) => theme.FONT_SIZE.m};
 	font-weight: 600;
+	gap: 10px;
+
+	> div:first-child {
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
 
 	@media screen and (min-width: 768px) {
 		font-size: ${({ theme }) => theme.FONT_SIZE.ml};
@@ -122,10 +129,25 @@ export const Writer = styled(Title)`
 	}
 `;
 
+const statusStyles = {
+	REVIEW_STATUS_01: css`
+		background: ${({ theme }) => theme.PALETTE.gray[100]};
+	`,
+	REVIEW_STATUS_02: css`
+		background: ${({ theme }) => theme.PALETTE.blue};
+	`,
+	REVIEW_STATUS_03: css`
+		background: ${({ theme }) => theme.PALETTE.orange[100]};
+	`,
+	REVIEW_STATUS_04: css`
+		background: ${({ theme }) => theme.PALETTE.navy};
+	`,
+};
+
 export const CheckProgress = styled.div`
 	${flexCenter};
 
-	background: ${({ theme }) => theme.PALETTE.orange[100]};
+	${({ $status }) => statusStyles[$status]}
 	color: ${({ theme }) => theme.PALETTE.white[100]};
 
 	font-weight: 500;
