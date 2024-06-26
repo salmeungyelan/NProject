@@ -16,7 +16,7 @@ function More({ children }) {
 
 	// 공지사항 중요 2개
 	const { result: impResult, isLoading: impLoading } = useApi({
-		path: `/notices?size=2&noticeContentType=NOTICE_CONTENT_TYPE_01`,
+		path: `/client/notices?size=2&noticeContentType=NOTICE_CONTENT_TYPE_01`,
 		shouldFetch: true,
 	});
 
@@ -28,7 +28,7 @@ function More({ children }) {
 		trigger: genTrigger,
 		isLoading: genLoading,
 	} = useApi({
-		path: '/guides?size=5',
+		path: '/client/guides?size=5',
 		shouldFetch: !title,
 	});
 
@@ -47,7 +47,7 @@ function More({ children }) {
 		) {
 			setImpData(impResult.data.noticeList);
 
-			const path = `/notices?size=${
+			const path = `/client/notices?size=${
 				5 - (impResult.data?.noticeList && impResult.data?.noticeList?.length)
 			}&noticeContentType=NOTICE_CONTENT_TYPE_02`;
 

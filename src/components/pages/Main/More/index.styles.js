@@ -108,7 +108,7 @@ export const Important = styled(Commons)`
 
 		@media screen and (min-width: 768px) {
 			width: 77%;
-			gap: 5px;
+			gap: 7px;
 		}
 	}
 `;
