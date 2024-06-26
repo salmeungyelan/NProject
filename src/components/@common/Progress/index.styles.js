@@ -2,16 +2,16 @@ import { styled, css } from 'styled-components';
 import { flexCenter } from 'styles/common';
 
 const variantCSS = {
-	tempSave: css`
+	REVIEW_STATUS_01: css`
 		background: ${({ theme }) => theme.PALETTE.gray[100]};
 	`,
-	wait: css`
+	REVIEW_STATUS_02: css`
 		background: ${({ theme }) => theme.PALETTE.blue};
 	`,
-	ing: css`
+	REVIEW_STATUS_03: css`
 		background: ${({ theme }) => theme.PALETTE.orange[100]};
 	`,
-	fin: css`
+	REVIEW_STATUS_04: css`
 		background: ${({ theme }) => theme.PALETTE.navy};
 	`,
 };

@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import {
+	flexAlignCenter,
 	flexCenter,
 	flexColumn,
 	flexColumnCenter,
@@ -17,12 +18,11 @@ export const Body = styled.div`
     "reviewFin reviewFin reviewFin"
     `};
 	gap: 24px 0;
-	grid-auto-rows: auto;
-	grid-auto-columns: auto;
+	grid-template-columns: 0.5fr 10fr;
 	width: 100%;
 
 	@media screen and (min-width: 768px) {
-		grid-template-areas: 'iphone iphone reviewIng' 'iphone iphone reviewFin' 'iphone iphone reviewFin';
+		grid-template-areas: 'iphone reviewIng' 'iphone reviewFin' 'iphone reviewFin';
 		gap: 20px 30px;
 	}
 `;
@@ -126,6 +126,16 @@ export const CardList = styled.div`
 	@media screen and (min-width: 768px) {
 		gap: 10px;
 	}
+
+	@media screen and (min-width: 1200px) {
+		gap: 18px;
+		${({ $completed, $current }) =>
+			($current < 4 || $completed < 4) &&
+			css`
+				${flexAlignCenter}
+				justify-content: flex-start;
+			`}
+	}
 `;
 
 const buttonBgReset = css`
@@ -155,14 +165,14 @@ export const LeftArrowImg = styled.button`
 `;
 
 export const RightArrowImg = styled(LeftArrowImg)`
-	left: ${({ $currentData }) => ($currentData ? '96.5%' : '95.5%')};
+	left: 95.5%;
 	background-image: url('/assets/icons/right-arrow.svg');
 
 	@media screen and (min-width: 768px) {
-		left: ${({ $currentData }) => ($currentData ? '96.5%' : '97.5%')};
+		left: 96%;
 	}
 
 	@media screen and (min-width: 1200px) {
-		left: ${({ $currentData }) => ($currentData ? '98.5%' : '99%')};
+		left: 98.5%;
 	}
 `;

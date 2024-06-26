@@ -10,196 +10,78 @@ import Card from 'components/@common/Card';
 import Button from 'components/@common/Button';
 import Iphone from '../Iphone';
 
-const source = [
-	{
-		id: 1,
-		progress: 'ing',
-		ko_pro: '진행중',
-		writer: '황올컴퍼니',
-		title: '불닭볶음면',
-		previewImg: '/assets/images/example.png',
-	},
-	{
-		id: 2,
-		progress: 'ing',
-		ko_pro: '진행중',
-		writer: '아연 조',
-		title: '완전 맛있음',
-		previewImg: '/assets/images/example.png',
-	},
-	{
-		id: 3,
-		progress: 'wait',
-		writer: '원소기호 zn',
-		ko_pro: '대기',
-		title: '불닭게티도',
-		previewImg: '',
-	},
-	{
-		id: 4,
-		progress: 'tempSave',
-		writer: '자바스크립트',
-		ko_pro: '임시저장',
-		title: '먹고 싶은데 해조 최은췍',
-		previewImg: '',
-	},
-	{
-		id: 5,
-		progress: 'ing',
-		writer: '타입스크립트',
-		ko_pro: '진행중',
-		title: '내 피부 어쩔',
-		previewImg: '/assets/images/example.png',
-	},
-	{
-		id: 6,
-		progress: 'ing',
-		writer: '리액트',
-		ko_pro: '진행중',
-		title: '그리고 왜 이렇게 어려움?',
-		previewImg: '',
-	},
-	{
-		id: 7,
-		progress: 'ing',
-		writer: '열라면',
-		ko_pro: '진행중',
-		title: '진짜 너무너무너무너무 어려움',
-		previewImg: '/assets/images/example.png',
-	},
-	{
-		id: 8,
-		progress: 'ing',
-		writer: '불닭볶음면',
-		ko_pro: '진행중',
-		title: '그만하고싶다티비데스',
-		previewImg: '',
-	},
-];
-
-const finSource = [
-	{
-		id: 1,
-		progress: 'fin',
-		ko_pro: '완료',
-		writer: '채로로',
-		title: '리뷰 왜 안 돼',
-		previewImg: '/assets/images/example.png',
-		rate: 4,
-	},
-	{
-		id: 2,
-		progress: 'fin',
-		ko_pro: '완료',
-		writer: '디올',
-		title: '리뷰 빨리...',
-		previewImg: '/assets/images/example.png',
-		rate: 3,
-	},
-	{
-		id: 3,
-		progress: 'fin',
-		writer: '황도',
-		ko_pro: '완료',
-		title: '피노키오 보려면 왓챠 결제해야 되네',
-		previewImg: '/assets/images/example.png',
-		rate: 5,
-	},
-	{
-		id: 4,
-		progress: 'fin',
-		writer: '메이',
-		ko_pro: '완료',
-		title: '돈이 없다',
-		previewImg: '/assets/images/example.png',
-		rate: 1,
-	},
-	{
-		id: 5,
-		progress: 'fin',
-		writer: 'zn',
-		ko_pro: '완료',
-		title: '메인도아직안끝난거실화냐?',
-		previewImg: '/assets/images/example.png',
-		rate: 0,
-	},
-	{
-		id: 6,
-		progress: 'fin',
-		writer: '드디어?',
-		ko_pro: '완료',
-		title: '슬라이더 됐나?',
-		previewImg: '/assets/images/example.png',
-		rate: 2,
-	},
-];
-
 function List() {
-	// 현재 진행 중인 리뷰
+	// 가장 최신 리뷰 -------------------------------------------
+	const [newestData, setNewestData] = useState([]);
+
+	const { result: iResult } = useApi({
+		path: '/client/reviews?size=1',
+		shouldFetch: true,
+	});
+
+	// 현재 진행 중인 리뷰 ----------------------------------------
 	const [currentData, setCurrentData] = useState([]);
 
 	// 진행 중인 리뷰 현재 인덱스 상태 추가
 	const [currentIndex, setCurrentIndex] = useState(0);
 
-	// const { result: curResult } = useApi({
-	// 	path: '/reviews',
-	// 	shouldFetch: true,
-	// });
+	const { result: curResult } = useApi({
+		path: '/client/reviews?status=REVIEW_STATUS_01&status=REVIEW_STATUS_02&status=REVIEW_STATUS_03',
+		shouldFetch: true,
+	});
 
-	// 완료된 리뷰
+	// 완료된 리뷰 ----------------------------------------------
 	const [completedData, setCompletedData] = useState([]);
 
 	// 완료된 리뷰 현재 인덱스 상태 추가
 	const [completedIndex, setCompletedIndex] = useState(0);
 
-	// const { result:comResult } = useApi({
-	// 	path: '/reviews',
-	// 	shouldFetch: true,
-	// });
+	const { result: comResult } = useApi({
+		path: '/client/reviews?status=REVIEW_STATUS_04',
+		shouldFetch: true,
+	});
+
+	useEffect(() => {
+		if (curResult.data) {
+			setCurrentData(curResult.data.reviews);
+		}
+
+		if (comResult.data) {
+			setCompletedData(comResult.data.reviews);
+		}
+
+		if (iResult.data) {
+			setNewestData(iResult.data.reviews);
+		}
+	}, [curResult.data, comResult.data, iResult.data]);
 
 	// 슬라이더 부분 못한 부분
 	// 1. 애니메이션 넣는 부분
 
-	// 현재 데이터 있고, 완료된 데이터 있거나 없거나, 태블릿 사이즈일 때 itemsPerPage 2
-	// 현재 데이터 있고, 완료된 데이터 있거나 없거나, 데스크탑 사이즈일 때 itemsPerPage 4
-	// 현재 데이터 없고, 태블릿 사이즈일 때 itemsPerPage가 3
-	// 현재 데이터 없고, 데스크탑 사이즈일 때 itemsPerPage가 5
-	const calculateItemsPerPage = () => {
-		if (currentData.length > 0 && window.innerWidth >= 1200) return 4;
-		else if (currentData.length > 0 && window.innerWidth >= 768) return 2;
-		else if (!currentData.length && window.innerWidth >= 1200) return 5;
-		else if (!currentData.length && window.innerWidth >= 768) return 3;
+	// 현재 데이터 있고 태블릿 사이즈일 때 itemsPerPage 2
+	// 현재 데이터 있고 데스크탑 사이즈일 때 itemsPerPage 4
+	const calcItemsPerPage = () => {
+		if (newestData.length > 0 && window.innerWidth >= 1200) return 4;
 		else return 2;
 	};
 
 	// 한 번에 보여줄 아이템 수
-	const [itemsPerPage, setItemsPerPage] = useState(calculateItemsPerPage);
+	const [itemsPerPage, setItemsPerPage] = useState(calcItemsPerPage);
 
+	// 화면 사이즈 변경에 따른 보여질 갯수 변경
 	useEffect(() => {
 		const handleResize = () => {
-			setItemsPerPage(calculateItemsPerPage);
+			setItemsPerPage(calcItemsPerPage);
 		};
 
 		handleResize();
 		window.addEventListener('resize', handleResize);
-	}, [currentData]);
+	}, [newestData, itemsPerPage]);
 
-	useEffect(() => {
-		// if (curResult.data) {
-		// setCurrentData(curResult.data.reviews);
-		// }
-
-		// if (comResult.data) {
-		// setCompletedData(comResult.data.reviews);
-		// }
-
-		setCurrentData(source);
-		setCompletedData(finSource);
-	}, [currentData]);
-
+	// 슬라이더 버튼 클릭 시
 	const handleSlider = (type, button) => {
-		const left = button === 'left';
-		const current = type === 'current';
+		const left = button === 'left'; // 왼쪽 버튼이냐 오른쪽 버튼이냐
+		const current = type === 'current'; // 현재 진행 중인 리뷰냐 완료된 리뷰냐
 
 		const calculateNewIndex = (prevIndex, dataLength) => {
 			const newIndex = prevIndex + (left ? -1 : 1);
@@ -222,16 +104,42 @@ function List() {
 		}
 	};
 
+	// 사이즈 관계 없이 데이터가 2개 이하일 때 2개 다 보여주고 ㅇ
+	// 데스크탑 사이즈 / 데이터 4개 이하 / 데이터 싹 다 보여주기 ㅇ
+	// 모바일 및 태블릿 사이즈 / 데이터가 홀수일 때 / 1, 2 -> 2, 3 ㅇ
+	// 데스크탑 사이즈 / 데이터 홀수일 때 / 1, 2, 3, 4 -> 2, 3, 4, 5 x
+
+	// 슬라이더 버튼 클릭 시 보여질 아이템 갯수 계산
 	const getCurrentItems = (data, index) => {
 		const start = index * itemsPerPage;
 		const end = start + itemsPerPage;
 
-		// 데이터 개수가 8 이하일 때의 특별한 경우 처리
+		// 데이터 개수가 1개일 때
+		if (data.length <= 2) {
+			return data;
+		}
+
+		if (itemsPerPage === 4 && data.length <= 4) {
+			return data;
+		}
+
+		// 데이터 개수가 짝수가 아닐 때
 		if (
+			data.length % 2 !== 0 &&
 			data.length <= 8 &&
 			index === Math.ceil(data.length / itemsPerPage) - 1
 		) {
 			const itemsToAdd = itemsPerPage - (data.length - start);
+
+			if (data.length > itemsPerPage) {
+				// 수정된 부분: 시작 인덱스가 0보다 크면, start-1을 포함하여 추출
+				if (start > 0) {
+					return [...data.slice(start - 1, start), ...data.slice(start, end)];
+				}
+				// 시작 인덱스가 0일 때는 start-1을 포함하지 않고 추출
+				return [...data.slice(start, end)];
+			}
+
 			return [...data.slice(0, itemsToAdd), ...data.slice(start)];
 		}
 
@@ -239,8 +147,8 @@ function List() {
 	};
 
 	return (
-		<S.Body $data={currentData}>
-			{currentData.length ? <Iphone /> : <></>}
+		<S.Body $data={newestData}>
+			{newestData.length ? <Iphone data={newestData[0]} /> : <></>}
 
 			<S.ReviewIng>
 				<S.Title>
@@ -252,16 +160,22 @@ function List() {
 
 				{currentData.length ? (
 					<>
-						<S.CardList>
+						<S.CardList $current={currentData.length}>
 							{getCurrentItems(currentData, currentIndex).map((data, idx) => (
 								<Card key={idx} data={data} />
 							))}
 						</S.CardList>
 
-						{currentIndex !== 0 && (
+						{currentData.length > 2 && currentIndex !== 0 && (
 							<S.LeftArrowImg onClick={() => handleSlider('current', 'left')} />
 						)}
-						<S.RightArrowImg onClick={() => handleSlider('current', 'right')} />
+
+						{/* 데스크탑 사이즈고 데이터 길이가 4이하일 때는 안 보이게 / 모바일 태블릿은 2개일 때만 안 보이게 */}
+						{currentData.length > 2 && (
+							<S.RightArrowImg
+								onClick={() => handleSlider('current', 'right')}
+							/>
+						)}
 					</>
 				) : (
 					<S.NoPost>
@@ -283,7 +197,7 @@ function List() {
 
 				{completedData.length ? (
 					<>
-						<S.CardList>
+						<S.CardList $completed={completedData.length}>
 							{getCurrentItems(completedData, completedIndex).map(
 								(data, idx) => (
 									<Card key={idx} data={data} />
@@ -291,16 +205,18 @@ function List() {
 							)}
 						</S.CardList>
 
-						{completedIndex !== 0 && (
+						{completedData.length > 2 && completedIndex !== 0 && (
 							<S.LeftArrowImg
-								$currentData={currentData.length}
+								$completedData={completedData.length}
 								onClick={() => handleSlider('completed', 'left')}
 							/>
 						)}
-						<S.RightArrowImg
-							$currentData={currentData.length}
-							onClick={() => handleSlider('completed', 'right')}
-						/>
+
+						{completedData.length > 2 && (
+							<S.RightArrowImg
+								onClick={() => handleSlider('completed', 'right')}
+							/>
+						)}
 					</>
 				) : (
 					<S.NoPost>

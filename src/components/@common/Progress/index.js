@@ -1,12 +1,12 @@
-import { useLocation } from 'react-router-dom';
+import usePathname from 'hooks/usePathname';
 
 import * as S from './index.styles';
 
 function Progress(props) {
 	const { variant, children } = props;
 
-	const { pathname } = useLocation();
-	const review = pathname.split('/')[1] === 'review';
+	const path = usePathname();
+	const review = path === 'review';
 
 	return (
 		<S.CheckProgress $variant={variant} $review={review}>
