@@ -12,7 +12,7 @@ const useInput = () => {
 		}));
 	};
 
-	return { inputData, handleChange };
+	return { inputData, setInputData, handleChange };
 };
 
 export default useInput;

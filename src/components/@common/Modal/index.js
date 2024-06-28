@@ -9,7 +9,7 @@ function Modal(props) {
 		<S.Background>
 			<S.Container>
 				<S.Header>
-					<img src={img} />
+					<img src={`/assets/icons/${img}`} />
 					<S.Title>{title}</S.Title>
 
 					<S.Body>{content}</S.Body>
