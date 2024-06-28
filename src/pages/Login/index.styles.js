@@ -33,7 +33,7 @@ export const InputBox = styled.div`
 	}
 
 	> input:focus + label,
-	input:valid + label {
+	> input:valid + label {
 		color: ${({ theme }) => theme.PALETTE.orange[100]};
 		font-size: ${({ theme }) => theme.FONT_SIZE.s};
 		top: 4px;
