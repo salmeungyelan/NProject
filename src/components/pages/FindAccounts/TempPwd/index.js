@@ -1,15 +1,25 @@
+import { useNavigate } from 'react-router-dom';
+
+import LINK from 'constants/link';
+
 import * as S from './index.styles';
 
 import Button from 'components/@common/Button';
 import InputBox from 'components/@common/InputBox';
 
-function TempPwd() {
+function TempPwd({ data }) {
+	const navigate = useNavigate();
+
+	const handleClickLogin = () => {
+		navigate(LINK.LOGIN);
+	};
+
 	return (
 		<S.FormBox>
 			<div>
 				<InputBox
 					title="임시 비밀번호"
-					value="귀엽지사랑스럽지예쁘지"
+					value={data.password}
 					register
 					disabled
 				/>
@@ -21,7 +31,7 @@ function TempPwd() {
 				</S.Message>
 			</div>
 
-			<Button size={'default'} variant={'default'}>
+			<Button size={'default'} variant={'default'} onClick={handleClickLogin}>
 				로그인
 			</Button>
 		</S.FormBox>
