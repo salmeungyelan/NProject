@@ -15,4 +15,8 @@ export const ButtonBox = styled.div`
 	margin-top: 30px;
 	${flexColumnCenter}
 	gap: 16px;
+
+	> div:first-child {
+		height: 14px;
+	}
 `;
