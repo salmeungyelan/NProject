@@ -1,9 +1,11 @@
+import { useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import useInput from 'hooks/useInput';
 import useApi from 'hooks/useApi';
 import { setCookie } from 'utils/cookie';
 import LINK from 'constants/link';
+import MESSAGE from 'constants/message';
 
 import * as S from './index.styles';
 
@@ -16,6 +18,11 @@ function Login() {
 	const { handleChange, inputData } = useInput();
 	const navigate = useNavigate();
 
+	const idRef = useRef(null);
+	const pwRef = useRef(null);
+
+	const [errorMessage, setErrorMessage] = useState('');
+
 	const { trigger } = useApi({
 		path: '/auth/login',
 		shouldFetch: false,
@@ -24,20 +31,35 @@ function Login() {
 	const handleSubmitLogin = async e => {
 		e.preventDefault();
 
+		if (!inputData.username) {
+			idRef.current.focus();
+			return setErrorMessage(MESSAGE.LOGIN.ID);
+		}
+
+		if (!inputData.password) {
+			pwRef.current.focus();
+			return setErrorMessage(MESSAGE.LOGIN.PW);
+		}
+
 		try {
+			const name = inputData.username.includes('@') ? 'email' : 'username';
+
+			const data = {
+				[name]: inputData.username,
+				password: inputData.password,
+			};
+
 			const res = await trigger({
 				method: 'post',
-				data: inputData,
+				data,
+				showBoundary: false,
 			});
 
-			const accessToken = res.data.accessToken;
-			const refreshToken = res.data.refreshToken;
-
+			const { accessToken, refreshToken } = res.data;
 			setCookie(accessToken, refreshToken);
-
 			navigate(LINK.HOME);
 		} catch (error) {
-			console.error('로그인 에러', error);
+			setErrorMessage(MESSAGE.LOGIN.FAILURE);
 		}
 	};
 
@@ -45,22 +67,26 @@ function Login() {
 		<S.Body>
 			<S.LoginBox>
 				<div>
-					<Logo size="default" />
+					<Link to={LINK.LOGIN}>
+						<Logo size={'default'} />
+					</Link>
 				</div>
 
 				<div>
-					<S.FormBox action="">
+					<S.FormBox onSubmit={handleSubmitLogin}>
 						<div>
 							<S.InputBox>
 								<Input
-									type="text"
 									name="username"
 									size="default"
+									id="username"
 									variant="login"
-									required
+									value={inputData.username}
 									onChange={handleChange}
 								/>
-								<S.Label htmlFor="id">이메일 또는 아이디 입력</S.Label>
+								<S.Label htmlFor="username" ref={idRef}>
+									이메일 또는 아이디 입력
+								</S.Label>
 							</S.InputBox>
 
 							<S.InputBox>
@@ -69,21 +95,28 @@ function Login() {
 									name="password"
 									size="default"
 									variant="login"
-									required
+									id="password"
+									value={inputData.password}
 									onChange={handleChange}
 								/>
-								<S.Label htmlFor="password">비밀번호 입력</S.Label>
+								<S.Label htmlFor="password" ref={pwRef}>
+									비밀번호 입력
+								</S.Label>
 							</S.InputBox>
 
-							<S.Text></S.Text>
+							{errorMessage.includes('/') ? (
+								<S.Text>
+									{errorMessage.split('/')[0]}
+									<br />
+									{errorMessage.split('/')[1]}
+								</S.Text>
+							) : (
+								<S.Text>{errorMessage}</S.Text>
+							)}
 						</div>
 
 						<div>
-							<Button
-								variant="default"
-								size="default"
-								onClick={handleSubmitLogin}
-							>
+							<Button variant="default" size="default" type="submit">
 								로그인
 							</Button>
 
