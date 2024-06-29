@@ -13,12 +13,12 @@ const LINK = {
 	NOTICE: '/notice',
 	NOTICE_POST: '/notice/post',
 
-	GUIDE: '/user_guide',
-	GUIDE_POST: '/user_guide/post',
+	GUIDE: '/guide',
+	GUIDE_POST: '/guide/post',
 
-	TEAM: '/review_team',
-	VIEW: '/view_instagram',
-	DEVELOP: '/web_creation',
+	TEAM: '/visit_experience',
+	VIEW: '/viewtab_instagram',
+	DEVELOP: '/website_outsourcing',
 
 	MY: '/my_page',
 };
