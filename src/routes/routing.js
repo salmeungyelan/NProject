@@ -54,11 +54,11 @@ const router = createBrowserRouter([
 				element: <Home />,
 			},
 			{
-				path: '/user_guide',
+				path: '/guide',
 				element: <Guide />,
 			},
 			{
-				path: '/user_guide/post/:_id',
+				path: '/guide/post/:_id',
 				element: <GuideDetail />,
 			},
 			{
@@ -86,15 +86,15 @@ const router = createBrowserRouter([
 				element: <ReviewApply />,
 			},
 			{
-				path: '/review_team',
+				path: '/visit_experience',
 				element: <OtherTabs />,
 			},
 			{
-				path: '/view_instagram',
+				path: '/viewtab_instagram',
 				element: <OtherTabs />,
 			},
 			{
-				path: '/web_creation',
+				path: '/website_outsourcing',
 				element: <OtherTabs />,
 			},
 		],
