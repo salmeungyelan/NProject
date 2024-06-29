@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 const useInput = () => {
-	const [inputData, setInputData] = useState({});
+	const [inputData, setInputData] = useState('');
 
 	const handleChange = e => {
 		const { name, value } = e.target;
@@ -12,7 +12,13 @@ const useInput = () => {
 		}));
 	};
 
-	return { inputData, setInputData, handleChange };
+	const handleChangeSearch = e => {
+		const { value } = e.target;
+
+		setInputData(value);
+	};
+
+	return { inputData, setInputData, handleChange, handleChangeSearch };
 };
 
 export default useInput;

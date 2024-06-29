@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
 import useFilter from 'hooks/useFilter';
+import useInput from 'hooks/useInput';
 import useApi from 'hooks/useApi';
-import useSearch from 'hooks/useSearch';
 
 import * as S from './index.styles';
 
@@ -10,10 +10,11 @@ import Search from 'components/@common/Search';
 import Title from 'components/@common/Title';
 import Filter from 'components/@common/Filter';
 import GuideList from 'components/pages/Guide/GuideList';
+import NoPost from 'components/@common/NoPost';
 
 function Guide() {
 	const { sort, handelSelectFilter } = useFilter();
-	const { search, handleChange, handleClickReset } = useSearch();
+	const { inputData, setInputData, handleChangeSearch } = useInput();
 
 	const [data, setData] = useState([]);
 
@@ -28,23 +29,41 @@ function Guide() {
 		if (result.data) {
 			setData(result.data.guideList);
 		}
-	}, [sort, result.data, search]);
 
+		const fullPath = path + `&title=${inputData}&content=${inputData}`;
+
+		const fetchData = async () => {
+			try {
+				const req = await trigger({ path: fullPath });
+
+				if (req.data) {
+					setData(req.data.guideList);
+				}
+			} catch (error) {
+				console.error(error);
+			}
+		};
+
+		fetchData();
+	}, [sort, result.data, inputData]);
+
+	// 검색
 	const handleClickSearch = async () => {
-		const req = await trigger({
-			path: path + `&title=${search}&content=${search}`,
-		});
+		try {
+			const req = await trigger({
+				path: path + `&title=${inputData}&content=${inputData}`,
+			});
 
-		console.log(req);
-
-		if (req.data) {
-			setData(req.data.guideList);
-		}
+			if (req.data) {
+				setData(req.data.guideList);
+			}
+		} catch (error) {}
 	};
 
-	useEffect(() => {
-		console.log(sort, data);
-	}, [sort, data]);
+	// 검색 초기화
+	const handleClickReset = () => {
+		setInputData('');
+	};
 
 	return (
 		<S.Body>
@@ -52,13 +71,23 @@ function Guide() {
 
 			<S.MainBox>
 				<Search
-					search={search}
-					onChange={handleChange}
+					search={inputData}
+					onChange={handleChangeSearch}
 					onClick={handleClickSearch}
 					reset={handleClickReset}
 				/>
 				<Filter onClick={handelSelectFilter} sort={sort} />
-				<GuideList list={data} />
+				{data.length > 0 ? (
+					<GuideList list={data} />
+				) : (
+					<S.Div>
+						<NoPost>
+							{inputData
+								? '해당하는 게시글이 없습니다.'
+								: '등록된 게시글이 없습니다.'}
+						</NoPost>
+					</S.Div>
+				)}
 			</S.MainBox>
 
 			{/* 페이지네이션 */}
