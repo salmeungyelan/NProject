@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import useInput from 'hooks/useInput';
@@ -24,14 +24,19 @@ function PwdModal({ onClose, userId }) {
 	const { password, newPassword, newPwCheck } = inputData;
 
 	const { trigger: matchTrigger } = useApi({
-		path: `/client/users/password-match/${userId}`,
+		path: `/users/password-match/${userId}`,
 		shouldFetch: false,
 	});
 
 	const { trigger: updateTrigger } = useApi({
-		path: `/client/users/update-password/${userId}`,
+		path: `/users/update-password/${userId}`,
 		shouldFetch: false,
 	});
+
+	useEffect(() => {
+		console.log(userId);
+		console.log(inputData);
+	}, [inputData, userId]);
 
 	// 1. 현재 비밀번호가 입력됐는지 확인
 	// 2. 현재 비밀번호가 맞는지 확인 api -> match
@@ -46,49 +51,55 @@ function PwdModal({ onClose, userId }) {
 		// 1. 현재 비밀번호가 입력됐는지 확인
 		if (password) {
 			// 2. 현재 비밀번호가 맞는지 확인 api -> match
-			const req = await matchTrigger({
-				method: 'post',
-				data: { password },
-			});
 
-			if (req.data) {
-				// 3. 맞다면 새 비밀번호가 입력됐는지 확인 / 틀리다면 메세지
-				if (newPassword) {
-					// 4. 새 비밀번호 확인이 입력됐는지 확인
-					if (newPwCheck) {
-						// 5. 새 비밀번호와 새 비밀번호 확인이 일치하는지 확인
-						if (newPassword === newPwCheck) {
-							const data = {
-								password,
-								newPassword,
-							};
+			try {
+				const req = await matchTrigger({
+					method: 'post',
+					data: { password },
+				});
 
-							// 6. 비밀번호 업데이트 api -> update
-							const request = await updateTrigger({
-								method: 'patch',
-								data,
-							});
+				if (req.data) {
+					// 3. 맞다면 새 비밀번호가 입력됐는지 확인 / 틀리다면 메세지
+					if (newPassword) {
+						// 4. 새 비밀번호 확인이 입력됐는지 확인
+						if (newPwCheck) {
+							// 5. 새 비밀번호와 새 비밀번호 확인이 일치하는지 확인
+							if (newPassword === newPwCheck) {
+								const data = {
+									password,
+									newPassword,
+								};
 
-							// 7. 비밀번호 변경됐다는 openModal
-							if (request.data) return openModal();
-						} else setMatch(MESSAGE.PASSWORD.CHECK);
-					} else setMatch(MESSAGE.PASSWORD.NEW_CHECK);
-				} else setMatch(MESSAGE.PASSWORD.NEW);
-			} else setMatch(MESSAGE.PASSWORD.FAIL);
+								// 6. 비밀번호 업데이트 api -> update
+								const request = await updateTrigger({
+									method: 'patch',
+									data,
+								});
+
+								// 7. 비밀번호 변경됐다는 openModal
+								if (request.data) return openModal();
+							} else setMatch(MESSAGE.PASSWORD.CHECK);
+						} else setMatch(MESSAGE.PASSWORD.NEW_CHECK);
+					} else setMatch(MESSAGE.PASSWORD.NEW);
+				} else setMatch(MESSAGE.PASSWORD.FAIL);
+			} catch (error) {
+				setMatch(MESSAGE.PASSWORD.FAIL);
+			}
 		}
 	};
 
 	// 8. 모달 닫으면 다시 마이페이지로 이동
 	const handleCloseModal = () => {
-		closeModal();
 		navigate(LINK.MY);
+		onClose();
+		closeModal();
 	};
 
 	return (
 		<S.Background>
 			{modalState && (
 				<Modal
-					img="/assets/icons/modal-check.svg"
+					img="modal-check.svg"
 					title="알림"
 					content={MESSAGE.PASSWORD.FIN}
 					onClose={handleCloseModal}
