@@ -1,39 +1,55 @@
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
+import useApi from 'hooks/useApi';
+
 import * as S from './index.styles';
 
 import Title from 'components/@common/Title';
 import PreviousPost from 'components/@common/PreviousPost';
+import Loading from 'components/@common/Loading/Loading';
 
 function GuideDetail() {
+	const params = useParams();
+	const id = params._id;
+
+	const [detailData, setDetailData] = useState({});
+
+	const { result, isLoading } = useApi({
+		path: `/client/guides/${id}`,
+		shouldFetch: true,
+	});
+
+	useEffect(() => {
+		if (result.data) {
+			setDetailData(result.data.guide);
+		}
+	}, [result.data, detailData]);
+
+	const { author, title, content } = detailData;
+
 	return (
-		<S.Body>
-			<Title title={'GUIDE'}>넷플레이스 이용안내</Title>
+		<>
+			{isLoading && <Loading />}
+			{detailData && (
+				<S.Body>
+					<Title title={'GUIDE'}>넷플레이스 이용안내</Title>
 
-			<S.Content>
-				<S.Title>이제 그만 STOP</S.Title>
+					<S.Content>
+						<S.Title>{title}</S.Title>
 
-				<S.Info>
-					<span>넷플레이스</span>
-					<p>2024년 04월 24일</p>
-				</S.Info>
+						<S.Info>
+							<span>{author}</span>
+							<p>2024년 04월 24일</p>
+						</S.Info>
 
-				<S.Description>
-					Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-					nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-					volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-					ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-					Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
-					molestie consequat, vel illum dolore eu feugiat nulla facilisis at
-					vero eros et accumsan et iusto odio dignissim qui blandit praesent
-					luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-					Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-					nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-					volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-					ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-				</S.Description>
-			</S.Content>
+						<S.Description>{content}</S.Description>
+					</S.Content>
 
-			<PreviousPost />
-		</S.Body>
+					<PreviousPost />
+				</S.Body>
+			)}
+		</>
 	);
 }
 
