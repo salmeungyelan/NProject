@@ -12,7 +12,7 @@ function Filter(props) {
 		<S.Body>
 			<S.Sort
 				data-value={`${filterName}_FILTER_01`}
-				selected={sort.sortBy === `${filterName}_FILTER_01`}
+				selected={sort === `${filterName}_FILTER_01`}
 				onClick={onClick}
 			>
 				• 최신순
@@ -20,7 +20,7 @@ function Filter(props) {
 
 			<S.Sort
 				data-value={`${filterName}_FILTER_02`}
-				selected={sort.sortBy === `${filterName}_FILTER_02`}
+				selected={sort === `${filterName}_FILTER_02`}
 				onClick={onClick}
 			>
 				• 오래된순
