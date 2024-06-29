@@ -37,7 +37,7 @@ function Guide() {
 				const req = await trigger({ path: fullPath });
 
 				if (req.data) {
-					setData(req.data.noticeList);
+					setData(req.data.guideList);
 				}
 			} catch (error) {
 				console.error(error);
@@ -77,7 +77,7 @@ function Guide() {
 					reset={handleClickReset}
 				/>
 				<Filter onClick={handelSelectFilter} sort={sort} />
-				{data.length ? (
+				{data.length > 0 ? (
 					<GuideList list={data} />
 				) : (
 					<S.Div>
