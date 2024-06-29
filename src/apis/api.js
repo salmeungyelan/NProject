@@ -15,24 +15,6 @@ export const api = axios.create({
 	withCredentials: true,
 });
 
-// api.interceptors.request.use(
-// 	req => {
-// 		if (req.data instanceof FormData) {
-// 			req.headers['Content-Type'] = 'multipart/form-data';
-// 		} else if (
-// 			typeof req.data === 'object' &&
-// 			!(req.data instanceof FormData)
-// 		) {
-// 			req.data = JSON.stringify(req.data);
-// 			req.headers['Content-Type'] = 'application/json';
-// 		}
-// 		return req;
-// 	},
-// 	err => {
-// 		throw err;
-// 	},
-// );
-
 api.interceptors.request.use(
 	config => {
 		const accessToken = getCookie('accessToken');
@@ -60,21 +42,16 @@ api.interceptors.request.use(
 	},
 );
 
-api.interceptors.response.use(
-	res => {
-		return res.data;
-	},
-	err => {
-		throw err;
-	},
-);
+api.interceptors.response.use(res => {
+	return res.data;
+});
 
 export const getApi = async (path, params) => {
 	return await api.get(path, { params });
 };
 
 export const postApi = async (path, data) => {
-	return await api.post(path, JSON.stringify(data));
+	return await api.post(path, data);
 };
 
 export const deleteApi = async (path, params) => {
@@ -82,7 +59,7 @@ export const deleteApi = async (path, params) => {
 };
 
 export const putApi = async (path, data) => {
-	return await api.put(path, JSON.stringify(data));
+	return await api.put(path, data);
 };
 
 export const patchApi = async (path, data) => {
