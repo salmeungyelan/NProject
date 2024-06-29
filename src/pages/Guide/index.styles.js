@@ -15,3 +15,7 @@ export const MainBox = styled.div`
 		gap: 12px;
 	}
 `;
+
+export const Div = styled.div`
+	border-top: 1px solid ${({ theme }) => theme.PALETTE.gray[0]};
+`;
