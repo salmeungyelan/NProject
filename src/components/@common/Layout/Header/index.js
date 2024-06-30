@@ -6,8 +6,9 @@ import LINK from 'constants/link';
 import * as S from './index.styles';
 
 import Logo from 'components/@common/Logo';
+import Button from 'components/@common/Button';
 
-function Header({ logout }) {
+function Header({ logout, applyBtn }) {
 	const navigate = useNavigate();
 
 	const [navClicked, setNavClicked] = useState(
@@ -128,6 +129,14 @@ function Header({ logout }) {
 						</S.Li>
 					</ul>
 				</S.Nav>
+
+				{applyBtn && (
+					<S.ApplyBtnBox>
+						<Button size="height" variant="default">
+							{applyBtn.title} 신청하기
+						</Button>
+					</S.ApplyBtnBox>
+				)}
 			</S.Header>
 		</>
 	);

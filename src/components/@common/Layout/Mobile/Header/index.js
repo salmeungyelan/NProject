@@ -6,8 +6,9 @@ import LINK from 'constants/link';
 import * as S from './index.styles';
 
 import Logo from 'components/@common/Logo';
+import Button from 'components/@common/Button';
 
-function MobileHeader({ logout }) {
+function MobileHeader({ logout, applyBtn }) {
 	// 모바일 NAV
 	const [navClicked, setNavClicked] = useState(
 		'/' + (window.location.pathname.split('/')[1] ?? ''),
@@ -370,6 +371,14 @@ function MobileHeader({ logout }) {
 					</S.BottomNavContent>
 				</S.MoreNavList>
 			</S.MoreNav>
+
+			{applyBtn && (
+				<S.ApplyBtnBox $moreBtn={moreBtn}>
+					<Button size="height" variant="default">
+						{applyBtn.title} 신청하기
+					</Button>
+				</S.ApplyBtnBox>
+			)}
 
 			<S.SideBarBackground $sideBar={sideBar}>
 				<S.SideBar>

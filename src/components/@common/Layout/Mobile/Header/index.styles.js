@@ -127,8 +127,15 @@ export const NavLabel = styled.label`
 		align-items: center;
 		text-decoration: none;
 
-		&:visited {
+		&:visited,
+		:link {
 			color: ${({ theme }) => theme.PALETTE.gray[100]};
+		}
+	}
+
+	&:hover {
+		& a {
+			color: ${({ theme }) => theme.PALETTE.orange[100]};
 		}
 	}
 
@@ -260,5 +267,19 @@ export const Logout = styled(SideMenu)`
 
 	&:hover {
 		color: ${({ theme }) => theme.PALETTE.orange[300]};
+	}
+`;
+
+export const ApplyBtnBox = styled.div`
+	width: 100%;
+	${flexCenter}
+	position: fixed;
+	height: 56px;
+	background-color: ${({ theme }) => theme.PALETTE.white[100]};
+	bottom: ${({ $moreBtn }) => ($moreBtn ? '132px' : '66px')};
+	box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.08);
+
+	& button {
+		width: 294px;
 	}
 `;
