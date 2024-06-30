@@ -23,7 +23,7 @@ export const Card = styled.div`
 	}
 
 	@media screen and (min-width: 768px) {
-		width: ${({ $main }) => ($main ? '162px' : '182px')};
+		width: ${({ $main }) => ($main ? '182px' : '182px')};
 		height: ${({ $main }) => ($main ? '170px' : '182px')};
 
 		> a {
@@ -37,7 +37,7 @@ export const Card = styled.div`
 	}
 
 	@media screen and (min-width: 1200px) {
-		width: ${({ $main }) => ($main ? '214px' : '228px')};
+		width: ${({ $main }) => ($main ? '228px' : '228px')};
 		height: ${({ $main }) => ($main ? '200px' : '213px')};
 
 		> a {
