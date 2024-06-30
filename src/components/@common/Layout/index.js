@@ -5,12 +5,23 @@ import { includeFooterState, includeHeaderState } from 'recoil/atom/index.atom';
 import useApi from 'hooks/useApi';
 import { deleteCookie } from 'utils/cookie';
 import LINK from 'constants/link';
+import usePathname from 'hooks/usePathname';
 
 import Footer from './Footer';
 import Header from './Header';
 import MobileHeader from './Mobile/Header';
 
+const applyBtn = [
+	{ url: 'review', title: '리뷰' },
+	{ url: '/visit_experience', title: '체험단' },
+	{ url: '/viewtab_instagram', title: '뷰탭&인스타' },
+	{ url: '/website_outsourcing', title: '홈페이지 제작' },
+];
+
 function Layout() {
+	const path = usePathname();
+	const matchedBtn = applyBtn.find(btn => path.includes(btn.url));
+
 	const includeHeader = useRecoilValue(includeHeaderState);
 	const includeFooter = useRecoilValue(includeFooterState);
 
@@ -36,8 +47,10 @@ function Layout() {
 
 	return (
 		<>
-			{includeHeader && <Header logout={handleLogout} />}
-			{includeHeader && <MobileHeader logout={handleLogout} />}
+			{includeHeader && <Header logout={handleLogout} applyBtn={matchedBtn} />}
+			{includeHeader && (
+				<MobileHeader logout={handleLogout} applyBtn={matchedBtn} />
+			)}
 			<Outlet />
 			{includeFooter && <Footer />}
 		</>
