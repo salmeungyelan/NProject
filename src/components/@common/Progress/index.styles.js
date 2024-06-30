@@ -31,7 +31,7 @@ export const CheckProgress = styled.div`
 
 	@media screen and (min-width: 768px) {
 		width: ${({ $review }) => ($review ? '50px' : '40px')};
-		height: ${({ $review }) => ($review ? '20px' : '18px')};
+		height: ${({ $review }) => ($review ? '25px' : '18px')};
 		font-size: ${({ theme }) => theme.FONT_SIZE.s};
 	}
 `;
