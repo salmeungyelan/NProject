@@ -4,6 +4,7 @@ import { useErrorBoundary } from 'react-error-boundary';
 import { isAxiosError } from 'axios';
 
 import { deleteApi, getApi, patchApi, postApi, putApi } from 'apis/api';
+import { useLoading } from '../contexts/loadingContext';
 
 const mapMethodToFetcher = {
 	get: (...args) => getApi(...args),
@@ -21,11 +22,12 @@ const useApi = ({
 	showBoundary = true, // 비동기 에러 표시 여부
 }) => {
 	const navigate = useNavigate();
-	const [isLoading, setIsLoading] = useState(false);
+	/* const [isLoading, setIsLoading] = useState(false); */
 	const [error, setError] = useState(null);
 	const [result, setResult] = useState({});
 	const [_, occurredError] = useState({});
 	const { showBoundary: handleError } = useErrorBoundary();
+	const { isLoading, setIsLoading } = useLoading(); // 전역 상태로 관리
 
 	const trigger = useCallback(
 		async ({
@@ -63,8 +65,9 @@ const useApi = ({
 					// 비동기 에러 검출 가능
 					setError(err);
 				}
+			} finally {
+				setIsLoading(false);
 			}
-			setIsLoading(false);
 		},
 		[path, method, data],
 	);
