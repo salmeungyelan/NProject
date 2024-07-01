@@ -16,7 +16,8 @@ export const Card = styled.div`
 		text-decoration: none;
 	}
 
-	> a > div > img {
+	> a > div > img,
+	video {
 		width: 100%;
 		height: 78px;
 		object-fit: cover;

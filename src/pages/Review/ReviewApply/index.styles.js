@@ -59,9 +59,12 @@ export const CategoryBox = styled.div`
 
 export const Category = styled.div`
 	padding: 5px 10px;
-	color: ${({ theme }) => theme.PALETTE.gray[100]};
+	color: ${({ theme, clicked }) =>
+		clicked ? theme.PALETTE.orange[100] : theme.PALETTE.gray[100]};
 	font-size: ${({ theme }) => theme.FONT_SIZE.s};
-	border: 1px solid ${({ theme }) => theme.PALETTE.gray[0]};
+	border: 1px solid
+		${({ theme, clicked }) =>
+			clicked ? theme.PALETTE.orange[100] : theme.PALETTE.gray[0]};
 	border-radius: 4px;
 	cursor: pointer;
 
@@ -110,7 +113,6 @@ export const Word = styled.div`
 export const FileBox = styled.div`
 	${flexColumn}
 	gap: 6px;
-	overflow-x: hidden;
 
 	> span {
 		line-height: 16px;
@@ -119,6 +121,7 @@ export const FileBox = styled.div`
 	}
 
 	> p {
+		height: 10px;
 		font-size: ${({ theme }) => theme.FONT_SIZE.s};
 		color: ${({ theme }) => theme.PALETTE.orange[100]};
 	}
@@ -129,10 +132,14 @@ export const FileBox = styled.div`
 			line-height: 18px;
 			font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 		}
+
+		> p {
+			height: 12px;
+		}
 	}
 `;
 
-export const FileImageBox = styled.div`
+export const MediaFileBox = styled.div`
 	${flexLeftCenter}
 	gap: 8px;
 `;
@@ -189,36 +196,78 @@ export const CustomButton = styled.button`
 	}
 `;
 
-export const Img = styled.div`
+export const MediaList = styled.div`
 	${flexColumn}
 	gap: 4px;
 	position: relative;
+	overflow-x: scroll;
+`;
 
-	> img {
+export const Img = styled.img`
+	border: ${({ $thumbnail, theme }) =>
+		$thumbnail ? `2px solid ${theme.PALETTE.navy}` : 'none'};
+
+	width: 64px;
+	height: 64px;
+	object-fit: cover;
+
+	@media screen and (min-width: 768px) {
+		width: 100px;
+		height: 100px;
 		border: ${({ $thumbnail, theme }) =>
-			$thumbnail ? `2px solid ${theme.PALETTE.navy}` : 'none'};
+			$thumbnail ? `4px solid ${theme.PALETTE.navy}` : 'none'};
+	}
 
-		width: 64px;
-		height: 64px;
-		object-fit: cover;
-
-		@media screen and (min-width: 768px) {
-			width: 100px;
-			height: 100px;
-			border: ${({ $thumbnail, theme }) =>
-				$thumbnail ? `4px solid ${theme.PALETTE.navy}` : 'none'};
-		}
-
-		@media screen and (min-width: 1200px) {
-			width: 120px;
-			height: 120px;
-			border: ${({ $thumbnail, theme }) =>
-				$thumbnail ? `4px solid ${theme.PALETTE.navy}` : 'none'};
-		}
+	@media screen and (min-width: 1200px) {
+		width: 120px;
+		height: 120px;
+		border: ${({ $thumbnail, theme }) =>
+			$thumbnail ? `4px solid ${theme.PALETTE.navy}` : 'none'};
 	}
 `;
 
-export const ImgTitle = styled.div`
+export const Video = styled.video`
+	border: ${({ $thumbnail, theme }) =>
+		$thumbnail ? `2px solid ${theme.PALETTE.navy}` : 'none'};
+
+	width: 64px;
+	height: 64px;
+	object-fit: cover;
+
+	@media screen and (min-width: 768px) {
+		width: 100px;
+		height: 100px;
+		border: ${({ $thumbnail, theme }) =>
+			$thumbnail ? `4px solid ${theme.PALETTE.navy}` : 'none'};
+	}
+
+	@media screen and (min-width: 1200px) {
+		width: 120px;
+		height: 120px;
+		border: ${({ $thumbnail, theme }) =>
+			$thumbnail ? `4px solid ${theme.PALETTE.navy}` : 'none'};
+	}
+`;
+
+export const XBtn = styled.img`
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	top: 5%;
+	right: 7%;
+
+	@media screen and (min-width: 768px) {
+		width: 16px;
+		height: 16px;
+	}
+
+	@media screen and (min-width: 1200px) {
+		width: 16px;
+		height: 16px;
+	}
+`;
+
+export const MediaTitle = styled.div`
 	${flexCenter}
 	gap: 4px;
 	height: 10px;

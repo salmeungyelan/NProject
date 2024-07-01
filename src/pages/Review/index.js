@@ -11,13 +11,12 @@ import MultiSelect from 'components/@common/MultiSelect';
 import NoPost from 'components/@common/NoPost';
 import Category from 'components/pages/Review/Category';
 import DropDown from 'components/pages/Review/DropDown';
-import Loading from 'components/@common/Loading/Loading';
 
 function Review() {
 	const [data, setData] = useState([]);
 
-	const { result, isLoading } = useApi({
-		path: `/client/reviews`,
+	const { result } = useApi({
+		path: `/client/reviews?size=10&page=1`,
 		shouldFetch: true,
 	});
 
@@ -29,7 +28,6 @@ function Review() {
 
 	return (
 		<>
-			{isLoading && <Loading />}
 			<S.Body>
 				<Title title={'REVIEW LIST'}>
 					자사 영업일 기준, 하루 한 번 신청 가능합니다.

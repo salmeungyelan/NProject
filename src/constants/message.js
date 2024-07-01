@@ -36,6 +36,12 @@ const MESSAGE = {
 		NUMBER: '전화번호를 입력해 주세요.',
 		CO_NUMBER: '사업자 등록 번호를 입력해 주세요.',
 	},
+	REVIEW: {
+		CATEGORY: '카테고리를 선택해 주세요.',
+		TITLE: '제목을 입력해 주세요.',
+		REQ: '요청사항을 입력해 주세요.',
+		THUMBNAIL: '썸네일을 지정해 주세요.',
+	},
 };
 
 export default MESSAGE;

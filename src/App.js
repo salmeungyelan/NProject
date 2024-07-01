@@ -10,17 +10,20 @@ import GlobalStyles from 'styles/global';
 import router from 'routes/routing';
 import Loading from 'components/@common/Loading/Loading';
 import ErrorFallback from 'components/@common/Error';
+import { LoadingProvider } from 'contexts/loadingContext';
 
 function App() {
 	return (
 		<ErrorBoundary FallbackComponent={ErrorFallback}>
 			<Suspense fallback={<Loading />}>
-				<RecoilRoot>
-					<ThemeProvider theme={theme}>
-						<GlobalStyles />
-						<RouterProvider router={router} />
-					</ThemeProvider>
-				</RecoilRoot>
+				<LoadingProvider>
+					<RecoilRoot>
+						<ThemeProvider theme={theme}>
+							<GlobalStyles />
+							<RouterProvider router={router} />
+						</ThemeProvider>
+					</RecoilRoot>
+				</LoadingProvider>
 			</Suspense>
 		</ErrorBoundary>
 	);

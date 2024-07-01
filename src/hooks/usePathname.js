@@ -4,7 +4,7 @@ const usePathname = () => {
 	const { pathname } = useLocation();
 	const path = pathname.split('/')[1];
 
-	return path;
+	return { path, pathname };
 };
 
 export default usePathname;
