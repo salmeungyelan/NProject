@@ -83,6 +83,7 @@ function Login() {
 									variant="login"
 									value={inputData.username}
 									onChange={handleChange}
+									placeholder=""
 								/>
 								<S.Label htmlFor="username" ref={idRef}>
 									이메일 또는 아이디 입력
@@ -98,6 +99,7 @@ function Login() {
 									id="password"
 									value={inputData.password}
 									onChange={handleChange}
+									placeholder=""
 								/>
 								<S.Label htmlFor="password" ref={pwRef}>
 									비밀번호 입력
