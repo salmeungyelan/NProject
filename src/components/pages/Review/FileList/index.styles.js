@@ -1,19 +1,21 @@
 import styled from 'styled-components';
 import { flexCenter, flexColumn, flexSpaceBetweenCenter } from 'styles/common';
 
-export const ImgList = styled.div`
+export const MediaList = styled.div`
 	${flexSpaceBetweenCenter}
+	justify-content: flex-start;
 	gap: 8px;
 	overflow-x: auto;
 	overflow-y: hidden;
 `;
 
-export const Img = styled.div`
+export const Media = styled.div`
 	${flexColumn}
 	gap: 4px;
 	position: relative;
 
-	> img {
+	> img,
+	video {
 		border: ${({ $thumbnail, theme }) =>
 			$thumbnail ? `2px solid ${theme.PALETTE.navy}` : 'none'};
 
@@ -37,7 +39,7 @@ export const Img = styled.div`
 	}
 `;
 
-export const ImgTitle = styled.div`
+export const MediaTitle = styled.div`
 	${flexCenter}
 	gap: 4px;
 	height: 10px;
@@ -46,6 +48,10 @@ export const ImgTitle = styled.div`
 
 	> p {
 		font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		width: 40px;
 	}
 
 	> img {
@@ -58,6 +64,7 @@ export const ImgTitle = styled.div`
 
 		> p {
 			font-size: ${({ theme }) => theme.FONT_SIZE.ms};
+			width: 50px;
 		}
 
 		> img {
@@ -70,6 +77,7 @@ export const ImgTitle = styled.div`
 
 		> p {
 			font-size: ${({ theme }) => theme.FONT_SIZE.m};
+			width: 60px;
 		}
 
 		> img {
