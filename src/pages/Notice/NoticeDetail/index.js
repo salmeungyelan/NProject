@@ -15,7 +15,7 @@ function NoticeDetail() {
 
 	const [detailData, setDetailData] = useState({});
 
-	const { result, isLoading } = useApi({
+	const { result } = useApi({
 		path: `/client/notices/${id}`,
 		shouldFetch: true,
 	});
@@ -30,7 +30,6 @@ function NoticeDetail() {
 
 	return (
 		<>
-			{isLoading && <Loading />}
 			{detailData && (
 				<S.Body>
 					<Title title={'NOTICE'}>넷플레이스 공지사항 안내</Title>
