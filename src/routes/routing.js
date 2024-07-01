@@ -86,6 +86,10 @@ const router = createBrowserRouter([
 				element: <ReviewApply />,
 			},
 			{
+				path: '/review/apply/:_id',
+				element: <ReviewApply />,
+			},
+			{
 				path: '/visit_experience',
 				element: <OtherTabs />,
 			},
