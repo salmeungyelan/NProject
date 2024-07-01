@@ -12,29 +12,35 @@ import Header from './Header';
 import MobileHeader from './Mobile/Header';
 
 const applyBtn = [
-	{ url: 'review', title: '리뷰' },
+	{ url: '/review', title: '리뷰' },
 	{ url: '/visit_experience', title: '체험단' },
 	{ url: '/viewtab_instagram', title: '뷰탭&인스타' },
 	{ url: '/website_outsourcing', title: '홈페이지 제작' },
 ];
 
 function Layout() {
-	const path = usePathname();
-	const matchedBtn = applyBtn.find(btn => path.includes(btn.url));
+	const { pathname } = usePathname();
+	const matchedBtn = applyBtn.find(btn => pathname === btn.url);
+
+	const handleClick = () => {
+		if (matchedBtn.url === LINK.REVIEW) {
+			navigate(LINK.REVIEW_APPLY);
+		}
+	};
 
 	const includeHeader = useRecoilValue(includeHeaderState);
 	const includeFooter = useRecoilValue(includeFooterState);
 
 	const navigate = useNavigate();
 
-	const { trigger: logoutTrigger } = useApi({
-		path: '/auth/logout',
-		shouldFetch: false,
-	});
+	// const { trigger: logoutTrigger } = useApi({
+	// 	path: '/auth/logout',
+	// 	shouldFetch: false,
+	// });
 
-	const handleLogout = async () => {
+	const handleLogout = () => {
 		try {
-			await logoutTrigger({});
+			// await logoutTrigger({});
 
 			deleteCookie('accessToken');
 			deleteCookie('refreshToken');
@@ -47,9 +53,19 @@ function Layout() {
 
 	return (
 		<>
-			{includeHeader && <Header logout={handleLogout} applyBtn={matchedBtn} />}
 			{includeHeader && (
-				<MobileHeader logout={handleLogout} applyBtn={matchedBtn} />
+				<Header
+					logout={handleLogout}
+					applyBtn={matchedBtn}
+					onClick={handleClick}
+				/>
+			)}
+			{includeHeader && (
+				<MobileHeader
+					logout={handleLogout}
+					applyBtn={matchedBtn}
+					onClick={handleClick}
+				/>
 			)}
 			<Outlet />
 			{includeFooter && <Footer />}

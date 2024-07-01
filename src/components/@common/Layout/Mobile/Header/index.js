@@ -8,7 +8,9 @@ import * as S from './index.styles';
 import Logo from 'components/@common/Logo';
 import Button from 'components/@common/Button';
 
-function MobileHeader({ logout, applyBtn }) {
+function MobileHeader(props) {
+	const { logout, applyBtn, onClick } = props;
+
 	// 모바일 NAV
 	const [navClicked, setNavClicked] = useState(
 		'/' + (window.location.pathname.split('/')[1] ?? ''),
@@ -374,7 +376,7 @@ function MobileHeader({ logout, applyBtn }) {
 
 			{applyBtn && (
 				<S.ApplyBtnBox $moreBtn={moreBtn}>
-					<Button size="height" variant="default">
+					<Button size="height" variant="default" onClick={onClick}>
 						{applyBtn.title} 신청하기
 					</Button>
 				</S.ApplyBtnBox>
