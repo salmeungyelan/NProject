@@ -35,16 +35,3 @@ export const Next = styled.div`
 		font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 	}
 `;
-
-export const ButtonBox = styled.div`
-	width: 100%;
-
-	@media screen and (min-width: 768px) {
-		${flexCenter}
-		justify-content: right;
-
-		> div {
-			width: 180px;
-		}
-	}
-`;

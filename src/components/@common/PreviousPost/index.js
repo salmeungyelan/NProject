@@ -1,15 +1,21 @@
 import { Link, useNavigate } from 'react-router-dom';
 
+import usePathname from 'hooks/usePathname';
+
 import * as S from './index.styles';
 
 import Line from '../Line';
-import Button from '../Button';
 
-function PreviousPost() {
-	const navigate = useNavigate();
+function PreviousPost(props) {
+	const { prev, next, trigger } = props;
 
-	const handleBackBtn = () => {
-		navigate(-1);
+	const { path } = usePathname();
+
+	const handleClickPrev = id => {
+		trigger({
+			path: `/client/${path}s/${id}`,
+			applyResult: true,
+		});
 	};
 
 	return (
@@ -18,7 +24,16 @@ function PreviousPost() {
 				<S.Next>
 					<span>이전</span>
 					<Line size={'height2'} variant={'gray'} />
-					<Link to={'/notice/detail'}>이전 게시글이 없습니다.</Link>
+					{prev ? (
+						<Link
+							to={`/${path}/post/${prev.id}`}
+							onClick={() => handleClickPrev(prev.id)}
+						>
+							{prev.previousTitle}
+						</Link>
+					) : (
+						'이전 게시글이 없습니다.'
+					)}
 				</S.Next>
 
 				<Line size={'width'} variant={'lightGray'} />
@@ -26,17 +41,18 @@ function PreviousPost() {
 				<S.Next>
 					<span>다음</span>
 					<Line size={'height2'} variant={'gray'} />
-					<Link to={'/notice/detail'}>다음 이용 안내 제목</Link>
+					{next ? (
+						<Link
+							to={`/${path}/post/${next.id}`}
+							onClick={() => handleClickPrev(next.id)}
+						>
+							{next.previousTitle}
+						</Link>
+					) : (
+						'다음 게시글이 없습니다.'
+					)}
 				</S.Next>
 			</S.NextBox>
-
-			<S.ButtonBox>
-				<div>
-					<Button variant={'white'} size={'height'} onClick={handleBackBtn}>
-						뒤로 가기
-					</Button>
-				</div>
-			</S.ButtonBox>
 		</>
 	);
 }
