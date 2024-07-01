@@ -1,54 +1,46 @@
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 
+import usePathname from 'hooks/usePathname';
 import useModal from 'hooks/useModal';
 
 import * as S from './index.styles';
 
 import Title from 'components/@common/Title';
-import Button from 'components/@common/Button';
 import InfoModal from 'components/pages/OtherTabs/InfoModal';
 import RequestModal from 'components/pages/OtherTabs/RequestModal';
 import OtherList from 'components/pages/OtherTabs/OtherList';
 
-const titles = [
+const url = [
 	{
-		link: 'review_team',
-		en_title: 'REVIEW TEAM',
-		ko_title: '체험단',
+		link: 'visit_experience',
+		enTitle: 'REVIEW TEAM',
+		koTitle: '체험단',
 		children: '체험단을 신청할 수 있습니다.',
 	},
 	{
-		link: 'view_instagram',
-		en_title: 'VIEWTAB & INSTA',
-		ko_title: '뷰탭&인스타',
+		link: 'viewtab_instagram',
+		enTitle: 'VIEWTAB & INSTA',
+		koTitle: '뷰탭&인스타',
 		children: '뷰탭&인스타를 신청할 수 있습니다.',
 	},
 	{
-		link: 'web_creation',
-		en_title: 'WEBSITE CREATION',
-		ko_title: '홈페이지 제작',
+		link: 'website_outsourcing',
+		enTitle: 'WEBSITE CREATION',
+		koTitle: '홈페이지 제작',
 		children: '홈페이지 제작을 신청할 수 있습니다.',
 	},
 ];
 
 function OtherTabs() {
-	const { pathname } = useLocation();
-	const link = pathname.split('/')[1];
+	const { path } = usePathname();
+	const mainTitle = url.filter(el => path === el.link)[0];
 
-	const mainTitle = titles.filter(el => link === el.link)[0];
-
-	const { openModal } = useModal();
+	const { modalState, openModal } = useModal();
 	const [suggestBtn, setSuggestBtn] = useState(false);
 	const [nextStep, setNextStep] = useState(true);
 
 	const handleOpenModal = () => {
-		openModal({
-			img: '',
-			title: `${mainTitle.ko_title} 신청`,
-			content: '',
-			callback: () => console.log('closed'),
-		});
+		openModal();
 		setNextStep(true);
 	};
 
@@ -65,13 +57,14 @@ function OtherTabs() {
 
 	return (
 		<S.Body>
-			{nextStep ? (
-				<InfoModal onNext={handleNext} />
-			) : (
-				<RequestModal onPrev={handleNext} />
-			)}
+			{modalState &&
+				(nextStep ? (
+					<InfoModal onNext={handleNext} title={mainTitle.koTitle} />
+				) : (
+					<RequestModal onPrev={handleNext} title={mainTitle.koTitle} />
+				))}
 
-			<Title title={mainTitle.en_title}>{mainTitle.children}</Title>
+			<Title title={mainTitle.enTitle}>{mainTitle.children}</Title>
 
 			{suggestBtn ? (
 				<S.Content>
@@ -80,17 +73,6 @@ function OtherTabs() {
 			) : (
 				<OtherList />
 			)}
-
-			<S.ButtonBox>
-				<Button
-					variant={'default'}
-					size={'height'}
-					onClick={handleSuggestBtn}
-					// onClick={suggestBtn && handleOpenModal}
-				>
-					{mainTitle.ko_title} 신청하기
-				</Button>
-			</S.ButtonBox>
 
 			{/* 페이지네이션 */}
 			<div></div>

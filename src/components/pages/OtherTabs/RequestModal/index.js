@@ -8,24 +8,20 @@ import Button from 'components/@common/Button';
 import InputBox from 'components/@common/InputBox';
 import { useLocation } from 'react-router-dom';
 
-function RequestModal({ onPrev }) {
+function RequestModal({ onPrev, title }) {
 	// 뷰탭&인스타는 체험 기간 / 제공 서비스 제외
 	// 홈페이지 제작은 요청사항만
 
 	const { pathname } = useLocation();
 	const path = pathname.split('/')[1];
 
-	const { modalDataState, closeModal } = useModal();
-
-	if (!modalDataState.isOpen) {
-		return null;
-	}
+	const { closeModal } = useModal();
 
 	return (
 		<S.Background>
 			<S.Container>
 				<S.Header>
-					<S.Title>{modalDataState.title}</S.Title>
+					<S.Title>{title} 신청</S.Title>
 					<S.CloseBtn onClick={closeModal} />
 				</S.Header>
 
