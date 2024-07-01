@@ -54,7 +54,7 @@ export const Textarea = styled.textarea`
 	font-weight: 400;
 	line-height: 1.5;
 	white-space: pre-wrap;
-	padding: 7px;
+	padding: 7px 10px;
 	border-radius: 4px;
 	resize: none;
 	outline: none;

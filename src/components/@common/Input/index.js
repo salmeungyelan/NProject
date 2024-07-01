@@ -1,9 +1,10 @@
+import { forwardRef } from 'react';
 import * as S from './index.styles';
 
-function Input(props) {
+function Input(props, ref) {
 	const { size, variant, ...rest } = props;
 
-	return <S.Input size={size} $variant={variant} {...rest} />;
+	return <S.Input size={size} $variant={variant} ref={ref} {...rest} />;
 }
 
-export default Input;
+export default forwardRef(Input);
