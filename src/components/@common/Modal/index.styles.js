@@ -20,7 +20,6 @@ export const Container = styled.div`
 	transition: all ease 0.3s;
 
 	@media screen and (max-width: 768px) {
-		width: 294px;
 		transition: all ease 0.3s;
 	}
 `;
