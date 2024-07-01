@@ -36,10 +36,7 @@ function Register() {
 	const termsRef = useRef(null);
 
 	// 보낼 데이터
-	const [data, setData] = useState({
-		userType: 'USER_TYPE_01',
-		companyType: 'COMPANY_TYPE_01',
-	});
+	const [data, setData] = useState({});
 
 	// 약관 동의 및 약관 아이디
 	const [termsId, setTermsId] = useState('');
@@ -115,8 +112,6 @@ function Register() {
 
 	// 핸드폰 / 사업자 번호 포맷
 	useEffect(() => {
-		console.log(data);
-
 		if (inputData.contactNumber) {
 			setInputData(prev => ({
 				...prev,
@@ -266,7 +261,6 @@ function Register() {
 				showBoundary: false,
 			});
 
-			console.log(req);
 			setRegisterSuccess(true);
 		} catch (error) {
 			console.log(error);
