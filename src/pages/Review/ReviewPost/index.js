@@ -31,6 +31,8 @@ function ReviewPost() {
 		if (result.data) {
 			setReview(result.data);
 		}
+
+		console.log(result.data);
 	}, [result.data, review.star]);
 
 	const handleClickApply = () => {
@@ -60,10 +62,11 @@ function ReviewPost() {
 		star,
 		nextReview,
 		previousReview,
+		isRatingable,
 	} = review;
 
 	const fin = statusLabel === '완료';
-	const results = { resultLinks, adminFiles, comment, star };
+	const results = { resultLinks, adminFiles, comment, star, isRatingable };
 
 	return (
 		<>
