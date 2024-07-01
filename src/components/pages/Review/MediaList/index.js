@@ -6,7 +6,7 @@ import * as S from './index.styles';
 
 import MediaModal from 'components/@common/MediaModal';
 
-function FileList({ clientFiles }) {
+function MediaList({ clientFiles }) {
 	const { modalState, openModal, closeModal } = useModal();
 
 	const [file, setFile] = useState({
@@ -54,4 +54,4 @@ function FileList({ clientFiles }) {
 	);
 }
 
-export default FileList;
+export default MediaList;
