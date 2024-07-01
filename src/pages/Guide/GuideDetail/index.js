@@ -15,7 +15,7 @@ function GuideDetail() {
 
 	const [detailData, setDetailData] = useState({});
 
-	const { result, isLoading } = useApi({
+	const { result } = useApi({
 		path: `/client/guides/${id}`,
 		shouldFetch: true,
 	});
@@ -30,7 +30,6 @@ function GuideDetail() {
 
 	return (
 		<>
-			{isLoading && <Loading />}
 			{detailData && (
 				<S.Body>
 					<Title title={'GUIDE'}>넷플레이스 이용안내</Title>
