@@ -19,15 +19,3 @@ export const Content = styled.div`
 		color: ${({ theme }) => theme.PALETTE.gray[400]};
 	}
 `;
-
-export const ButtonBox = styled.div`
-	${flexCenter}
-
-	@media screen and (min-width: 768px) {
-		justify-content: right;
-
-		& button {
-			width: 180px;
-		}
-	}
-`;
