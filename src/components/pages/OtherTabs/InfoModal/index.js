@@ -1,28 +1,23 @@
 import useModal from 'hooks/useModal';
+import usePathname from 'hooks/usePathname';
 
 import * as S from './index.styles';
 
 import Button from 'components/@common/Button';
 import InputBox from 'components/@common/InputBox';
 import Address from 'components/@common/Address';
-import { useLocation } from 'react-router-dom';
 
-function InfoModal({ onNext }) {
+function InfoModal({ onNext, title }) {
 	// 뷰탭 인스타 및 홈페이지 제작은 주소 제외
-	const { pathname } = useLocation();
-	const path = pathname.split('/')[1];
+	const { path } = usePathname();
 
-	const { modalDataState, closeModal } = useModal();
-
-	if (!modalDataState.isOpen) {
-		return null;
-	}
+	const { closeModal } = useModal();
 
 	return (
 		<S.Background>
 			<S.Container>
 				<S.Header>
-					<S.Title>{modalDataState.title}</S.Title>
+					<S.Title>{title} 신청</S.Title>
 					<S.CloseBtn onClick={closeModal} />
 				</S.Header>
 
