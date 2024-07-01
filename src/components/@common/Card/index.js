@@ -11,7 +11,7 @@ function Card(props) {
 	const { data } = props;
 
 	// 메인인지 아닌지 확인
-	const path = usePathname();
+	const { path } = usePathname();
 	const main = path !== 'main';
 
 	const { id, title, status, status_label, picUsername, thumbnail, star } =
@@ -32,7 +32,8 @@ function Card(props) {
 		<S.Card $main={main}>
 			<Link to={LINK.REVIEW_POST + `/${id}`}>
 				<div>
-					<img src={imgSrc} />
+					{imgSrc.includes('mp4') && <video src={imgSrc} />}
+					{!imgSrc.includes('mp4') && <img src={imgSrc} />}
 				</div>
 
 				<S.MainBox>
