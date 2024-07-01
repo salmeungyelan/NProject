@@ -10,6 +10,7 @@ const fileToBase64 = file => {
 				originalname: file.name,
 				url: fileReader.result,
 				isThumbnail: null,
+				mimetype: file.type,
 			};
 
 			resolve(fileObj);
