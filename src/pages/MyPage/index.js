@@ -26,7 +26,7 @@ function MyPage() {
 	const decodedPayload = decodeJWT();
 	const { sub } = decodedPayload;
 
-	const { result, isLoading } = useApi({
+	const { result } = useApi({
 		path: `/users/${sub}`,
 		shouldFetch: true,
 	});

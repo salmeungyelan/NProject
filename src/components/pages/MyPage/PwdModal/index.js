@@ -33,11 +33,6 @@ function PwdModal({ onClose, userId }) {
 		shouldFetch: false,
 	});
 
-	useEffect(() => {
-		console.log(userId);
-		console.log(inputData);
-	}, [inputData, userId]);
-
 	// 1. 현재 비밀번호가 입력됐는지 확인
 	// 2. 현재 비밀번호가 맞는지 확인 api -> match
 	// 3. 맞다면 새 비밀번호가 입력됐는지 확인 / 틀리다면 메세지
