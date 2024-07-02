@@ -116,7 +116,7 @@ function PwdModal({ onClose, userId }) {
 							placeholder="현재 비밀번호"
 							name="password"
 							type="password"
-							onChange={handleChange}
+							onChange={() => handleChange()}
 						/>
 						<Input
 							variant="default"
@@ -124,7 +124,7 @@ function PwdModal({ onClose, userId }) {
 							placeholder="새 비밀번호"
 							name="newPassword"
 							type="password"
-							onChange={handleChange}
+							onChange={() => handleChange()}
 						/>
 						<Input
 							variant="default"
@@ -132,7 +132,7 @@ function PwdModal({ onClose, userId }) {
 							placeholder="새 비밀번호 확인"
 							name="newPwCheck"
 							type="password"
-							onChange={handleChange}
+							onChange={() => handleChange()}
 						/>
 					</S.InputBox>
 
@@ -143,7 +143,11 @@ function PwdModal({ onClose, userId }) {
 					<Button variant="white" size="height" onClick={onClose}>
 						취소
 					</Button>
-					<Button variant="default" size="height" onClick={handleChangePw}>
+					<Button
+						variant="default"
+						size="height"
+						onClick={() => handleChangePw()}
+					>
 						확인
 					</Button>
 				</S.ButtonBox>
