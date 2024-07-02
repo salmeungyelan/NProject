@@ -76,7 +76,7 @@ function More({ children }) {
 				</S.MoreClick>
 			</S.TitleBox>
 
-			<Line size={'width'} variant={'lightGray'} />
+			<Line size="width" variant="lightGray" />
 
 			<S.List $genData={genData}>
 				{/* 공지사항 중요 2개 */}
