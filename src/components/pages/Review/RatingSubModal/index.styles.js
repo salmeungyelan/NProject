@@ -3,7 +3,7 @@ import { ModalBackground, flexCenter, flexColumn } from 'styles/common';
 
 export const Background = styled.div`
 	${ModalBackground}
-	z-index: 101;
+	z-index: 100;
 `;
 
 export const Container = styled.div`
@@ -25,7 +25,7 @@ export const Container = styled.div`
 
 export const Header = styled.div`
 	${flexCenter}
-	justify-content: right;
+	position: relative;
 	gap: 80px;
 
 	@media only screen and (min-width: 768px) {
@@ -50,6 +50,8 @@ const buttonBgReset = css`
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: contain;
+	position: absolute;
+	right: 0;
 
 	@media only screen and (min-width: 768px) {
 		width: 20px;
