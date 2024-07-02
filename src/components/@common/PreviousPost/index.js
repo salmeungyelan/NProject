@@ -1,19 +1,39 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import usePathname from 'hooks/usePathname';
 
 import * as S from './index.styles';
 
 import Line from '../Line';
+import Button from '../Button';
+import { useEffect, useState } from 'react';
 
 function PreviousPost(props) {
 	const { prev, next, trigger } = props;
 
+	const navigate = useNavigate();
 	const { path } = usePathname();
+
+	const params = useParams();
+	const _id = params._id;
+
+	const [backId, setBackId] = useState();
+
+	useEffect(() => {
+		setBackId(_id);
+	}, [_id]);
 
 	const handleClickPrev = id => {
 		trigger({
 			path: `/client/${path}s/${id}`,
+			applyResult: true,
+		});
+	};
+
+	const handleClickBackBtn = async id => {
+		navigate(-1);
+		await trigger({
+			path: `/client/notices/${id}`,
 			applyResult: true,
 		});
 	};
@@ -23,7 +43,7 @@ function PreviousPost(props) {
 			<S.NextBox>
 				<S.Next>
 					<span>이전</span>
-					<Line size={'height2'} variant={'gray'} />
+					<Line size="height2" variant="gray" />
 					{prev ? (
 						<Link
 							to={`/${path}/post/${prev.id}`}
@@ -36,11 +56,11 @@ function PreviousPost(props) {
 					)}
 				</S.Next>
 
-				<Line size={'width'} variant={'lightGray'} />
+				<Line size="width" variant="lightGray" />
 
 				<S.Next>
 					<span>다음</span>
-					<Line size={'height2'} variant={'gray'} />
+					<Line size="height2" variant="gray" />
 					{next ? (
 						<Link
 							to={`/${path}/post/${next.id}`}
@@ -53,6 +73,19 @@ function PreviousPost(props) {
 					)}
 				</S.Next>
 			</S.NextBox>
+			{path !== 'review' && (
+				<S.ButtonBox>
+					<div>
+						<Button
+							variant="white"
+							size="height"
+							onClick={() => handleClickBackBtn(backId)}
+						>
+							뒤로 가기
+						</Button>
+					</div>
+				</S.ButtonBox>
+			)}
 		</>
 	);
 }
