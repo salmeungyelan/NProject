@@ -65,7 +65,7 @@ function MobileHeader(props) {
 			<S.TopBox>
 				<S.ImgBox>
 					<Link to={LINK.HOME}>
-						<Logo size={'header'} white />
+						<Logo size="header" white />
 					</Link>
 				</S.ImgBox>
 
@@ -75,7 +75,7 @@ function MobileHeader(props) {
 					</p>
 				</S.WelcomeText>
 
-				<S.Side onClick={handleOpenSideBar}>
+				<S.Side onClick={() => handleOpenSideBar()}>
 					<img src={`/assets/icons/${sideBar ? 'white-x' : 'hamburger'}.svg`} />
 				</S.Side>
 			</S.TopBox>
@@ -412,7 +412,7 @@ function MobileHeader(props) {
 							</S.SideMenu>
 						</Link>
 
-						<S.Help onClick={handleOpenHelpMenu} $help={userHelp}>
+						<S.Help onClick={() => handleOpenHelpMenu()} $help={userHelp}>
 							고객센터
 							<button />
 						</S.Help>

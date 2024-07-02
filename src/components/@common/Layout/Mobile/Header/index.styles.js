@@ -100,6 +100,11 @@ export const BottomNavContent = styled.li`
 		display: none;
 	}
 
+	&a:visited,
+	a:link {
+		color: ${({ theme }) => theme.PALETTE.gray[100]};
+	}
+
 	&:hover {
 		& label {
 			color: ${({ theme }) => theme.PALETTE.orange[100]};
