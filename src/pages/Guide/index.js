@@ -67,7 +67,7 @@ function Guide() {
 
 	return (
 		<S.Body>
-			<Title title={'GUIDE'}>넷플레이스 이용안내</Title>
+			<Title title="GUIDE">넷플레이스 이용안내</Title>
 
 			<S.MainBox>
 				<Search
