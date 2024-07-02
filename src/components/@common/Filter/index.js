@@ -1,30 +1,42 @@
+import { useEffect, useState } from 'react';
+
 import usePathname from 'hooks/usePathname';
+import useApi from 'hooks/useApi';
 
 import * as S from './index.styles';
 
 function Filter(props) {
 	const { onClick, sort } = props;
 
-	const path = usePathname();
-	const filterName = path === 'notice' ? 'NOTICE' : 'GUIDE';
+	const { path } = usePathname();
+	const filterName = path.toUpperCase();
+
+	const { result } = useApi({
+		path: `/client/global-constants?typeValue=${filterName}_FILTER`,
+		shouldFetch: true,
+	});
+
+	const [filter, setFilter] = useState([]);
+
+	useEffect(() => {
+		if (result.data) {
+			setFilter(result.data.globalConstantList);
+		}
+	}, [result.data]);
 
 	return (
 		<S.Body>
-			<S.Sort
-				data-value={`${filterName}_FILTER_01`}
-				selected={sort === `${filterName}_FILTER_01`}
-				onClick={onClick}
-			>
-				• 최신순
-			</S.Sort>
-
-			<S.Sort
-				data-value={`${filterName}_FILTER_02`}
-				selected={sort === `${filterName}_FILTER_02`}
-				onClick={onClick}
-			>
-				• 오래된순
-			</S.Sort>
+			{filter &&
+				filter.map(flt => (
+					<S.Sort
+						key={flt.id}
+						data-value={flt.codeValue}
+						selected={sort === flt.codeValue}
+						onClick={onClick}
+					>
+						• {flt.codeLabel}
+					</S.Sort>
+				))}
 		</S.Body>
 	);
 }
