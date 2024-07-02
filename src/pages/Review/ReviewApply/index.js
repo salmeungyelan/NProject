@@ -335,7 +335,7 @@ function ReviewApply() {
 				/>
 			)}
 
-			<Title title={'REVIEW'}>
+			<Title title="REVIEW">
 				자사 영업일 기준, 하루 한 번 신청 가능합니다.
 			</Title>
 
@@ -453,9 +453,9 @@ function ReviewApply() {
 									ref={fileRef}
 									multiple
 								/>
-								<S.ImgTitle onClick={() => handleClickImg()}>
+								<S.MediaTitle onClick={() => handleClickImg()}>
 									<p>파일 선택</p>
-								</S.ImgTitle>
+								</S.MediaTitle>
 							</S.FileContainer>
 
 							{fileList &&
