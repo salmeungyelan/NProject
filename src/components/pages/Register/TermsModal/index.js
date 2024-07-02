@@ -31,28 +31,26 @@ function TermsModal(props) {
 	};
 
 	return (
-		<>
-			<S.Background>
-				<S.Container>
-					<S.Header>
-						<S.Title>넷플레이스 - {data.name}</S.Title>
-						<S.CloseBtn onClick={handleDisagree} />
-					</S.Header>
+		<S.Background>
+			<S.Container>
+				<S.Header>
+					<S.Title>넷플레이스 - {data.name}</S.Title>
+					<S.CloseBtn onClick={handleDisagree} />
+				</S.Header>
 
-					<S.Body>
-						<pre>{data.description}</pre>
-					</S.Body>
+				<S.Body>
+					<pre>{data.description}</pre>
+				</S.Body>
 
-					<S.ButtonBox>
-						<div>
-							<Button variant="default" size="default" onClick={handleAgree}>
-								동의
-							</Button>
-						</div>
-					</S.ButtonBox>
-				</S.Container>
-			</S.Background>
-		</>
+				<S.ButtonBox>
+					<div>
+						<Button variant="default" size="default" onClick={handleAgree}>
+							동의
+						</Button>
+					</div>
+				</S.ButtonBox>
+			</S.Container>
+		</S.Background>
 	);
 }
 

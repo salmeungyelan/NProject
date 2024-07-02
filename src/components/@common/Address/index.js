@@ -47,7 +47,7 @@ function Address(props, ref) {
 		open({ onComplete: handleComplete });
 	};
 
-	const handleDetailChange = e => {
+	const handleChangeDetail = e => {
 		setDetailAddress(e.target.value);
 		onChange('detailAddress', e.target.value);
 	};
@@ -58,7 +58,7 @@ function Address(props, ref) {
 			<div>
 				<S.Input
 					size={size}
-					variant={'default'}
+					variant="default"
 					type="text"
 					placeholder="우편 번호"
 					value={postcode}
@@ -66,14 +66,18 @@ function Address(props, ref) {
 					{...rest}
 				/>
 				{button && (
-					<Button variant={'default'} size={size} onClick={handleClickPostCode}>
+					<Button
+						variant="default"
+						size={size}
+						onClick={() => handleClickPostCode()}
+					>
 						주소 찾기
 					</Button>
 				)}
 			</div>
 			<S.Input
 				size={size}
-				variant={'default'}
+				variant="default"
 				type="text"
 				placeholder="주소"
 				value={address}
@@ -81,11 +85,11 @@ function Address(props, ref) {
 			/>
 			<S.Input
 				size={size}
-				variant={'default'}
+				variant="default"
 				type="text"
 				placeholder="상세 주소"
 				value={detailAddress}
-				onChange={handleDetailChange}
+				onChange={() => handleChangeDetail()}
 				{...rest}
 			/>
 			{message && <p>{message}</p>}
