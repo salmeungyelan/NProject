@@ -56,12 +56,12 @@ function ReviewPost() {
 		mainKeyword,
 		subKeywords,
 		clientFiles,
+		nextReview,
+		previousReview,
 		resultLinks,
 		adminFiles,
 		comment,
 		star,
-		nextReview,
-		previousReview,
 		isRatingable,
 	} = review;
 
@@ -72,7 +72,7 @@ function ReviewPost() {
 		<>
 			{review && (
 				<S.Body>
-					<Title title={'REVIEW'}>
+					<Title title="REVIEW">
 						자사 영업일 기준, 하루 한 번 신청 가능합니다.
 					</Title>
 
@@ -120,7 +120,7 @@ function ReviewPost() {
 							<Button
 								variant="white"
 								size="height"
-								onClick={handleClickBackBtn}
+								onClick={() => handleClickBackBtn()}
 							>
 								뒤로 가기
 							</Button>
@@ -130,7 +130,7 @@ function ReviewPost() {
 								<Button
 									variant="default"
 									size="height"
-									onClick={handleClickApply}
+									onClick={() => handleClickApply()}
 								>
 									임시 저장 수정
 								</Button>

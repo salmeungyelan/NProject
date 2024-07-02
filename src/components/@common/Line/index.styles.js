@@ -1,6 +1,10 @@
 import { css, styled } from 'styled-components';
 
 const sizeCSS = {
+	default: css`
+		width: 4px;
+		height: 100%;
+	`,
 	width: css`
 		height: 1px;
 		width: 100%;
@@ -9,11 +13,7 @@ const sizeCSS = {
 		width: 1px;
 		height: 16px;
 	`,
-	default: css`
-		width: 4px;
-		height: 100%;
-	`,
-	height2: css`
+	login: css`
 		width: 1px;
 		height: 100%;
 	`,

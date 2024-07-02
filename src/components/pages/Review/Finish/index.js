@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import useModal from 'hooks/useModal';
 
 import * as S from './index.styles';
@@ -7,54 +5,56 @@ import * as S from './index.styles';
 import RatingSubModal from '../RatingSubModal';
 
 import Button from 'components/@common/Button';
+import { useNavigate } from 'react-router-dom';
 
-const img = [1, 2, 3, 4, 5];
+function Finish({ result }) {
+	const { modalState, openModal, closeModal } = useModal();
 
-function Finish() {
-	const [stars, setStars] = useState(false);
+	const navigate = useNavigate();
 
-	const { openModal } = useModal();
+	const { resultLinks, adminFiles, comment, star, isRatingable } = result;
 
-	const handleOpenPwdModal = () => {
-		openModal({
-			img: '',
-			title: stars ? '별점 등록' : '별점 수정',
-			content: '이용에 만족하셨다면 별점을 등록해 주세요.',
-			callback: () => console.log('closed'),
-		});
-	};
+	// 별점 계산
+	const rate = [];
+
+	for (let i = 0; i < 5; i++) {
+		if (star > i) rate.push(<img src="/assets/icons/star-color.svg" />);
+		else rate.push(<img src="/assets/icons/star.svg" />);
+	}
 
 	return (
 		<S.Body>
-			<RatingSubModal />
+			{modalState && (
+				<RatingSubModal onClose={() => closeModal(navigate(0))} star={star} />
+			)}
 
 			<S.Box>
 				<S.Title>링크</S.Title>
-				<S.ReadOnly>https://hwangeumOliveYou.naver.blog.com</S.ReadOnly>
+				{resultLinks &&
+					resultLinks.map(link => (
+						<S.ReadOnly key={link.id}>{link.url}</S.ReadOnly>
+					))}
 			</S.Box>
 
 			<S.Box>
 				<S.Title>첨부 파일</S.Title>
 				<S.ReadImg>
-					{img.map((el, idx) => (
-						<S.Img key={idx}>
-							<img src="/assets/images/example.png" />
-							<S.ImgTitle>
-								<p>image_{el}.jpg</p>
-								<img src="/assets/icons/search.svg" />
-							</S.ImgTitle>
-						</S.Img>
-					))}
+					{adminFiles.length > 0 &&
+						adminFiles.map(file => (
+							<S.Img key={file.id}>
+								<img src={file.url} />
+								<S.ImgTitle>
+									<p>{file.name}</p>
+									<img src="/assets/icons/search.svg" />
+								</S.ImgTitle>
+							</S.Img>
+						))}
 				</S.ReadImg>
 			</S.Box>
 
 			<S.Box>
 				<S.Title>안내</S.Title>
-				<S.ReadOnly>
-					Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-					nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-					volutpat.
-				</S.ReadOnly>
+				<S.ReadOnly>{comment}</S.ReadOnly>
 			</S.Box>
 
 			<S.RatingBox>
@@ -62,25 +62,20 @@ function Finish() {
 
 				<div>
 					<S.Rate>
-						<div>
-							<img src="/assets/icons/star.svg" />
-							<img src="/assets/icons/star.svg" />
-							<img src="/assets/icons/star.svg" />
-							<img src="/assets/icons/star.svg" />
-							<img src="/assets/icons/star.svg" />
-						</div>
-						등록된 별점 없음
+						<div>{rate}</div>
+						{star || '등록된 별점 없음'}
 					</S.Rate>
 
-					{/* 별점이 0점이라면 ? '등록' : '수정' */}
 					<div>
-						<Button
-							size={'height'}
-							variant={'default'}
-							onClick={handleOpenPwdModal}
-						>
-							별점 등록하기
-						</Button>
+						{isRatingable && (
+							<Button
+								size="height"
+								variant="default"
+								onClick={() => openModal()}
+							>
+								별점 등록하기
+							</Button>
+						)}
 					</div>
 				</div>
 			</S.RatingBox>

@@ -1,4 +1,6 @@
 import axios from 'axios';
+
+import authInterceptor from './authInterceptor';
 import { getCookie } from 'utils/cookie';
 
 // post메서드로 통신할 때 기본값 설정
@@ -11,9 +13,12 @@ const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
 
 export const api = axios.create({
 	baseURL: apiBaseUrl,
-	timeout: 5000,
+	// timeout: 10000,
 	withCredentials: true,
 });
+
+// authInterceptor를 api 인스턴스에 적용
+// authInterceptor(api);
 
 api.interceptors.request.use(
 	config => {
@@ -26,7 +31,6 @@ api.interceptors.request.use(
 		// 데이터 형식에 따라 Content-Type 설정
 		if (config.data instanceof FormData) {
 			config.headers['Content-Type'] = 'multipart/form-data';
-			config.data = JSON.stringify(config.data);
 		} else if (
 			typeof config.data === 'object' &&
 			!(config.data instanceof FormData)

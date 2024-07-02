@@ -1,31 +1,38 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import useApi from 'hooks/useApi';
 
 import * as S from './index.styles';
 
-function DropDown() {
+function DropDown(props) {
+	const { selectedOption, setSelectedOption } = props;
+
 	const [isOpen, setIsOpen] = useState(false);
-	const [selectedOption, setSelectedOption] = useState('최신순');
+	const [option, setOption] = useState([]);
 
-	const options = [
-		{ value: 'latest', label: '최신순' },
-		{ value: 'oldest', label: '오래된순' },
-		{ value: 'high-rating', label: '별점 높은순' },
-		{ value: 'low-rating', label: '별점 낮은순' },
-	];
+	const { result } = useApi({
+		path: '/client/global-constants?typeValue=REVIEW_FILTER',
+		shouldFetch: true,
+	});
 
-	const handleOptionClick = option => {
-		setSelectedOption(option.label);
+	useEffect(() => {
+		if (result.data) {
+			setOption(result.data.globalConstantList);
+		}
+	}, [result.data]);
+
+	const handleClickOption = (codeLabel, codeValue) => {
+		setSelectedOption({
+			codeLabel,
+			sortBy: codeValue,
+		});
 		setIsOpen(false);
 	};
-
-	const filteredOptions = options.filter(
-		option => option.label !== selectedOption,
-	);
 
 	return (
 		<S.CustomSelectContainer>
 			<S.SelectStyled onClick={() => setIsOpen(!isOpen)} $isOpen={isOpen}>
-				{selectedOption}
+				{selectedOption.codeLabel}
 				<S.DropdownArrow>
 					<img src={`/assets/icons/${isOpen ? `up.svg` : `down.svg`}`} />
 				</S.DropdownArrow>
@@ -33,11 +40,17 @@ function DropDown() {
 
 			{isOpen && (
 				<S.OptionsContainer>
-					{filteredOptions.map((option, index) => (
-						<S.Option key={index} onClick={() => handleOptionClick(option)}>
-							{option.label}
-						</S.Option>
-					))}
+					{option &&
+						option.map(option => (
+							<S.Option
+								key={option.id}
+								onClick={() =>
+									handleClickOption(option.codeLabel, option.codeValue)
+								}
+							>
+								{option.codeLabel}
+							</S.Option>
+						))}
 				</S.OptionsContainer>
 			)}
 		</S.CustomSelectContainer>

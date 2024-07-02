@@ -1,13 +1,47 @@
+import { useEffect, useState } from 'react';
+
+import useApi from 'hooks/useApi';
+
 import * as S from './index.styles';
 
-const position = ['전체', '블로그', '방문자', '인스타그램'];
+function Category(props) {
+	const { selectedCategory, setSelectedCategory } = props;
 
-function Category() {
+	const [categories, setCategories] = useState([]);
+
+	const { result } = useApi({
+		path: '/client/global-constants?typeValue=REVIEW_TYPE',
+		shouldFetch: true,
+	});
+
+	useEffect(() => {
+		if (result.data) {
+			setCategories(result.data.globalConstantList);
+		}
+	}, [result.data]);
+
+	const handleClickCategory = name => {
+		setSelectedCategory(name);
+	};
+
 	return (
 		<S.Body>
-			{position.map((filter, idx) => (
-				<S.Category key={idx}>{filter}</S.Category>
-			))}
+			<S.Category
+				$selected={selectedCategory === ''}
+				onClick={() => handleClickCategory('')}
+			>
+				전체
+			</S.Category>
+			{categories &&
+				categories.map(category => (
+					<S.Category
+						key={category.id}
+						$selected={selectedCategory === category.codeValue}
+						onClick={() => handleClickCategory(category.codeValue)}
+					>
+						{category.codeLabel}
+					</S.Category>
+				))}
 		</S.Body>
 	);
 }

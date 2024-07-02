@@ -18,7 +18,7 @@ function Search(props) {
 			</S.SearchBox>
 
 			<S.ButtonBox>
-				<Button variant={'default'} size={'height'} onClick={onClick}>
+				<Button variant="default" size="height" onClick={onClick}>
 					검색
 				</Button>
 			</S.ButtonBox>
