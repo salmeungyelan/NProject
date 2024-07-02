@@ -105,7 +105,7 @@ function Notice() {
 
 	return (
 		<S.Body>
-			<Title title={'NOTICE'}>넷플레이스 공지사항 안내</Title>
+			<Title title="NOTICE">넷플레이스 공지사항 안내</Title>
 
 			<S.MainBox>
 				<S.Select>

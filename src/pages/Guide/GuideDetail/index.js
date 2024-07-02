@@ -7,15 +7,18 @@ import * as S from './index.styles';
 
 import Title from 'components/@common/Title';
 import PreviousPost from 'components/@common/PreviousPost';
-import Loading from 'components/@common/Loading/Loading';
 
 function GuideDetail() {
 	const params = useParams();
 	const id = params._id;
 
 	const [detailData, setDetailData] = useState({});
+	const [prevPost, setPrevPost] = useState({
+		prev: {},
+		next: {},
+	});
 
-	const { result } = useApi({
+	const { result, trigger } = useApi({
 		path: `/client/guides/${id}`,
 		shouldFetch: true,
 	});
@@ -23,7 +26,13 @@ function GuideDetail() {
 	useEffect(() => {
 		if (result.data) {
 			setDetailData(result.data.guide);
+			setPrevPost({
+				prev: result.data.previousGuide,
+				next: result.data.nextGuide,
+			});
 		}
+
+		console.log(result.data);
 	}, [result.data, detailData]);
 
 	const { author, title, content } = detailData;
@@ -32,7 +41,7 @@ function GuideDetail() {
 		<>
 			{detailData && (
 				<S.Body>
-					<Title title={'GUIDE'}>넷플레이스 이용안내</Title>
+					<Title title="GUIDE">넷플레이스 이용안내</Title>
 
 					<S.Content>
 						<S.Title>{title}</S.Title>
@@ -45,7 +54,11 @@ function GuideDetail() {
 						<S.Description>{content}</S.Description>
 					</S.Content>
 
-					<PreviousPost />
+					<PreviousPost
+						trigger={trigger}
+						prev={prevPost.prev}
+						next={prevPost.next}
+					/>
 				</S.Body>
 			)}
 		</>
