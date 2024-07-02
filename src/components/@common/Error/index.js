@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
+import LINK from 'constants/link';
+
 import * as S from './index.styles';
 
 import Button from '../Button';
@@ -9,11 +11,11 @@ function ErrorFallback({ error }) {
 
 	const navigate = useNavigate();
 
-	const HandleClickToMain = () => {
-		navigate('/main');
+	const handleClickToMain = () => {
+		navigate(LINK.HOME);
 	};
 
-	const HandleClickToBack = () => {
+	const handleClickToBack = () => {
 		navigate(-1);
 	};
 
@@ -38,10 +40,18 @@ function ErrorFallback({ error }) {
 			</S.Top>
 
 			<S.ButtonBox>
-				<Button variant={'white'} size={'error'} onClick={HandleClickToBack}>
+				<Button
+					variant="white"
+					size="error"
+					onClick={() => handleClickToBack()}
+				>
 					이전으로
 				</Button>
-				<Button variant={'default'} size={'error'} onClick={HandleClickToMain}>
+				<Button
+					variant="default"
+					size="error"
+					onClick={() => handleClickToMain()}
+				>
 					메인으로
 				</Button>
 			</S.ButtonBox>
