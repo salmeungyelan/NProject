@@ -24,7 +24,11 @@ function IdResult({ data }) {
 				<InputBox title="아이디" value={username} disabled register />
 			</div>
 
-			<Button size={'default'} variant={'default'} onClick={handleClickLogin}>
+			<Button
+				size="default"
+				variant="default"
+				onClick={() => handleClickLogin()}
+			>
 				로그인
 			</Button>
 		</S.Body>

@@ -31,7 +31,11 @@ function TempPwd({ data }) {
 				</S.Message>
 			</div>
 
-			<Button size={'default'} variant={'default'} onClick={handleClickLogin}>
+			<Button
+				size="default"
+				variant="default"
+				onClick={() => handleClickLogin()}
+			>
 				로그인
 			</Button>
 		</S.FormBox>
