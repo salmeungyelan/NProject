@@ -8,11 +8,15 @@ export const Body = styled.div`
 
 export const Category = styled.div`
 	padding: 5px 10px;
-	color: ${({ theme }) => theme.PALETTE.gray[100]};
 	font-size: ${({ theme }) => theme.FONT_SIZE.s};
-	border: 1px solid ${({ theme }) => theme.PALETTE.gray[0]};
 	border-radius: 26px;
 	cursor: pointer;
+
+	color: ${({ theme, $selected }) =>
+		$selected ? theme.PALETTE.orange[100] : theme.PALETTE.gray[100]};
+	border: 1px solid
+		${({ theme, $selected }) =>
+			$selected ? theme.PALETTE.orange[100] : theme.PALETTE.gray[0]};
 
 	&:hover {
 		color: ${({ theme }) => theme.PALETTE.orange[100]};
