@@ -31,7 +31,7 @@ function Header(props) {
 				<S.TopBox>
 					<S.ImgBox>
 						<Link to={LINK.HOME}>
-							<Logo size={'header'} white />
+							<Logo size="header" white />
 						</Link>
 					</S.ImgBox>
 
