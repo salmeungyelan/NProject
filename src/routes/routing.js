@@ -70,7 +70,7 @@ const router = createBrowserRouter([
 				element: <NoticeDetail />,
 			},
 			{
-				path: '/my_page',
+				path: '/mypage',
 				element: <MyPage />,
 			},
 			{
@@ -90,15 +90,15 @@ const router = createBrowserRouter([
 				element: <ReviewApply />,
 			},
 			{
-				path: '/visit_experience',
+				path: '/visit-experience',
 				element: <OtherTabs />,
 			},
 			{
-				path: '/viewtab_instagram',
+				path: '/viewtab-instagram',
 				element: <OtherTabs />,
 			},
 			{
-				path: '/website_outsourcing',
+				path: '/website-outsourcing',
 				element: <OtherTabs />,
 			},
 		],

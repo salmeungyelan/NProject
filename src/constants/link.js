@@ -16,11 +16,11 @@ const LINK = {
 	GUIDE: '/guide',
 	GUIDE_POST: '/guide/post',
 
-	TEAM: '/visit_experience',
-	VIEW: '/viewtab_instagram',
-	DEVELOP: '/website_outsourcing',
+	TEAM: '/visit-experience',
+	VIEW: '/viewtab-instagram',
+	DEVELOP: '/website-outsourcing',
 
-	MY: '/my_page',
+	MY: '/mypage',
 };
 
 export default LINK;
