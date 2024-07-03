@@ -135,7 +135,7 @@ function AccountLookup(props) {
 						title={input}
 						name={password ? 'emailNId' : 'companyName'}
 						placeholder={`${inputPlaceHolder} 입력해 주세요.`}
-						onChange={handleChange}
+						onChange={() => handleChange()}
 						ref={emailRef}
 						message={
 							(password ? errorMessages.emailNId : errorMessages.companyName) ||
@@ -149,7 +149,7 @@ function AccountLookup(props) {
 						name="contactNumber"
 						placeholder="전화번호를 입력해 주세요."
 						value={inputData.contactNumber}
-						onChange={handleChange}
+						onChange={() => handleChange()}
 						ref={phoneNumRef}
 						message={errorMessages.contactNumber || ' '}
 						register
@@ -160,7 +160,7 @@ function AccountLookup(props) {
 						name="businessNumber"
 						placeholder="업체의 사업자 등록 번호를 입력해 주세요."
 						value={inputData.businessNumber}
-						onChange={handleChange}
+						onChange={() => handleChange()}
 						ref={businessNumRef}
 						message={errorMessages.businessNumber || ' '}
 						register
@@ -169,7 +169,7 @@ function AccountLookup(props) {
 					<S.ButtonBox>
 						<Notice notice={notice} />
 
-						<Button variant={'default'} size={'default'} type="submit">
+						<Button variant="default" size="default" type="submit">
 							{password ? '임시 비밀번호 발급' : '아이디 찾기'}
 						</Button>
 					</S.ButtonBox>

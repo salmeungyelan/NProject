@@ -3,7 +3,7 @@ import { useState } from 'react';
 import usePathname from './usePathname';
 
 const useFilter = () => {
-	const path = usePathname();
+	const { path } = usePathname();
 	const filterName = path.toUpperCase();
 
 	const [sort, setSort] = useState(`${filterName}_FILTER_01`);

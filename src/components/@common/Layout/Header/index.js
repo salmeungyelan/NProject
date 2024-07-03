@@ -8,7 +8,9 @@ import * as S from './index.styles';
 import Logo from 'components/@common/Logo';
 import Button from 'components/@common/Button';
 
-function Header({ logout, applyBtn }) {
+function Header(props) {
+	const { logout, applyBtn, onClick } = props;
+
 	const navigate = useNavigate();
 
 	const [navClicked, setNavClicked] = useState(
@@ -29,7 +31,7 @@ function Header({ logout, applyBtn }) {
 				<S.TopBox>
 					<S.ImgBox>
 						<Link to={LINK.HOME}>
-							<Logo size={'header'} white />
+							<Logo size="header" white />
 						</Link>
 					</S.ImgBox>
 
@@ -132,7 +134,7 @@ function Header({ logout, applyBtn }) {
 
 				{applyBtn && (
 					<S.ApplyBtnBox>
-						<Button size="height" variant="default">
+						<Button size="height" variant="default" onClick={onClick}>
 							{applyBtn.title} 신청하기
 						</Button>
 					</S.ApplyBtnBox>

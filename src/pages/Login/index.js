@@ -68,7 +68,7 @@ function Login() {
 			<S.LoginBox>
 				<div>
 					<Link to={LINK.LOGIN}>
-						<Logo size={'default'} />
+						<Logo size="default" />
 					</Link>
 				</div>
 
@@ -83,6 +83,7 @@ function Login() {
 									variant="login"
 									value={inputData.username}
 									onChange={handleChange}
+									placeholder=""
 								/>
 								<S.Label htmlFor="username" ref={idRef}>
 									이메일 또는 아이디 입력
@@ -98,6 +99,7 @@ function Login() {
 									id="password"
 									value={inputData.password}
 									onChange={handleChange}
+									placeholder=""
 								/>
 								<S.Label htmlFor="password" ref={pwRef}>
 									비밀번호 입력
@@ -122,9 +124,9 @@ function Login() {
 
 							<S.LinkBox>
 								<Link to={LINK.FIND_ID}>아이디 찾기</Link>
-								<Line size="height" variant="gray" />
+								<Line size="login" variant="gray" />
 								<Link to={LINK.FIND_PW}>비밀번호 찾기</Link>
-								<Line size="height" variant="gray" />
+								<Line size="login" variant="gray" />
 								<Link to={LINK.REGISTER}>회원가입</Link>
 							</S.LinkBox>
 						</div>

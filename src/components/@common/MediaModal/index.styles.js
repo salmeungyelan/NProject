@@ -12,12 +12,20 @@ export const Container = styled.div`
 	top: 50%;
 	transform: translate(-50%, -50%);
 	width: 80%;
+	height: 80%;
 	padding: 10px;
 	max-width: 500px;
+	max-height: 400px;
 	transition: all ease 0.3s;
 
 	& img {
 		width: 100%;
+		height: 100%;
+	}
+
+	& video {
+		width: 90%;
+		height: 100%;
 	}
 
 	@media screen and (max-width: 768px) {
@@ -38,7 +46,7 @@ const buttonBgReset = css`
 
 export const CloseBtn = styled.button`
 	${buttonBgReset}
-	background-image: url('/assets/icons/modal-x.svg');
+	background-image: url('/assets/icons/white-x.svg');
 	position: absolute;
 	transform: translate(-90%, 40%);
 	right: 0;

@@ -15,18 +15,10 @@ import PwdModal from 'components/pages/MyPage/PwdModal';
 function MyPage() {
 	const { modalState, openModal, closeModal } = useModal();
 
-	const handleOpenPwdModal = () => {
-		openModal();
-	};
-
-	const handleCloseModal = () => {
-		closeModal();
-	};
-
 	const decodedPayload = decodeJWT();
 	const { sub } = decodedPayload;
 
-	const { result, isLoading } = useApi({
+	const { result } = useApi({
 		path: `/users/${sub}`,
 		shouldFetch: true,
 	});
@@ -57,9 +49,9 @@ function MyPage() {
 
 	return (
 		<S.Body>
-			{modalState && <PwdModal onClose={handleCloseModal} userId={sub} />}
+			{modalState && <PwdModal onClose={() => closeModal()} userId={sub} />}
 
-			<Title title={'MY PAGE'}>회원 정보를 수정할 수 있습니다.</Title>
+			<Title title="MY PAGE">회원 정보를 수정할 수 있습니다.</Title>
 
 			<div>
 				<S.Account>
@@ -78,7 +70,7 @@ function MyPage() {
 							<Button
 								size="height"
 								variant="default"
-								onClick={handleOpenPwdModal}
+								onClick={() => openModal()}
 							>
 								비밀번호 변경하기
 							</Button>

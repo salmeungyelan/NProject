@@ -8,7 +8,9 @@ import * as S from './index.styles';
 import Logo from 'components/@common/Logo';
 import Button from 'components/@common/Button';
 
-function MobileHeader({ logout, applyBtn }) {
+function MobileHeader(props) {
+	const { logout, applyBtn, onClick } = props;
+
 	// 모바일 NAV
 	const [navClicked, setNavClicked] = useState(
 		'/' + (window.location.pathname.split('/')[1] ?? ''),
@@ -63,7 +65,7 @@ function MobileHeader({ logout, applyBtn }) {
 			<S.TopBox>
 				<S.ImgBox>
 					<Link to={LINK.HOME}>
-						<Logo size={'header'} white />
+						<Logo size="header" white />
 					</Link>
 				</S.ImgBox>
 
@@ -73,7 +75,7 @@ function MobileHeader({ logout, applyBtn }) {
 					</p>
 				</S.WelcomeText>
 
-				<S.Side onClick={handleOpenSideBar}>
+				<S.Side onClick={() => handleOpenSideBar()}>
 					<img src={`/assets/icons/${sideBar ? 'white-x' : 'hamburger'}.svg`} />
 				</S.Side>
 			</S.TopBox>
@@ -374,7 +376,7 @@ function MobileHeader({ logout, applyBtn }) {
 
 			{applyBtn && (
 				<S.ApplyBtnBox $moreBtn={moreBtn}>
-					<Button size="height" variant="default">
+					<Button size="height" variant="default" onClick={onClick}>
 						{applyBtn.title} 신청하기
 					</Button>
 				</S.ApplyBtnBox>
@@ -410,7 +412,7 @@ function MobileHeader({ logout, applyBtn }) {
 							</S.SideMenu>
 						</Link>
 
-						<S.Help onClick={handleOpenHelpMenu} $help={userHelp}>
+						<S.Help onClick={() => handleOpenHelpMenu()} $help={userHelp}>
 							고객센터
 							<button />
 						</S.Help>

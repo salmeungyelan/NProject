@@ -100,6 +100,11 @@ export const BottomNavContent = styled.li`
 		display: none;
 	}
 
+	&a:visited,
+	a:link {
+		color: ${({ theme }) => theme.PALETTE.gray[100]};
+	}
+
 	&:hover {
 		& label {
 			color: ${({ theme }) => theme.PALETTE.orange[100]};
@@ -278,6 +283,7 @@ export const ApplyBtnBox = styled.div`
 	background-color: ${({ theme }) => theme.PALETTE.white[100]};
 	bottom: ${({ $moreBtn }) => ($moreBtn ? '132px' : '66px')};
 	box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.08);
+	z-index: 22;
 
 	& button {
 		width: 294px;

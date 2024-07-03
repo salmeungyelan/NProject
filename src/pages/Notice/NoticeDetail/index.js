@@ -7,15 +7,18 @@ import * as S from './index.styles';
 
 import Title from 'components/@common/Title';
 import PreviousPost from 'components/@common/PreviousPost';
-import Loading from 'components/@common/Loading/Loading';
 
 function NoticeDetail() {
 	const params = useParams();
 	const id = params._id;
 
 	const [detailData, setDetailData] = useState({});
+	const [prevPost, setPrevPost] = useState({
+		prev: {},
+		next: {},
+	});
 
-	const { result, isLoading } = useApi({
+	const { result, trigger } = useApi({
 		path: `/client/notices/${id}`,
 		shouldFetch: true,
 	});
@@ -23,21 +26,24 @@ function NoticeDetail() {
 	useEffect(() => {
 		if (result.data) {
 			setDetailData(result.data.notice);
+			setPrevPost({
+				prev: result.data.previousNotice,
+				next: result.data.nextNotice,
+			});
 		}
 	}, [result.data, detailData]);
 
-	const { author, title, content, noticeContentType } = detailData;
+	const { author, title, content, noticeContentTypeLabel } = detailData;
 
 	return (
 		<>
-			{isLoading && <Loading />}
 			{detailData && (
 				<S.Body>
-					<Title title={'NOTICE'}>넷플레이스 공지사항 안내</Title>
+					<Title title="NOTICE">넷플레이스 공지사항 안내</Title>
 
 					<S.Content>
 						<S.TitleBox>
-							{noticeContentType === '중요' && (
+							{noticeContentTypeLabel === '중요' && (
 								<>
 									<img src="/assets/icons/pin.svg" />
 									<S.Important>중요</S.Important>
@@ -54,7 +60,11 @@ function NoticeDetail() {
 						<S.Description>{content}</S.Description>
 					</S.Content>
 
-					<PreviousPost />
+					<PreviousPost
+						trigger={trigger}
+						prev={prevPost.prev}
+						next={prevPost.next}
+					/>
 				</S.Body>
 			)}
 		</>

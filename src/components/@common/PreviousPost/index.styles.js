@@ -37,11 +37,14 @@ export const Next = styled.div`
 `;
 
 export const ButtonBox = styled.div`
+	${flexColumn}
+	gap: 12px;
 	width: 100%;
 
 	@media screen and (min-width: 768px) {
 		${flexCenter}
 		justify-content: right;
+		flex-direction: row;
 
 		> div {
 			width: 180px;

@@ -26,18 +26,17 @@ export const SelectStyled = styled.div`
 	${flexSpaceBetweenCenter}
 	color: ${({ theme }) => theme.PALETTE.gray[200]};
 	height: 22px;
-	width: 75px;
+	width: 85px;
 
 	@media screen and (min-width: 768px) {
 		height: 26px;
-		width: 100px;
+		width: 110px;
 		padding: 0 9px;
 		font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 	}
 
 	@media screen and (min-width: 1200px) {
 		height: 30px;
-		width: 100px;
 		font-size: ${({ theme }) => theme.FONT_SIZE.m};
 	}
 `;
@@ -65,17 +64,15 @@ export const CheckBoxContainer = styled.div`
 	top: 110%;
 	overflow-y: auto;
 	padding: 4px;
-
-	width: 75px;
+	width: 85px;
 
 	@media screen and (min-width: 768px) {
-		width: 100px;
+		width: 110px;
 		padding: 6px;
 		font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 	}
 
 	@media screen and (min-width: 1200px) {
-		width: 100px;
 		padding: 8px;
 		font-size: ${({ theme }) => theme.FONT_SIZE.m};
 	}

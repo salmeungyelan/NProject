@@ -1,71 +1,104 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 import * as S from './index.styles';
+import useApi from 'hooks/useApi';
+import usePathname from 'hooks/usePathname';
 
-function MultiSelect() {
+function MultiSelect(props) {
+	const { selectedStatus, setSelectedStatus } = props;
+
+	const { path } = usePathname();
+
 	const CheckBox = useRef(null);
 	const [expanded, setExpanded] = useState(false);
-	const [selectedPositions, setSelectedPositions] = useState([]);
+	const [status, setStatus] = useState([]);
 
-	const checkOption = [
-		{ id: 1, value: 'all', name: '전체' },
-		{ id: 2, value: 'tempSave', name: '임시 저장' },
-		{ id: 3, value: 'waiting', name: '대기' },
-		{ id: 4, value: 'ing', name: '진행중' },
-		{ id: 5, value: 'finish', name: '완료' },
-	];
+	const { result } = useApi({
+		path: `/client/global-constants?typeValue=${path.toUpperCase()}_STATUS`,
+		shouldFetch: true,
+	});
+
+	useEffect(() => {
+		if (result.data) {
+			setStatus(result.data.globalConstantList);
+		}
+	}, [result.data]);
 
 	const showCheckboxes = () => {
 		setExpanded(!expanded);
 	};
 
-	useEffect(() => {
-		if (selectedPositions.length === 4) {
-			setExpanded(false);
+	const handleChangeStatus = (label, value) => {
+		let updatedStatus;
+		const isSelected = selectedStatus.some(stat => stat.codeLabel === label);
+
+		// '전체'가 선택되면 다른 모든 선택 해제하고 '전체'만 선택
+		if (label === '전체') {
+			updatedStatus = [{ codeLabel: '전체', sortBy: '' }];
+			setSelectedStatus(updatedStatus);
+			return setExpanded(false);
 		}
 
-		console.log(selectedPositions);
-	}, [selectedPositions]);
-
-	const handlePositionChange = positionValue => {
-		let updatedPositions;
-
-		if (selectedPositions.includes(positionValue)) {
-			updatedPositions = selectedPositions.filter(pos => pos !== positionValue);
+		if (isSelected) {
+			updatedStatus = selectedStatus.filter(stat => stat.codeLabel !== label); // 이미 선택된 상태를 해제
 		} else {
-			if (selectedPositions.length < 4) {
-				updatedPositions = [...selectedPositions, positionValue];
-			} else {
-				alert('야');
-				return;
+			updatedStatus = selectedStatus.filter(stat => stat.codeLabel !== '전체');
+			updatedStatus = [...updatedStatus, { codeLabel: label, sortBy: value }];
+
+			// 4개가 선택되면 '전체'로 설정
+			if (updatedStatus.length === status.length) {
+				updatedStatus = [{ codeLabel: '전체', sortBy: '' }];
 			}
 		}
 
-		setSelectedPositions(updatedPositions);
+		setSelectedStatus(updatedStatus);
 	};
+
+	const isStatusSelected = label => {
+		return selectedStatus.some(stat => stat.codeLabel === label);
+	};
+
+	const length =
+		selectedStatus.length === 1 ? '' : `외 ${selectedStatus.length - 1}개`;
 
 	return (
 		<S.MultiselectContainer>
 			<S.SelectStyled onClick={showCheckboxes} $expanded={expanded}>
-				상태
+				{selectedStatus[0].codeLabel === '전체'
+					? '전체'
+					: `${selectedStatus[0].codeLabel} ${length}`}
 				<S.DropdownArrow>
 					<img src={`/assets/icons/${expanded ? `up.svg` : `down.svg`}`} />
 				</S.DropdownArrow>
 			</S.SelectStyled>
 
 			<S.CheckBoxContainer ref={CheckBox} $expanded={expanded}>
-				{checkOption.map(el => (
-					<S.Label key={el.id}>
-						<input
-							type="checkbox"
-							id={el.value}
-							checked={selectedPositions.includes(el.value)}
-							onChange={() => handlePositionChange(el.value)}
-						/>
-						<label htmlFor={el.value} />
-						<span>{el.name}</span>
-					</S.Label>
-				))}
+				<S.Label>
+					<input
+						id="all"
+						type="checkbox"
+						checked={isStatusSelected('전체')}
+						onChange={() => handleChangeStatus('전체')}
+					/>
+					<label htmlFor="all" />
+					<span>전체</span>
+				</S.Label>
+
+				{status &&
+					status.map(stat => (
+						<S.Label key={stat.id}>
+							<input
+								type="checkbox"
+								id={stat.codeValue}
+								checked={isStatusSelected(stat.codeLabel)}
+								onChange={() =>
+									handleChangeStatus(stat.codeLabel, stat.codeValue)
+								}
+							/>
+							<label htmlFor={stat.codeValue} />
+							<span>{stat.codeLabel}</span>
+						</S.Label>
+					))}
 			</S.CheckBoxContainer>
 		</S.MultiselectContainer>
 	);

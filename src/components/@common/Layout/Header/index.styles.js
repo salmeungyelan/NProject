@@ -183,6 +183,7 @@ export const ApplyBtnBox = styled.div`
 	background-color: ${({ theme }) => theme.PALETTE.white[100]};
 	bottom: 0;
 	box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.08);
+	z-index: 23;
 
 	& button {
 		width: 180px;

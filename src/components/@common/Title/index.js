@@ -8,7 +8,7 @@ function Title(props) {
 	return (
 		<S.TitleBox>
 			<S.Title>
-				<Line size={'default'} variant={'orange'} />
+				<Line size="default" variant="orange" />
 				<span>{title}</span>
 			</S.Title>
 
