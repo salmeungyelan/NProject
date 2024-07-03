@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import authInterceptor from './authInterceptor';
+// import authInterceptor from './authInterceptor';
 import { getCookie } from 'utils/cookie';
 
 // post메서드로 통신할 때 기본값 설정
