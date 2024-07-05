@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import usePathname from 'hooks/usePathname';
+import useFilter from 'hooks/useFilter';
 import useApi from 'hooks/useApi';
 
 import * as S from './index.styles';
@@ -8,8 +8,7 @@ import * as S from './index.styles';
 function Filter(props) {
 	const { onClick, sort } = props;
 
-	const { path } = usePathname();
-	const filterName = path.toUpperCase();
+	const { filterName } = useFilter();
 
 	const { result } = useApi({
 		path: `/client/global-constants?typeValue=${filterName}_FILTER`,
