@@ -85,3 +85,35 @@ export const NoPost = styled.div`
 		height: calc(100vh - 563px);
 	}
 `;
+
+export const ApplyBtnBox = styled.div`
+	width: 100%;
+	${flexCenter}
+	position: fixed;
+	height: 56px;
+	background-color: ${({ theme }) => theme.PALETTE.white[100]};
+	bottom: ${({ $moreBtn }) => ($moreBtn ? '131px' : '66px')};
+	box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.08);
+	z-index: 3;
+
+	& button {
+		width: 294px;
+	}
+
+	@media screen and (min-width: 768px) {
+		width: 100%;
+		${flexCenter}
+		justify-content: right;
+		position: fixed;
+		height: 72px;
+		padding: 20px 100px;
+		background-color: ${({ theme }) => theme.PALETTE.white[100]};
+		bottom: 0;
+		box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.08);
+		z-index: 23;
+
+		& button {
+			width: 180px;
+		}
+	}
+`;

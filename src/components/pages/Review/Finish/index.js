@@ -1,11 +1,11 @@
+import { useNavigate } from 'react-router-dom';
+
 import useModal from 'hooks/useModal';
 
 import * as S from './index.styles';
 
-import RatingSubModal from '../RatingSubModal';
-
 import Button from 'components/@common/Button';
-import { useNavigate } from 'react-router-dom';
+import RatingSubModal from '../RatingSubModal';
 
 function Finish({ result }) {
 	const { modalState, openModal, closeModal } = useModal();

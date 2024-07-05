@@ -8,11 +8,11 @@ import * as S from './index.styles';
 
 import Title from 'components/@common/Title';
 import Progress from 'components/@common/Progress';
-import PreviousPost from 'components/@common/PreviousPost';
-import Button from 'components/@common/Button';
 import Keyword from 'components/pages/Review/Keyword';
 import MediaList from 'components/pages/Review/MediaList';
 import Finish from 'components/pages/Review/Finish';
+import PreviousPost from 'components/@common/PreviousPost';
+import Button from 'components/@common/Button';
 
 function ReviewPost() {
 	const params = useParams();
@@ -31,8 +31,6 @@ function ReviewPost() {
 		if (result.data) {
 			setReview(result.data);
 		}
-
-		console.log(result.data);
 	}, [result.data, review.star]);
 
 	const handleClickApply = () => {
@@ -52,17 +50,17 @@ function ReviewPost() {
 		email,
 		submittedAt,
 		requirement,
-		hashtags,
 		mainKeyword,
 		subKeywords,
+		hashtags,
 		clientFiles,
-		nextReview,
-		previousReview,
 		resultLinks,
 		adminFiles,
 		comment,
 		star,
 		isRatingable,
+		nextReview,
+		previousReview,
 	} = review;
 
 	const fin = statusLabel === '완료';

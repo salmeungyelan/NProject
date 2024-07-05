@@ -51,7 +51,7 @@ export const MediaTitle = styled.div`
 		overflow: hidden;
 		white-space: nowrap;
 		text-overflow: ellipsis;
-		width: 40px;
+		width: 50px;
 	}
 
 	> img {
@@ -64,7 +64,7 @@ export const MediaTitle = styled.div`
 
 		> p {
 			font-size: ${({ theme }) => theme.FONT_SIZE.ms};
-			width: 50px;
+			width: 80px;
 		}
 
 		> img {
@@ -77,7 +77,7 @@ export const MediaTitle = styled.div`
 
 		> p {
 			font-size: ${({ theme }) => theme.FONT_SIZE.m};
-			width: 60px;
+			width: 90px;
 		}
 
 		> img {

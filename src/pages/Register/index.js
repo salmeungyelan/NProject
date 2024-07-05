@@ -1,20 +1,20 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import useApi from 'hooks/useApi';
 import useModal from 'hooks/useModal';
-import LINK from 'constants/link';
 import useInput from 'hooks/useInput';
+import useApi from 'hooks/useApi';
+import LINK from 'constants/link';
+import { formatBusinessNum, formatPhoneNum } from 'utils/formatNum';
 import MESSAGE from 'constants/message';
 import VALIDATE from 'utils/regex';
-import { formatBusinessNum, formatPhoneNum } from 'utils/formatNum';
 
 import * as S from './index.styles';
 
 import Logo from 'components/@common/Logo';
-import Line from 'components/@common/Line';
-import Address from 'components/@common/Address';
 import InputBox from 'components/@common/InputBox';
+import Address from 'components/@common/Address';
+import Line from 'components/@common/Line';
 import Button from 'components/@common/Button';
 import Modal from 'components/@common/Modal';
 import TermsModal from 'components/pages/Register/TermsModal';
@@ -255,9 +255,31 @@ function Register() {
 		else dataSet();
 
 		try {
+			const newData = {
+				email: inputData.email,
+				username: inputData.username,
+				password: inputData.password,
+				companyName: inputData.companyName,
+				contactNumber: inputData.contactNumber.replace(/-/g, ''),
+				postalCode: location.postalCode,
+				address: location.address,
+				addressDetail: location.detailAddress,
+				businessNumber: inputData.businessNumber.replace(/-/g, ''),
+				userTerms: [
+					{
+						termId: 1,
+						isAgreed: terms.privacy,
+					},
+					{
+						termId: 2,
+						isAgreed: terms.service,
+					},
+				],
+			};
+
 			const req = await trigger({
 				method: 'post',
-				data,
+				data: newData,
 				showBoundary: false,
 			});
 

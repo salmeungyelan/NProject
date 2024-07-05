@@ -1,20 +1,25 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import useApi from 'hooks/useApi';
 import useInput from 'hooks/useInput';
+import useApi from 'hooks/useApi';
+import LINK from 'constants/link';
 
 import * as S from './index.styles';
 
 import Title from 'components/@common/Title';
 import Search from 'components/@common/Search';
-import Card from 'components/@common/Card';
-import MultiSelect from 'components/@common/MultiSelect';
-import NoPost from 'components/@common/NoPost';
 import Category from 'components/pages/Review/Category';
+import MultiSelect from 'components/@common/MultiSelect';
 import DropDown from 'components/pages/Review/DropDown';
+import Card from 'components/@common/Card';
+import NoPost from 'components/@common/NoPost';
+import Button from 'components/@common/Button';
 
 function Review() {
 	const { inputData, setInputData, handleChangeSearch } = useInput();
+
+	const navigate = useNavigate();
 
 	const [data, setData] = useState([]);
 	const [selectedCategory, setSelectedCategory] = useState('');
@@ -47,7 +52,7 @@ function Review() {
 	const status =
 		selectedStatus[0].sortBy &&
 		selectedStatus.map(stat => `&status=${stat.sortBy}`).join('');
-	const searchData = `&title=${inputData}`;
+	const searchData = `&title=${inputData}&requirement=${inputData}`;
 
 	// 카테고리 / 옵션 / 상태만 변화했을 때 api 호출
 	const fetchData = async () => {
@@ -95,6 +100,10 @@ function Review() {
 				setData(req.data.reviews);
 			}
 		} catch (error) {}
+	};
+
+	const handleClickApply = () => {
+		navigate(LINK.REVIEW_APPLY);
 	};
 
 	return (
@@ -146,6 +155,12 @@ function Review() {
 				{/* 페이지네이션 */}
 				{data ? <div>1</div> : ''}
 			</S.Body>
+
+			<S.ApplyBtnBox>
+				<Button size="height" variant="default" onClick={handleClickApply}>
+					리뷰 신청하기
+				</Button>
+			</S.ApplyBtnBox>
 		</>
 	);
 }
