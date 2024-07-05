@@ -6,9 +6,9 @@ import useApi from 'hooks/useApi';
 
 import * as S from './index.styles';
 
-import Card from 'components/@common/Card';
-import Button from 'components/@common/Button';
 import Iphone from '../Iphone';
+import Card from 'components/@common/Card';
+import NoPost from 'components/@common/NoPost';
 
 function List() {
 	// 가장 최신 리뷰 -------------------------------------------
@@ -179,10 +179,7 @@ function List() {
 					</>
 				) : (
 					<S.NoPost>
-						<span>등록된 게시글이 없습니다.</span>
-						<Button variant="default" size="height">
-							등록하러 가기
-						</Button>
+						<NoPost review>등록된 게시글이 없습니다.</NoPost>
 					</S.NoPost>
 				)}
 			</S.ReviewIng>
@@ -220,10 +217,7 @@ function List() {
 					</>
 				) : (
 					<S.NoPost>
-						<span>등록된 게시글이 없습니다.</span>
-						<Button variant="default" size="height">
-							등록하러 가기
-						</Button>
+						<NoPost review>등록된 게시글이 없습니다.</NoPost>
 					</S.NoPost>
 				)}
 			</S.ReviewFin>

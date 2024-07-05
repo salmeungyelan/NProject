@@ -92,24 +92,12 @@ export const NoPost = styled.div`
 	width: 100%;
 	height: 133px;
 	box-shadow: 0 2px 4px 0 #00000029;
+	border-radius: 6px;
 	${flexColumnCenter}
 	gap: 19px;
 
-	> span {
-		font-weight: 600;
-		font-size: ${({ theme }) => theme.FONT_SIZE.m};
-	}
-
-	& button {
-		width: 100px;
-	}
-
 	@media screen and (min-width: 768px) {
 		height: 150px;
-
-		> span {
-			font-size: ${({ theme }) => theme.FONT_SIZE.ml};
-		}
 	}
 
 	@media screen and (min-width: 1200px) {

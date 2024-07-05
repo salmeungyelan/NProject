@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import LINK from 'constants/link';
 import useApi from 'hooks/useApi';
+import LINK from 'constants/link';
 
 import * as S from './index.styles';
 
