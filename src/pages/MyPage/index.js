@@ -7,8 +7,8 @@ import useApi from 'hooks/useApi';
 import * as S from './index.styles';
 
 import Title from 'components/@common/Title';
-import Button from 'components/@common/Button';
 import InputBox from 'components/@common/InputBox';
+import Button from 'components/@common/Button';
 import Address from 'components/@common/Address';
 import PwdModal from 'components/pages/MyPage/PwdModal';
 
