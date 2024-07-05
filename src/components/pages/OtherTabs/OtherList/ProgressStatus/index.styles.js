@@ -1,42 +1,20 @@
 import styled from 'styled-components';
-import {
-	flexCenter,
-	flexColumn,
-	flexLeftCenter,
-	flexSpaceBetweenCenter,
-} from 'styles/common';
+import { flexCenter, flexColumn, flexSpaceBetweenCenter } from 'styles/common';
 
 export const Body = styled.div`
 	border-top: 1px solid ${({ theme }) => theme.PALETTE.gray[0]};
 	background-color: ${({ theme }) => theme.PALETTE.white[0]};
+
 	padding: 24px 12px;
 	${flexColumn}
 	gap: 24px;
 
 	@media screen and (min-width: 768px) {
 		padding: 36px 24px;
-
-		> div:last-child {
-			${flexCenter}
-			justify-content: right;
-
-			> button {
-				width: 180px;
-			}
-		}
 	}
 
 	@media screen and (min-width: 1200px) {
 		padding: 60px 36px;
-
-		> div:last-child {
-			${flexCenter}
-			justify-content: right;
-
-			> button {
-				width: 180px;
-			}
-		}
 	}
 `;
 
@@ -59,7 +37,7 @@ export const Status = styled.p`
 	padding: 4px 8px;
 	background-color: ${({ theme }) => theme.PALETTE.white[150]};
 	width: 68px;
-	border-radius: 8px;
+	border-radius: 4px;
 	font-weight: 600;
 	text-align: center;
 
@@ -197,99 +175,18 @@ export const Td = styled.td`
 	}
 `;
 
-export const TextBox = styled.div`
+export const ButtonBox = styled.div`
 	${flexColumn}
-	gap: 12px;
-`;
-
-export const ReadImg = styled.div`
-	padding: 7px 10px;
-	border: 1px solid ${({ theme }) => theme.PALETTE.gray[0]};
-	border-radius: 4px;
-	background-color: ${({ theme }) => theme.PALETTE.white[100]};
-	color: ${({ theme }) => theme.PALETTE.gray[200]};
-	font-size: ${({ theme }) => theme.FONT_SIZE.ms};
-	line-height: 18px;
-
-	line-height: 0px;
-	${flexLeftCenter}
-	gap: 8px;
-	overflow-x: scroll;
-	overflow-y: hidden;
-	box-sizing: border-box;
+	gap: 10px;
 
 	@media screen and (min-width: 768px) {
-		font-size: ${({ theme }) => theme.FONT_SIZE.m};
-		padding: 12px;
-	}
-`;
+		${flexCenter}
+		justify-content: right;
+		flex-direction: row;
+		gap: 10px;
 
-export const Img = styled.div`
-	${flexColumn}
-	gap: 4px;
-	position: relative;
-
-	> img {
-		border: ${({ $thumbnail, theme }) =>
-			$thumbnail ? `2px solid ${theme.PALETTE.navy}` : 'none'};
-
-		width: 64px;
-		height: 64px;
-		object-fit: cover;
-
-		@media screen and (min-width: 768px) {
-			width: 100px;
-			height: 100px;
-			border: ${({ $thumbnail, theme }) =>
-				$thumbnail ? `4px solid ${theme.PALETTE.navy}` : 'none'};
-		}
-
-		@media screen and (min-width: 1200px) {
-			width: 120px;
-			height: 120px;
-			border: ${({ $thumbnail, theme }) =>
-				$thumbnail ? `4px solid ${theme.PALETTE.navy}` : 'none'};
-		}
-	}
-`;
-
-export const ImgTitle = styled.div`
-	${flexCenter}
-	gap: 4px;
-	height: 10px;
-	color: ${({ theme }) => theme.PALETTE.gray[100]};
-	cursor: pointer;
-
-	> p {
-		font-size: ${({ theme }) => theme.FONT_SIZE.xs};
-	}
-
-	> img {
-		width: 8px;
-	}
-
-	@media screen and (min-width: 768px) {
-		height: 14px;
-		gap: 6px;
-
-		> p {
-			font-size: ${({ theme }) => theme.FONT_SIZE.ms};
-		}
-
-		> img {
-			width: 12px;
-		}
-	}
-
-	@media screen and (min-width: 1200px) {
-		height: 16px;
-
-		> p {
-			font-size: ${({ theme }) => theme.FONT_SIZE.m};
-		}
-
-		> img {
-			width: 14px;
+		> button {
+			width: 180px;
 		}
 	}
 `;

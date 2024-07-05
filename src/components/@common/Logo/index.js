@@ -1,6 +1,8 @@
 import * as S from './index.styles';
 
-function Logo({ size, white }) {
+function Logo(props) {
+	const { size, white } = props;
+
 	const logoSrc = '/assets/images/Logo-white.png';
 
 	return (

@@ -1,10 +1,14 @@
 import styled from 'styled-components';
-import { flexCenter, flexColumn, flexSpaceBetweenCenter } from 'styles/common';
+import {
+	flexCenter,
+	flexColumn,
+	flexLeftCenter,
+	flexSpaceBetweenCenter,
+} from 'styles/common';
 
 export const Body = styled.div`
 	border-top: 1px solid ${({ theme }) => theme.PALETTE.gray[0]};
 	background-color: ${({ theme }) => theme.PALETTE.white[0]};
-
 	padding: 24px 12px;
 	${flexColumn}
 	gap: 24px;
@@ -55,7 +59,7 @@ export const Status = styled.p`
 	padding: 4px 8px;
 	background-color: ${({ theme }) => theme.PALETTE.white[150]};
 	width: 68px;
-	border-radius: 4px;
+	border-radius: 8px;
 	font-weight: 600;
 	text-align: center;
 
@@ -190,5 +194,100 @@ export const Td = styled.td`
 
 	@media screen and (min-width: 1200px) {
 		padding: 18px 0;
+	}
+`;
+
+export const TextBox = styled.div`
+	${flexColumn}
+	gap: 12px;
+`;
+
+export const ReadImg = styled.div`
+	padding: 7px 10px;
+	border: 1px solid ${({ theme }) => theme.PALETTE.gray[0]};
+	border-radius: 4px;
+	background-color: ${({ theme }) => theme.PALETTE.white[100]};
+	color: ${({ theme }) => theme.PALETTE.gray[200]};
+	font-size: ${({ theme }) => theme.FONT_SIZE.ms};
+	line-height: 18px;
+
+	${flexLeftCenter}
+	gap: 8px;
+	overflow-x: scroll;
+	overflow-y: hidden;
+	box-sizing: border-box;
+
+	@media screen and (min-width: 768px) {
+		font-size: ${({ theme }) => theme.FONT_SIZE.m};
+		padding: 12px;
+	}
+`;
+
+export const Img = styled.div`
+	${flexColumn}
+	gap: 4px;
+
+	> img,
+	video {
+		width: 64px;
+		height: 64px;
+		object-fit: cover;
+
+		@media screen and (min-width: 768px) {
+			width: 100px;
+			height: 100px;
+		}
+
+		@media screen and (min-width: 1200px) {
+			width: 120px;
+			height: 120px;
+		}
+	}
+`;
+
+export const ImgTitle = styled.div`
+	${flexCenter}
+	gap: 4px;
+	height: 10px;
+	color: ${({ theme }) => theme.PALETTE.gray[100]};
+	cursor: pointer;
+
+	> p {
+		font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		width: 50px;
+	}
+
+	> img {
+		width: 8px;
+	}
+
+	@media screen and (min-width: 768px) {
+		height: 14px;
+		gap: 6px;
+
+		> p {
+			font-size: ${({ theme }) => theme.FONT_SIZE.ms};
+			width: 80px;
+		}
+
+		> img {
+			width: 12px;
+		}
+	}
+
+	@media screen and (min-width: 1200px) {
+		height: 16px;
+
+		> p {
+			font-size: ${({ theme }) => theme.FONT_SIZE.m};
+			width: 90px;
+		}
+
+		> img {
+			width: 14px;
+		}
 	}
 `;

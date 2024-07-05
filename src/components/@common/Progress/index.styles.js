@@ -2,17 +2,20 @@ import { styled, css } from 'styled-components';
 import { flexCenter } from 'styles/common';
 
 const variantCSS = {
-	REVIEW_STATUS_01: css`
+	'01': css`
 		background: ${({ theme }) => theme.PALETTE.gray[100]};
 	`,
-	REVIEW_STATUS_02: css`
+	'02': css`
 		background: ${({ theme }) => theme.PALETTE.blue};
 	`,
-	REVIEW_STATUS_03: css`
+	'03': css`
 		background: ${({ theme }) => theme.PALETTE.orange[100]};
 	`,
-	REVIEW_STATUS_04: css`
+	'04': css`
 		background: ${({ theme }) => theme.PALETTE.navy};
+	`,
+	'05': css`
+		background: ${({ theme }) => theme.PALETTE.red[100]};
 	`,
 };
 

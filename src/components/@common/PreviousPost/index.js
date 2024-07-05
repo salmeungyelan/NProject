@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import usePathname from 'hooks/usePathname';
@@ -6,7 +7,6 @@ import * as S from './index.styles';
 
 import Line from '../Line';
 import Button from '../Button';
-import { useEffect, useState } from 'react';
 
 function PreviousPost(props) {
 	const { prev, next, trigger } = props;

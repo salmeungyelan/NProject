@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { ModalBackground, flexColumnCenter } from 'styles/common';
+import { ModalBackground, flexCenter, flexColumnCenter } from 'styles/common';
 
 export const Background = styled.div`
 	${ModalBackground}
-	z-index: 101;
+	z-index: 100;
 `;
 
 export const Container = styled.div`
@@ -13,7 +13,7 @@ export const Container = styled.div`
 	transform: translate(-50%, -50%);
 	background-color: ${({ theme }) => theme.PALETTE.white[100]};
 	max-width: 400px;
-	width: 80%;
+	width: 70%;
 	padding: 32px 30px;
 	${flexColumnCenter}
 	gap: 36px;
@@ -47,6 +47,8 @@ export const Body = styled.div`
 `;
 
 export const ButtonBox = styled.div`
+	${flexCenter}
+	gap: 10px;
 	width: 85%;
 	cursor: pointer;
 `;

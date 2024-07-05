@@ -5,8 +5,6 @@ export const Card = styled.div`
 	width: 143px;
 	height: 133px;
 	box-shadow: 0 0 4px 0 #00000029;
-	/* transition: transform 1s ease-in-out; */
-	/* transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94); */
 	transition: all 1s linear;
 
 	> a,

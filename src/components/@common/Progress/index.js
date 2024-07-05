@@ -5,11 +5,14 @@ import * as S from './index.styles';
 function Progress(props) {
 	const { variant, children } = props;
 
-	const path = usePathname();
+	const { path } = usePathname();
 	const review = path === 'review';
 
+	const variantSplit = variant?.split('_');
+	const status = variantSplit && variantSplit[variantSplit.length - 1];
+
 	return (
-		<S.CheckProgress $variant={variant} $review={review}>
+		<S.CheckProgress $variant={status} $review={review}>
 			{children}
 		</S.CheckProgress>
 	);

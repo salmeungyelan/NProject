@@ -1,4 +1,4 @@
-import { forwardRef, useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 
 import * as S from './index.styles';
@@ -9,8 +9,16 @@ const scriptUrl =
 	'https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
 
 function Address(props, ref) {
-	const { button, register, number, detail, onChange, message, ...rest } =
-		props;
+	const {
+		button,
+		register,
+		postalCode,
+		detail,
+		place,
+		onChange,
+		message,
+		...rest
+	} = props;
 
 	const size = register ? 'default' : 'height';
 
@@ -19,6 +27,12 @@ function Address(props, ref) {
 	const [postcode, setPostcode] = useState('');
 	const [address, setAddress] = useState('');
 	const [detailAddress, setDetailAddress] = useState('');
+
+	useEffect(() => {
+		setPostcode(postalCode);
+		setAddress(place);
+		setDetailAddress(detail);
+	}, [postalCode, place, detail]);
 
 	const handleComplete = data => {
 		let fullAddress = data.address;
@@ -42,8 +56,7 @@ function Address(props, ref) {
 		onChange('address', fullAddress);
 	};
 
-	const handleClickPostCode = e => {
-		e.preventDefault();
+	const handleClickPostCode = () => {
 		open({ onComplete: handleComplete });
 	};
 
@@ -89,7 +102,7 @@ function Address(props, ref) {
 				type="text"
 				placeholder="상세 주소"
 				value={detailAddress}
-				onChange={() => handleChangeDetail()}
+				onChange={e => handleChangeDetail(e)}
 				{...rest}
 			/>
 			{message && <p>{message}</p>}

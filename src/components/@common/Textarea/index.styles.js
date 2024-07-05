@@ -44,6 +44,10 @@ const sizeCSS = {
 			height: 210px;
 		}
 	`,
+	completed: css`
+		width: 100%;
+		height: fit-content;
+	`,
 };
 
 export const Textarea = styled.textarea`
