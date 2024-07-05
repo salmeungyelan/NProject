@@ -9,8 +9,8 @@ import * as S from './index.styles';
 import Title from 'components/@common/Title';
 import Search from 'components/@common/Search';
 import Filter from 'components/@common/Filter';
-import NoPost from 'components/@common/NoPost';
 import NoticeList from 'components/pages/Notice/NoticeList';
+import NoPost from 'components/@common/NoPost';
 
 function Notice() {
 	const { sort, handelSelectFilter } = useFilter();
