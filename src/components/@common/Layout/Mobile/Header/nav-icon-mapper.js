@@ -1,6 +1,8 @@
 import LINK from '../../../../../constants/link';
+
 import * as S from './index.styles';
-export default function navIconMapper(path) {
+
+const navIconMapper = path => {
 	switch (path) {
 		// 리뷰
 		case `${LINK.REVIEW}`:
@@ -236,4 +238,6 @@ export default function navIconMapper(path) {
 				</S.Svg>
 			);
 	}
-}
+};
+
+export default navIconMapper;
