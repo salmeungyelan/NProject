@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import useInput from 'hooks/useInput';
-import useApi from 'hooks/useApi';
-import MESSAGE from 'constants/message';
 import useModal from 'hooks/useModal';
+import useApi from 'hooks/useApi';
 import LINK from 'constants/link';
+import MESSAGE from 'constants/message';
 
 import * as S from './index.styles';
 
-import Button from 'components/@common/Button';
 import Input from 'components/@common/Input';
+import Button from 'components/@common/Button';
 import Modal from 'components/@common/Modal';
 
 function PwdModal({ onClose, userId }) {
@@ -32,15 +32,6 @@ function PwdModal({ onClose, userId }) {
 		path: `/users/update-password/${userId}`,
 		shouldFetch: false,
 	});
-
-	// 1. 현재 비밀번호가 입력됐는지 확인
-	// 2. 현재 비밀번호가 맞는지 확인 api -> match
-	// 3. 맞다면 새 비밀번호가 입력됐는지 확인 / 틀리다면 메세지
-	// 4. 새 비밀번호 확인이 입력됐는지 확인
-	// 5. 새 비밀번호와 새 비밀번호 확인이 일치하는지 확인
-	// 6. 비밀번호 업데이트 api -> update
-	// 7. 비밀번호 변경됐다는 openModal
-	// 8. 모달 닫으면 다시 마이페이지로 이동
 
 	const handleChangePw = async () => {
 		// 1. 현재 비밀번호가 입력됐는지 확인
