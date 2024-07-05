@@ -6,8 +6,8 @@ import useApi from 'hooks/useApi';
 
 import * as S from './index.styles';
 
-import Search from 'components/@common/Search';
 import Title from 'components/@common/Title';
+import Search from 'components/@common/Search';
 import Filter from 'components/@common/Filter';
 import GuideList from 'components/pages/Guide/GuideList';
 import NoPost from 'components/@common/NoPost';

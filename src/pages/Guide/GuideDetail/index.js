@@ -31,8 +31,6 @@ function GuideDetail() {
 				next: result.data.nextGuide,
 			});
 		}
-
-		console.log(result.data);
 	}, [result.data, detailData]);
 
 	const { author, title, content } = detailData;
