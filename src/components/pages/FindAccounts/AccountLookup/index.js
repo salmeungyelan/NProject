@@ -1,20 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
 
-import useApi from 'hooks/useApi';
 import useInput from 'hooks/useInput';
-import MESSAGE from 'constants/message';
+import useApi from 'hooks/useApi';
 import { formatBusinessNum, formatPhoneNum } from 'utils/formatNum';
+import MESSAGE from 'constants/message';
 
 import * as S from './index.styles';
 
+import InputBox from 'components/@common/InputBox';
 import Notice from 'components/@common/Notice';
 import Button from 'components/@common/Button';
-import InputBox from 'components/@common/InputBox';
 import IdResult from '../IdResult';
 import TempPwd from '../TempPwd';
 
-function AccountLookup(props) {
-	const { password } = props;
+function AccountLookup({ password }) {
 	const { inputData, setInputData, handleChange } = useInput();
 
 	const input = password ? '이메일 또는 아이디' : '업체명';

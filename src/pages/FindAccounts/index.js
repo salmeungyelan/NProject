@@ -1,5 +1,6 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
+import usePathname from 'hooks/usePathname';
 import LINK from 'constants/link';
 
 import * as S from './index.styles';
@@ -8,7 +9,7 @@ import Logo from 'components/@common/Logo';
 import AccountLookup from 'components/pages/FindAccounts/AccountLookup';
 
 function FindAccounts() {
-	const { pathname } = useLocation();
+	const { pathname } = usePathname();
 	const accounts = pathname.split('/')[2] === 'password';
 
 	return (
