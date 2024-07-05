@@ -211,7 +211,6 @@ export const ReadImg = styled.div`
 	font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 	line-height: 18px;
 
-	line-height: 0px;
 	${flexLeftCenter}
 	gap: 8px;
 	overflow-x: scroll;
@@ -227,12 +226,9 @@ export const ReadImg = styled.div`
 export const Img = styled.div`
 	${flexColumn}
 	gap: 4px;
-	position: relative;
 
-	> img {
-		border: ${({ $thumbnail, theme }) =>
-			$thumbnail ? `2px solid ${theme.PALETTE.navy}` : 'none'};
-
+	> img,
+	video {
 		width: 64px;
 		height: 64px;
 		object-fit: cover;
@@ -240,15 +236,11 @@ export const Img = styled.div`
 		@media screen and (min-width: 768px) {
 			width: 100px;
 			height: 100px;
-			border: ${({ $thumbnail, theme }) =>
-				$thumbnail ? `4px solid ${theme.PALETTE.navy}` : 'none'};
 		}
 
 		@media screen and (min-width: 1200px) {
 			width: 120px;
 			height: 120px;
-			border: ${({ $thumbnail, theme }) =>
-				$thumbnail ? `4px solid ${theme.PALETTE.navy}` : 'none'};
 		}
 	}
 `;
@@ -262,6 +254,10 @@ export const ImgTitle = styled.div`
 
 	> p {
 		font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		width: 50px;
 	}
 
 	> img {
@@ -274,6 +270,7 @@ export const ImgTitle = styled.div`
 
 		> p {
 			font-size: ${({ theme }) => theme.FONT_SIZE.ms};
+			width: 80px;
 		}
 
 		> img {
@@ -286,6 +283,7 @@ export const ImgTitle = styled.div`
 
 		> p {
 			font-size: ${({ theme }) => theme.FONT_SIZE.m};
+			width: 90px;
 		}
 
 		> img {
