@@ -25,12 +25,12 @@ export const Container = styled.div`
 
 	@media only screen and (min-width: 768px) {
 		width: 568px;
-		padding: 46px 40px;
+		padding: 42px 34px;
 	}
 
 	@media only screen and (min-width: 1200px) {
-		width: 1200px;
-		padding: 60px 102px;
+		width: 800px;
+		padding: 52px 44px;
 	}
 `;
 
@@ -112,52 +112,17 @@ export const Step = styled.div`
 
 export const Body = styled.div`
 	${flexColumn};
-
-	/* height: 458.5px;
-
-	@media screen and (min-width: 768px) {
-		height: 498.5px;
-	}
-
-	@media screen and (min-width: 1200px) {
-		height: 574.5px;
-	} */
 `;
 
 export const ButtonBox = styled.div`
 	${flexCenter}
 	flex-wrap: wrap;
 	gap: 12px;
-
-	> div {
-		${flexCenter};
-		gap: 12px;
-		width: 100%;
-	}
+	width: 100%;
 
 	@media screen and (min-width: 768px) {
-		flex-wrap: nowrap;
-		flex-direction: row;
-
 		> button {
-			width: 180px;
-		}
-
-		> div > button {
-			width: 180px;
-		}
-	}
-
-	@media screen and (min-width: 1200px) {
-		${flexSpaceBetweenCenter}
-		flex-direction: row;
-
-		> div {
-			width: auto;
-		}
-
-		& button {
-			width: 180px;
+			width: 360px;
 		}
 	}
 `;
