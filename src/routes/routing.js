@@ -16,13 +16,13 @@ const GuideDetail = lazy(() => import('pages/Guide/GuideDetail'));
 const Notice = lazy(() => import('pages/Notice'));
 const NoticeDetail = lazy(() => import('pages/Notice/NoticeDetail'));
 
-const MyPage = lazy(() => import('pages/MyPage'));
-
 const Review = lazy(() => import('pages/Review'));
 const ReviewPost = lazy(() => import('pages/Review/ReviewPost'));
 const ReviewApply = lazy(() => import('pages/Review/ReviewApply'));
 
 const OtherTabs = lazy(() => import('pages/OtherTabs'));
+
+const MyPage = lazy(() => import('pages/MyPage'));
 
 const router = createBrowserRouter([
 	{
