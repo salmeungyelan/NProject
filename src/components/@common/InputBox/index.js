@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 
 import * as S from './index.styles';
 
@@ -6,14 +6,15 @@ function InputBox(props, ref) {
 	const {
 		register,
 		title,
-		password,
-		check,
-		value,
-		placeholder,
 		message,
-		type,
 		id,
 		name,
+		type,
+		value,
+		defaultValue,
+		placeholder,
+		disabled,
+		password,
 		...rest
 	} = props;
 
@@ -26,11 +27,13 @@ function InputBox(props, ref) {
 			<S.Input
 				id={id}
 				name={name}
-				size={register ? 'default' : 'height'}
 				type={type}
 				ref={ref}
 				value={value}
+				defaultValue={defaultValue}
 				placeholder={placeholder}
+				disabled={disabled}
+				size={register ? 'default' : 'height'}
 			/>
 
 			{password && (

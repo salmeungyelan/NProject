@@ -18,6 +18,7 @@ export const Container = styled.div`
 	${flexColumnCenter}
 	gap: 36px;
 	transition: all ease 0.3s;
+	border-radius: 6px;
 
 	@media screen and (max-width: 768px) {
 		transition: all ease 0.3s;

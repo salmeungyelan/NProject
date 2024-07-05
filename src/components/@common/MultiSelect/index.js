@@ -1,8 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
+
+import usePathname from 'hooks/usePathname';
+import useApi from 'hooks/useApi';
 
 import * as S from './index.styles';
-import useApi from 'hooks/useApi';
-import usePathname from 'hooks/usePathname';
 
 function MultiSelect(props) {
 	const { selectedStatus, setSelectedStatus } = props;
@@ -13,8 +14,10 @@ function MultiSelect(props) {
 	const [expanded, setExpanded] = useState(false);
 	const [status, setStatus] = useState([]);
 
+	const paths = path.toUpperCase().replace(/-/g, '_');
+
 	const { result } = useApi({
-		path: `/client/global-constants?typeValue=${path.toUpperCase()}_STATUS`,
+		path: `/client/global-constants?typeValue=${paths}_STATUS`,
 		shouldFetch: true,
 	});
 

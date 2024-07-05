@@ -4,7 +4,7 @@ function MediaModal(props) {
 	const { onClose, src, type } = props;
 
 	// 비디오 여부 확인
-	const video = type.includes('video', 'mp4');
+	const video = type.includes('video');
 
 	return (
 		<S.Background>
