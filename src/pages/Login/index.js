@@ -16,6 +16,7 @@ import Line from 'components/@common/Line';
 
 function Login() {
 	const { handleChange, inputData } = useInput();
+
 	const navigate = useNavigate();
 
 	const idRef = useRef(null);
