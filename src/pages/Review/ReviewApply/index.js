@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import useInput from 'hooks/useInput';
+import useModal from 'hooks/useModal';
 import decodeJWT from 'utils/token';
 import useApi from 'hooks/useApi';
 import fileToBase64 from 'utils/fileToBase64';
-import useModal from 'hooks/useModal';
 import LINK from 'constants/link';
 import MESSAGE from 'constants/message';
 
