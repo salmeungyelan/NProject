@@ -11,28 +11,10 @@ export const Body = styled.div`
 
 	@media screen and (min-width: 768px) {
 		padding: 36px 24px;
-
-		> div:last-child {
-			${flexCenter}
-			justify-content: right;
-
-			> button {
-				width: 180px;
-			}
-		}
 	}
 
 	@media screen and (min-width: 1200px) {
 		padding: 60px 36px;
-
-		> div:last-child {
-			${flexCenter}
-			justify-content: right;
-
-			> button {
-				width: 180px;
-			}
-		}
 	}
 `;
 
@@ -190,5 +172,21 @@ export const Td = styled.td`
 
 	@media screen and (min-width: 1200px) {
 		padding: 18px 0;
+	}
+`;
+
+export const ButtonBox = styled.div`
+	${flexColumn}
+	gap: 10px;
+
+	@media screen and (min-width: 768px) {
+		${flexCenter}
+		justify-content: right;
+		flex-direction: row;
+		gap: 10px;
+
+		> button {
+			width: 180px;
+		}
 	}
 `;
