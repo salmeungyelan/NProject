@@ -1,21 +1,27 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
+import usePathname from 'hooks/usePathname';
 import LINK from 'constants/link';
 
 import * as S from './index.styles';
 
 import Logo from 'components/@common/Logo';
-import Button from 'components/@common/Button';
 
 function Header(props) {
-	const { logout, applyBtn, onClick } = props;
+	const { logout, name } = props;
 
 	const navigate = useNavigate();
 
-	const [navClicked, setNavClicked] = useState(
-		'/' + (window.location.pathname.split('/')[1] ?? ''),
-	);
+	const { path } = usePathname();
+
+	const [navClicked, setNavClicked] = useState('/' + (path ?? ''));
+
+	useEffect(() => {
+		if (navClicked !== path) {
+			setNavClicked('/' + (path ?? ''));
+		}
+	}, [path]);
 
 	const handleClickNav = link => {
 		setNavClicked(link);
@@ -37,7 +43,7 @@ function Header(props) {
 
 					<S.WelcomeText>
 						<p>
-							<strong>황올컴퍼니</strong> 님 환영합니다!
+							<strong>{name}</strong> 님 환영합니다!
 						</p>
 					</S.WelcomeText>
 
@@ -131,14 +137,6 @@ function Header(props) {
 						</S.Li>
 					</ul>
 				</S.Nav>
-
-				{applyBtn && (
-					<S.ApplyBtnBox>
-						<Button size="height" variant="default" onClick={onClick}>
-							{applyBtn.title} 신청하기
-						</Button>
-					</S.ApplyBtnBox>
-				)}
 			</S.Header>
 		</>
 	);

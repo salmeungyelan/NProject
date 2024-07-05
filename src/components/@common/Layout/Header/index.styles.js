@@ -172,20 +172,3 @@ export const MoreLi = styled.li`
 		}
 	}
 `;
-
-export const ApplyBtnBox = styled.div`
-	width: 100%;
-	${flexCenter}
-	justify-content: right;
-	position: fixed;
-	height: 72px;
-	padding: 20px 100px;
-	background-color: ${({ theme }) => theme.PALETTE.white[100]};
-	bottom: 0;
-	box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.08);
-	z-index: 23;
-
-	& button {
-		width: 180px;
-	}
-`;
