@@ -1,82 +1,164 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
+import LINK from 'constants/link';
 import usePathname from 'hooks/usePathname';
+import useFilter from 'hooks/useFilter';
 import useModal from 'hooks/useModal';
+import useApi from 'hooks/useApi';
 
 import * as S from './index.styles';
 
 import Title from 'components/@common/Title';
-import InfoModal from 'components/pages/OtherTabs/InfoModal';
-import RequestModal from 'components/pages/OtherTabs/RequestModal';
 import OtherList from 'components/pages/OtherTabs/OtherList';
+import ApplicationModal from 'components/pages/OtherTabs/ApplicationModal';
+import Button from 'components/@common/Button';
 
 const url = [
 	{
-		link: 'visit_experience',
-		enTitle: 'REVIEW TEAM',
+		link: LINK.TEAM,
 		koTitle: '체험단',
+		enTitle: 'REVIEW TEAM',
 		children: '체험단을 신청할 수 있습니다.',
 	},
 	{
-		link: 'viewtab_instagram',
-		enTitle: 'VIEWTAB & INSTA',
+		link: LINK.VIEW,
 		koTitle: '뷰탭&인스타',
+		enTitle: 'VIEWTAB & INSTA',
 		children: '뷰탭&인스타를 신청할 수 있습니다.',
 	},
 	{
-		link: 'website_outsourcing',
-		enTitle: 'WEBSITE CREATION',
+		link: LINK.DEVELOP,
 		koTitle: '홈페이지 제작',
+		enTitle: 'WEBSITE CREATION',
 		children: '홈페이지 제작을 신청할 수 있습니다.',
 	},
 ];
 
 function OtherTabs() {
-	const { path } = usePathname();
-	const mainTitle = url.filter(el => path === el.link)[0];
+	const { path, pathname } = usePathname();
+	const mainTitle = url.filter(el => pathname === el.link)[0];
 
-	const { modalState, openModal } = useModal();
-	const [suggestBtn, setSuggestBtn] = useState(false);
-	const [nextStep, setNextStep] = useState(true);
+	const { sort, handelSelectFilter } = useFilter();
+	const { modalState, openModal, closeModal } = useModal();
 
+	const [otherList, setOtherList] = useState([]);
+	const [checkHistory, setCheckHistory] = useState(false);
+
+	const [selectedStatus, setSelectedStatus] = useState([
+		{
+			codeLabel: '전체',
+			sortBy: '',
+		},
+	]);
+
+	const apiPath = `/client/${path}s?page=1&size=7&sortBy=${sort}`;
+
+	const { result, trigger } = useApi({
+		path: apiPath,
+		shouldFetch: true,
+	});
+
+	// visitExperiences, viewtabInstagrams, websiteOutsourcings
+	const camelCasePath = useMemo(() => {
+		return (
+			path
+				.split('-')
+				.map((word, index) =>
+					index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1),
+				)
+				.join('') + 's'
+		);
+	}, [path]);
+
+	useEffect(() => {
+		if (result.data) {
+			const resultData = result.data[camelCasePath];
+			setOtherList(resultData);
+		}
+	}, [result.data, camelCasePath]);
+
+	useEffect(() => {
+		setCheckHistory(false);
+
+		trigger({
+			applyResult: true,
+		});
+	}, [path, sort]);
+
+	const status =
+		selectedStatus[0].sortBy &&
+		selectedStatus.map(stat => `&status=${stat.sortBy}`).join('');
+
+	const fetchData = async () => {
+		try {
+			const req = await trigger({
+				path: apiPath + status,
+				applyResult: true,
+			});
+
+			if (req.data) {
+				setOtherList(req.data[camelCasePath]);
+			}
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	useEffect(() => {
+		fetchData();
+	}, [selectedStatus, sort]);
+
+	// 제안서 & 리스트
+	const handleSuggestBtn = () => {
+		setCheckHistory(prev => !prev);
+	};
+
+	// 신청 모달 띄우기
 	const handleOpenModal = () => {
 		openModal();
-		setNextStep(true);
 	};
-
-	const handleNext = () => {
-		setNextStep(prev => !prev);
-	};
-
-	const handleSuggestBtn = () => {
-		setSuggestBtn(prev => !prev);
-	};
-
-	// 리스트가 있을 경우 1. 신청하기 버튼 click 2. 제안서 보기 3. 신청하기 버튼 -> 모달
-	// 리스트 없는 경우 1. 제안서 보기 2. 신청하기 버튼 -> 모달
 
 	return (
-		<S.Body>
-			{modalState &&
-				(nextStep ? (
-					<InfoModal onNext={handleNext} title={mainTitle.koTitle} />
-				) : (
-					<RequestModal onPrev={handleNext} title={mainTitle.koTitle} />
-				))}
-
-			<Title title={mainTitle.enTitle}>{mainTitle.children}</Title>
-
-			{suggestBtn ? (
-				<S.Content>
-					<span>제안서</span>
-				</S.Content>
-			) : (
-				<OtherList />
+		<>
+			{modalState && (
+				<ApplicationModal onClose={closeModal} title={mainTitle.koTitle} />
 			)}
 
-			{/* 페이지네이션 */}
-			<div></div>
-		</S.Body>
+			<S.Body>
+				<Title title={mainTitle.enTitle}>{mainTitle.children}</Title>
+
+				{/* 첫 렌더링 시 */}
+				{!checkHistory && (
+					<S.Content>
+						<span>제안서</span>
+					</S.Content>
+				)}
+
+				{checkHistory && (
+					<OtherList
+						title={mainTitle.koTitle}
+						otherList={otherList}
+						selectedStatus={selectedStatus}
+						setSelectedStatus={setSelectedStatus}
+						sort={sort}
+						onSelect={handelSelectFilter}
+					/>
+				)}
+
+				{/* 페이지네이션 */}
+				<div></div>
+			</S.Body>
+			<S.ApplyBtnBox>
+				<div>
+					<Button size="height" variant="white" onClick={handleSuggestBtn}>
+						{checkHistory ? '제안서 보기' : '이용 내역 확인'}
+					</Button>
+					<Button size="height" variant="default" onClick={handleOpenModal}>
+						{mainTitle.koTitle} 신청하기
+					</Button>
+				</div>
+			</S.ApplyBtnBox>
+		</>
 	);
 }
 
