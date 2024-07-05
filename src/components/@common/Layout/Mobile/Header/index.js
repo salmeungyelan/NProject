@@ -1,21 +1,21 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import usePathname from 'hooks/usePathname';
 import LINK from 'constants/link';
 
 import * as S from './index.styles';
 
 import Logo from 'components/@common/Logo';
-import Button from 'components/@common/Button';
 import navIconMapper from './nav-icon-mapper';
 
 function MobileHeader(props) {
-	const { logout, applyBtn, onClick } = props;
+	const { logout, name } = props;
+
+	const { path } = usePathname();
 
 	// 모바일 NAV
-	const [navClicked, setNavClicked] = useState(
-		'/' + (window.location.pathname.split('/')[1] ?? ''),
-	);
+	const [navClicked, setNavClicked] = useState('/' + (path ?? ''));
 
 	// 모바일 NAV 더보기
 	const [moreBtn, setMoreBtn] = useState(false);
@@ -72,7 +72,7 @@ function MobileHeader(props) {
 
 				<S.WelcomeText>
 					<p>
-						<strong>황올컴퍼니</strong> 님 환영합니다!
+						<strong>{name}</strong> 님 환영합니다!
 					</p>
 				</S.WelcomeText>
 
@@ -172,7 +172,7 @@ function MobileHeader(props) {
 						<S.NavLabel>
 							<input type="radio" checked={LINK.TEAM === navClicked} />
 							<Link to={LINK.TEAM} onClick={() => setNavClicked(LINK.TEAM)}>
-							{navIconMapper(LINK.TEAM)}
+								{navIconMapper(LINK.TEAM)}
 								체험단
 							</Link>
 						</S.NavLabel>
@@ -182,7 +182,7 @@ function MobileHeader(props) {
 						<S.NavLabel>
 							<input type="radio" checked={LINK.VIEW === navClicked} />
 							<Link to={LINK.VIEW} onClick={() => setNavClicked(LINK.VIEW)}>
-							{navIconMapper(LINK.VIEW)}
+								{navIconMapper(LINK.VIEW)}
 								뷰탭&인스타
 							</Link>
 						</S.NavLabel>
@@ -205,21 +205,13 @@ function MobileHeader(props) {
 						<S.NavLabel>
 							<input type="radio" checked={LINK.MY === navClicked} />
 							<Link to={LINK.MY} onClick={() => setNavClicked(LINK.MY)}>
-							{navIconMapper(LINK.MY)}
+								{navIconMapper(LINK.MY)}
 								마이페이지
 							</Link>
 						</S.NavLabel>
 					</S.BottomNavContent>
 				</S.MoreNavList>
 			</S.MoreNav>
-
-			{applyBtn && (
-				<S.ApplyBtnBox $moreBtn={moreBtn}>
-					<Button size="height" variant="default" onClick={onClick}>
-						{applyBtn.title} 신청하기
-					</Button>
-				</S.ApplyBtnBox>
-			)}
 
 			<S.SideBarBackground $sideBar={sideBar}>
 				<S.SideBar>
