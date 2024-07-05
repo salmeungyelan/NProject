@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
 	flexColumn,
 	flexLeftCenter,
@@ -16,7 +16,15 @@ export const FilterBox = styled.div`
 
 export const ListBox = styled.div`
 	> div:last-child {
-		border-bottom: 1px solid ${({ theme }) => theme.PALETTE.gray[0]};
+		${({ $list }) =>
+			$list
+				? css`
+						border-bottom: 1px solid ${({ theme }) => theme.PALETTE.gray[0]};
+					}
+			  `
+				: css`
+						border: none;
+				  `}
 	}
 `;
 
