@@ -10,7 +10,7 @@ import ApplicationModal from '../../ApplicationModal';
 import CancelModal from '../CancelModal';
 
 function Incomplete(props) {
-	const { id, title, statusLabel } = props;
+	const { id, title, statusLabel, listTrigger } = props;
 	const { modalState, openModal, closeModal } = useModal();
 
 	const navigate = useNavigate();
@@ -29,7 +29,12 @@ function Incomplete(props) {
 		<>
 			{/* 수정하기 모달 */}
 			{modalState && modify && (
-				<ApplicationModal onClose={closeModal} title={title} tempSave={id} />
+				<ApplicationModal
+					title={title}
+					tempSave={id}
+					onClose={closeModal}
+					listTrigger={listTrigger}
+				/>
 			)}
 
 			{/* 취소 모달 */}
@@ -37,7 +42,7 @@ function Incomplete(props) {
 				<CancelModal
 					id={id}
 					onClose={() => closeModal(navigate(0))}
-					remove={statusLabel === '삭제'}
+					remove={statusLabel === '취소'}
 				/>
 			)}
 

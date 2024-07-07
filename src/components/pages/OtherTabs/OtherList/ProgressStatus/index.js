@@ -36,9 +36,9 @@ function ProgressStatus(props) {
 			{/* 신청한 내역 확인 */}
 			{modalState && !isCancel && (
 				<ApplicationModal
-					onClose={closeModal}
 					title={title}
 					tempSave={id}
+					onClose={closeModal}
 					disabled={true}
 				/>
 			)}

@@ -19,6 +19,7 @@ function OtherList(props) {
 		setSelectedStatus,
 		sort,
 		onSelect,
+		listTrigger,
 	} = props;
 
 	const { path } = usePathname();
@@ -73,6 +74,7 @@ function OtherList(props) {
 										id={list.id}
 										title={title}
 										statusLabel={list.statusLabel}
+										listTrigger={listTrigger}
 									/>
 								)}
 

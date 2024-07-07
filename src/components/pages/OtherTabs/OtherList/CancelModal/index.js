@@ -95,12 +95,12 @@ function CancelModal(props) {
 					</S.Header>
 
 					<S.ButtonBox>
-						<Button variant="white" size="default" onClick={onClose}>
+						<Button size="default" variant="white" onClick={onClose}>
 							취소
 						</Button>
 						<Button
-							variant="default"
 							size="default"
+							variant="default"
 							onClick={remove ? handleClickDelete : handleClickCancel}
 						>
 							확인

@@ -55,9 +55,9 @@ function CompletionInfo({ id }) {
 					resultLinks.map(link => (
 						<Input
 							key={link.id}
-							variant="default"
-							size="height"
 							value={link.url}
+							size="height"
+							variant="default"
 							disabled
 						/>
 					))}
@@ -88,9 +88,9 @@ function CompletionInfo({ id }) {
 			<S.TextBox>
 				<S.Status>안내 사항</S.Status>
 				<Textarea
-					variant="default"
-					size="completed"
 					value={instruction}
+					size="completed"
+					variant="default"
 					disabled
 				/>
 			</S.TextBox>
