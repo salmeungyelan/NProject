@@ -1,5 +1,5 @@
 import { Outlet, useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 import { includeFooterState, includeHeaderState } from 'recoil/atom/index.atom';
 import decodeJWT from 'utils/token';
@@ -9,6 +9,7 @@ import LINK from 'constants/link';
 import Footer from './Footer';
 import Header from './Header';
 import MobileHeader from './Mobile/Header';
+import { otherTabsState } from 'recoil/atom/otherTabs.atom';
 
 function Layout() {
 	const includeHeader = useRecoilValue(includeHeaderState);
@@ -18,11 +19,12 @@ function Layout() {
 	const { companyName } = decodedPayload;
 
 	const navigate = useNavigate();
+	const [otherTab, setOtherTab] = useRecoilState(otherTabsState);
 
 	const handleLogout = () => {
 		deleteCookie('accessToken');
 		deleteCookie('refreshToken');
-
+		setOtherTab({});
 		navigate(LINK.LOGIN);
 	};
 
