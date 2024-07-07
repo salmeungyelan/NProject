@@ -1,4 +1,4 @@
-import LINK from '../../../../../constants/link';
+import LINK from 'constants/link';
 
 import * as S from './index.styles';
 
