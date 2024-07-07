@@ -13,8 +13,8 @@ function Address(props, ref) {
 		button,
 		register,
 		postalCode,
-		detail,
 		place,
+		detail,
 		onChange,
 		message,
 		...rest
@@ -70,12 +70,11 @@ function Address(props, ref) {
 			<S.H1 $register={register}>주소</S.H1>
 			<div>
 				<S.Input
-					size={size}
-					variant="default"
 					type="text"
-					placeholder="우편 번호"
 					value={postcode}
+					placeholder="우편 번호"
 					ref={ref}
+					size={size}
 					{...rest}
 				/>
 				{button && (
@@ -89,20 +88,18 @@ function Address(props, ref) {
 				)}
 			</div>
 			<S.Input
-				size={size}
-				variant="default"
 				type="text"
-				placeholder="주소"
 				value={address}
+				placeholder="주소"
+				size={size}
 				{...rest}
 			/>
 			<S.Input
-				size={size}
-				variant="default"
 				type="text"
-				placeholder="상세 주소"
 				value={detailAddress}
+				placeholder="상세 주소"
 				onChange={e => handleChangeDetail(e)}
+				size={size}
 				{...rest}
 			/>
 			{message && <p>{message}</p>}

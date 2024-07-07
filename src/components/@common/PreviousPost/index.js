@@ -44,7 +44,7 @@ function PreviousPost(props) {
 			<S.NextBox>
 				<S.Next>
 					<span>이전</span>
-					<Line size="height2" variant="gray" />
+					<Line size="height" variant="gray" />
 					{prev ? (
 						<Link
 							to={`/${path}/post/${prev.id}`}
@@ -61,7 +61,7 @@ function PreviousPost(props) {
 
 				<S.Next>
 					<span>다음</span>
-					<Line size="height2" variant="gray" />
+					<Line size="height" variant="gray" />
 					{next ? (
 						<Link
 							to={`/${path}/post/${next.id}`}
@@ -74,12 +74,13 @@ function PreviousPost(props) {
 					)}
 				</S.Next>
 			</S.NextBox>
+
 			{path !== 'review' && (
 				<S.ButtonBox>
 					<div>
 						<Button
-							variant="white"
 							size="height"
+							variant="white"
 							onClick={() => handleClickBackBtn(backId)}
 						>
 							뒤로 가기

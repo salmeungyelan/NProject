@@ -11,11 +11,11 @@ const sizeCSS = {
 	`,
 	height: css`
 		width: 1px;
-		height: 16px;
+		height: 100%;
 	`,
 	login: css`
 		width: 1px;
-		height: 100%;
+		height: 16px;
 	`,
 };
 

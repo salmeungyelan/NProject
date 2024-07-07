@@ -11,14 +11,14 @@ function Search(props) {
 				<img src="/assets/icons/search.svg" />
 				<S.Input
 					name="search"
+					value={search}
 					placeholder="검색어를 입력해 주세요."
 					onChange={onChange}
-					value={search}
 				/>
 			</S.SearchBox>
 
 			<S.ButtonBox>
-				<Button variant="default" size="height" onClick={onClick}>
+				<Button size="height" variant="default" onClick={onClick}>
 					검색
 				</Button>
 			</S.ButtonBox>
