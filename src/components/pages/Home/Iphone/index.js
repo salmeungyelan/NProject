@@ -4,11 +4,8 @@ import LINK from 'constants/link';
 
 import * as S from './index.styles';
 
-function Iphone(props) {
-	const { data } = props;
-
-	const { id, title, status, status_label, picUsername, thumbnail, star } =
-		data;
+function Iphone({ data }) {
+	const { id, title, status, status_label, adminname, thumbnail, star } = data;
 
 	// 이미지 없을 경우
 	const imgSrc = !thumbnail ? '/assets/images/noImage.png' : thumbnail;
@@ -38,7 +35,7 @@ function Iphone(props) {
 					<S.Rate>
 						{(status === 'REVIEW_STATUS_03' ||
 							status === 'REVIEW_STATUS_04') && (
-							<S.Writer>{picUsername}</S.Writer>
+							<S.Writer>{adminname}</S.Writer>
 						)}
 
 						{status === 'REVIEW_STATUS_04' && (
