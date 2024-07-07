@@ -7,9 +7,7 @@ import * as S from './index.styles';
 
 import Progress from '../Progress';
 
-function Card(props) {
-	const { data } = props;
-
+function Card({ data }) {
 	// 메인인지 아닌지 확인
 	const { path } = usePathname();
 	const main = path !== 'main';

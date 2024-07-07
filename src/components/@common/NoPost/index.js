@@ -8,8 +8,9 @@ function NoPost(props) {
 	return (
 		<S.NoPost>
 			<span>{children}</span>
+
 			{review && (
-				<Button variant="default" size="height">
+				<Button size="height" variant="default">
 					등록하기
 				</Button>
 			)}

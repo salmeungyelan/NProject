@@ -6,22 +6,33 @@ function Pagination(props) {
 	const { totalItems, itemsPerPage, currentPage, onPageChange } = props;
 
 	const {
-		pages,
+		startPage,
+		endPage,
+		totalPages,
 		onClickPrev,
 		onClickPrevGroup,
 		onClickNext,
 		onClickNextGroup,
-	} = usePagination(totalItems, itemsPerPage, 5);
-
-	const { endPage, startPage } = pages;
+	} = usePagination(totalItems, itemsPerPage);
 
 	return (
 		<S.PaginationBox>
 			<S.NextPrevBox>
-				<S.ImgButton onClick={onClickPrevGroup}>
-					<img src="/assets/icons/left-arrow.svg" alt="Previous" />
-				</S.ImgButton>
-				<S.HangulBtn onClick={onClickPrev}>이전</S.HangulBtn>
+				<S.LeftButton
+					onClick={() => {
+						onClickPrevGroup();
+						onPageChange(startPage - 1);
+					}}
+				/>
+				<S.HangulBtn
+					onClick={() => {
+						onClickPrev();
+						onPageChange(currentPage - 1);
+					}}
+					disabled={currentPage <= 1}
+				>
+					이전
+				</S.HangulBtn>
 			</S.NextPrevBox>
 
 			<S.PageNumBox>
@@ -29,8 +40,7 @@ function Pagination(props) {
 					<S.Number
 						key={startPage + index}
 						onClick={() => onPageChange(startPage + index)}
-						$currentPage={currentPage}
-						$plus={startPage + index}
+						$selected={currentPage === startPage + index}
 					>
 						{startPage + index}
 					</S.Number>
@@ -38,10 +48,21 @@ function Pagination(props) {
 			</S.PageNumBox>
 
 			<S.NextPrevBox>
-				<S.HangulBtn onClick={onClickNext}>다음</S.HangulBtn>
-				<S.ImgButton onClick={onClickNextGroup}>
-					<img src="/assets/icons/right-arrow.svg" alt="Next" />
-				</S.ImgButton>
+				<S.HangulBtn
+					onClick={() => {
+						onClickNext();
+						onPageChange(currentPage + 1);
+					}}
+					disabled={currentPage === totalPages}
+				>
+					다음
+				</S.HangulBtn>
+				<S.RightButton
+					onClick={() => {
+						onClickNextGroup();
+						onPageChange(endPage + 1);
+					}}
+				/>
 			</S.NextPrevBox>
 		</S.PaginationBox>
 	);

@@ -10,7 +10,7 @@ function MultiSelect(props) {
 
 	const { path } = usePathname();
 
-	const CheckBox = useRef(null);
+	const checkBox = useRef(null);
 	const [expanded, setExpanded] = useState(false);
 	const [status, setStatus] = useState([]);
 
@@ -79,7 +79,7 @@ function MultiSelect(props) {
 				</S.DropdownArrow>
 			</S.SelectStyled>
 
-			<S.CheckBoxContainer ref={CheckBox} $expanded={expanded}>
+			<S.CheckBoxContainer ref={checkBox} $expanded={expanded}>
 				<S.Label>
 					<input
 						id="all"
@@ -95,8 +95,8 @@ function MultiSelect(props) {
 					status.map(stat => (
 						<S.Label key={stat.id}>
 							<input
-								type="checkbox"
 								id={stat.codeValue}
+								type="checkbox"
 								checked={isStatusSelected(stat.codeLabel)}
 								onChange={() =>
 									handleChangeStatus(stat.codeLabel, stat.codeValue)

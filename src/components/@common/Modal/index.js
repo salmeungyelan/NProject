@@ -16,7 +16,7 @@ function Modal(props) {
 				</S.Header>
 
 				<S.ButtonBox>
-					<Button variant="default" size="default" onClick={onClose}>
+					<Button size="default" variant="default" onClick={onClose}>
 						확인
 					</Button>
 				</S.ButtonBox>

@@ -34,7 +34,7 @@ function NoticeDetail() {
 		}
 	}, [result.data]);
 
-	const { author, title, content, noticeContentTypeLabel } = noticeDetail;
+	const { noticeContentTypeLabel, title, author, content } = noticeDetail;
 
 	return (
 		<>
