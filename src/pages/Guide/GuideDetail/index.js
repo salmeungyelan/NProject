@@ -12,7 +12,7 @@ function GuideDetail() {
 	const params = useParams();
 	const id = params._id;
 
-	const [detailData, setDetailData] = useState({});
+	const [guideDetail, setGuideDetail] = useState({});
 	const [prevPost, setPrevPost] = useState({
 		prev: {},
 		next: {},
@@ -25,19 +25,20 @@ function GuideDetail() {
 
 	useEffect(() => {
 		if (result.data) {
-			setDetailData(result.data.guide);
+			setGuideDetail(result.data.guide);
+
 			setPrevPost({
 				prev: result.data.previousGuide,
 				next: result.data.nextGuide,
 			});
 		}
-	}, [result.data, detailData]);
+	}, [result.data]);
 
-	const { author, title, content } = detailData;
+	const { author, title, content } = guideDetail;
 
 	return (
 		<>
-			{detailData && (
+			{guideDetail && (
 				<S.Body>
 					<Title title="GUIDE">넷플레이스 이용안내</Title>
 

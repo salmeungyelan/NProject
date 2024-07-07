@@ -12,7 +12,7 @@ function NoticeDetail() {
 	const params = useParams();
 	const id = params._id;
 
-	const [detailData, setDetailData] = useState({});
+	const [noticeDetail, setNoticeDetail] = useState({});
 	const [prevPost, setPrevPost] = useState({
 		prev: {},
 		next: {},
@@ -25,19 +25,20 @@ function NoticeDetail() {
 
 	useEffect(() => {
 		if (result.data) {
-			setDetailData(result.data.notice);
+			setNoticeDetail(result.data.notice);
+
 			setPrevPost({
 				prev: result.data.previousNotice,
 				next: result.data.nextNotice,
 			});
 		}
-	}, [result.data, detailData]);
+	}, [result.data]);
 
-	const { author, title, content, noticeContentTypeLabel } = detailData;
+	const { author, title, content, noticeContentTypeLabel } = noticeDetail;
 
 	return (
 		<>
-			{detailData && (
+			{noticeDetail && (
 				<S.Body>
 					<Title title="NOTICE">넷플레이스 공지사항 안내</Title>
 
