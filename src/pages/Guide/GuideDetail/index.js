@@ -34,7 +34,7 @@ function GuideDetail() {
 		}
 	}, [result.data]);
 
-	const { author, title, content } = guideDetail;
+	const { title, author, content } = guideDetail;
 
 	return (
 		<>
