@@ -54,6 +54,10 @@ function MultiSelect(props) {
 			}
 		}
 
+		if (updatedStatus.length === 0) {
+			updatedStatus = [{ codeLabel: '전체', sortBy: '' }];
+		}
+
 		setSelectedStatus(updatedStatus);
 	};
 
