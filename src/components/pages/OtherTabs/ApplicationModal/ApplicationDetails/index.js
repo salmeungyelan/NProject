@@ -3,10 +3,11 @@ import { useRecoilState } from 'recoil';
 import { ko } from 'date-fns/locale';
 import 'react-day-picker/dist/style.css';
 
+import decodeJWT from 'utils/token';
 import usePathname from 'hooks/usePathname';
 import useInput from 'hooks/useInput';
 import useModal from 'hooks/useModal';
-import { userAtom } from 'recoil/atom/user.atom';
+import { otherTabsState } from 'recoil/atom/otherTabs.atom';
 import LINK from 'constants/link';
 import dateFormat from 'utils/formatDate';
 import MESSAGE from 'constants/message';
@@ -20,13 +21,17 @@ import Button from 'components/@common/Button';
 import Modal from 'components/@common/Modal';
 
 function ApplicationDetails(props) {
-	const { setNextStep, trigger, disabled, onClose } = props;
+	const { setNextStep, tempSave, trigger, disabled, onClose, listTrigger } =
+		props;
+
+	const decodedPayload = decodeJWT();
+	const { sub } = decodedPayload;
 
 	const { path, pathname } = usePathname();
 	const { inputData, setInputData, handleChange } = useInput();
 	const { modalState, openModal, closeModal } = useModal();
 
-	const [applyData, setApplyData] = useRecoilState(userAtom);
+	const [applyData, setApplyData] = useRecoilState(otherTabsState);
 
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -134,11 +139,13 @@ function ApplicationDetails(props) {
 		const urlPath = path.toUpperCase().replace(/-/g, '_');
 		const otherStatus = `${urlPath}_STATUS_${status ? '01' : '02'}`;
 
+		// 임시저장 수정일 경우에 id = 신청 아이디 / 신청하기일 경우 이 사람 아이디
 		const { id, ...restApplyData } = applyData;
 
 		const updatedData = {
 			...restApplyData,
-			authorId: id,
+			id: tempSave || null, // 임시저장 아이디
+			authorId: sub,
 			visitStartDate: inputData.visitStartDate,
 			visitEndDate: inputData.visitEndDate,
 			availableService: inputData.availableService,
@@ -161,10 +168,9 @@ function ApplicationDetails(props) {
 				data: formData,
 			});
 
-			const statusContent =
-				status === otherStatus
-					? '임시 저장되었습니다.'
-					: '신청이 완료되었습니다.';
+			const statusContent = status
+				? '임시 저장되었습니다.'
+				: '신청이 완료되었습니다.';
 
 			setModal(prev => ({
 				...prev,
@@ -173,6 +179,10 @@ function ApplicationDetails(props) {
 			}));
 
 			openModal();
+
+			await listTrigger({
+				applyResult: true,
+			});
 		} catch (error) {
 			setModal({
 				content: '다시 신청해 주세요.',
@@ -186,8 +196,8 @@ function ApplicationDetails(props) {
 		<>
 			{modalState && (
 				<Modal
-					title={modal.title}
 					img={modal.img}
+					title={modal.title}
 					content={modal.content}
 					onClose={() => closeModal(onClose())}
 				/>
@@ -204,14 +214,14 @@ function ApplicationDetails(props) {
 								<S.DateBox>
 									<Input
 										name="visitStartDate"
-										placeholder="시작일"
-										variant="default"
-										size="height"
-										defaultValue={inputData.visitStartDate || startDate}
-										onClick={() => handleOpenCalendar('start')}
 										value={inputData.visitStartDate || startDate}
-										disabled={disabled}
+										defaultValue={inputData.visitStartDate || startDate}
+										placeholder="시작일"
+										onClick={() => handleOpenCalendar('start')}
 										ref={startRef}
+										size="height"
+										variant="default"
+										disabled={disabled}
 										readOnly
 									/>
 									{!disabled && (
@@ -237,14 +247,14 @@ function ApplicationDetails(props) {
 								<S.DateBox>
 									<Input
 										name="visitEndDate"
+										value={inputData.visitEndDate || endDate}
+										defaultValue={endDate}
 										placeholder="종료일"
+										onClick={() => handleOpenCalendar('end')}
+										ref={endRef}
 										size="height"
 										variant="default"
-										defaultValue={endDate}
-										onClick={() => handleOpenCalendar('end')}
-										value={inputData.visitEndDate || endDate}
 										disabled={disabled}
-										ref={endRef}
 										readOnly
 									/>
 									{!disabled && (
@@ -272,13 +282,13 @@ function ApplicationDetails(props) {
 						</S.ExDate>
 
 						<InputBox
-							name="availableService"
 							title="제공 서비스"
-							placeholder="제공 가능한 서비스를 입력해 주세요."
+							name="availableService"
 							value={inputData.availableService}
+							placeholder="제공 가능한 서비스를 입력해 주세요."
 							onChange={handleChange}
-							disabled={disabled}
 							ref={serviceRef}
+							disabled={disabled}
 							message={errorMsg.availableService || ' '}
 						/>
 					</>
@@ -334,14 +344,14 @@ function ApplicationDetails(props) {
 				<S.InputBox>
 					<S.H1>요청 사항</S.H1>
 					<Textarea
-						size={pathname === LINK.DEVELOP ? 'web' : 'modal'}
-						variant="default"
 						name="requirement"
 						value={inputData.requirement}
+						placeholder="내용을 입력해 주세요."
 						onChange={handleChange}
 						ref={reqRef}
-						placeholder="내용을 입력해 주세요."
 						disabled={disabled}
+						size={pathname === LINK.DEVELOP ? 'web' : 'modal'}
+						variant="default"
 					/>
 					<p>{errorMsg.requirement}</p>
 				</S.InputBox>
@@ -349,13 +359,13 @@ function ApplicationDetails(props) {
 
 			<S.ButtonBox disabled={disabled}>
 				<div>
-					<Button variant="white" size="height" onClick={handleClickPrev}>
+					<Button size="height" variant="white" onClick={handleClickPrev}>
 						이전
 					</Button>
 					{!disabled && (
 						<Button
-							variant="white"
 							size="height"
+							variant="white"
 							onClick={() => handleSubmit(true)}
 						>
 							임시저장
@@ -363,9 +373,9 @@ function ApplicationDetails(props) {
 					)}
 				</div>
 				<Button
-					variant="default"
 					size="height"
-					onClick={disabled ? onClose : handleSubmit}
+					variant="default"
+					onClick={disabled ? onClose : () => handleSubmit(false)}
 				>
 					{disabled ? '닫기' : '신청'}
 				</Button>

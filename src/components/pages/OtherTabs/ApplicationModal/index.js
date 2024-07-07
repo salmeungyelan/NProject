@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { userAtom } from 'recoil/atom/user.atom';
 
 import usePathname from 'hooks/usePathname';
 import useInput from 'hooks/useInput';
+import { otherTabsState } from 'recoil/atom/otherTabs.atom';
 import decodeJWT from 'utils/token';
 import useApi from 'hooks/useApi';
 import LINK from 'constants/link';
@@ -17,7 +17,7 @@ import Button from 'components/@common/Button';
 import ApplicationDetails from './ApplicationDetails';
 
 function ApplicationModal(props) {
-	const { title, onClose, tempSave, disabled } = props;
+	const { title, onClose, tempSave, disabled, listTrigger } = props;
 
 	// 뷰탭 인스타 및 홈페이지 제작은 주소 제외
 	const { path, pathname } = usePathname();
@@ -28,7 +28,7 @@ function ApplicationModal(props) {
 	const { sub } = decodedPayload;
 
 	// 신청 데이터
-	const [applyData, setApplyData] = useRecoilState(userAtom);
+	const [applyData, setApplyData] = useRecoilState(otherTabsState);
 
 	// 주소
 	const [location, setLocation] = useState({
@@ -157,7 +157,7 @@ function ApplicationModal(props) {
 						</S.Body>
 
 						<S.ButtonBox>
-							<Button variant="default" size="height" onClick={handleClickNext}>
+							<Button size="height" variant="default" onClick={handleClickNext}>
 								다음
 							</Button>
 						</S.ButtonBox>
@@ -167,9 +167,11 @@ function ApplicationModal(props) {
 				{nextStep && (
 					<ApplicationDetails
 						setNextStep={setNextStep}
+						tempSave={tempSave}
 						trigger={trigger}
 						disabled={disabled}
 						onClose={onClose}
+						listTrigger={listTrigger}
 					/>
 				)}
 			</S.Container>
