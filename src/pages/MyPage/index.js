@@ -11,6 +11,7 @@ import InputBox from 'components/@common/InputBox';
 import Button from 'components/@common/Button';
 import Address from 'components/@common/Address';
 import PwdModal from 'components/pages/MyPage/PwdModal';
+import { formatBusinessNum, formatPhoneNum } from 'utils/formatNum';
 
 function MyPage() {
 	const { modalState, openModal, closeModal } = useModal();
@@ -82,7 +83,11 @@ function MyPage() {
 					</S.InfoBox>
 
 					<S.InfoBox>
-						<InputBox title="전화번호" value={contactNumber || ''} disabled />
+						<InputBox
+							title="전화번호"
+							value={formatPhoneNum(contactNumber) || ''}
+							disabled
+						/>
 					</S.InfoBox>
 
 					<S.InfoBox>
@@ -97,7 +102,7 @@ function MyPage() {
 					<S.InfoBox>
 						<InputBox
 							title="사업자 등록 번호"
-							value={businessNumber || ''}
+							value={formatBusinessNum(businessNumber) || ''}
 							disabled
 						/>
 					</S.InfoBox>
