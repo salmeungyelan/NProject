@@ -10,7 +10,7 @@ import AccountLookup from 'components/pages/FindAccounts/AccountLookup';
 
 function FindAccounts() {
 	const { pathname } = usePathname();
-	const accounts = pathname.split('/')[2] === 'password';
+	const accounts = pathname.includes('password');
 
 	return (
 		<S.Body>
