@@ -16,6 +16,7 @@ export const Container = styled.div`
 	padding: 32px 20px;
 	${flexColumn}
 	gap: 22px;
+	border-radius: 6px;
 
 	@media only screen and (min-width: 768px) {
 		width: 400px;
