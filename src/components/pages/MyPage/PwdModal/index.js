@@ -23,12 +23,12 @@ function PwdModal({ onClose, userId }) {
 
 	const { password, newPassword, newPwCheck } = inputData;
 
-	const { trigger: matchTrigger } = useApi({
+	const { result: matchResult, trigger: matchTrigger } = useApi({
 		path: `/users/password-match/${userId}`,
 		shouldFetch: false,
 	});
 
-	const { trigger: updateTrigger } = useApi({
+	const { result: updateResult, trigger: updateTrigger } = useApi({
 		path: `/users/update-password/${userId}`,
 		shouldFetch: false,
 	});
@@ -37,14 +37,13 @@ function PwdModal({ onClose, userId }) {
 		// 1. 현재 비밀번호가 입력됐는지 확인
 		if (password) {
 			// 2. 현재 비밀번호가 맞는지 확인 api -> match
-
 			try {
-				const req = await matchTrigger({
+				await matchTrigger({
 					method: 'post',
 					data: { password },
 				});
 
-				if (req.data) {
+				if (matchResult.data) {
 					// 3. 맞다면 새 비밀번호가 입력됐는지 확인 / 틀리다면 메세지
 					if (newPassword) {
 						// 4. 새 비밀번호 확인이 입력됐는지 확인
@@ -57,13 +56,13 @@ function PwdModal({ onClose, userId }) {
 								};
 
 								// 6. 비밀번호 업데이트 api -> update
-								const request = await updateTrigger({
+								await updateTrigger({
 									method: 'patch',
 									data,
 								});
 
 								// 7. 비밀번호 변경됐다는 openModal
-								if (request.data) return openModal();
+								if (updateResult.data) return openModal();
 							} else setMatch(MESSAGE.PASSWORD.CHECK);
 						} else setMatch(MESSAGE.PASSWORD.NEW_CHECK);
 					} else setMatch(MESSAGE.PASSWORD.NEW);
@@ -131,12 +130,12 @@ function PwdModal({ onClose, userId }) {
 				</S.Body>
 
 				<S.ButtonBox>
-					<Button variant="white" size="height" onClick={onClose}>
+					<Button size="height" variant="white" onClick={onClose}>
 						취소
 					</Button>
 					<Button
-						variant="default"
 						size="height"
+						variant="default"
 						onClick={() => handleChangePw()}
 					>
 						확인
