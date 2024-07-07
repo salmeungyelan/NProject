@@ -92,8 +92,8 @@ function MyPage() {
 
 					<S.InfoBox>
 						<Address
-							number={postalCode || ''}
-							address={address || ''}
+							postalCode={postalCode || ''}
+							place={address || ''}
 							detail={addressDetail || ''}
 							disabled
 						/>
