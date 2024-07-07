@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import useFilter from 'hooks/useFilter';
 import useInput from 'hooks/useInput';
+import usePagination from 'hooks/usePagination';
 import useApi from 'hooks/useApi';
 
 import * as S from './index.styles';
@@ -11,58 +12,51 @@ import Search from 'components/@common/Search';
 import Filter from 'components/@common/Filter';
 import GuideList from 'components/pages/Guide/GuideList';
 import NoPost from 'components/@common/NoPost';
+import Pagination from 'components/@common/Pagination';
 
 function Guide() {
 	const { sort, handelSelectFilter } = useFilter();
 	const { inputData, setInputData, handleChangeSearch } = useInput();
 
-	const [data, setData] = useState([]);
+	const [guideList, setGuideList] = useState([]);
 
-	const path = `/client/guides?page=1&size=7&sortBy=${sort}`;
+	const itemsPerPage = 8;
+	const { currentPage, setCurrentPage, total, setTotal } = usePagination();
+
+	const basePath = `/client/guides?size=${itemsPerPage}&page=${currentPage}&sortBy=${sort}`;
+	const fullPath = basePath + `&title=${inputData}&content=${inputData}`;
 
 	const { result, trigger } = useApi({
-		path,
+		path: basePath,
 		shouldFetch: true,
 	});
 
 	useEffect(() => {
 		if (result.data) {
-			setData(result.data.guideList);
+			setGuideList(result.data.guideList);
+			setTotal(result.data.total);
 		}
+	}, [result.data]);
 
-		const fullPath = path + `&title=${inputData}&content=${inputData}`;
-
-		const fetchData = async () => {
-			try {
-				const req = await trigger({ path: fullPath });
-
-				if (req.data) {
-					setData(req.data.guideList);
-				}
-			} catch (error) {
-				console.error(error);
-			}
-		};
-
-		fetchData();
-	}, [sort, result.data, inputData]);
+	useEffect(() => {
+		trigger({ path: fullPath, applyResult: true });
+	}, [sort, currentPage]);
 
 	// 검색
-	const handleClickSearch = async () => {
-		try {
-			const req = await trigger({
-				path: path + `&title=${inputData}&content=${inputData}`,
-			});
-
-			if (req.data) {
-				setData(req.data.guideList);
-			}
-		} catch (error) {}
+	const handleClickSearch = () => {
+		trigger({ path: fullPath, applyResult: true });
 	};
 
 	// 검색 초기화
-	const handleClickReset = () => {
+	const handleClickReset = async () => {
+		await trigger({ path: basePath, applyResult: true });
 		setInputData('');
+	};
+
+	// 페이지 이동
+	const handlePageChange = async pageNumber => {
+		await trigger({ path: basePath, applyResult: true });
+		setCurrentPage(pageNumber);
 	};
 
 	return (
@@ -76,9 +70,11 @@ function Guide() {
 					onClick={handleClickSearch}
 					reset={handleClickReset}
 				/>
-				<Filter onClick={handelSelectFilter} sort={sort} />
-				{data.length > 0 ? (
-					<GuideList list={data} />
+
+				<Filter sort={sort} onClick={handelSelectFilter} />
+
+				{guideList?.length ? (
+					<GuideList list={guideList} />
 				) : (
 					<S.Div>
 						<NoPost>
@@ -91,7 +87,16 @@ function Guide() {
 			</S.MainBox>
 
 			{/* 페이지네이션 */}
-			<div></div>
+			{guideList?.length ? (
+				<Pagination
+					totalItems={total}
+					itemsPerPage={itemsPerPage}
+					currentPage={currentPage}
+					onPageChange={handlePageChange}
+				/>
+			) : (
+				<></>
+			)}
 		</S.Body>
 	);
 }
