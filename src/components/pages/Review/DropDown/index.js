@@ -44,6 +44,7 @@ function DropDown(props) {
 						option.map(option => (
 							<S.Option
 								key={option.id}
+								$selected={option.codeLabel === selectedOption.codeLabel}
 								onClick={() =>
 									handleClickOption(option.codeLabel, option.codeValue)
 								}

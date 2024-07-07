@@ -51,7 +51,8 @@ export const OptionsContainer = styled.div`
 export const Option = styled.div`
 	padding: 5px;
 	cursor: pointer;
-	color: ${({ theme }) => theme.PALETTE.gray[200]};
+	color: ${({ theme, $selected }) =>
+		$selected ? theme.PALETTE.orange[100] : theme.PALETTE.gray[200]};
 	font-size: ${({ theme }) => theme.FONT_SIZE.s};
 	border-radius: 4px;
 
@@ -59,6 +60,9 @@ export const Option = styled.div`
 		background-color: ${({ theme }) => theme.PALETTE.ivory};
 		color: ${({ theme }) => theme.PALETTE.orange[100]};
 	}
+
+	background-color: ${({ theme, $selected }) =>
+		$selected ? theme.PALETTE.ivory : theme.PALETTE.white[100]};
 
 	@media screen and (min-width: 768px) {
 		font-size: ${({ theme }) => theme.FONT_SIZE.ms};
