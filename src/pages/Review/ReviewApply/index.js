@@ -36,8 +36,8 @@ function ReviewApply() {
 	});
 
 	// 보낼 데이터
-	const [defaultData, setDefaultData] = useState({});
-	const [req, setReq] = useState(false);
+	const [reviewPost, setReviewPost] = useState({});
+	const [postId, setPostId] = useState(null);
 	const categoryRef = useRef(null);
 	const titleRef = useRef(null);
 	const desRef = useRef(null);
@@ -78,7 +78,7 @@ function ReviewApply() {
 
 	useEffect(() => {
 		if (result.data) {
-			setDefaultData(result.data);
+			setReviewPost(result.data);
 			setSelectedCategory({
 				type: result.data.type,
 				typeLabel: result.data.typeLabel,
@@ -218,7 +218,7 @@ function ReviewApply() {
 				isValid = false;
 				setErrorMsg({ category: MESSAGE.REVIEW.CATEGORY });
 				categoryRef.current.focus();
-			} else if (!inputData.title || defaultData.title) {
+			} else if (!inputData.title || reviewPost.title) {
 				isValid = false;
 				setErrorMsg({ title: MESSAGE.REVIEW.TITLE });
 				titleRef.current.focus();
@@ -239,19 +239,19 @@ function ReviewApply() {
 
 		if (!isValid) return;
 
-		const { clientFiles, ...restDefaultData } = defaultData;
+		const { clientFiles, ...restDefaultData } = reviewPost;
 
 		const updatedData = {
 			...inputData,
 			...restDefaultData,
 
 			id: _id || null,
-			authorId: defaultData.id,
+			authorId: sub,
 
-			title: inputData.title ? inputData.title : defaultData.title,
+			title: inputData.title ? inputData.title : reviewPost.title,
 			requirement: inputData.requirement
 				? inputData.requirement
-				: defaultData.requirement,
+				: reviewPost.requirement,
 
 			type: selectedCategory.type,
 			typeLabel: selectedCategory.typeLabel,
@@ -278,7 +278,7 @@ function ReviewApply() {
 				}
 			}
 
-			const req = await trigger({
+			const request = await trigger({
 				method: 'post',
 				path: '/client/reviews',
 				data: formData,
@@ -294,7 +294,7 @@ function ReviewApply() {
 				content: statusContent,
 			});
 			openModal();
-			setReq(true);
+			setPostId(request.data.id);
 		} catch (error) {
 			setModal({
 				content: '리뷰 신청을 다시 시도해 주세요.',
@@ -314,7 +314,7 @@ function ReviewApply() {
 		mainKeyword,
 		subKeywords,
 		smartplaceLink,
-	} = defaultData;
+	} = reviewPost;
 
 	return (
 		<S.Body>
@@ -323,7 +323,9 @@ function ReviewApply() {
 					title={modal.title}
 					img={modal.img}
 					content={modal.content}
-					onClose={() => closeModal(req && navigate(LINK.REVIEW))}
+					onClose={() =>
+						closeModal(postId && navigate(LINK.REVIEW_POST + `/${postId}`))
+					}
 				/>
 			)}
 
