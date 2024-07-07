@@ -24,7 +24,7 @@ function Login() {
 
 	const [errorMessage, setErrorMessage] = useState('');
 
-	const { trigger } = useApi({
+	const { result, trigger } = useApi({
 		path: '/auth/login',
 		shouldFetch: false,
 	});
@@ -50,13 +50,13 @@ function Login() {
 				password: inputData.password,
 			};
 
-			const res = await trigger({
+			await trigger({
 				method: 'post',
 				data,
-				showBoundary: false,
+				applyResult: true,
 			});
 
-			const { accessToken, refreshToken } = res.data;
+			const { accessToken, refreshToken } = result.data;
 			setCookie(accessToken, refreshToken);
 			navigate(LINK.HOME);
 		} catch (error) {
@@ -78,13 +78,13 @@ function Login() {
 						<div>
 							<S.InputBox>
 								<Input
-									name="username"
-									size="default"
 									id="username"
-									variant="login"
+									name="username"
 									value={inputData.username}
-									onChange={handleChange}
 									placeholder=""
+									onChange={handleChange}
+									size="default"
+									variant="login"
 								/>
 								<S.Label htmlFor="username" ref={idRef}>
 									이메일 또는 아이디 입력
@@ -93,14 +93,14 @@ function Login() {
 
 							<S.InputBox>
 								<Input
+									id="password"
 									type="password"
 									name="password"
+									value={inputData.password}
+									placeholder=""
+									onChange={handleChange}
 									size="default"
 									variant="login"
-									id="password"
-									value={inputData.password}
-									onChange={handleChange}
-									placeholder=""
 								/>
 								<S.Label htmlFor="password" ref={pwRef}>
 									비밀번호 입력
@@ -119,7 +119,7 @@ function Login() {
 						</div>
 
 						<div>
-							<Button variant="default" size="default" type="submit">
+							<Button size="default" variant="default" type="submit">
 								로그인
 							</Button>
 
