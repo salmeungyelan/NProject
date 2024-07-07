@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import useInput from 'hooks/useInput';
+import usePagination from 'hooks/usePagination';
 import useApi from 'hooks/useApi';
 import LINK from 'constants/link';
 
@@ -15,13 +16,14 @@ import DropDown from 'components/pages/Review/DropDown';
 import Card from 'components/@common/Card';
 import NoPost from 'components/@common/NoPost';
 import Button from 'components/@common/Button';
+import Pagination from 'components/@common/Pagination';
 
 function Review() {
 	const { inputData, setInputData, handleChangeSearch } = useInput();
 
 	const navigate = useNavigate();
 
-	const [data, setData] = useState([]);
+	const [reviewList, setReviewList] = useState([]);
 	const [selectedCategory, setSelectedCategory] = useState('');
 	const [selectedStatus, setSelectedStatus] = useState([
 		{
@@ -34,76 +36,77 @@ function Review() {
 		sortBy: 'REVIEW_FILTER_01',
 	});
 
-	const path = `/client/reviews?size=10&page=1`;
+	const itemsPerPage = 10;
+	const { currentPage, setCurrentPage, total, setTotal } = usePagination();
+
+	const paths = useMemo(() => {
+		const basePath = `/client/reviews?size=${itemsPerPage}&page=${currentPage}`;
+		const category = selectedCategory && `&type=${selectedCategory}`;
+		const option = `&sortBy=${selectedOption.sortBy}`;
+		const searchData = `&title=${inputData}&requirement=${inputData}`;
+
+		const status =
+			selectedStatus[0].sortBy &&
+			selectedStatus.map(stat => `&status=${stat.sortBy}`).join('');
+
+		return { basePath, category, option, status, searchData };
+	}, [
+		currentPage,
+		selectedCategory,
+		selectedOption.sortBy,
+		selectedStatus,
+		inputData,
+	]);
+
+	const { basePath, category, option, status, searchData } = paths;
 
 	const { result, trigger } = useApi({
-		path,
+		path: basePath,
 		shouldFetch: true,
 	});
 
 	useEffect(() => {
 		if (result.data) {
-			setData(result.data.reviews);
+			setReviewList(result.data.reviews);
+			setTotal(result.data.total);
 		}
 	}, [result.data]);
 
-	const category = selectedCategory && `&type=${selectedCategory}`;
-	const option = `&sortBy=${selectedOption.sortBy}`;
-	const status =
-		selectedStatus[0].sortBy &&
-		selectedStatus.map(stat => `&status=${stat.sortBy}`).join('');
-	const searchData = `&title=${inputData}&requirement=${inputData}`;
-
 	// 카테고리 / 옵션 / 상태만 변화했을 때 api 호출
-	const fetchData = async () => {
-		try {
-			const req = await trigger({
-				path: path + category + option + status,
-				applyResult: true,
-			});
-
-			if (req.data) {
-				setData(req.data.reviews);
-			}
-		} catch (error) {
-			console.error(error);
-		}
-	};
-
 	useEffect(() => {
-		fetchData();
-	}, [selectedCategory, selectedOption, selectedStatus]);
+		trigger({
+			path: basePath + category + option + status + searchData,
+			applyResult: true,
+		});
+	}, [selectedCategory, selectedOption, selectedStatus, currentPage]);
 
 	// 검색
 	const handleClickSearch = async () => {
-		try {
-			const req = await trigger({
-				path: path + category + option + status + searchData,
-			});
-
-			if (req.data) {
-				setData(req.data.reviews);
-			}
-		} catch (error) {}
+		await trigger({
+			path: basePath + category + option + status + searchData,
+			applyResult: true,
+		});
 	};
 
 	// 검색 초기화
 	const handleReset = async () => {
+		await trigger({
+			path: basePath + category + option + status,
+			applyResult: true,
+		});
+
 		setInputData('');
-
-		try {
-			const req = await trigger({
-				path: path + category + option + status,
-			});
-
-			if (req.data) {
-				setData(req.data.reviews);
-			}
-		} catch (error) {}
 	};
 
+	// 신청 페이지 이동
 	const handleClickApply = () => {
 		navigate(LINK.REVIEW_APPLY);
+	};
+
+	// 페이지 이동
+	const handlePageChange = async page => {
+		await trigger({ applyResult: true });
+		setCurrentPage(page);
 	};
 
 	return (
@@ -134,26 +137,39 @@ function Review() {
 									setSelectedStatus={setSelectedStatus}
 								/>
 								<DropDown
-									setSelectedOption={setSelectedOption}
 									selectedOption={selectedOption}
+									setSelectedOption={setSelectedOption}
 								/>
 							</S.MultiSelect>
 						</S.SelectBox>
 
-						{data ? (
+						{reviewList?.length ? (
 							<S.CardBox>
-								{data.map((el, idx) => (
+								{reviewList.map((el, idx) => (
 									<Card data={el} key={idx} />
 								))}
 							</S.CardBox>
 						) : (
-							<NoPost review>등록된 게시글이 없습니다.</NoPost>
+							<NoPost review={!inputData}>
+								{inputData
+									? '해당하는 게시글이 없습니다.'
+									: '등록된 게시글이 없습니다.'}
+							</NoPost>
 						)}
 					</S.Main>
 				</S.MainBox>
 
 				{/* 페이지네이션 */}
-				{data ? <div>1</div> : ''}
+				{reviewList?.length ? (
+					<Pagination
+						totalItems={total}
+						itemsPerPage={itemsPerPage}
+						currentPage={currentPage}
+						onPageChange={handlePageChange}
+					/>
+				) : (
+					<></>
+				)}
 			</S.Body>
 
 			<S.ApplyBtnBox>
@@ -166,3 +182,11 @@ function Review() {
 }
 
 export default Review;
+
+// const path = `/client/reviews?size=${itemsPerPage}&page=${currentPage}`;
+// const category = selectedCategory && `&type=${selectedCategory}`;
+// const option = `&sortBy=${selectedOption.sortBy}`;
+// const status =
+// 	selectedStatus[0].sortBy &&
+// 	selectedStatus.map(stat => `&status=${stat.sortBy}`).join('');
+// const searchData = `&title=${inputData}&requirement=${inputData}`;

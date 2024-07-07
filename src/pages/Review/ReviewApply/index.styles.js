@@ -59,12 +59,12 @@ export const CategoryBox = styled.div`
 
 export const Category = styled.div`
 	padding: 5px 10px;
-	color: ${({ theme, clicked }) =>
-		clicked ? theme.PALETTE.orange[100] : theme.PALETTE.gray[100]};
+	color: ${({ theme, $clicked }) =>
+		$clicked ? theme.PALETTE.orange[100] : theme.PALETTE.gray[100]};
 	font-size: ${({ theme }) => theme.FONT_SIZE.s};
 	border: 1px solid
-		${({ theme, clicked }) =>
-			clicked ? theme.PALETTE.orange[100] : theme.PALETTE.gray[0]};
+		${({ theme, $clicked }) =>
+			$clicked ? theme.PALETTE.orange[100] : theme.PALETTE.gray[0]};
 	border-radius: 4px;
 	cursor: pointer;
 

@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import usePathname from './usePathname';
 
-const usePagination = (totalItems, itemsPerPage, displayPageCount) => {
+const usePagination = (totalItems, itemsPerPage) => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [total, setTotal] = useState(0);
 
@@ -13,32 +13,30 @@ const usePagination = (totalItems, itemsPerPage, displayPageCount) => {
 		setTotal(totalItems);
 	}, [path]);
 
-	const pages = useMemo(() => {
-		const totalPages = Math.ceil(totalItems / itemsPerPage);
-		const currentGroup = Math.ceil(currentPage / displayPageCount);
-		const startPage = (currentGroup - 1) * displayPageCount + 1;
-		const endPage = Math.min(startPage + displayPageCount - 1, totalPages);
+	const displayPageCount = 5;
+	const totalPages = Math.ceil(totalItems / itemsPerPage);
+	const currentGroup = Math.ceil(currentPage / displayPageCount);
+	const startPage = (currentGroup - 1) * displayPageCount + 1;
+	const endPage = Math.min(startPage + displayPageCount - 1, totalPages);
 
-		return { totalPages, currentGroup, startPage, endPage };
-	}, [totalItems, itemsPerPage, displayPageCount]);
-
-	const onClickNextGroup = () => {
-		const nextPage = pages.endPage + 1;
-		if (nextPage <= pages.totalPages) setCurrentPage(nextPage);
+	const onClickPrev = () => {
+		if (currentPage > 1) setCurrentPage(currentPage - 1);
 	};
 
 	const onClickPrevGroup = () => {
-		const prevPage = pages.startPage - displayPageCount;
+		const prevPage = startPage - displayPageCount;
 		if (prevPage >= 1) setCurrentPage(prevPage);
 		else setCurrentPage(1);
 	};
 
 	const onClickNext = () => {
-		if (currentPage > 1) setCurrentPage(currentPage - 1);
+		if (currentPage < totalPages) setCurrentPage(currentPage + 1);
 	};
 
-	const onClickPrev = () => {
-		if (currentPage < pages.totalPages) setCurrentPage(currentPage + 1);
+	const onClickNextGroup = () => {
+		const nextPage = endPage + 1;
+		if (nextPage <= totalPages) setCurrentPage(nextPage);
+		else setCurrentPage(totalPages);
 	};
 
 	return {
@@ -46,7 +44,9 @@ const usePagination = (totalItems, itemsPerPage, displayPageCount) => {
 		setCurrentPage,
 		total,
 		setTotal,
-		pages,
+		startPage,
+		endPage,
+		totalPages,
 		onClickNextGroup,
 		onClickPrevGroup,
 		onClickNext,
@@ -55,3 +55,22 @@ const usePagination = (totalItems, itemsPerPage, displayPageCount) => {
 };
 
 export default usePagination;
+
+// const onClickPrev = useCallback(() => {
+// 	if (currentPage > 1) setCurrentPage(currentPage - 1);
+// }, [currentPage]);
+
+// const onClickPrevGroup = useCallback(() => {
+// 	const prevPage = startPage - displayPageCount;
+// 	if (prevPage >= 1) setCurrentPage(prevPage);
+// 	else setCurrentPage(1);
+// }, [startPage]);
+
+// const onClickNext = useCallback(() => {
+// 	if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+// }, [currentPage, totalPages]);
+
+// const onClickNextGroup = useCallback(() => {
+// 	const nextPage = endPage + 1;
+// 	setCurrentPage(nextPage <= totalPages ? nextPage : totalPages);
+// }, [endPage, totalPages]);
