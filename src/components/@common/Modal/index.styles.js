@@ -3,7 +3,7 @@ import { ModalBackground, flexColumnCenter } from 'styles/common';
 
 export const Background = styled.div`
 	${ModalBackground}
-	z-index: 101;
+	z-index: 200;
 `;
 
 export const Container = styled.div`
