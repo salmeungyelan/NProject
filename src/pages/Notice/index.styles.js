@@ -52,6 +52,10 @@ export const Li = styled.li`
 		display: none;
 	}
 
+	& label {
+		cursor: pointer;
+	}
+
 	&:has(input:checked),
 	&:hover {
 		color: ${({ theme }) => theme.PALETTE.orange[100]};
@@ -66,5 +70,6 @@ export const Li = styled.li`
 `;
 
 export const Div = styled.div`
+	cursor: pointer;
 	border-top: 1px solid ${({ theme }) => theme.PALETTE.gray[0]};
 `;
