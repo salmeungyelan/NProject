@@ -1,7 +1,6 @@
 import { Outlet, useNavigate } from 'react-router-dom';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 
-import { includeFooterState, includeHeaderState } from 'recoil/atom/index.atom';
 import decodeJWT from 'utils/token';
 import { deleteCookie } from 'utils/cookie';
 import LINK from 'constants/link';
@@ -12,9 +11,6 @@ import MobileHeader from './Mobile/Header';
 import { otherTabsState } from 'recoil/atom/otherTabs.atom';
 
 function Layout() {
-	const includeHeader = useRecoilValue(includeHeaderState);
-	const includeFooter = useRecoilValue(includeFooterState);
-
 	const decodedPayload = decodeJWT();
 	const { companyName } = decodedPayload;
 
@@ -30,12 +26,12 @@ function Layout() {
 
 	return (
 		<>
-			{includeHeader && <Header logout={handleLogout} name={companyName} />}
-			{includeHeader && (
-				<MobileHeader logout={handleLogout} name={companyName} />
-			)}
+			<Header logout={handleLogout} name={companyName} />
+
+			<MobileHeader logout={handleLogout} name={companyName} />
+
 			<Outlet />
-			{includeFooter && <Footer />}
+			<Footer />
 		</>
 	);
 }
