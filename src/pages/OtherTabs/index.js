@@ -4,6 +4,7 @@ import LINK from 'constants/link';
 import usePathname from 'hooks/usePathname';
 import useFilter from 'hooks/useFilter';
 import useModal from 'hooks/useModal';
+import usePagination from 'hooks/usePagination';
 import useApi from 'hooks/useApi';
 
 import * as S from './index.styles';
@@ -12,6 +13,7 @@ import Title from 'components/@common/Title';
 import OtherList from 'components/pages/OtherTabs/OtherList';
 import ApplicationModal from 'components/pages/OtherTabs/ApplicationModal';
 import Button from 'components/@common/Button';
+import Pagination from 'components/@common/Pagination';
 
 const url = [
 	{
@@ -36,7 +38,9 @@ const url = [
 
 function OtherTabs() {
 	const { path, pathname } = usePathname();
-	const mainTitle = url.filter(el => pathname === el.link)[0];
+	const mainTitle = useMemo(() => {
+		return url.filter(el => pathname === el.link)[0];
+	}, [pathname]);
 
 	const { sort, handelSelectFilter } = useFilter();
 	const { modalState, openModal, closeModal } = useModal();
@@ -51,15 +55,27 @@ function OtherTabs() {
 		},
 	]);
 
-	const apiPath = `/client/${path}s?page=1&size=7&sortBy=${sort}`;
+	const itemsPerPage = 8;
+	const { currentPage, setCurrentPage, total, setTotal } = usePagination();
+
+	const paths = useMemo(() => {
+		const basePath = `/client/${path}s?page=${currentPage}&size=${itemsPerPage}&sortBy=${sort}`;
+		const status =
+			selectedStatus[0].sortBy &&
+			selectedStatus.map(stat => `&status=${stat.sortBy}`).join('');
+
+		return { basePath, status };
+	}, [path, currentPage, sort, selectedStatus]);
+
+	const { basePath, status } = paths;
 
 	const { result, trigger } = useApi({
-		path: apiPath,
+		path: basePath,
 		shouldFetch: true,
 	});
 
 	// visitExperiences, viewtabInstagrams, websiteOutsourcings
-	const camelCasePath = useMemo(() => {
+	const camelCaseData = useMemo(() => {
 		return (
 			path
 				.split('-')
@@ -72,41 +88,20 @@ function OtherTabs() {
 
 	useEffect(() => {
 		if (result.data) {
-			const resultData = result.data[camelCasePath];
+			const resultData = result.data[camelCaseData];
 			setOtherList(resultData);
+			setTotal(result.data.total);
 		}
-	}, [result.data, camelCasePath]);
+	}, [result.data]);
 
 	useEffect(() => {
 		setCheckHistory(false);
-
-		trigger({
-			applyResult: true,
-		});
-	}, [path, sort]);
-
-	const status =
-		selectedStatus[0].sortBy &&
-		selectedStatus.map(stat => `&status=${stat.sortBy}`).join('');
-
-	const fetchData = async () => {
-		try {
-			const req = await trigger({
-				path: apiPath + status,
-				applyResult: true,
-			});
-
-			if (req.data) {
-				setOtherList(req.data[camelCasePath]);
-			}
-		} catch (error) {
-			console.error(error);
-		}
-	};
+		trigger({ applyResult: true });
+	}, [path]);
 
 	useEffect(() => {
-		fetchData();
-	}, [selectedStatus, sort]);
+		trigger({ path: basePath + status, applyResult: true });
+	}, [selectedStatus, sort, currentPage]);
 
 	// 제안서 & 리스트
 	const handleSuggestBtn = () => {
@@ -118,10 +113,20 @@ function OtherTabs() {
 		openModal();
 	};
 
+	// 페이지 변경 핸들러
+	const handlePageChange = async pageNumber => {
+		await trigger({ applyResult: true });
+		setCurrentPage(pageNumber);
+	};
+
 	return (
 		<>
 			{modalState && (
-				<ApplicationModal onClose={closeModal} title={mainTitle.koTitle} />
+				<ApplicationModal
+					onClose={closeModal}
+					title={mainTitle.koTitle}
+					listTrigger={trigger}
+				/>
 			)}
 
 			<S.Body>
@@ -137,17 +142,29 @@ function OtherTabs() {
 				{checkHistory && (
 					<OtherList
 						title={mainTitle.koTitle}
+						sort={sort}
 						otherList={otherList}
 						selectedStatus={selectedStatus}
 						setSelectedStatus={setSelectedStatus}
-						sort={sort}
 						onSelect={handelSelectFilter}
+						listTrigger={trigger}
 					/>
 				)}
 
 				{/* 페이지네이션 */}
-				<div></div>
+				{checkHistory &&
+					(otherList?.length ? (
+						<Pagination
+							totalItems={total}
+							itemsPerPage={itemsPerPage}
+							currentPage={currentPage}
+							onPageChange={handlePageChange}
+						/>
+					) : (
+						<></>
+					))}
 			</S.Body>
+
 			<S.ApplyBtnBox>
 				<div>
 					<Button size="height" variant="white" onClick={handleSuggestBtn}>
