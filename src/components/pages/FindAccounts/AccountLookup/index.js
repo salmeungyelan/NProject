@@ -146,8 +146,8 @@ function AccountLookup({ password }) {
 					<InputBox
 						title="전화번호"
 						name="contactNumber"
-						placeholder="전화번호를 입력해 주세요."
 						value={inputData.contactNumber}
+						placeholder="전화번호를 입력해 주세요."
 						onChange={() => handleChange()}
 						ref={phoneNumRef}
 						message={errorMessages.contactNumber || ' '}
@@ -157,8 +157,8 @@ function AccountLookup({ password }) {
 					<InputBox
 						title="사업자 등록 번호"
 						name="businessNumber"
-						placeholder="업체의 사업자 등록 번호를 입력해 주세요."
 						value={inputData.businessNumber}
+						placeholder="업체의 사업자 등록 번호를 입력해 주세요."
 						onChange={() => handleChange()}
 						ref={businessNumRef}
 						message={errorMessages.businessNumber || ' '}
@@ -168,7 +168,7 @@ function AccountLookup({ password }) {
 					<S.ButtonBox>
 						<Notice notice={notice} />
 
-						<Button variant="default" size="default" type="submit">
+						<Button size="default" variant="default" type="submit">
 							{password ? '임시 비밀번호 발급' : '아이디 찾기'}
 						</Button>
 					</S.ButtonBox>

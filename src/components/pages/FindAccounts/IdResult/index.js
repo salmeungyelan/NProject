@@ -20,7 +20,6 @@ function IdResult({ data }) {
 		<S.Body>
 			<div>
 				<InputBox title="이메일" value={email} disabled register />
-
 				<InputBox title="아이디" value={username} disabled register />
 			</div>
 
