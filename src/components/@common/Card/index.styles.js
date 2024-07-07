@@ -22,8 +22,8 @@ export const Card = styled.div`
 	}
 
 	@media screen and (min-width: 768px) {
-		width: ${({ $main }) => ($main ? '182px' : '182px')};
-		height: ${({ $main }) => ($main ? '170px' : '182px')};
+		width: ${({ $isReview }) => ($isReview ? '182px' : '162px')};
+		height: ${({ $isReview }) => ($isReview ? '182px' : '172px')};
 
 		> a {
 			gap: 6px;
@@ -37,8 +37,8 @@ export const Card = styled.div`
 	}
 
 	@media screen and (min-width: 1200px) {
-		width: ${({ $main }) => ($main ? '228px' : '228px')};
-		height: ${({ $main }) => ($main ? '200px' : '213px')};
+		width: ${({ $isReview }) => ($isReview ? '228px' : '210px')};
+		height: ${({ $isReview }) => ($isReview ? '213px' : '200px')};
 
 		> a {
 			gap: 8px;
@@ -47,7 +47,7 @@ export const Card = styled.div`
 		> a > div > img,
 		video {
 			width: 100%;
-			height: ${({ $main }) => ($main ? '130px' : '135px')};
+			height: ${({ $isReview }) => ($isReview ? '130px' : '135px')};
 		}
 	}
 `;
@@ -64,7 +64,6 @@ export const MainBox = styled.div`
 
 	@media screen and (min-width: 1200px) {
 		padding: 0 16px;
-		gap: 14px;
 	}
 `;
 
@@ -76,7 +75,7 @@ export const Title = styled.div`
 	font-weight: 600;
 
 	> div:first-child {
-		width: ${({ $main }) => ($main ? '78px' : '100%')};
+		width: ${({ $isReview }) => ($isReview ? '100%' : '78px')};
 		overflow: hidden;
 		white-space: nowrap;
 		text-overflow: ellipsis;
@@ -87,7 +86,7 @@ export const Title = styled.div`
 		gap: 6px;
 
 		> div:first-child {
-			width: ${({ $main }) => ($main ? '84px' : '100%')};
+			width: ${({ $isReview }) => ($isReview ? '100%' : '84px')};
 		}
 	}
 
@@ -96,7 +95,7 @@ export const Title = styled.div`
 		gap: 10px;
 
 		> div:first-child {
-			width: ${({ $main }) => ($main ? '132px' : '100%')};
+			width: ${({ $isReview }) => ($isReview ? '100%' : '122px')};
 		}
 	}
 `;
