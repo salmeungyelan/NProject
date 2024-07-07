@@ -20,7 +20,7 @@ function MediaList({ clientFiles }) {
 	};
 
 	return (
-		<S.MediaList>
+		<>
 			{modalState && (
 				<MediaModal
 					src={file.url}
@@ -29,28 +29,30 @@ function MediaList({ clientFiles }) {
 				/>
 			)}
 
-			{clientFiles &&
-				clientFiles.map(file => (
-					<S.Media key={file.id}>
-						{file.isThumbnail && (
-							<S.Thumbnail>
-								<img src="/assets/icons/thumbnail-check.svg" />
-								<span>썸네일</span>
-							</S.Thumbnail>
-						)}
+			<S.MediaList>
+				{clientFiles &&
+					clientFiles.map(file => (
+						<S.Media key={file.id}>
+							{file.isThumbnail && (
+								<S.Thumbnail>
+									<img src="/assets/icons/thumbnail-check.svg" />
+									<span>썸네일</span>
+								</S.Thumbnail>
+							)}
 
-						{file.mimetype.includes('video') && <video src={file.url} />}
-						{!file.mimetype.includes('video') && <img src={file.url} />}
+							{file.mimetype.includes('video') && <video src={file.url} />}
+							{!file.mimetype.includes('video') && <img src={file.url} />}
 
-						<S.MediaTitle
-							onClick={() => handleOpenModal(file.url, file.mimetype)}
-						>
-							<p>{file.originalname}</p>
-							<img src="/assets/icons/search.svg" />
-						</S.MediaTitle>
-					</S.Media>
-				))}
-		</S.MediaList>
+							<S.MediaTitle
+								onClick={() => handleOpenModal(file.url, file.mimetype)}
+							>
+								<p>{file.originalname}</p>
+								<img src="/assets/icons/search.svg" />
+							</S.MediaTitle>
+						</S.Media>
+					))}
+			</S.MediaList>
+		</>
 	);
 }
 

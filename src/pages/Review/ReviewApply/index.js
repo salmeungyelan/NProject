@@ -310,9 +310,9 @@ function ReviewApply() {
 	const {
 		title,
 		requirement,
-		hashtags,
 		mainKeyword,
 		subKeywords,
+		hashtags,
 		smartplaceLink,
 	} = reviewPost;
 
@@ -320,8 +320,8 @@ function ReviewApply() {
 		<S.Body>
 			{modalState && !img && (
 				<Modal
-					title={modal.title}
 					img={modal.img}
+					title={modal.title}
 					content={modal.content}
 					onClose={() =>
 						closeModal(postId && navigate(LINK.REVIEW_POST + `/${postId}`))
@@ -352,7 +352,7 @@ function ReviewApply() {
 									onClick={() =>
 										handleClickCategory(category.codeValue, category.typeLabel)
 									}
-									clicked={selectedCategory.type === category.codeValue}
+									$clicked={selectedCategory.type === category.codeValue}
 									ref={categoryRef}
 									tabIndex={0}
 								>
@@ -366,13 +366,13 @@ function ReviewApply() {
 				<S.Box>
 					<S.Title>리뷰 제목</S.Title>
 					<Input
-						variant="default"
-						size="height"
 						name="title"
+						defaultValue={title || inputData.title}
 						placeholder="제목을 입력해 주세요."
 						onChange={e => handleChange(e)}
-						defaultValue={title || inputData.title}
 						ref={titleRef}
+						size="height"
+						variant="default"
 					/>
 					<p>{errorMsg.title || ' '}</p>
 				</S.Box>
@@ -380,13 +380,13 @@ function ReviewApply() {
 				<S.Box>
 					<S.Title>요청사항 및 내용</S.Title>
 					<Textarea
-						variant="default"
-						size="default"
 						name="requirement"
+						defaultValue={requirement || inputData.requirement}
 						placeholder="요청사항 및 내용을 입력해 주세요."
 						onChange={e => handleChange(e)}
-						defaultValue={requirement || inputData.requirement}
 						ref={desRef}
+						size="default"
+						variant="default"
 					/>
 					<p>{errorMsg.requirement || ' '}</p>
 				</S.Box>
@@ -421,9 +421,9 @@ function ReviewApply() {
 				<S.Box>
 					<S.Title>스마트 플레이스 링크</S.Title>
 					<Input
-						variant="default"
-						size="height"
 						value={smartplaceLink || ''}
+						size="height"
+						variant="default"
 						disabled
 					/>
 					<p />
@@ -487,6 +487,7 @@ function ReviewApply() {
 												}
 											/>
 										)}
+
 										<S.XBtn
 											src="/assets/icons/white-x.svg"
 											onClick={() =>
@@ -514,16 +515,12 @@ function ReviewApply() {
 
 				<div>
 					<div>
-						<Button
-							variant="white"
-							size="height"
-							onClick={() => handleCancel()}
-						>
+						<Button size="height" variant="white" onClick={handleCancel}>
 							취소
 						</Button>
 						<Button
-							variant="white"
 							size="height"
+							variant="white"
 							onClick={() => handleSubmit('REVIEW_STATUS_01', '임시저장')}
 						>
 							임시 저장
@@ -531,8 +528,8 @@ function ReviewApply() {
 					</div>
 
 					<Button
-						variant="default"
 						size="height"
+						variant="default"
 						onClick={() => handleSubmit('REVIEW_STATUS_02', '대기')}
 					>
 						리뷰 등록 완료

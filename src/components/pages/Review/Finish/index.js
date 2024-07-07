@@ -39,7 +39,7 @@ function Finish({ result }) {
 			<S.Box>
 				<S.Title>첨부 파일</S.Title>
 				<S.ReadImg>
-					{adminFiles.length > 0 &&
+					{adminFiles?.length &&
 						adminFiles.map(file => (
 							<S.Img key={file.id}>
 								<img src={file.url} />

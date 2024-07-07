@@ -33,11 +33,11 @@ function ReviewPost() {
 		}
 	}, [result.data, review.star]);
 
-	const handleClickApply = () => {
+	const handleClickModify = () => {
 		navigate(LINK.REVIEW_APPLY + `/${_id}`);
 	};
 
-	const handleClickBackBtn = () => {
+	const handleClickBack = () => {
 		navigate(-1);
 	};
 
@@ -63,8 +63,14 @@ function ReviewPost() {
 		previousReview,
 	} = review;
 
-	const fin = statusLabel === '완료';
-	const results = { resultLinks, adminFiles, comment, star, isRatingable };
+	const completed = statusLabel === '완료';
+	const resultInfo = {
+		resultLinks,
+		adminFiles,
+		comment,
+		star,
+		isRatingable,
+	};
 
 	return (
 		<>
@@ -104,7 +110,7 @@ function ReviewPost() {
 
 						<MediaList clientFiles={clientFiles} />
 
-						{fin && <Finish result={results} />}
+						{completed && <Finish result={resultInfo} />}
 					</S.Content>
 
 					<PreviousPost
@@ -115,20 +121,16 @@ function ReviewPost() {
 
 					<S.ButtonBox>
 						<div>
-							<Button
-								variant="white"
-								size="height"
-								onClick={() => handleClickBackBtn()}
-							>
+							<Button size="height" variant="white" onClick={handleClickBack}>
 								뒤로 가기
 							</Button>
 						</div>
 						{statusLabel === '임시저장' && (
 							<div>
 								<Button
-									variant="default"
 									size="height"
-									onClick={() => handleClickApply()}
+									variant="default"
+									onClick={handleClickModify}
 								>
 									임시 저장 수정
 								</Button>

@@ -105,12 +105,12 @@ function RatingSubModal(props) {
 					</S.Body>
 
 					<S.ButtonBox>
-						<Button variant="white" size="height" onClick={onClose}>
+						<Button size="height" variant="white" onClick={onClose}>
 							취소
 						</Button>
 						<Button
-							variant="default"
 							size="height"
+							variant="default"
 							onClick={() => handleSubmitRate()}
 						>
 							확인
