@@ -44,7 +44,7 @@ function TermsModal(props) {
 
 				<S.ButtonBox>
 					<div>
-						<Button variant="default" size="default" onClick={handleAgree}>
+						<Button size="default" variant="default" onClick={handleAgree}>
 							동의
 						</Button>
 					</div>

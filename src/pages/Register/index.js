@@ -71,6 +71,7 @@ function Register() {
 		setTermsId(id);
 	};
 
+	// 약관 모달
 	const handleCloseModal = agreed => {
 		closeModal(false);
 
@@ -89,6 +90,7 @@ function Register() {
 		setTermsId('');
 	};
 
+	// 약관 전체 동의
 	const handleAllCheckedChange = () => {
 		const newCheckedStatus = !terms.allChecked;
 
@@ -99,6 +101,7 @@ function Register() {
 		});
 	};
 
+	// 약관 모달 내에서 동의
 	const handleIndividualChange = name => {
 		setTerms(prevState => {
 			const newTerms = {
@@ -134,6 +137,7 @@ function Register() {
 		detailAddress: '',
 	});
 
+	// 주소 변경
 	const handleAddressChange = (name, value) => {
 		setLocation(prevData => ({
 			...prevData,
@@ -277,10 +281,9 @@ function Register() {
 				],
 			};
 
-			const req = await trigger({
+			await trigger({
 				method: 'post',
 				data: newData,
-				showBoundary: false,
 			});
 
 			setRegisterSuccess(true);
@@ -315,8 +318,8 @@ function Register() {
 				<InputBox
 					title="이메일 입력"
 					name="email"
-					placeholder="이메일을 입력해 주세요."
 					value={inputData.email}
+					placeholder="이메일을 입력해 주세요."
 					onChange={handleChange}
 					ref={emailRef}
 					message={errorMsg.email}
@@ -326,8 +329,8 @@ function Register() {
 				<InputBox
 					title="아이디 입력"
 					name="username"
-					placeholder="아이디는 영어와 숫자로만 입력해 주세요."
 					value={inputData.username}
+					placeholder="아이디는 영어와 숫자로만 입력해 주세요."
 					onChange={handleChange}
 					ref={idRef}
 					message={errorMsg.username}
@@ -338,8 +341,8 @@ function Register() {
 					title="비밀번호 입력"
 					name="password"
 					type="password"
-					placeholder="비밀번호를 입력해 주세요."
 					value={inputData.password}
+					placeholder="비밀번호를 입력해 주세요."
 					onChange={handleChange}
 					ref={pwRef}
 					message={errorMsg.password}
@@ -348,10 +351,10 @@ function Register() {
 
 				<InputBox
 					title="비밀번호 확인"
-					name="passwordCheck"
 					type="password"
-					placeholder="비밀번호를 입력해 주세요."
+					name="passwordCheck"
 					value={inputData.passwordCheck}
+					placeholder="비밀번호를 입력해 주세요."
 					onChange={handleChange}
 					ref={pwCheckRef}
 					message={errorMsg.passwordCheck}
@@ -361,8 +364,8 @@ function Register() {
 				<InputBox
 					title="업체명"
 					name="companyName"
-					placeholder="업체명을 입력해 주세요."
 					value={inputData.companyName}
+					placeholder="업체명을 입력해 주세요."
 					onChange={handleChange}
 					ref={companyRef}
 					message={errorMsg.companyName}
@@ -372,8 +375,8 @@ function Register() {
 				<InputBox
 					title="전화번호"
 					name="contactNumber"
-					placeholder="전화번호를 입력해 주세요."
 					value={inputData.contactNumber}
+					placeholder="전화번호를 입력해 주세요."
 					onChange={handleChange}
 					ref={contactRef}
 					message={errorMsg.contactNumber}
@@ -391,8 +394,8 @@ function Register() {
 				<InputBox
 					title="사업자 등록 번호"
 					name="businessNumber"
-					placeholder="업체의 사업자 등록 번호를 입력해 주세요."
 					value={inputData.businessNumber}
+					placeholder="업체의 사업자 등록 번호를 입력해 주세요."
 					onChange={handleChange}
 					ref={businessRef}
 					message={errorMsg.businessNumber}
@@ -404,42 +407,39 @@ function Register() {
 					<S.Check>
 						<S.CheckAll>
 							<input
+								id="allCheck"
 								type="checkbox"
-								name=""
-								id="check"
-								checked={terms.allChecked}
 								onChange={handleAllCheckedChange}
 								ref={termsRef}
+								checked={terms.allChecked}
 							/>
-							<label htmlFor="check" />
+							<label htmlFor="allCheck" />
 							<h1>전체동의</h1>
 						</S.CheckAll>
 						<Line size="width" variant="lightGray" />
 						<S.CheckItem>
 							<input
+								id="privacy"
 								type="checkbox"
-								name=""
-								id="check_1"
-								checked={terms.privacy}
 								onChange={() => handleIndividualChange('privacy')}
+								checked={terms.privacy}
 							/>
-							<label htmlFor="check_1" />
+							<label htmlFor="privacy" />
 							<p onClick={handleOpenModal(2)}>
 								개인정보 제공 및 활용에 동의합니다.
 							</p>
-							<span className="text_color">(필수)</span>
+							<span>(필수)</span>
 						</S.CheckItem>
 						<S.CheckItem>
 							<input
+								id="service"
 								type="checkbox"
-								name=""
-								id="check_2"
-								checked={terms.service}
 								onChange={() => handleIndividualChange('service')}
+								checked={terms.service}
 							/>
-							<label htmlFor="check_2" />
+							<label htmlFor="service" />
 							<p onClick={handleOpenModal(1)}>서비스 이용 약관에 동의합니다.</p>
-							<span className="text_color">(필수)</span>
+							<span>(필수)</span>
 						</S.CheckItem>
 					</S.Check>
 					<span>{errorMsg.terms || ' '}</span>
