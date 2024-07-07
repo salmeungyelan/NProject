@@ -61,7 +61,7 @@ function List() {
 	// 현재 데이터 있고 태블릿 사이즈일 때 itemsPerPage 2
 	// 현재 데이터 있고 데스크탑 사이즈일 때 itemsPerPage 4
 	const calcItemsPerPage = () => {
-		if (newestData.length > 0 && window.innerWidth >= 1200) return 4;
+		if (newestData?.length && window.innerWidth >= 1200) return 4;
 		else return 2;
 	};
 
@@ -148,7 +148,7 @@ function List() {
 
 	return (
 		<S.Body $data={newestData}>
-			{newestData.length ? <Iphone data={newestData[0]} /> : <></>}
+			{newestData?.length ? <Iphone data={newestData[0]} /> : <></>}
 
 			<S.ReviewIng>
 				<S.Title>
@@ -158,7 +158,7 @@ function List() {
 					</Link>
 				</S.Title>
 
-				{currentData.length ? (
+				{currentData?.length ? (
 					<>
 						<S.CardList $current={currentData.length}>
 							{getCurrentItems(currentData, currentIndex).map((data, idx) => (
@@ -192,7 +192,7 @@ function List() {
 					</Link>
 				</S.Title>
 
-				{completedData.length ? (
+				{completedData?.length ? (
 					<>
 						<S.CardList $completed={completedData.length}>
 							{getCurrentItems(completedData, completedIndex).map(
