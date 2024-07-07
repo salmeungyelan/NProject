@@ -30,10 +30,11 @@ function PreviousPost(props) {
 		});
 	};
 
-	const handleClickBackBtn = async id => {
+	const handleClickBackBtn = id => {
 		navigate(-1);
-		await trigger({
-			path: `/client/notices/${id}`,
+
+		trigger({
+			path: `/client/${path}s/${id}`,
 			applyResult: true,
 		});
 	};
