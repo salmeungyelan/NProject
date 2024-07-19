@@ -10,11 +10,11 @@ import GlobalStyles from 'styles/global';
 import router from 'routes/routing';
 import Loading from 'components/@common/Loading/Loading';
 import ErrorFallback from 'components/@common/Error';
-import { LoadingProvider } from 'contexts/loadingContext';
+import { LoadingProvider } from 'contexts/LoadingContext';
 
 function App() {
 	return (
-		<ErrorBoundary FallbackComponent={ErrorFallback}>
+		<ErrorBoundary FallbackComponent={<ErrorFallback />}>
 			<Suspense fallback={<Loading />}>
 				<LoadingProvider>
 					<RecoilRoot>
