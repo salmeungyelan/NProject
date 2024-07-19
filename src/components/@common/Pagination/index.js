@@ -9,6 +9,8 @@ function Pagination(props) {
 		startPage,
 		endPage,
 		totalPages,
+		totalGroup,
+		currentGroup,
 		onClickPrev,
 		onClickPrevGroup,
 		onClickNext,
@@ -23,6 +25,7 @@ function Pagination(props) {
 						onClickPrevGroup();
 						onPageChange(startPage - 1);
 					}}
+					disabled={currentGroup === 1}
 				/>
 				<S.HangulBtn
 					onClick={() => {
@@ -62,6 +65,7 @@ function Pagination(props) {
 						onClickNextGroup();
 						onPageChange(endPage + 1);
 					}}
+					disabled={currentGroup === totalGroup}
 				/>
 			</S.NextPrevBox>
 		</S.PaginationBox>
