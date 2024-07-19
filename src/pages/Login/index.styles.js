@@ -1,5 +1,45 @@
-import styled from 'styled-components';
-import { flexCenter, flexColumn } from 'styles/common';
+import styled, { keyframes } from 'styled-components';
+import { bodyContainer, flexCenter, flexColumn } from 'styles/common';
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+const fadeOut = keyframes`
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+`;
+
+export const StartImg = styled.div`
+	${flexCenter}
+	animation: ${fadeIn} 0.3s ease forwards;
+	background-color: ${({ theme }) => theme.PALETTE.white[100]};
+	width: 100vw;
+	height: 100vh;
+
+	> img {
+		width: 375px;
+	}
+
+	@media screen and (min-width: 768px) {
+		> img {
+			width: 600px;
+		}
+	}
+
+	&.fade-out {
+		animation: ${fadeOut} 0.3s ease forwards;
+	}
+`;
 
 export const Body = styled.div`
 	height: 100vh;

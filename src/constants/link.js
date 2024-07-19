@@ -1,7 +1,7 @@
 const LINK = {
-	HOME: '/',
+	HOME: '/main',
 
-	LOGIN: '/login',
+	LOGIN: '/',
 	REGISTER: '/register',
 	FIND_ID: '/find/id',
 	FIND_PW: '/find/password',
