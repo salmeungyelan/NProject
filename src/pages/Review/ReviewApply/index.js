@@ -8,6 +8,7 @@ import useApi from 'hooks/useApi';
 import fileToBase64 from 'utils/fileToBase64';
 import LINK from 'constants/link';
 import MESSAGE from 'constants/message';
+import useSlide from 'hooks/useSlide';
 
 import * as S from './index.styles';
 
@@ -27,7 +28,7 @@ function ReviewApply() {
 	const { inputData, handleChange } = useInput();
 	const { modalState, openModal, closeModal } = useModal();
 
-	const decodedPayload = decodeJWT();
+	const decodedPayload = decodeJWT('accessToken');
 	const { sub } = decodedPayload;
 
 	const { result, trigger } = useApi({
@@ -199,6 +200,7 @@ function ReviewApply() {
 
 	// 이미지 및 비디오 확대
 	const handleClickImgModal = (url, type) => {
+		console.log(type);
 		setImg({ src: url, type });
 		openModal();
 	};
@@ -291,6 +293,7 @@ function ReviewApply() {
 
 			setModal({
 				img: 'modal-check.svg',
+				title: '리뷰 신청',
 				content: statusContent,
 			});
 			openModal();
@@ -306,6 +309,12 @@ function ReviewApply() {
 	const handleCancel = () => {
 		navigate(-1);
 	};
+
+	const mediaRef = useRef([]);
+	const containerRef = useRef(null);
+
+	const { handlePrevClick, handleNextClick, slide, visibleItemsCount } =
+		useSlide(mediaRef, containerRef, fileList);
 
 	const {
 		title,
@@ -331,9 +340,12 @@ function ReviewApply() {
 
 			{modalState && img && (
 				<MediaModal
-					src={img.url}
+					src={img.src}
 					type={img.type}
-					onClose={() => closeModal(setImg(null))}
+					onClose={() => {
+						closeModal();
+						setImg(null);
+					}}
 				/>
 			)}
 
@@ -369,6 +381,7 @@ function ReviewApply() {
 						name="title"
 						defaultValue={title || inputData.title}
 						placeholder="제목을 입력해 주세요."
+						maxLength="80"
 						onChange={e => handleChange(e)}
 						ref={titleRef}
 						size="height"
@@ -383,6 +396,7 @@ function ReviewApply() {
 						name="requirement"
 						defaultValue={requirement || inputData.requirement}
 						placeholder="요청사항 및 내용을 입력해 주세요."
+						maxLength="20000"
 						onChange={e => handleChange(e)}
 						ref={desRef}
 						size="default"
@@ -460,48 +474,56 @@ function ReviewApply() {
 								</S.MediaTitle>
 							</S.FileContainer>
 
-							{fileList &&
-								fileList.map((file, idx) => (
-									<S.MediaList key={idx}>
-										{isThumbnail === idx && (
-											<S.Thumbnail>
-												<img src="/assets/icons/thumbnail-check.svg" />
-												<span>썸네일</span>
-											</S.Thumbnail>
-										)}
+							{slide > 0 && slide !== fileList?.length - 1 && (
+								<S.LeftArrowImg onClick={handlePrevClick} />
+							)}
+							<S.MediaList ref={containerRef}>
+								{fileList &&
+									fileList.map((file, idx) => (
+										<S.Media key={idx} ref={el => (mediaRef.current[idx] = el)}>
+											{isThumbnail === idx && (
+												<S.Thumbnail>
+													<img src="/assets/icons/thumbnail-check.svg" />
+													<span>썸네일</span>
+												</S.Thumbnail>
+											)}
 
-										{isVideo(file.url) ? (
-											<S.Video
-												src={file.url}
-												$thumbnail={isThumbnail === idx}
+											{isVideo(file.url) ? (
+												<S.Video
+													src={file.url}
+													$thumbnail={isThumbnail === idx}
+													onClick={() =>
+														handleClickThumbnail(idx, file.originalname)
+													}
+												/>
+											) : (
+												<S.Img
+													src={file.url}
+													$thumbnail={isThumbnail === idx}
+													onClick={() =>
+														handleClickThumbnail(idx, file.originalname)
+													}
+												/>
+											)}
+
+											<S.XBtn
+												src="/assets/icons/white-x.svg"
 												onClick={() =>
-													handleClickThumbnail(idx, file.originalname)
+													handleDeleteFile(file.url, file.originalname)
 												}
 											/>
-										) : (
-											<S.Img
-												src={file.url}
-												$thumbnail={isThumbnail === idx}
-												onClick={() =>
-													handleClickThumbnail(idx, file.originalname)
-												}
-											/>
-										)}
-
-										<S.XBtn
-											src="/assets/icons/white-x.svg"
-											onClick={() =>
-												handleDeleteFile(file.url, file.originalname)
-											}
-										/>
-										<S.MediaTitle
-											onClick={() => handleClickImgModal(file.url, file.type)}
-										>
-											<p>{file.originalname}</p>
-											<img src="/assets/icons/search.svg" />
-										</S.MediaTitle>
-									</S.MediaList>
-								))}
+											<S.MediaTitle
+												onClick={() => handleClickImgModal(file.url, file.type)}
+											>
+												<p>{file.originalname}</p>
+												<img src="/assets/icons/search.svg" />
+											</S.MediaTitle>
+										</S.Media>
+									))}
+							</S.MediaList>
+							{slide + visibleItemsCount < fileList?.length && (
+								<S.RightArrowImg onClick={handleNextClick} />
+							)}
 						</S.MediaFileBox>
 					</S.FileBox>
 				</S.Box>

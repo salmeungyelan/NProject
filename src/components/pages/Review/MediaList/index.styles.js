@@ -1,12 +1,25 @@
-import styled from 'styled-components';
-import { flexCenter, flexColumn, flexSpaceBetweenCenter } from 'styles/common';
+import styled, { css } from 'styled-components';
+import { flexCenter, flexColumn } from 'styles/common';
+
+export const Background = styled.div`
+	position: relative;
+`;
 
 export const MediaList = styled.div`
-	${flexSpaceBetweenCenter}
+	${flexCenter}
 	justify-content: flex-start;
 	gap: 8px;
-	overflow-x: auto;
+	overflow-x: scroll;
 	overflow-y: hidden;
+	padding-bottom: 3px;
+
+	@media screen and (min-width: 768px) {
+		padding-bottom: 5px;
+	}
+
+	@media screen and (min-width: 1200px) {
+		padding-bottom: 7px;
+	}
 `;
 
 export const Media = styled.div`
@@ -16,9 +29,6 @@ export const Media = styled.div`
 
 	> img,
 	video {
-		border: ${({ $thumbnail, theme }) =>
-			$thumbnail ? `2px solid ${theme.PALETTE.navy}` : 'none'};
-
 		width: 64px;
 		height: 64px;
 		object-fit: cover;
@@ -26,21 +36,18 @@ export const Media = styled.div`
 		@media screen and (min-width: 768px) {
 			width: 100px;
 			height: 100px;
-			border: ${({ $thumbnail, theme }) =>
-				$thumbnail ? `4px solid ${theme.PALETTE.navy}` : 'none'};
 		}
 
 		@media screen and (min-width: 1200px) {
 			width: 120px;
 			height: 120px;
-			border: ${({ $thumbnail, theme }) =>
-				$thumbnail ? `4px solid ${theme.PALETTE.navy}` : 'none'};
 		}
 	}
 `;
 
 export const MediaTitle = styled.div`
-	${flexCenter}
+	display: flex;
+	justify-content: center;
 	gap: 4px;
 	height: 10px;
 	color: ${({ theme }) => theme.PALETTE.gray[100]};
@@ -51,24 +58,25 @@ export const MediaTitle = styled.div`
 		overflow: hidden;
 		white-space: nowrap;
 		text-overflow: ellipsis;
+		text-align: center;
 		width: 50px;
 	}
 
-	> img {
-		width: 8px;
+	& img {
+		width: 10%;
 	}
 
 	@media screen and (min-width: 768px) {
 		height: 14px;
 		gap: 6px;
 
-		> p {
+		& p {
 			font-size: ${({ theme }) => theme.FONT_SIZE.ms};
-			width: 80px;
+			width: 70px;
 		}
 
-		> img {
-			width: 12px;
+		& img {
+			width: 12%;
 		}
 	}
 
@@ -77,11 +85,7 @@ export const MediaTitle = styled.div`
 
 		> p {
 			font-size: ${({ theme }) => theme.FONT_SIZE.m};
-			width: 90px;
-		}
-
-		> img {
-			width: 14px;
+			width: 85px;
 		}
 	}
 `;
@@ -131,5 +135,52 @@ export const Thumbnail = styled.div`
 			width: 8px;
 			height: 10px;
 		}
+	}
+`;
+
+const buttonBgReset = css`
+	background: none;
+	width: 12px;
+	height: 12px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 8px 8px;
+	background-color: ${({ theme }) => theme.PALETTE.white[100]};
+	border-radius: 50%;
+	box-shadow: 0 0 4px 0 #00000029;
+
+	@media screen and (min-width: 768px) {
+		width: 18px;
+		height: 18px;
+		background-size: 12px 12px;
+	}
+`;
+
+export const LeftArrowImg = styled.button`
+	${buttonBgReset}
+	background-image: url('/assets/icons/left-arrow.svg');
+	z-index: 20;
+
+	background-repeat: 0;
+	position: absolute;
+	top: 32.5%;
+	left: -1.5%;
+
+	@media screen and (min-width: 768px) {
+		top: 34%;
+	}
+
+	@media screen and (min-width: 1200px) {
+		top: 36%;
+		left: -0.8%;
+	}
+`;
+
+export const RightArrowImg = styled(LeftArrowImg)`
+	left: 98%;
+	background-image: url('/assets/icons/right-arrow.svg');
+
+	@media screen and (min-width: 1200px) {
+		left: 99.3%;
 	}
 `;
