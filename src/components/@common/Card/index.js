@@ -12,8 +12,7 @@ function Card({ data }) {
 	const { pathname } = usePathname();
 	const isReview = pathname === LINK.REVIEW;
 
-	const { id, title, status, status_label, picUsername, thumbnail, star } =
-		data;
+	const { id, title, status, statusLabel, picUsername, thumbnail, star } = data;
 
 	// 이미지 없을 경우
 	const imgSrc = !thumbnail ? '/assets/images/noImage.png' : thumbnail;
@@ -37,7 +36,7 @@ function Card({ data }) {
 				<S.MainBox>
 					<S.Title $isReview={isReview}>
 						<div>{title}</div>
-						<Progress variant={status}>{status_label}</Progress>
+						<Progress variant={status}>{statusLabel}</Progress>
 					</S.Title>
 
 					<S.Rate>
@@ -49,7 +48,7 @@ function Card({ data }) {
 						{status === 'REVIEW_STATUS_04' && (
 							<S.Rate>
 								<div>{rate}</div>
-								{star}
+								{star || 0}
 							</S.Rate>
 						)}
 					</S.Rate>

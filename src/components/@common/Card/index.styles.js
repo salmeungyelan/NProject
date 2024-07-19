@@ -75,7 +75,7 @@ export const Title = styled.div`
 	font-weight: 600;
 
 	> div:first-child {
-		width: ${({ $isReview }) => ($isReview ? '100%' : '78px')};
+		width: ${({ $isReview }) => ($isReview ? '70%' : '78px')};
 		overflow: hidden;
 		white-space: nowrap;
 		text-overflow: ellipsis;
@@ -86,7 +86,7 @@ export const Title = styled.div`
 		gap: 6px;
 
 		> div:first-child {
-			width: ${({ $isReview }) => ($isReview ? '100%' : '84px')};
+			width: ${({ $isReview }) => ($isReview ? '70%' : '84px')};
 		}
 	}
 
@@ -95,7 +95,7 @@ export const Title = styled.div`
 		gap: 10px;
 
 		> div:first-child {
-			width: ${({ $isReview }) => ($isReview ? '100%' : '122px')};
+			width: ${({ $isReview }) => ($isReview ? '70%' : '122px')};
 		}
 	}
 `;
