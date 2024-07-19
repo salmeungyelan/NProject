@@ -66,6 +66,7 @@ function More({ children }) {
 
 	// 더보기 주소
 	const link = title ? LINK.NOTICE : LINK.GUIDE;
+	const detail = title ? LINK.NOTICE_POST : LINK.GUIDE_POST;
 
 	return (
 		<S.Body>
@@ -84,7 +85,7 @@ function More({ children }) {
 					impData &&
 					impData.map((notice, idx) => (
 						<S.Important key={idx}>
-							<Link to={link + `/${notice.id}`}>
+							<Link to={detail + `/${notice.id}`}>
 								<img src="/assets/icons/pin.svg" alt="pin" />
 								<S.ImportantBtn>중요</S.ImportantBtn>
 								<S.ImpTitle>{notice.title}</S.ImpTitle>
@@ -98,7 +99,7 @@ function More({ children }) {
 				{genData &&
 					genData.map((guide, idx) => (
 						<S.Commons key={idx}>
-							<Link to={link + `/${guide.id}`}>
+							<Link to={detail + `/${guide.id}`}>
 								<S.ListTitle>{guide.title}</S.ListTitle>
 								<S.Date>{guide.createDate}</S.Date>
 							</Link>
