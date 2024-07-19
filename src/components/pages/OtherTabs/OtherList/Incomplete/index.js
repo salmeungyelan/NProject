@@ -41,7 +41,7 @@ function Incomplete(props) {
 			{modalState && !modify && (
 				<CancelModal
 					id={id}
-					onClose={() => closeModal(navigate(0))}
+					onClose={() => closeModal()}
 					remove={statusLabel === '취소'}
 				/>
 			)}
