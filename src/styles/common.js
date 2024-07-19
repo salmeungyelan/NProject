@@ -11,6 +11,7 @@ export const ModalBackground = css`
 
 export const bodyContainer = css`
 	width: 294px;
+	min-height: 800px;
 	margin: 0 auto;
 	padding: 40px 0;
 
