@@ -36,29 +36,36 @@ function Review() {
 		sortBy: 'REVIEW_FILTER_01',
 	});
 
-	const itemsPerPage = 10;
+	const calcItemsPerPage = () => {
+		if (window.innerWidth >= 768 && window.innerWidth < 1200) return 9;
+		else return 10;
+	};
+
+	// 한 번에 보여줄 아이템 수
+	const [itemsPerPage, setItemsPerPage] = useState(calcItemsPerPage);
+
+	// 화면 사이즈 변경에 따른 보여질 갯수 변경
+	useEffect(() => {
+		const handleResize = () => {
+			setItemsPerPage(calcItemsPerPage);
+		};
+
+		handleResize();
+		window.addEventListener('resize', handleResize);
+	}, [itemsPerPage]);
+
 	const { currentPage, setCurrentPage, total, setTotal } = usePagination();
 
-	const paths = useMemo(() => {
-		const basePath = `/client/reviews?size=${itemsPerPage}&page=${currentPage}`;
-		const category = selectedCategory && `&type=${selectedCategory}`;
-		const option = `&sortBy=${selectedOption.sortBy}`;
-		const searchData = `&title=${inputData}&requirement=${inputData}`;
+	const basePath = `/client/reviews?size=${itemsPerPage}&page=${currentPage}`;
+	const category = selectedCategory && `&type=${selectedCategory}`;
+	const option = `&sortBy=${selectedOption.sortBy}`;
+	const searchData = `&title=${inputData}&requirement=${inputData}`;
 
-		const status =
-			selectedStatus[0].sortBy &&
-			selectedStatus.map(stat => `&status=${stat.sortBy}`).join('');
+	const status =
+		selectedStatus[0].sortBy &&
+		selectedStatus.map(stat => `&status=${stat.sortBy}`).join('');
 
-		return { basePath, category, option, status, searchData };
-	}, [
-		currentPage,
-		selectedCategory,
-		selectedOption.sortBy,
-		selectedStatus,
-		inputData,
-	]);
-
-	const { basePath, category, option, status, searchData } = paths;
+	const fullPath = basePath + category + option + searchData + status;
 
 	const { result, trigger } = useApi({
 		path: basePath,
@@ -74,28 +81,34 @@ function Review() {
 
 	// 카테고리 / 옵션 / 상태만 변화했을 때 api 호출
 	useEffect(() => {
-		trigger({
-			path: basePath + category + option + status + searchData,
-			applyResult: true,
-		});
-	}, [selectedCategory, selectedOption, selectedStatus, currentPage]);
+		trigger({ path: fullPath, applyResult: true });
+	}, [
+		selectedCategory,
+		selectedOption,
+		selectedStatus,
+		currentPage,
+		itemsPerPage,
+	]);
+
+	useEffect(() => {
+		setCurrentPage(1);
+	}, [selectedCategory, selectedStatus]);
 
 	// 검색
 	const handleClickSearch = async () => {
-		await trigger({
-			path: basePath + category + option + status + searchData,
-			applyResult: true,
-		});
+		setCurrentPage(1);
+		await trigger({ path: fullPath, applyResult: true });
 	};
 
 	// 검색 초기화
 	const handleReset = async () => {
+		setCurrentPage(1);
+		setInputData('');
+
 		await trigger({
 			path: basePath + category + option + status,
 			applyResult: true,
 		});
-
-		setInputData('');
 	};
 
 	// 신청 페이지 이동
@@ -143,7 +156,7 @@ function Review() {
 							</S.MultiSelect>
 						</S.SelectBox>
 
-						{reviewList?.length ? (
+						{Array.isArray(reviewList) && reviewList.length ? (
 							<S.CardBox>
 								{reviewList.map((el, idx) => (
 									<Card data={el} key={idx} />

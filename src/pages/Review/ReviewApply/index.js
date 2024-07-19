@@ -200,7 +200,6 @@ function ReviewApply() {
 
 	// 이미지 및 비디오 확대
 	const handleClickImgModal = (url, type) => {
-		console.log(type);
 		setImg({ src: url, type });
 		openModal();
 	};
