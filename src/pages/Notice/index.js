@@ -51,12 +51,10 @@ function Notice() {
 		trigger({ path: fullPath, applyResult: true });
 	}, [sort, navClicked, currentPage]);
 
-	useEffect(() => {
-		setCurrentPage(1);
-	}, [navClicked]);
-
 	// 전체 / 중요 / 일반
 	const handleClickNav = async e => {
+		setCurrentPage(1);
+
 		const { name } = e.target;
 		setNavClicked(name);
 
@@ -65,14 +63,16 @@ function Notice() {
 	};
 
 	// 검색
-	const handleClickSearch = () => {
-		trigger({ path: fullPath, applyResult: true });
+	const handleClickSearch = async () => {
+		setCurrentPage(1);
+		await trigger({ path: fullPath, applyResult: true });
 	};
 
 	// 검색 초기화
 	const handleReset = async () => {
-		await trigger({ path: basePath + noticeType, applyResult: true });
 		setInputData('');
+		setCurrentPage(1);
+		await trigger({ path: basePath + noticeType, applyResult: true });
 	};
 
 	// 페이지 이동
