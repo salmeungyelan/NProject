@@ -12,8 +12,11 @@ import * as S from './index.styles';
 import Input from 'components/@common/Input';
 import Button from 'components/@common/Button';
 import Modal from 'components/@common/Modal';
+import VALIDATE from 'utils/regex';
 
-function PwdModal({ onClose, userId }) {
+function PwdModal(props) {
+	const { onClose, userId } = props;
+
 	const navigate = useNavigate();
 
 	const [match, setMatch] = useState('');
@@ -23,12 +26,12 @@ function PwdModal({ onClose, userId }) {
 
 	const { password, newPassword, newPwCheck } = inputData;
 
-	const { result: matchResult, trigger: matchTrigger } = useApi({
+	const { trigger: matchTrigger } = useApi({
 		path: `/users/password-match/${userId}`,
 		shouldFetch: false,
 	});
 
-	const { result: updateResult, trigger: updateTrigger } = useApi({
+	const { trigger: updateTrigger } = useApi({
 		path: `/users/update-password/${userId}`,
 		shouldFetch: false,
 	});
@@ -38,7 +41,7 @@ function PwdModal({ onClose, userId }) {
 		if (password) {
 			// 2. 현재 비밀번호가 맞는지 확인 api -> match
 			try {
-				await matchTrigger({
+				const matchResult = await matchTrigger({
 					method: 'post',
 					data: { password },
 				});
@@ -47,7 +50,9 @@ function PwdModal({ onClose, userId }) {
 					// 3. 맞다면 새 비밀번호가 입력됐는지 확인 / 틀리다면 메세지
 					if (newPassword) {
 						// 4. 새 비밀번호 확인이 입력됐는지 확인
-						if (newPwCheck) {
+						if (!newPassword.match(VALIDATE.password)) {
+							return setMatch(MESSAGE.JOIN.PW_REGEX);
+						} else if (newPwCheck) {
 							// 5. 새 비밀번호와 새 비밀번호 확인이 일치하는지 확인
 							if (newPassword === newPwCheck) {
 								const data = {
@@ -56,9 +61,10 @@ function PwdModal({ onClose, userId }) {
 								};
 
 								// 6. 비밀번호 업데이트 api -> update
-								await updateTrigger({
+								const updateResult = await updateTrigger({
 									method: 'patch',
 									data,
+									showBoundary: true,
 								});
 
 								// 7. 비밀번호 변경됐다는 openModal
@@ -87,7 +93,7 @@ function PwdModal({ onClose, userId }) {
 					img="modal-check.svg"
 					title="알림"
 					content={MESSAGE.PASSWORD.FIN}
-					onClose={handleCloseModal}
+					onClose={() => handleCloseModal()}
 				/>
 			)}
 
@@ -106,7 +112,7 @@ function PwdModal({ onClose, userId }) {
 							placeholder="현재 비밀번호"
 							name="password"
 							type="password"
-							onChange={() => handleChange()}
+							onChange={handleChange}
 						/>
 						<Input
 							variant="default"
@@ -114,7 +120,7 @@ function PwdModal({ onClose, userId }) {
 							placeholder="새 비밀번호"
 							name="newPassword"
 							type="password"
-							onChange={() => handleChange()}
+							onChange={handleChange}
 						/>
 						<Input
 							variant="default"
@@ -122,7 +128,7 @@ function PwdModal({ onClose, userId }) {
 							placeholder="새 비밀번호 확인"
 							name="newPwCheck"
 							type="password"
-							onChange={() => handleChange()}
+							onChange={handleChange}
 						/>
 					</S.InputBox>
 
