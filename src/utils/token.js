@@ -1,8 +1,12 @@
-import { getCookie } from './cookie';
+import Cookies from 'js-cookie';
 
-const decodeJWT = () => {
-	const token = getCookie('accessToken');
+const decodeJWT = tokenOrType => {
+	let token;
 
+	if (tokenOrType.includes('.')) token = tokenOrType;
+	else token = Cookies.get(tokenOrType);
+
+	if (!token) return { sub: '', companyName: '' };
 	// 토큰의 3번째 부분 (payload)을 분리
 	const base64Url = token.split('.')[1];
 

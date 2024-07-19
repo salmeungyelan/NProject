@@ -1,14 +1,15 @@
 import { lazy } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
-import Layout from 'components/@common/Layout';
 import ErrorFallback from 'components/@common/Error';
+import ProtectedRoute from './ProtectedRoute';
 
 const Login = lazy(() => import('pages/Login'));
 const Register = lazy(() => import('pages/Register'));
 const FindAccounts = lazy(() => import('pages/FindAccounts'));
 
 const Home = lazy(() => import('pages/Home'));
+const MyPage = lazy(() => import('pages/MyPage'));
 
 const Guide = lazy(() => import('pages/Guide'));
 const GuideDetail = lazy(() => import('pages/Guide/GuideDetail'));
@@ -22,9 +23,11 @@ const ReviewApply = lazy(() => import('pages/Review/ReviewApply'));
 
 const OtherTabs = lazy(() => import('pages/OtherTabs'));
 
-const MyPage = lazy(() => import('pages/MyPage'));
-
 const router = createBrowserRouter([
+	{
+		path: '/',
+		element: <Login />,
+	},
 	{
 		path: '/login',
 		element: <Login />,
@@ -46,11 +49,11 @@ const router = createBrowserRouter([
 		element: <ErrorFallback />,
 	},
 	{
-		path: '/',
-		element: <Layout />,
+		path: '',
+		element: <ProtectedRoute />,
 		children: [
 			{
-				path: '/',
+				path: '/main',
 				element: <Home />,
 			},
 			{

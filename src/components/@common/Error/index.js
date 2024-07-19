@@ -7,7 +7,7 @@ import * as S from './index.styles';
 import Button from '../Button';
 
 function ErrorFallback({ error }) {
-	console.log(error);
+	console.error(error);
 
 	const navigate = useNavigate();
 

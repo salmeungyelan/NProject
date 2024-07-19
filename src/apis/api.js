@@ -1,7 +1,9 @@
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
-// import authInterceptor from './authInterceptor';
-import { getCookie } from 'utils/cookie';
+import { setCookie } from 'utils/cookie';
+import { useLocation, useNavigate } from 'react-router-dom';
+import LINK from 'constants/link';
 
 // post메서드로 통신할 때 기본값 설정
 axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -17,12 +19,9 @@ export const api = axios.create({
 	withCredentials: true,
 });
 
-// authInterceptor를 api 인스턴스에 적용
-// authInterceptor(api);
-
 api.interceptors.request.use(
 	config => {
-		const accessToken = getCookie('accessToken');
+		const accessToken = Cookies.get('accessToken');
 
 		if (accessToken) {
 			config.headers.Authorization = `Bearer ${accessToken}`;
@@ -46,9 +45,38 @@ api.interceptors.request.use(
 	},
 );
 
-api.interceptors.response.use(res => {
-	return res.data;
-});
+api.interceptors.response.use(
+	res => {
+		return res.data;
+	},
+
+	async axiosError => {
+		const { response, config } = axiosError;
+		const refreshToken = Cookies.get('refreshToken');
+
+		if ([403, 410].includes(response.status) && refreshToken) {
+			try {
+				const response = await axios.post(`${apiBaseUrl}/auth/renew-token`, {
+					refreshToken,
+				});
+
+				Cookies.set('accessToken', response.data.data.accessToken);
+				setCookie(response.data.data.accessToken);
+				config.headers.Authorization = `Bearer ${response.data.data.accessToken}`;
+
+				return api(config); // 기존 요청을 재요청
+			} catch (refreshError) {
+				const navigate = useNavigate();
+				const queryParams = new URLSearchParams(location.search);
+				const redirectUrl = queryParams.get('redirection') || LINK.HOME;
+				navigate(redirectUrl, { replace: true });
+
+				return Promise.reject(axiosError);
+			}
+		}
+		return Promise.reject(axiosError);
+	},
+);
 
 export const getApi = async (path, params) => {
 	return await api.get(path, { params });
