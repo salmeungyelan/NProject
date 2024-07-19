@@ -4,7 +4,7 @@ import { useErrorBoundary } from 'react-error-boundary';
 import { isAxiosError } from 'axios';
 
 import { deleteApi, getApi, patchApi, postApi, putApi } from 'apis/api';
-import { useLoading } from '../contexts/loadingContext';
+import { useLoading } from 'contexts/LoadingContext';
 
 const mapMethodToFetcher = {
 	get: (...args) => getApi(...args),
@@ -37,6 +37,7 @@ const useApi = ({
 			applyResult = false,
 			showBoundary = true,
 		}) => {
+			// setError(null);
 			try {
 				setIsLoading(true);
 				const triggerResult = await mapMethodToFetcher[triggerMethod](
@@ -64,6 +65,7 @@ const useApi = ({
 				} else {
 					// 비동기 에러 검출 가능
 					setError(err);
+					return { error: err };
 				}
 			} finally {
 				setIsLoading(false);
