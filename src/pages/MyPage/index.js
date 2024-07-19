@@ -16,7 +16,7 @@ import { formatBusinessNum, formatPhoneNum } from 'utils/formatNum';
 function MyPage() {
 	const { modalState, openModal, closeModal } = useModal();
 
-	const decodedPayload = decodeJWT();
+	const decodedPayload = decodeJWT('accessToken');
 	const { sub } = decodedPayload;
 
 	const { result } = useApi({
