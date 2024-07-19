@@ -5,7 +5,7 @@ import LINK from 'constants/link';
 import * as S from './index.styles';
 
 function Iphone({ data }) {
-	const { id, title, status, status_label, adminname, thumbnail, star } = data;
+	const { id, title, status, statusLabel, adminname, thumbnail, star } = data;
 
 	// 이미지 없을 경우
 	const imgSrc = !thumbnail ? '/assets/images/noImage.png' : thumbnail;
@@ -29,7 +29,7 @@ function Iphone({ data }) {
 				<S.MainBox>
 					<S.Title>
 						<div>{title}</div>
-						<S.CheckProgress $status={status}>{status_label}</S.CheckProgress>
+						<S.CheckProgress $status={status}>{statusLabel}</S.CheckProgress>
 					</S.Title>
 
 					<S.Rate>

@@ -4,7 +4,6 @@ import {
 	flexCenter,
 	flexColumn,
 	flexColumnCenter,
-	flexSpaceBetweenCenter,
 } from 'styles/common';
 
 export const Body = styled.div`
@@ -91,7 +90,7 @@ export const Title = styled.div`
 export const NoPost = styled.div`
 	width: 100%;
 	height: 133px;
-	box-shadow: 0 2px 4px 0 #00000029;
+	box-shadow: 0 0 4px 0 #00000029;
 	border-radius: 6px;
 	${flexColumnCenter}
 	gap: 19px;
@@ -106,8 +105,9 @@ export const NoPost = styled.div`
 `;
 
 export const CardList = styled.div`
-	margin-top: 12px;
-	${flexSpaceBetweenCenter};
+	${flexAlignCenter}
+	justify-content: flex-start;
+
 	gap: 8px;
 	position: relative;
 
@@ -116,13 +116,7 @@ export const CardList = styled.div`
 	}
 
 	@media screen and (min-width: 1200px) {
-		gap: 18px;
-		${({ $completed, $current }) =>
-			($current < 4 || $completed < 4) &&
-			css`
-				${flexAlignCenter}
-				justify-content: flex-start;
-			`}
+		gap: 23px;
 	}
 `;
 
@@ -144,7 +138,7 @@ export const LeftArrowImg = styled.button`
 
 	background-repeat: 0;
 	position: absolute;
-	top: 55%;
+	top: 52.5%;
 	left: -3.5%;
 
 	@media screen and (min-width: 1200px) {
