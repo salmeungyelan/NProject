@@ -21,6 +21,11 @@ function PreviousPost(props) {
 
 	useEffect(() => {
 		setBackId(_id);
+
+		trigger({
+			path: `/client/${path}s/${_id}`,
+			applyResult: true,
+		});
 	}, [_id]);
 
 	const handleClickPrev = id => {
@@ -30,19 +35,14 @@ function PreviousPost(props) {
 		});
 	};
 
-	const handleClickBackBtn = id => {
+	const handleClickBackBtn = () => {
 		navigate(-1);
-
-		trigger({
-			path: `/client/${path}s/${id}`,
-			applyResult: true,
-		});
 	};
 
 	return (
 		<>
 			<S.NextBox>
-				<S.Next>
+				<S.Next $noPost={!prev}>
 					<span>이전</span>
 					<Line size="height" variant="gray" />
 					{prev ? (
@@ -59,7 +59,7 @@ function PreviousPost(props) {
 
 				<Line size="width" variant="lightGray" />
 
-				<S.Next>
+				<S.Next $noPost={!next}>
 					<span>다음</span>
 					<Line size="height" variant="gray" />
 					{next ? (
