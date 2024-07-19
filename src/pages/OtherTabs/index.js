@@ -96,12 +96,22 @@ function OtherTabs() {
 
 	useEffect(() => {
 		setCheckHistory(false);
+		setSelectedStatus([
+			{
+				codeLabel: '전체',
+				sortBy: '',
+			},
+		]);
 		trigger({ applyResult: true });
 	}, [path]);
 
 	useEffect(() => {
 		trigger({ path: basePath + status, applyResult: true });
 	}, [selectedStatus, sort, currentPage]);
+
+	useEffect(() => {
+		setCurrentPage(1);
+	}, [selectedStatus]);
 
 	// 제안서 & 리스트
 	const handleSuggestBtn = () => {
@@ -113,7 +123,7 @@ function OtherTabs() {
 		openModal();
 	};
 
-	// 페이지 변경 핸들러
+	// 페이지 변경
 	const handlePageChange = async pageNumber => {
 		await trigger({ applyResult: true });
 		setCurrentPage(pageNumber);

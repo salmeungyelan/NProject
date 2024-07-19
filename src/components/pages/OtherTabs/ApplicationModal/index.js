@@ -24,7 +24,7 @@ function ApplicationModal(props) {
 
 	const { inputData, setInputData, handleChange } = useInput();
 
-	const decodedPayload = decodeJWT();
+	const decodedPayload = decodeJWT('accessToken');
 	const { sub } = decodedPayload;
 
 	// 신청 데이터

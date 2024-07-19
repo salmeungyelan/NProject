@@ -24,7 +24,7 @@ function ApplicationDetails(props) {
 	const { setNextStep, tempSave, trigger, disabled, onClose, listTrigger } =
 		props;
 
-	const decodedPayload = decodeJWT();
+	const decodedPayload = decodeJWT('accessToken');
 	const { sub } = decodedPayload;
 
 	const { path, pathname } = usePathname();
