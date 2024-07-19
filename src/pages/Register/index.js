@@ -59,8 +59,10 @@ function Register() {
 		terms: ' ',
 	});
 
+	const [registerSuccess, setRegisterSuccess] = useState(false);
+
 	// api
-	const { trigger } = useApi({
+	const { result, trigger } = useApi({
 		path: '/users',
 		shouldFetch: false,
 	});
@@ -170,8 +172,6 @@ function Register() {
 		}));
 	};
 
-	const [registerSuccess, setRegisterSuccess] = useState(false);
-
 	// 회원가입 로직 미친 거 아님? 뒤져라...
 	const handleSubmit = async e => {
 		e.preventDefault();
@@ -236,9 +236,9 @@ function Register() {
 			isValid = false;
 			contactRef.current.focus();
 		} else if (
-			!location.address &&
-			!location.postalCode &&
-			!location.detailAddress
+			!location.detailAddress ||
+			!location.address ||
+			!location.postalCode
 		) {
 			newErrorMessages.address = MESSAGE.JOIN.ADDRESS;
 			isValid = false;
@@ -258,38 +258,49 @@ function Register() {
 		if (!isValid) return;
 		else dataSet();
 
-		try {
-			const newData = {
-				email: inputData.email,
-				username: inputData.username,
-				password: inputData.password,
-				companyName: inputData.companyName,
-				contactNumber: inputData.contactNumber.replace(/-/g, ''),
-				postalCode: location.postalCode,
-				address: location.address,
-				addressDetail: location.detailAddress,
-				businessNumber: inputData.businessNumber.replace(/-/g, ''),
-				userTerms: [
-					{
-						termId: 1,
-						isAgreed: terms.privacy,
-					},
-					{
-						termId: 2,
-						isAgreed: terms.service,
-					},
-				],
-			};
+		const newData = {
+			email: inputData.email,
+			username: inputData.username,
+			password: inputData.password,
+			companyName: inputData.companyName,
+			contactNumber: inputData.contactNumber.replace(/-/g, ''),
+			postalCode: location.postalCode,
+			address: location.address,
+			addressDetail: location.detailAddress,
+			businessNumber: inputData.businessNumber.replace(/-/g, ''),
+			userTerms: [
+				{
+					termId: 1,
+					isAgreed: terms.privacy,
+				},
+				{
+					termId: 2,
+					isAgreed: terms.service,
+				},
+			],
+		};
 
-			await trigger({
-				method: 'post',
-				data: newData,
-			});
+		const triggerResult = await trigger({
+			method: 'post',
+			data: newData,
+			showBoundary: false,
+			applyResult: true,
+		});
 
-			setRegisterSuccess(true);
-		} catch (error) {
-			console.log(error);
-		}
+		const { error } = triggerResult || {};
+
+		if (error) {
+			if (error.response.data.message.includes('이메일')) {
+				newErrorMessages.email = MESSAGE.JOIN.DUP_EMAIL;
+				emailRef.current.focus();
+			} else if (error.response.data.message.includes('아이디')) {
+				newErrorMessages.username = MESSAGE.JOIN.DUP_USERNAME;
+				idRef.current.focus();
+			} else if (error.response.data.message.includes('사업자')) {
+				newErrorMessages.businessNumber = MESSAGE.JOIN.DUP_COMPANY;
+				businessRef.current.focus();
+			}
+		} else setRegisterSuccess(true);
 	};
 
 	const handleCloseSuccessModal = () => {
