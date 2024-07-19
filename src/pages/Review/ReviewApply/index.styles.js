@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
 	bodyContainer,
 	flexCenter,
@@ -142,6 +142,7 @@ export const FileBox = styled.div`
 export const MediaFileBox = styled.div`
 	${flexLeftCenter}
 	gap: 8px;
+	position: relative;
 `;
 
 export const FileContainer = styled.div`
@@ -197,10 +198,45 @@ export const CustomButton = styled.button`
 `;
 
 export const MediaList = styled.div`
-	${flexColumn}
+	${flexCenter}
+	justify-content: flex-start;
 	gap: 4px;
 	position: relative;
 	overflow-x: scroll;
+	overflow-y: hidden;
+
+	@media screen and (min-width: 768px) {
+		gap: 6px;
+	}
+
+	@media screen and (min-width: 1200px) {
+		gap: 8px;
+	}
+
+	/* &::-webkit-scrollbar {
+		display: inherit;
+		height: 3px;
+
+		@media screen and (min-width: 768px) {
+			height: 5px;
+		}
+	}
+
+	&::-webkit-scrollbar-thumb {
+		border-radius: 4px;
+		background-color: ${({ theme }) => theme.PALETTE.gray[100]};
+	}
+
+	&::-webkit-scrollbar-track {
+		background-color: rgba(0, 0, 0, 0.1);
+	} */
+`;
+
+export const Media = styled.div`
+	${flexColumn}
+	gap: 4px;
+	position: relative;
+	transform: ${({ slide }) => `translateX(-${slide * 100}%)`};
 `;
 
 export const Img = styled.img`
@@ -397,5 +433,57 @@ export const Check = styled.div`
 
 	@media screen and (min-width: 768px) {
 		font-size: ${({ theme }) => theme.FONT_SIZE.ms};
+	}
+`;
+
+const buttonBgReset = css`
+	background: none;
+	width: 12px;
+	height: 12px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 8px 8px;
+	background-color: ${({ theme }) => theme.PALETTE.white[100]};
+	border-radius: 50%;
+	box-shadow: 0 0 4px 0 #00000029;
+
+	@media screen and (min-width: 768px) {
+		width: 18px;
+		height: 18px;
+		background-size: 12px 12px;
+	}
+`;
+
+export const LeftArrowImg = styled.button`
+	${buttonBgReset}
+	background-image: url('/assets/icons/left-arrow.svg');
+	z-index: 20;
+
+	background-repeat: 0;
+	position: absolute;
+	top: 32.5%;
+	left: 22%;
+
+	@media screen and (min-width: 768px) {
+		top: 35%;
+		left: 17.5%;
+	}
+
+	@media screen and (min-width: 1200px) {
+		top: 37%;
+		left: 10%;
+	}
+`;
+
+export const RightArrowImg = styled(LeftArrowImg)`
+	left: 97%;
+	background-image: url('/assets/icons/right-arrow.svg');
+
+	@media screen and (min-width: 768px) {
+		left: 98%;
+	}
+
+	@media screen and (min-width: 1200px) {
+		left: 99%;
 	}
 `;

@@ -46,7 +46,7 @@ function ReviewPost() {
 		statusLabel,
 		typeLabel,
 		title,
-		companyName,
+		username,
 		email,
 		submittedAt,
 		requirement,
@@ -90,7 +90,7 @@ function ReviewPost() {
 
 							<S.InfoSub>
 								<div>
-									{companyName}ㅣ{email}
+									{username}ㅣ{email}
 								</div>
 								<div>{submittedAt}</div>
 							</S.InfoSub>

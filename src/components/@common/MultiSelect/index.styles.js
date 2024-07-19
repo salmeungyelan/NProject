@@ -30,13 +30,14 @@ export const SelectStyled = styled.div`
 
 	@media screen and (min-width: 768px) {
 		height: 26px;
-		width: 110px;
+		width: 112px;
 		padding: 0 9px;
 		font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 	}
 
 	@media screen and (min-width: 1200px) {
 		height: 30px;
+		width: 123px;
 		font-size: ${({ theme }) => theme.FONT_SIZE.m};
 	}
 `;
@@ -55,7 +56,7 @@ export const CheckBoxContainer = styled.div`
 	z-index: 1;
 	background-color: ${({ theme }) => theme.PALETTE.white[100]};
 	${flexColumn}
-	max-height: 170px;
+	max-height: fit-content;
 	border: 1px solid ${({ theme }) => theme.PALETTE.gray[0]};
 	border-radius: 4px;
 	position: absolute;
@@ -67,13 +68,14 @@ export const CheckBoxContainer = styled.div`
 	width: 85px;
 
 	@media screen and (min-width: 768px) {
-		width: 110px;
+		width: 112px;
 		padding: 6px;
 		font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 	}
 
 	@media screen and (min-width: 1200px) {
 		padding: 8px;
+		width: 123px;
 		font-size: ${({ theme }) => theme.FONT_SIZE.m};
 	}
 `;

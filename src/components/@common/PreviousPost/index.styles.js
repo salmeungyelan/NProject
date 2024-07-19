@@ -15,12 +15,16 @@ export const Next = styled.div`
 	gap: 8px;
 	font-size: ${({ theme }) => theme.FONT_SIZE.s};
 	color: ${({ theme }) => theme.PALETTE.gray[200]};
-	cursor: pointer;
+	cursor: ${({ $noPost }) => ($noPost ? 'default' : 'pointer')};
 
 	& a,
 	:visited {
 		text-decoration: none;
 		color: ${({ theme }) => theme.PALETTE.gray[200]};
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		width: 87%;
 	}
 
 	& div {

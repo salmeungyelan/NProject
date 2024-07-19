@@ -9,11 +9,10 @@ import Progress from '../Progress';
 
 function Card({ data }) {
 	// 메인인지 아닌지 확인
-	const { path } = usePathname();
-	const main = path !== 'main';
+	const { pathname } = usePathname();
+	const isReview = pathname === LINK.REVIEW;
 
-	const { id, title, status, status_label, picUsername, thumbnail, star } =
-		data;
+	const { id, title, status, statusLabel, picUsername, thumbnail, star } = data;
 
 	// 이미지 없을 경우
 	const imgSrc = !thumbnail ? '/assets/images/noImage.png' : thumbnail;
@@ -27,7 +26,7 @@ function Card({ data }) {
 	}
 
 	return (
-		<S.Card $main={main}>
+		<S.Card $isReview={isReview}>
 			<Link to={LINK.REVIEW_POST + `/${id}`}>
 				<div>
 					{imgSrc.includes('mp4') && <video src={imgSrc} />}
@@ -35,9 +34,9 @@ function Card({ data }) {
 				</div>
 
 				<S.MainBox>
-					<S.Title $main={main}>
+					<S.Title $isReview={isReview}>
 						<div>{title}</div>
-						<Progress variant={status}>{status_label}</Progress>
+						<Progress variant={status}>{statusLabel}</Progress>
 					</S.Title>
 
 					<S.Rate>
@@ -49,7 +48,7 @@ function Card({ data }) {
 						{status === 'REVIEW_STATUS_04' && (
 							<S.Rate>
 								<div>{rate}</div>
-								{star}
+								{star || 0}
 							</S.Rate>
 						)}
 					</S.Rate>

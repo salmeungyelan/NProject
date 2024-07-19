@@ -29,12 +29,12 @@ export const CheckProgress = styled.div`
 	border-radius: 4px;
 
 	width: 40px;
-	height: ${({ $review }) => ($review ? '18px' : '16px')};
+	height: ${({ $isReview }) => ($isReview ? '18px' : '16px')};
 	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 
 	@media screen and (min-width: 768px) {
-		width: ${({ $review }) => ($review ? '50px' : '40px')};
-		height: ${({ $review }) => ($review ? '25px' : '18px')};
+		width: ${({ $isReview }) => ($isReview ? '45px' : '40px')};
+		height: ${({ $isReview }) => ($isReview ? '22px' : '18px')};
 		font-size: ${({ theme }) => theme.FONT_SIZE.s};
 	}
 `;

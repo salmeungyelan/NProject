@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import styled from 'styled-components';
 import { flexCenter, flexColumn, flexLeftCenter } from 'styles/common';
 
@@ -15,6 +16,7 @@ export const Body = styled.div`
 export const Box = styled.div`
 	${flexColumn}
 	gap: 8px;
+	position: relative;
 
 	@media screen and (min-width: 768px) {
 		gap: 12px;
@@ -50,9 +52,7 @@ export const ReadImg = styled(ReadOnly)`
 	line-height: 0px;
 	${flexLeftCenter}
 	gap: 8px;
-	overflow-x: scroll;
-	overflow-y: hidden;
-	box-sizing: border-box;
+	overflow: hidden;
 
 	@media screen and (min-width: 768px) {
 		padding: 12px;
@@ -170,5 +170,55 @@ export const Rate = styled.div`
 		& img {
 			width: 18px;
 		}
+	}
+`;
+
+const buttonBgReset = css`
+	background: none;
+	width: 12px;
+	height: 12px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 8px 8px;
+	border-radius: 50%;
+	box-shadow: 0 0 4px 0 #00000029;
+	background-repeat: 0;
+	position: absolute;
+`;
+
+export const LeftArrowImg = styled.button`
+	${buttonBgReset}
+	z-index: 10;
+	left: -2%;
+	top: 50%;
+	background-color: ${({ theme }) => theme.PALETTE.white[100]};
+	background-image: url('/assets/icons/left-arrow.svg');
+
+	@media screen and (min-width: 768px) {
+		width: 18px;
+		height: 18px;
+		background-size: 12px 12px;
+		left: -1%;
+	}
+
+	@media screen and (min-width: 1200px) {
+		left: -0.5%;
+	}
+`;
+
+export const RightArrowImg = styled.button`
+	${buttonBgReset}
+	z-index: 10;
+	top: 50%;
+	background-color: ${({ theme }) => theme.PALETTE.white[100]};
+	left: 98%;
+	background-image: url('/assets/icons/right-arrow.svg');
+
+	@media screen and (min-width: 768px) {
+		left: 98.5%;
+	}
+
+	@media screen and (min-width: 1200px) {
+		left: 99.5%;
 	}
 `;

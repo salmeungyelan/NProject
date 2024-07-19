@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { ModalBackground } from 'styles/common';
 
 export const Background = styled.div`
@@ -14,13 +14,15 @@ export const Container = styled.div`
 	width: 80%;
 	height: 80%;
 	padding: 10px;
-	max-width: 500px;
-	max-height: 400px;
+	max-width: 600px;
+	max-height: 600px;
 	transition: all ease 0.3s;
+	cursor: pointer;
 
 	& img {
 		width: 100%;
 		height: 100%;
+		object-fit: contain;
 	}
 
 	& video {
@@ -30,24 +32,7 @@ export const Container = styled.div`
 
 	@media screen and (max-width: 768px) {
 		transition: all ease 0.3s;
+		width: 90%;
+		height: 90%;
 	}
-`;
-
-const buttonBgReset = css`
-	background: none;
-	width: 80%;
-	height: 80%;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: contain;
-	max-width: 20px;
-	max-height: 20px;
-`;
-
-export const CloseBtn = styled.button`
-	${buttonBgReset}
-	background-image: url('/assets/icons/white-x.svg');
-	position: absolute;
-	transform: translate(-90%, 40%);
-	right: 0;
 `;
