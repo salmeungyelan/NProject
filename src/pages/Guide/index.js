@@ -43,19 +43,22 @@ function Guide() {
 	}, [sort, currentPage]);
 
 	// 검색
-	const handleClickSearch = () => {
-		trigger({ path: fullPath, applyResult: true });
+	const handleClickSearch = async () => {
+		setCurrentPage(1);
+		await trigger({ path: fullPath, applyResult: true });
 	};
 
 	// 검색 초기화
 	const handleClickReset = async () => {
-		await trigger({ path: basePath, applyResult: true });
+		setCurrentPage(1);
 		setInputData('');
+
+		await trigger({ path: basePath, applyResult: true });
 	};
 
 	// 페이지 이동
 	const handlePageChange = async pageNumber => {
-		await trigger({ path: basePath, applyResult: true });
+		await trigger({ path: fullPath, applyResult: true });
 		setCurrentPage(pageNumber);
 	};
 
