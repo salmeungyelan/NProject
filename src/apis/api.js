@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 import { setCookie } from 'utils/cookie';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import LINK from 'constants/link';
 
 // post메서드로 통신할 때 기본값 설정
