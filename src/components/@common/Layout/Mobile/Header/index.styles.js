@@ -23,6 +23,12 @@ export const Header = styled.div`
 	${MediaQuery}
 `;
 
+export const FixedHeader = styled(Header)`
+	position: fixed;
+	z-index: 2;
+	width: 100vw;
+`;
+
 export const TopBox = styled.div`
 	width: 294px;
 	${flexSpaceBetweenCenter}
@@ -168,9 +174,8 @@ export const SideBarBackground = styled.div`
 	${ModalBackground}
 	${flexCenter}
 	display: ${({ $sideBar }) => !$sideBar && 'none'};
-	position: absolute;
 	z-index: 2;
-	top: 100%;
+  top: 80px;
 	height: calc(100vh - 80px);
 	justify-content: right;
 `;

@@ -52,6 +52,11 @@ function MobileHeader(props) {
 	};
 
 	useEffect(() => {
+		if (sideBar) document.body.style.overflow = 'hidden';
+		else document.body.style.overflow = 'auto';
+	}, [sideBar]);
+
+	useEffect(() => {
 		setSideBar(false);
 		setMoreBtn(false);
 	}, [navClicked]);
@@ -63,23 +68,27 @@ function MobileHeader(props) {
 
 	return (
 		<S.Header>
-			<S.TopBox>
-				<S.ImgBox>
-					<Link to={LINK.HOME}>
-						<Logo size="header" white />
-					</Link>
-				</S.ImgBox>
+			<S.FixedHeader>
+				<S.TopBox>
+					<S.ImgBox>
+						<Link to={LINK.HOME}>
+							<Logo size="header" white />
+						</Link>
+					</S.ImgBox>
 
-				<S.WelcomeText>
-					<p>
-						<strong>{name}</strong> 님 환영합니다!
-					</p>
-				</S.WelcomeText>
+					<S.WelcomeText>
+						<p>
+							<strong>{name}</strong> 님 환영합니다!
+						</p>
+					</S.WelcomeText>
 
-				<S.Side onClick={() => handleOpenSideBar()}>
-					<img src={`/assets/icons/${sideBar ? 'white-x' : 'hamburger'}.svg`} />
-				</S.Side>
-			</S.TopBox>
+					<S.Side onClick={() => handleOpenSideBar()}>
+						<img
+							src={`/assets/icons/${sideBar ? 'white-x' : 'hamburger'}.svg`}
+						/>
+					</S.Side>
+				</S.TopBox>
+			</S.FixedHeader>
 
 			<S.BottomNav>
 				<S.BottomNavList>
