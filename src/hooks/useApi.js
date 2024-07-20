@@ -60,6 +60,7 @@ const useApi = ({
 							localStorage.removeItem('recoil-persist');
 							return navigate(0);
 						}
+						return { error: err };
 					}
 					handleError(err);
 				} else {
