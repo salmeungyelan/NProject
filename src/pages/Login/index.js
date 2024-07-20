@@ -27,7 +27,6 @@ function Login() {
 	const { trigger } = useApi({
 		method: 'post',
 		path: '/auth/login',
-		showBoundary: false,
 	});
 
 	const [showStartImg, setShowStartImg] = useState(true);
