@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
 	bodyContainer,
 	flexCenter,
@@ -92,7 +92,15 @@ export const Description = styled.div`
 	width: 100%;
 	padding: 12px 0;
 	border-top: 1px solid ${({ theme }) => theme.PALETTE.gray[0]};
-	border-bottom: 1px solid ${({ theme }) => theme.PALETTE.gray[0]};
+
+	${({ $isList }) =>
+		$isList
+			? css`
+					border-bottom: 1px solid ${({ theme }) => theme.PALETTE.gray[0]};
+			  `
+			: css`
+					border-bottom: none;
+			  `}
 
 	> pre {
 		line-height: 22px;
