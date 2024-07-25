@@ -404,7 +404,7 @@ function ReviewApply() {
 					<p>{errorMsg.requirement || ' '}</p>
 				</S.Box>
 
-				<S.Box>
+				{/* <S.Box>
 					<S.Title>메인 키워드</S.Title>
 					<S.WordBox>
 						{mainKeyword &&
@@ -429,7 +429,7 @@ function ReviewApply() {
 							hashtags.map(tag => <S.Word key={tag.id}>{tag.name}</S.Word>)}
 					</S.WordBox>
 					<p />
-				</S.Box>
+				</S.Box> */}
 
 				<S.Box>
 					<S.Title>스마트 플레이스 링크</S.Title>
@@ -529,10 +529,7 @@ function ReviewApply() {
 			</S.Content>
 
 			<S.ButtonBox>
-				<S.Check>
-					키워드, 해시태그, 스마트 플레이스 링크 수정은 관리자에게 문의해
-					주세요.
-				</S.Check>
+				<S.Check>스마트 플레이스 링크 수정은 관리자에게 문의해 주세요.</S.Check>
 
 				<div>
 					<div>
