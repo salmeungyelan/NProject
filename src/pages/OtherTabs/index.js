@@ -14,6 +14,9 @@ import OtherList from 'components/pages/OtherTabs/OtherList';
 import ApplicationModal from 'components/pages/OtherTabs/ApplicationModal';
 import Button from 'components/@common/Button';
 import Pagination from 'components/@common/Pagination';
+import { useRecoilState } from 'recoil';
+import { otherTabsState } from 'recoil/atom/otherTabs.atom';
+import decodeJWT from 'utils/token';
 
 const url = [
 	{
@@ -74,6 +77,16 @@ function OtherTabs() {
 		shouldFetch: true,
 	});
 
+	const decodedPayload = decodeJWT('accessToken');
+	const { sub } = decodedPayload;
+
+	const [applyData, setApplyData] = useRecoilState(otherTabsState);
+
+	const { result: userResult } = useApi({
+		path: `/users/${sub}`,
+		shouldFetch: true,
+	});
+
 	// visitExperiences, viewtabInstagrams, websiteOutsourcings
 	const camelCaseData = useMemo(() => {
 		return (
@@ -87,12 +100,16 @@ function OtherTabs() {
 	}, [path]);
 
 	useEffect(() => {
+		if (userResult.data) {
+			setApplyData(userResult.data);
+		}
+
 		if (result.data) {
 			const resultData = result.data[camelCaseData];
 			setOtherList(resultData);
 			setTotal(result.data.total);
 		}
-	}, [result.data]);
+	}, [result.data, userResult.data]);
 
 	useEffect(() => {
 		setCheckHistory(false);

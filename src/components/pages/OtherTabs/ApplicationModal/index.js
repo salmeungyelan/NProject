@@ -4,7 +4,6 @@ import { useRecoilState } from 'recoil';
 import usePathname from 'hooks/usePathname';
 import useInput from 'hooks/useInput';
 import { otherTabsState } from 'recoil/atom/otherTabs.atom';
-import decodeJWT from 'utils/token';
 import useApi from 'hooks/useApi';
 import LINK from 'constants/link';
 import { formatPhoneNum } from 'utils/formatNum';
@@ -24,9 +23,6 @@ function ApplicationModal(props) {
 
 	const { inputData, setInputData, handleChange } = useInput();
 
-	const decodedPayload = decodeJWT('accessToken');
-	const { sub } = decodedPayload;
-
 	// 신청 데이터
 	const [applyData, setApplyData] = useRecoilState(otherTabsState);
 
@@ -41,28 +37,24 @@ function ApplicationModal(props) {
 	const [nextStep, setNextStep] = useState(false);
 
 	const { result, trigger } = useApi({
-		path: tempSave ? `/client/${path}s/${tempSave}` : `/users/${sub}`,
+		path: `/client/${path}s/${tempSave}`,
 		shouldFetch: true,
 	});
 
 	useEffect(() => {
-		if (result.data) {
-			setApplyData(result.data);
+		if (applyData) {
+			setLocation({
+				postalCode: applyData.postalCode,
+				address: applyData.address,
+				detailAddress: applyData.addressDetail,
+			});
 
-			if (applyData) {
-				setLocation({
-					postalCode: applyData.postalCode,
-					address: applyData.address,
-					detailAddress: applyData.addressDetail,
-				});
-
-				setInputData(prev => ({
-					...prev,
-					companyName: applyData.companyName,
-					contactNumber: formatPhoneNum(applyData.contactNumber),
-					smartplaceLink: applyData.smartplaceLink,
-				}));
-			}
+			setInputData(prev => ({
+				...prev,
+				companyName: applyData.companyName,
+				contactNumber: formatPhoneNum(applyData.contactNumber),
+				smartplaceLink: applyData.smartplaceLink,
+			}));
 		}
 	}, [result.data]);
 
