@@ -9,6 +9,7 @@ import MESSAGE from 'constants/message';
 
 import * as S from './index.styles';
 
+import Seo from 'components/@common/Seo/Seo';
 import Logo from 'components/@common/Logo';
 import Input from 'components/@common/Input';
 import Button from 'components/@common/Button';
@@ -77,6 +78,7 @@ function Login() {
 
 	return (
 		<>
+			<Seo />
 			{showStartImg ? (
 				<S.StartImg>
 					<img src="/assets/images/start.gif" />
