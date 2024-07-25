@@ -62,7 +62,6 @@ export const BottomNav = styled.div`
 	background-color: ${({ theme }) => theme.PALETTE.white[100]};
 	position: fixed;
 	bottom: 0;
-	z-index: 5;
 	${flexCenter}
 	padding: 0;
 	z-index: 19;
@@ -75,7 +74,7 @@ export const MoreNav = styled.div`
 	${flexCenter}
 	display: ${({ $moreBtn }) => ($moreBtn ? 'flex' : 'none')};
 	gap: 33px;
-	top: 84%;
+	bottom: 66px;
 	z-index: 4;
 	left: 0;
 	height: 66px;
@@ -175,7 +174,7 @@ export const SideBarBackground = styled.div`
 	${flexCenter}
 	display: ${({ $sideBar }) => !$sideBar && 'none'};
 	z-index: 2;
-  top: 80px;
+	top: 80px;
 	height: calc(100vh - 80px);
 	justify-content: right;
 `;

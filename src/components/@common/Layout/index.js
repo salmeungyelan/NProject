@@ -9,6 +9,7 @@ import LINK from 'constants/link';
 import Footer from './Footer';
 import Header from './Header';
 import MobileHeader from './Mobile/Header';
+import Seo from '../Seo/Seo';
 
 function Layout() {
 	const decodedPayload = decodeJWT('accessToken');
@@ -26,6 +27,7 @@ function Layout() {
 
 	return (
 		<>
+			<Seo />
 			<Header logout={handleLogout} name={companyName} />
 			<MobileHeader logout={handleLogout} name={companyName} />
 
