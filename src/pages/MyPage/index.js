@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import useModal from 'hooks/useModal';
 import decodeJWT from 'utils/token';
 import useApi from 'hooks/useApi';
+import { formatBusinessNum, formatPhoneNum } from 'utils/formatNum';
 
 import * as S from './index.styles';
 
@@ -11,7 +12,6 @@ import InputBox from 'components/@common/InputBox';
 import Button from 'components/@common/Button';
 import Address from 'components/@common/Address';
 import PwdModal from 'components/pages/MyPage/PwdModal';
-import { formatBusinessNum, formatPhoneNum } from 'utils/formatNum';
 
 function MyPage() {
 	const { modalState, openModal, closeModal } = useModal();
@@ -110,7 +110,9 @@ function MyPage() {
 					<S.InfoBox>
 						<InputBox
 							title="스마트 플레이스 링크"
-							value={smartplaceLink || ''}
+							value={
+								smartplaceLink || '등록된 스마트 플레이스 링크가 없습니다.'
+							}
 							disabled
 						/>
 					</S.InfoBox>
