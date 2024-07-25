@@ -9,8 +9,6 @@ import * as S from './index.styles';
 import Button from 'components/@common/Button';
 import RatingSubModal from '../RatingSubModal';
 
-const admin = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
 function Finish({ result }) {
 	const { modalState, openModal, closeModal } = useModal();
 
@@ -40,35 +38,27 @@ function Finish({ result }) {
 
 			<S.Box>
 				<S.Title>링크</S.Title>
-				{resultLinks ? (
-					resultLinks.map(link => (
-						<S.ReadOnly key={link.id}>{link.url}</S.ReadOnly>
-					))
-				) : (
-					<S.ReadOnly></S.ReadOnly>
-				)}
+				{resultLinks?.map(link => (
+					<S.ReadOnly key={link.id}>{link.url}</S.ReadOnly>
+				))}
 			</S.Box>
 
 			<S.Box>
-				{slide > 0 && slide !== admin?.length - 1 && (
+				{slide > 0 && slide !== adminFiles?.length - 1 && (
 					<S.LeftArrowImg onClick={handlePrevClick} />
 				)}
 
 				<S.Title>첨부 파일</S.Title>
 				<S.ReadImg ref={containerRef}>
-					{adminFiles?.length ? (
-						adminFiles.map((file, index) => (
-							<S.Img key={file.id} ref={el => (mediaRef.current[index] = el)}>
-								<img src={file.url} />
-								<S.ImgTitle>
-									<p>{file.name}</p>
-									<img src="/assets/icons/search.svg" />
-								</S.ImgTitle>
-							</S.Img>
-						))
-					) : (
-						<></>
-					)}
+					{adminFiles?.map((file, index) => (
+						<S.Img key={file.id} ref={el => (mediaRef.current[index] = el)}>
+							<img src={file.url} />
+							<S.ImgTitle>
+								<p>{file.name}</p>
+								<img src="/assets/icons/search.svg" />
+							</S.ImgTitle>
+						</S.Img>
+					))}
 				</S.ReadImg>
 
 				{slide + visibleItemsCount < adminFiles?.length && (
