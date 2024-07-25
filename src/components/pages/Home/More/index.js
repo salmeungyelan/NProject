@@ -112,7 +112,7 @@ function More({ children }) {
 				)}
 
 				{/* 공지사항 없을 때 */}
-				{title && !genData && !impData && (
+				{title && !genData.length && !impData.length && (
 					<S.NoData>등록된 게시글이 없습니다.</S.NoData>
 				)}
 			</S.List>
