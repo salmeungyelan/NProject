@@ -80,7 +80,6 @@ export const HangulBtn = styled.button`
 	}
 
 	@media screen and (min-width: 768px) {
-		width: 25px;
 		height: 25px;
 		font-size: ${({ theme }) => theme.FONT_SIZE.m};
 	}

@@ -96,19 +96,25 @@ function ReviewPost() {
 							</S.InfoSub>
 						</S.Info>
 
-						<S.Description>
+						<S.Description $isList={clientFiles?.length}>
 							<S.DesTitle>요청 사항 및 내용</S.DesTitle>
 
 							<pre>{requirement}</pre>
 
-							<Keyword
-								main={mainKeyword}
-								sub={subKeywords}
-								hashtag={hashtags}
-							/>
+							{!['대기', '임시저장'].includes(statusLabel) && (
+								<Keyword
+									main={mainKeyword}
+									sub={subKeywords}
+									hashtag={hashtags}
+								/>
+							)}
 						</S.Description>
 
-						<MediaList clientFiles={clientFiles} />
+						{clientFiles?.length ? (
+							<MediaList clientFiles={clientFiles} />
+						) : (
+							<></>
+						)}
 
 						{completed && <Finish result={resultInfo} />}
 					</S.Content>
