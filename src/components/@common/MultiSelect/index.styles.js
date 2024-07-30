@@ -53,7 +53,7 @@ export const DropdownArrow = styled.span`
 `;
 
 export const CheckBoxContainer = styled.div`
-	z-index: 1;
+	z-index: 3;
 	background-color: ${({ theme }) => theme.PALETTE.white[100]};
 	${flexColumn}
 	max-height: fit-content;

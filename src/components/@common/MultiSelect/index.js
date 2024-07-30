@@ -6,7 +6,13 @@ import useApi from 'hooks/useApi';
 import * as S from './index.styles';
 
 function MultiSelect(props) {
-	const { selectedStatus, setSelectedStatus } = props;
+	const {
+		selectedStatus,
+		setSelectedStatus,
+		statusSortBy,
+		setStatusSortBy,
+		updateQueryParams,
+	} = props;
 
 	const { path } = usePathname();
 
@@ -33,31 +39,43 @@ function MultiSelect(props) {
 
 	const handleChangeStatus = (label, value) => {
 		let updatedStatus;
+		let updatedStatusSort;
 		const isSelected = selectedStatus.some(stat => stat.codeLabel === label);
 
 		// '전체'가 선택되면 다른 모든 선택 해제하고 '전체'만 선택
 		if (label === '전체') {
 			updatedStatus = [{ codeLabel: '전체', sortBy: '' }];
+			updatedStatusSort = [{ sortBy: '' }];
 			setSelectedStatus(updatedStatus);
 			return setExpanded(false);
 		}
 
 		if (isSelected) {
 			updatedStatus = selectedStatus.filter(stat => stat.codeLabel !== label); // 이미 선택된 상태를 해제
+			updatedStatusSort = statusSortBy.filter(stat => stat.sortBy !== value);
 		} else {
 			updatedStatus = selectedStatus.filter(stat => stat.codeLabel !== '전체');
+			updatedStatusSort = statusSortBy.filter(stat => stat.sortBy !== '');
 			updatedStatus = [...updatedStatus, { codeLabel: label, sortBy: value }];
+			updatedStatusSort = [...updatedStatusSort, { sortBy: value }];
 
 			// 4개가 선택되면 '전체'로 설정
 			if (updatedStatus.length === status.length) {
 				updatedStatus = [{ codeLabel: '전체', sortBy: '' }];
+				updatedStatusSort = [{ sortBy: '' }];
 			}
 		}
 
 		if (updatedStatus.length === 0) {
 			updatedStatus = [{ codeLabel: '전체', sortBy: '' }];
+			updatedStatusSort = [{ sortBy: '' }];
 		}
 
+		updateQueryParams({
+			status: updatedStatus.map(stat => stat.sortBy).join(','),
+		});
+
+		setStatusSortBy(updatedStatusSort);
 		setSelectedStatus(updatedStatus);
 	};
 

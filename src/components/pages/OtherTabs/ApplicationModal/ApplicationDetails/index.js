@@ -21,8 +21,17 @@ import Button from 'components/@common/Button';
 import Modal from 'components/@common/Modal';
 
 function ApplicationDetails(props) {
-	const { setNextStep, tempSave, trigger, disabled, onClose, listTrigger } =
-		props;
+	const {
+		setNextStep,
+		tempSave,
+		trigger,
+		disabled,
+		onClose,
+		listTrigger,
+		progress,
+	} = props;
+
+	console.log(tempSave);
 
 	const decodedPayload = decodeJWT('accessToken');
 	const { sub } = decodedPayload;
@@ -295,7 +304,7 @@ function ApplicationDetails(props) {
 				)}
 
 				{/* 홈페이지 제작에만 안 들어가는 거 */}
-				{pathname !== LINK.DEVELOP && (
+				{pathname !== LINK.DEVELOP && ['진행중', '완료'].includes(progress) && (
 					<>
 						<S.InputBox>
 							<S.H1>메인 키워드</S.H1>
@@ -304,7 +313,7 @@ function ApplicationDetails(props) {
 									mainKeyword.map(main => (
 										<S.Word key={main.id}>
 											{main.name}
-											{/* <img src="/assets/icons/modal-x.svg" /> */}
+											<img src="/assets/icons/modal-x.svg" />
 										</S.Word>
 									))}
 							</S.WordBox>
@@ -318,7 +327,7 @@ function ApplicationDetails(props) {
 									subKeywords.map(sub => (
 										<S.Word key={sub.id}>
 											{sub.name}
-											{/* <img src="/assets/icons/modal-x.svg" /> */}
+											<img src="/assets/icons/modal-x.svg" />
 										</S.Word>
 									))}
 							</S.WordBox>
@@ -332,7 +341,7 @@ function ApplicationDetails(props) {
 									hashtags.map(tag => (
 										<S.Word key={tag.id}>
 											{tag.name}
-											{/* <img src="/assets/icons/modal-x.svg" /> */}
+											<img src="/assets/icons/modal-x.svg" />
 										</S.Word>
 									))}
 							</S.HashTag>

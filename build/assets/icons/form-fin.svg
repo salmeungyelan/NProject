@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 200 43.4783">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #ddd;
+      }
+
+      .cls-1, .cls-2 {
+        stroke-width: 0px;
+      }
+
+      .cls-2 {
+        fill: #de5000;
+      }
+    </style>
+  </defs>
+  <g id="_선_220" data-name="선 220">
+    <rect class="cls-1" x="11.9562" y="19.5644" width="165.2174" height="2.1739"/>
+  </g>
+  <circle id="_타원_103" data-name="타원 103" class="cls-2" cx="13.0435" cy="21.7391" r="13.0435"/>
+  <circle id="_타원_113" data-name="타원 113" class="cls-2" cx="178.2609" cy="21.7391" r="21.7391"/>
+</svg>
