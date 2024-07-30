@@ -10,6 +10,7 @@ import Progress from 'components/@common/Progress';
 import Incomplete from './Incomplete';
 import ProgressStatus from './ProgressStatus';
 import NoPost from 'components/@common/NoPost';
+import { useNavigate } from 'react-router-dom';
 
 function OtherList(props) {
 	const {
@@ -26,6 +27,20 @@ function OtherList(props) {
 
 	const [display, setDisplay] = useState(null);
 
+	// 쿼리스트링에서 상태를 가져오는 함수
+	const getQueryParams = () => {
+		const params = new URLSearchParams(location.search);
+		return {
+			sort: params.get('sort'),
+			status: params.get('status')
+				? params.get('status').split(',')
+				: [{ sortBy: '' }],
+		};
+	};
+	const params = getQueryParams();
+
+	const [statusSortBy, setStatusSortBy] = useState(params.status);
+
 	const handleClickDown = index => {
 		setDisplay(prev => (prev === index ? null : index));
 	};
@@ -41,6 +56,26 @@ function OtherList(props) {
 		);
 	}, [path]);
 
+	const navigate = useNavigate();
+
+	// 상태를 쿼리스트링에 반영하는 함수
+	const updateQueryParams = newParams => {
+		const params = new URLSearchParams(location.search);
+
+		Object.keys(newParams).forEach(key => {
+			if (newParams[key] !== undefined && newParams[key] !== null) {
+				if (newParams[key] === '') {
+					params.delete(key); // 빈 문자열인 경우 쿼리스트링에서 삭제
+				} else {
+					params.set(key, newParams[key]);
+				}
+			} else {
+				params.delete(key); // null 또는 undefined인 경우 쿼리스트링에서 삭제
+			}
+		});
+		navigate(`?${params.toString()}`, { replace: true });
+	};
+
 	return (
 		<S.Body>
 			<S.FilterBox>
@@ -48,6 +83,9 @@ function OtherList(props) {
 				<MultiSelect
 					selectedStatus={selectedStatus}
 					setSelectedStatus={setSelectedStatus}
+					statusSortBy={statusSortBy}
+					setStatusSortBy={setStatusSortBy}
+					updateQueryParams={updateQueryParams}
 				/>
 			</S.FilterBox>
 

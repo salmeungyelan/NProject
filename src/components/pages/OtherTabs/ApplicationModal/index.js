@@ -16,7 +16,7 @@ import Button from 'components/@common/Button';
 import ApplicationDetails from './ApplicationDetails';
 
 function ApplicationModal(props) {
-	const { title, onClose, tempSave, disabled, listTrigger } = props;
+	const { title, onClose, tempSave, disabled, listTrigger, progress } = props;
 
 	// 뷰탭 인스타 및 홈페이지 제작은 주소 제외
 	const { path, pathname } = usePathname();
@@ -98,7 +98,7 @@ function ApplicationModal(props) {
 					<S.CloseBtn onClick={onClose} />
 				</S.Header>
 
-				<S.Step>
+				<S.Step $nextStep={nextStep}>
 					<img src={`/assets/icons/${nextStep ? 'form-fin' : 'form'}.svg`} />
 
 					<div>
@@ -164,6 +164,7 @@ function ApplicationModal(props) {
 						disabled={disabled}
 						onClose={onClose}
 						listTrigger={listTrigger}
+						progress={progress}
 					/>
 				)}
 			</S.Container>
