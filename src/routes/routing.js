@@ -2,7 +2,7 @@ import { lazy } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
 import ErrorFallback from 'components/@common/Error';
-import ProtectedRoute from './protectedRoute';
+import ProtectedRoute from 'routes/ProtectedRoute';
 
 const Login = lazy(() => import('pages/Login'));
 const Register = lazy(() => import('pages/Register'));
