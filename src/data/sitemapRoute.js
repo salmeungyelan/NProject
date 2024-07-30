@@ -51,7 +51,21 @@ export const sitemapRoutes = [
 		keywords: ['guide', 'netplace', '넷플레이스'],
 	},
 	{
+		path: '/guide/post',
+		disable: true,
+		title: '넷플레이스 - 이용안내',
+		desc: '넷플레이스 메타 이용안내 페이지입니다.',
+		keywords: ['guide', 'netplace', '넷플레이스'],
+	},
+	{
 		path: '/notice',
+		disable: true,
+		title: '넷플레이스 - 공지사항',
+		desc: '넷플레이스 메타 공지사항 페이지입니다.',
+		keywords: ['notice', 'netplace', '넷플레이스'],
+	},
+	{
+		path: '/notice/post',
 		disable: true,
 		title: '넷플레이스 - 공지사항',
 		desc: '넷플레이스 메타 공지사항 페이지입니다.',
@@ -66,6 +80,13 @@ export const sitemapRoutes = [
 	},
 	{
 		path: '/review',
+		disable: true,
+		title: '넷플레이스 - 리뷰',
+		desc: '넷플레이스 메타 리뷰 페이지입니다.',
+		keywords: ['review', 'netplace', '넷플레이스'],
+	},
+	{
+		path: '/review/post',
 		disable: true,
 		title: '넷플레이스 - 리뷰',
 		desc: '넷플레이스 메타 리뷰 페이지입니다.',

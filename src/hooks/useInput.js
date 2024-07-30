@@ -1,7 +1,12 @@
 import { useState } from 'react';
 
 const useInput = () => {
-	const [inputData, setInputData] = useState('');
+	const getQueryParams = () => {
+		const params = new URLSearchParams(location.search);
+		return { inputData: params.get('title') || '' };
+	};
+
+	const [inputData, setInputData] = useState(getQueryParams().inputData);
 
 	const handleChange = e => {
 		const { name, value } = e.target;
@@ -14,7 +19,6 @@ const useInput = () => {
 
 	const handleChangeSearch = e => {
 		const { value } = e.target;
-
 		setInputData(value);
 	};
 

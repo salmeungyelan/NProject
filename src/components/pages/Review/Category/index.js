@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import useApi from 'hooks/useApi';
 
@@ -8,6 +9,8 @@ function Category(props) {
 	const { selectedCategory, setSelectedCategory } = props;
 
 	const [categories, setCategories] = useState([]);
+
+	const navigate = useNavigate();
 
 	const { result } = useApi({
 		path: '/client/global-constants?typeValue=REVIEW_TYPE',
@@ -21,6 +24,10 @@ function Category(props) {
 	}, [result.data]);
 
 	const handleClickCategory = name => {
+		const params = new URLSearchParams(location.search);
+		params.set('category', name);
+		navigate(`?${params.toString()}`, { replace: true });
+
 		setSelectedCategory(name);
 	};
 
