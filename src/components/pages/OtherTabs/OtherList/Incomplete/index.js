@@ -13,8 +13,6 @@ function Incomplete(props) {
 	const { id, title, statusLabel, listTrigger } = props;
 	const { modalState, openModal, closeModal } = useModal();
 
-	const navigate = useNavigate();
-
 	const [modify, setModify] = useState(false);
 
 	const handleModify = () => {
