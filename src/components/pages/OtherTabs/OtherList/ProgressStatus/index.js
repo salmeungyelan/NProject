@@ -31,6 +31,8 @@ function ProgressStatus(props) {
 		setIsCancel(true);
 	};
 
+	console.log(progress);
+
 	return (
 		<>
 			{/* 신청한 내역 확인 */}
@@ -40,6 +42,7 @@ function ProgressStatus(props) {
 					tempSave={id}
 					onClose={closeModal}
 					disabled={true}
+					progress={progress}
 				/>
 			)}
 

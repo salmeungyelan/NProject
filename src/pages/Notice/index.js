@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import useFilter from 'hooks/useFilter';
 import useInput from 'hooks/useInput';
@@ -15,30 +16,51 @@ import NoPost from 'components/@common/NoPost';
 import Pagination from 'components/@common/Pagination';
 
 function Notice() {
-	const { sort, handelSelectFilter } = useFilter();
+	const { sort, setSort, handelSelectFilter } = useFilter();
 	const { inputData, setInputData, handleChangeSearch } = useInput();
 
+	const location = useLocation();
+	const navigate = useNavigate();
+
+	// 쿼리스트링에서 상태를 가져오는 함수
+	const getQueryParams = () => {
+		const params = new URLSearchParams(location.search);
+		return {
+			sort: params.get('sort') || sort,
+			inputData: params.get('title') || '',
+			currentPage: parseInt(params.get('page'), 10) || 1,
+			navClicked: params.get('nav') || '전체',
+		};
+	};
+
 	const [noticeList, setNoticeList] = useState([]);
-	const [navClicked, setNavClicked] = useState('전체');
+	const [navClicked, setNavClicked] = useState(getQueryParams().navClicked);
 
 	const itemsPerPage = 8;
 	const { currentPage, setCurrentPage, total, setTotal } = usePagination();
 
-	// 초기 api path
 	const basePath = `/client/notices/all?size=${itemsPerPage}&page=${currentPage}&sortBy=${sort}`;
-
-	// 전체 중요 일반 선택
 	const noticeType =
 		navClicked !== '전체' ? `&noticeContentType=${navClicked}` : '';
-
-	// 검색 데이터까지 있는 총 api path
 	const fullPath =
 		basePath + `&title=${inputData}&content=${inputData}&${noticeType}`;
 
 	const { result, trigger } = useApi({
-		path: basePath,
+		path: fullPath,
 		shouldFetch: true,
 	});
+
+	useEffect(() => {
+		const params = getQueryParams();
+		setSort(params.sort);
+		setInputData(params.inputData);
+		setCurrentPage(params.currentPage);
+		setNavClicked(params.navClicked);
+	}, [location.search]);
+
+	useEffect(() => {
+		trigger({ path: fullPath, applyResult: true });
+	}, [sort, navClicked, currentPage]);
 
 	useEffect(() => {
 		if (result.data) {
@@ -47,9 +69,23 @@ function Notice() {
 		}
 	}, [result.data]);
 
-	useEffect(() => {
-		trigger({ path: fullPath, applyResult: true });
-	}, [sort, navClicked, currentPage]);
+	// 상태를 쿼리스트링에 반영하는 함수
+	const updateQueryParams = newParams => {
+		const params = new URLSearchParams(location.search);
+
+		Object.keys(newParams).forEach(key => {
+			if (newParams[key] !== undefined && newParams[key] !== null) {
+				if (newParams[key] === '') {
+					params.delete(key); // 빈 문자열인 경우 쿼리스트링에서 삭제
+				} else {
+					params.set(key, newParams[key]);
+				}
+			} else {
+				params.delete(key); // null 또는 undefined인 경우 쿼리스트링에서 삭제
+			}
+		});
+		navigate(`?${params.toString()}`, { replace: true });
+	};
 
 	// 전체 / 중요 / 일반
 	const handleClickNav = async e => {
@@ -59,12 +95,14 @@ function Notice() {
 		setNavClicked(name);
 
 		const noticeType = name === '전체' ? '' : `&noticeContentType=${name}`;
+		updateQueryParams({ page: 1, nav: name });
 		await trigger({ path: basePath + noticeType, applyResult: true });
 	};
 
 	// 검색
 	const handleClickSearch = async () => {
 		setCurrentPage(1);
+		updateQueryParams({ page: 1, title: inputData, content: inputData });
 		await trigger({ path: fullPath, applyResult: true });
 	};
 
@@ -72,13 +110,15 @@ function Notice() {
 	const handleReset = async () => {
 		setInputData('');
 		setCurrentPage(1);
+		updateQueryParams({ page: 1, title: '', content: '' });
 		await trigger({ path: basePath + noticeType, applyResult: true });
 	};
 
 	// 페이지 이동
 	const handlePageChange = async pageNumber => {
-		await trigger({ path: fullPath, applyResult: true });
 		setCurrentPage(pageNumber);
+		updateQueryParams({ page: pageNumber });
+		await trigger({ path: fullPath, applyResult: true });
 	};
 
 	return (

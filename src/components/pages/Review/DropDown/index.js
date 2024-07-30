@@ -3,12 +3,15 @@ import { useEffect, useState } from 'react';
 import useApi from 'hooks/useApi';
 
 import * as S from './index.styles';
+import { useNavigate } from 'react-router-dom';
 
 function DropDown(props) {
 	const { selectedOption, setSelectedOption } = props;
 
 	const [isOpen, setIsOpen] = useState(false);
 	const [option, setOption] = useState([]);
+
+	const navigate = useNavigate();
 
 	const { result } = useApi({
 		path: '/client/global-constants?typeValue=REVIEW_FILTER',
@@ -22,6 +25,11 @@ function DropDown(props) {
 	}, [result.data]);
 
 	const handleClickOption = (codeLabel, codeValue) => {
+		const params = new URLSearchParams(location.search);
+		params.set('optionCode', codeLabel);
+		params.set('sortBy', codeValue);
+		navigate(`?${params.toString()}`, { replace: true });
+
 		setSelectedOption({
 			codeLabel,
 			sortBy: codeValue,

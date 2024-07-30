@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import useInput from 'hooks/useInput';
 import usePagination from 'hooks/usePagination';
@@ -21,19 +21,39 @@ import Pagination from 'components/@common/Pagination';
 function Review() {
 	const { inputData, setInputData, handleChangeSearch } = useInput();
 
+	const location = useLocation();
 	const navigate = useNavigate();
 
+	// 쿼리스트링에서 상태를 가져오는 함수
+	const getQueryParams = () => {
+		const params = new URLSearchParams(location.search);
+		return {
+			inputData: params.get('title') || '',
+			currentPage: parseInt(params.get('page'), 10) || 1,
+			category: params.get('category') || '',
+			status: params.get('status')
+				? params.get('status').split(',')
+				: [{ sortBy: '' }],
+			optionCode: params.get('optionCode') || '최신순',
+			sortBy: params.get('sortBy') || 'REVIEW_FILTER_01',
+		};
+	};
+	const params = getQueryParams();
+
 	const [reviewList, setReviewList] = useState([]);
-	const [selectedCategory, setSelectedCategory] = useState('');
+	const [selectedCategory, setSelectedCategory] = useState(params.category);
+
+	const [statusSortBy, setStatusSortBy] = useState(params.status);
 	const [selectedStatus, setSelectedStatus] = useState([
 		{
 			codeLabel: '전체',
 			sortBy: '',
 		},
 	]);
+
 	const [selectedOption, setSelectedOption] = useState({
-		codeLabel: '최신순',
-		sortBy: 'REVIEW_FILTER_01',
+		codeLabel: params.optionCode,
+		sortBy: params.sortBy,
 	});
 
 	const calcItemsPerPage = () => {
@@ -68,16 +88,24 @@ function Review() {
 	const fullPath = basePath + category + option + searchData + status;
 
 	const { result, trigger } = useApi({
-		path: basePath,
+		path: fullPath,
 		shouldFetch: true,
 	});
 
 	useEffect(() => {
-		if (result.data) {
-			setReviewList(result.data.reviews);
-			setTotal(result.data.total);
-		}
-	}, [result.data]);
+		console.log(fullPath);
+	}, [fullPath, status]);
+
+	useEffect(() => {
+		setSelectedCategory(params.category);
+		setSelectedOption({
+			codeLabel: params.optionCode,
+			sortBy: params.sortBy,
+		});
+		setStatusSortBy(params.status);
+		setInputData(params.inputData);
+		setCurrentPage(params.currentPage);
+	}, [location.search]);
 
 	// 카테고리 / 옵션 / 상태만 변화했을 때 api 호출
 	useEffect(() => {
@@ -94,9 +122,35 @@ function Review() {
 		setCurrentPage(1);
 	}, [selectedCategory, selectedStatus]);
 
+	useEffect(() => {
+		if (result.data) {
+			setReviewList(result.data.reviews);
+			setTotal(result.data.total);
+		}
+	}, [result.data]);
+
+	// 상태를 쿼리스트링에 반영하는 함수
+	const updateQueryParams = newParams => {
+		const params = new URLSearchParams(location.search);
+
+		Object.keys(newParams).forEach(key => {
+			if (newParams[key] !== undefined && newParams[key] !== null) {
+				if (newParams[key] === '') {
+					params.delete(key); // 빈 문자열인 경우 쿼리스트링에서 삭제
+				} else {
+					params.set(key, newParams[key]);
+				}
+			} else {
+				params.delete(key); // null 또는 undefined인 경우 쿼리스트링에서 삭제
+			}
+		});
+		navigate(`?${params.toString()}`, { replace: true });
+	};
+
 	// 검색
 	const handleClickSearch = async () => {
 		setCurrentPage(1);
+		updateQueryParams({ page: 1, title: inputData, requirement: inputData });
 		await trigger({ path: fullPath, applyResult: true });
 	};
 
@@ -104,7 +158,7 @@ function Review() {
 	const handleReset = async () => {
 		setCurrentPage(1);
 		setInputData('');
-
+		updateQueryParams({ page: 1, title: '', requirement: '' });
 		await trigger({
 			path: basePath + category + option + status,
 			applyResult: true,
@@ -118,8 +172,9 @@ function Review() {
 
 	// 페이지 이동
 	const handlePageChange = async page => {
-		await trigger({ applyResult: true });
 		setCurrentPage(page);
+		updateQueryParams({ page });
+		await trigger({ applyResult: true });
 	};
 
 	return (
@@ -148,6 +203,9 @@ function Review() {
 								<MultiSelect
 									selectedStatus={selectedStatus}
 									setSelectedStatus={setSelectedStatus}
+									statusSortBy={statusSortBy}
+									setStatusSortBy={setStatusSortBy}
+									updateQueryParams={updateQueryParams}
 								/>
 								<DropDown
 									selectedOption={selectedOption}
@@ -195,11 +253,3 @@ function Review() {
 }
 
 export default Review;
-
-// const path = `/client/reviews?size=${itemsPerPage}&page=${currentPage}`;
-// const category = selectedCategory && `&type=${selectedCategory}`;
-// const option = `&sortBy=${selectedOption.sortBy}`;
-// const status =
-// 	selectedStatus[0].sortBy &&
-// 	selectedStatus.map(stat => `&status=${stat.sortBy}`).join('');
-// const searchData = `&title=${inputData}&requirement=${inputData}`;
