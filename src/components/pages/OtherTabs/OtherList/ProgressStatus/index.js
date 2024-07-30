@@ -31,8 +31,6 @@ function ProgressStatus(props) {
 		setIsCancel(true);
 	};
 
-	console.log(progress);
-
 	return (
 		<>
 			{/* 신청한 내역 확인 */}
