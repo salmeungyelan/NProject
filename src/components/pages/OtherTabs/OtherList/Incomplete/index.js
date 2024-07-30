@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import useModal from 'hooks/useModal';
 
@@ -30,7 +29,7 @@ function Incomplete(props) {
 				<ApplicationModal
 					title={title}
 					tempSave={id}
-					onClose={closeModal}
+					onClose={() => closeModal()}
 					listTrigger={listTrigger}
 				/>
 			)}

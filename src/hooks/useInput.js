@@ -1,6 +1,9 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const useInput = () => {
+	const location = useLocation();
+
 	const getQueryParams = () => {
 		const params = new URLSearchParams(location.search);
 		return { inputData: params.get('title') || '' };

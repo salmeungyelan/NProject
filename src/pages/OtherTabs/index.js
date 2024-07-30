@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useRecoilState } from 'recoil';
 
 import LINK from 'constants/link';
 import usePathname from 'hooks/usePathname';
@@ -6,6 +7,8 @@ import useFilter from 'hooks/useFilter';
 import useModal from 'hooks/useModal';
 import usePagination from 'hooks/usePagination';
 import useApi from 'hooks/useApi';
+import { otherTabsState } from 'recoil/atom/otherTabs.atom';
+import decodeJWT from 'utils/token';
 
 import * as S from './index.styles';
 
@@ -14,9 +17,6 @@ import OtherList from 'components/pages/OtherTabs/OtherList';
 import ApplicationModal from 'components/pages/OtherTabs/ApplicationModal';
 import Button from 'components/@common/Button';
 import Pagination from 'components/@common/Pagination';
-import { useRecoilState } from 'recoil';
-import { otherTabsState } from 'recoil/atom/otherTabs.atom';
-import decodeJWT from 'utils/token';
 
 const url = [
 	{
@@ -142,8 +142,8 @@ function OtherTabs() {
 
 	// 페이지 변경
 	const handlePageChange = async pageNumber => {
-		await trigger({ applyResult: true });
 		setCurrentPage(pageNumber);
+		await trigger({ applyResult: true });
 	};
 
 	return (
