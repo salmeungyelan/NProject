@@ -1,8 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useRecoilState } from 'recoil';
 
-import LINK from 'constants/link';
-import usePathname from 'hooks/usePathname';
 import useFilter from 'hooks/useFilter';
 import useModal from 'hooks/useModal';
 import usePagination from 'hooks/usePagination';
@@ -18,33 +16,7 @@ import ApplicationModal from 'components/pages/OtherTabs/ApplicationModal';
 import Button from 'components/@common/Button';
 import Pagination from 'components/@common/Pagination';
 
-const url = [
-	{
-		link: LINK.TEAM,
-		koTitle: '체험단',
-		enTitle: 'REVIEW TEAM',
-		children: '체험단을 신청할 수 있습니다.',
-	},
-	{
-		link: LINK.VIEW,
-		koTitle: '뷰탭&인스타',
-		enTitle: 'VIEWTAB & INSTA',
-		children: '뷰탭&인스타를 신청할 수 있습니다.',
-	},
-	{
-		link: LINK.DEVELOP,
-		koTitle: '홈페이지 제작',
-		enTitle: 'WEBSITE CREATION',
-		children: '홈페이지 제작을 신청할 수 있습니다.',
-	},
-];
-
-function OtherTabs() {
-	const { path, pathname } = usePathname();
-	const mainTitle = useMemo(() => {
-		return url.filter(el => pathname === el.link)[0];
-	}, [pathname]);
-
+function VisitExperience() {
 	const { sort, handelSelectFilter } = useFilter();
 	const { modalState, openModal, closeModal } = useModal();
 
@@ -62,13 +34,13 @@ function OtherTabs() {
 	const { currentPage, setCurrentPage, total, setTotal } = usePagination();
 
 	const paths = useMemo(() => {
-		const basePath = `/client/${path}s?page=${currentPage}&size=${itemsPerPage}&sortBy=${sort}`;
+		const basePath = `/client/visit-experiences?page=${currentPage}&size=${itemsPerPage}&sortBy=${sort}`;
 		const status =
 			selectedStatus[0].sortBy &&
 			selectedStatus.map(stat => `&status=${stat.sortBy}`).join('');
 
 		return { basePath, status };
-	}, [path, currentPage, sort, selectedStatus]);
+	}, [currentPage, sort, selectedStatus]);
 
 	const { basePath, status } = paths;
 
@@ -87,40 +59,16 @@ function OtherTabs() {
 		shouldFetch: true,
 	});
 
-	// visitExperiences, viewtabInstagrams, websiteOutsourcings
-	const camelCaseData = useMemo(() => {
-		return (
-			path
-				.split('-')
-				.map((word, index) =>
-					index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1),
-				)
-				.join('') + 's'
-		);
-	}, [path]);
-
 	useEffect(() => {
 		if (userResult.data) {
 			setApplyData(userResult.data);
 		}
 
 		if (result.data) {
-			const resultData = result.data[camelCaseData];
-			setOtherList(resultData);
+			setOtherList(result.data.visitExperiences);
 			setTotal(result.data.total);
 		}
 	}, [result.data, userResult.data]);
-
-	useEffect(() => {
-		setCheckHistory(false);
-		setSelectedStatus([
-			{
-				codeLabel: '전체',
-				sortBy: '',
-			},
-		]);
-		trigger({ applyResult: true });
-	}, [path]);
 
 	useEffect(() => {
 		trigger({ path: basePath + status, applyResult: true });
@@ -151,13 +99,13 @@ function OtherTabs() {
 			{modalState && (
 				<ApplicationModal
 					onClose={closeModal}
-					title={mainTitle.koTitle}
+					title="체험단"
 					listTrigger={trigger}
 				/>
 			)}
 
 			<S.Body>
-				<Title title={mainTitle.enTitle}>{mainTitle.children}</Title>
+				<Title title="REVIEW TEAM">체험단을 신청할 수 있습니다.</Title>
 
 				{/* 첫 렌더링 시 */}
 				{!checkHistory && (
@@ -168,7 +116,7 @@ function OtherTabs() {
 
 				{checkHistory && (
 					<OtherList
-						title={mainTitle.koTitle}
+						title="체험단"
 						sort={sort}
 						otherList={otherList}
 						selectedStatus={selectedStatus}
@@ -198,7 +146,7 @@ function OtherTabs() {
 						{checkHistory ? '제안서 보기' : '이용 내역 확인'}
 					</Button>
 					<Button size="height" variant="default" onClick={handleOpenModal}>
-						{mainTitle.koTitle} 신청하기
+						체험단 신청하기
 					</Button>
 				</div>
 			</S.ApplyBtnBox>
@@ -206,4 +154,4 @@ function OtherTabs() {
 	);
 }
 
-export default OtherTabs;
+export default VisitExperience;
