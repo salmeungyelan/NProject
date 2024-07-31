@@ -240,13 +240,12 @@ function ReviewApply() {
 
 		if (!isValid) return;
 
-		const { clientFiles, ...restDefaultData } = reviewPost;
+		const { clientFiles, id, ...restDefaultData } = reviewPost;
 
 		const updatedData = {
 			...inputData,
 			...restDefaultData,
 
-			id: _id || null,
 			authorId: sub,
 
 			title: inputData.title ? inputData.title : reviewPost.title,
@@ -261,9 +260,11 @@ function ReviewApply() {
 			statusLabel: label,
 		};
 
+		const finalData = _id ? { ...updatedData, id: _id } : { ...updatedData };
+
 		try {
 			const formData = new FormData();
-			for (const [key, value] of Object.entries(updatedData)) {
+			for (const [key, value] of Object.entries(finalData)) {
 				formData.append(
 					key,
 					value instanceof Object ? JSON.stringify(value) : value,
@@ -299,6 +300,8 @@ function ReviewApply() {
 			setPostId(request.data.id);
 		} catch (error) {
 			setModal({
+				img: 'modal-excl.svg',
+				title: '알림',
 				content: '리뷰 신청을 다시 시도해 주세요.',
 			});
 		}
