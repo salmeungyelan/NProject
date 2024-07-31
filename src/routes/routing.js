@@ -2,7 +2,7 @@ import { lazy } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
 import ErrorFallback from 'components/@common/Error';
-import ProtectedRoute from 'routes/ProtectedRoute';
+import ProtectedRoute from 'routes/protectedRoute';
 
 const Login = lazy(() => import('pages/Login'));
 const Register = lazy(() => import('pages/Register'));
@@ -21,7 +21,9 @@ const Review = lazy(() => import('pages/Review'));
 const ReviewPost = lazy(() => import('pages/Review/ReviewPost'));
 const ReviewApply = lazy(() => import('pages/Review/ReviewApply'));
 
-const OtherTabs = lazy(() => import('pages/OtherTabs'));
+const VisitExperience = lazy(() => import('pages/VisitExperience'));
+const WebsiteOutsourcing = lazy(() => import('pages/WebsiteOutsourcing'));
+const ViewTabInstagram = lazy(() => import('pages/ViewTabInstagram'));
 
 const router = createBrowserRouter([
 	{
@@ -94,15 +96,15 @@ const router = createBrowserRouter([
 			},
 			{
 				path: '/visit-experience',
-				element: <OtherTabs />,
+				element: <VisitExperience />,
 			},
 			{
 				path: '/viewtab-instagram',
-				element: <OtherTabs />,
+				element: <ViewTabInstagram />,
 			},
 			{
 				path: '/website-outsourcing',
-				element: <OtherTabs />,
+				element: <WebsiteOutsourcing />,
 			},
 		],
 	},

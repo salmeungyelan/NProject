@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
 
 import usePathname from 'hooks/usePathname';
@@ -26,31 +26,21 @@ function ApplicationModal(props) {
 	// 신청 데이터
 	const [applyData, setApplyData] = useRecoilState(otherTabsState);
 
-	// 주소
-	const [location, setLocation] = useState({
-		postalCode: '',
-		address: '',
-		detailAddress: '',
-	});
-
 	// 이전 / 다음
 	const [nextStep, setNextStep] = useState(false);
 
 	const { result, trigger } = useApi({
 		path: `/client/${path}s/${tempSave}`,
-		shouldFetch: true,
+		shouldFetch: tempSave,
 	});
 
 	useEffect(() => {
 		if (applyData) {
-			setLocation({
+			setInputData(prev => ({
+				...prev,
 				postalCode: applyData.postalCode,
 				address: applyData.address,
 				detailAddress: applyData.addressDetail,
-			});
-
-			setInputData(prev => ({
-				...prev,
 				companyName: applyData.companyName,
 				contactNumber: formatPhoneNum(applyData.contactNumber),
 				smartplaceLink: applyData.smartplaceLink,
@@ -66,28 +56,42 @@ function ApplicationModal(props) {
 				contactNumber: formatPhoneNum(inputData.contactNumber),
 			}));
 		}
-	}, [inputData.contactNumber]);
+
+		if (inputData.detailAddress) {
+			setApplyData(prev => ({
+				...prev,
+				addressDetail: inputData.detailAddress,
+			}));
+		}
+	}, [inputData.contactNumber, inputData.detailAddress]);
 
 	// 주소 바뀔 때
 	const handleAddressChange = (name, value) => {
-		setLocation(prevData => ({
+		setInputData(prevData => ({
 			...prevData,
 			[name]: value,
 		}));
 	};
 
+	const addressRef = useRef(null);
+	const [errMsg, setErrMsg] = useState('');
+
 	// 다음 버튼 클릭
 	const handleClickNext = () => {
-		setNextStep(true);
-		setApplyData(prev => ({
-			...prev,
-			companyName: inputData.companyName,
-			contactNumber: inputData.contactNumber,
-			smartplaceLink: inputData.smartplaceLink,
-			postalCode: location.postalCode,
-			address: location.address,
-			detailAddress: location.detailAddress,
-		}));
+		const { detailAddress, ...restInputData } = inputData;
+
+		if (!detailAddress && !applyData.addressDetail) {
+			addressRef.current.focus();
+			setErrMsg('상세 주소를 입력해 주세요.');
+		} else {
+			setNextStep(true);
+
+			setApplyData(prev => ({
+				...prev,
+				...restInputData,
+				addressDetail: detailAddress,
+			}));
+		}
 	};
 
 	return (
@@ -128,13 +132,14 @@ function ApplicationModal(props) {
 							/>
 							{pathname === LINK.TEAM && (
 								<Address
-									postalCode={location.postalCode}
-									place={location.address}
-									detail={location.detailAddress}
+									postalCode={inputData.postalCode}
+									place={inputData.address}
+									detail={inputData.detailAddress}
 									onChange={handleAddressChange}
 									disabled={disabled}
 									button={!disabled}
-									message
+									ref={addressRef}
+									message={errMsg || ' '}
 								/>
 							)}
 
