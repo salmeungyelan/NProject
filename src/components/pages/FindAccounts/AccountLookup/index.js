@@ -44,6 +44,7 @@ function AccountLookup({ password }) {
 
 	const { trigger } = useApi({
 		path,
+		method: 'post',
 		shouldFetch: false,
 	});
 
@@ -98,25 +99,33 @@ function AccountLookup({ password }) {
 
 		if (!isValid) return;
 
-		try {
-			const name = inputData.emailNId.includes('@') ? 'email' : 'username';
+		const idData = {
+			...inputData,
+			contactNumber: inputData.contactNumber.replace(/-/g, ''),
+			businessNumber: inputData.businessNumber.replace(/-/g, ''),
+		};
 
-			const data = {
-				[name]: inputData.emailNId,
-				contactNumber: inputData.contactNumber.replace(/-/g, ''),
-				businessNumber: inputData.businessNumber.replace(/-/g, ''),
-			};
+		const name =
+			password && inputData.emailNId.includes('@') ? 'email' : 'username';
 
-			const req = await trigger({
-				method: 'post',
-				data: password ? data : inputData,
-				showBoundary: false,
-			});
+		const pwData = {
+			[name]: inputData.emailNId,
+			contactNumber: inputData.contactNumber.replace(/-/g, ''),
+			businessNumber: inputData.businessNumber.replace(/-/g, ''),
+		};
 
+		const req = await trigger({
+			data: password ? pwData : idData,
+			showBoundary: false,
+		});
+
+		const { error } = req || {};
+
+		if (error) {
+			setNotice(true);
+		} else {
 			setResultData(req.data);
 			setResult(true);
-		} catch (error) {
-			setNotice(true);
 		}
 	};
 
@@ -134,7 +143,7 @@ function AccountLookup({ password }) {
 						title={input}
 						name={password ? 'emailNId' : 'companyName'}
 						placeholder={`${inputPlaceHolder} 입력해 주세요.`}
-						onChange={() => handleChange()}
+						onChange={handleChange}
 						ref={emailRef}
 						message={
 							(password ? errorMessages.emailNId : errorMessages.companyName) ||
@@ -148,7 +157,7 @@ function AccountLookup({ password }) {
 						name="contactNumber"
 						value={inputData.contactNumber}
 						placeholder="전화번호를 입력해 주세요."
-						onChange={() => handleChange()}
+						onChange={handleChange}
 						ref={phoneNumRef}
 						message={errorMessages.contactNumber || ' '}
 						register
@@ -159,7 +168,7 @@ function AccountLookup({ password }) {
 						name="businessNumber"
 						value={inputData.businessNumber}
 						placeholder="업체의 사업자 등록 번호를 입력해 주세요."
-						onChange={() => handleChange()}
+						onChange={handleChange}
 						ref={businessNumRef}
 						message={errorMessages.businessNumber || ' '}
 						register
