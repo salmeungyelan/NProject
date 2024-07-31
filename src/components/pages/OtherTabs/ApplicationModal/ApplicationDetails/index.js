@@ -31,8 +31,6 @@ function ApplicationDetails(props) {
 		progress,
 	} = props;
 
-	console.log(tempSave);
-
 	const decodedPayload = decodeJWT('accessToken');
 	const { sub } = decodedPayload;
 
@@ -153,7 +151,6 @@ function ApplicationDetails(props) {
 
 		const updatedData = {
 			...restApplyData,
-			id: tempSave || null, // 임시저장 아이디
 			authorId: sub,
 			visitStartDate: inputData.visitStartDate,
 			visitEndDate: inputData.visitEndDate,
@@ -162,16 +159,18 @@ function ApplicationDetails(props) {
 			status: otherStatus,
 		};
 
+		const finalData = tempSave ? { ...updatedData, id: tempSave } : updatedData;
+
 		try {
 			const formData = new FormData();
-			for (const [key, value] of Object.entries(updatedData)) {
+			for (const [key, value] of Object.entries(finalData)) {
 				formData.append(
 					key,
 					value instanceof Object ? JSON.stringify(value) : value,
 				);
 			}
 
-			await trigger({
+			const request = await trigger({
 				method: 'post',
 				path: `/client/${path}s`,
 				data: formData,
