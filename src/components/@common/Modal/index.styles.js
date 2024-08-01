@@ -1,9 +1,18 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { ModalBackground, flexColumnCenter } from 'styles/common';
 
 export const Background = styled.div`
 	${ModalBackground}
 	z-index: 200;
+
+	${({ $otherTabs }) =>
+		$otherTabs &&
+		css`
+			bottom: 0;
+			right: 0;
+			width: auto;
+			height: auto;
+		`}
 `;
 
 export const Container = styled.div`

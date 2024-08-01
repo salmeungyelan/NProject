@@ -3,10 +3,10 @@ import * as S from './index.styles';
 import Button from '../Button';
 
 function Modal(props) {
-	const { img, title, content, onClose } = props;
+	const { img, title, content, onClose, otherTabs } = props;
 
 	return (
-		<S.Background>
+		<S.Background $otherTabs={otherTabs}>
 			<S.Container>
 				<S.Header>
 					<img src={`/assets/icons/${img}`} />
