@@ -14,6 +14,7 @@ import InputBox from 'components/@common/InputBox';
 import Address from 'components/@common/Address';
 import Button from 'components/@common/Button';
 import ApplicationDetails from './ApplicationDetails';
+import Modal from 'components/@common/Modal';
 
 function ApplicationModal(props) {
 	const { title, onClose, tempSave, disabled, listTrigger, progress } = props;
@@ -27,7 +28,9 @@ function ApplicationModal(props) {
 	const [applyData, setApplyData] = useRecoilState(otherTabsState);
 
 	// 이전 / 다음
-	const [nextStep, setNextStep] = useState(false);
+	const [nextStep, setNextStep] = useState(0);
+
+	const [modalContent, setModalContent] = useState('');
 
 	const { result, trigger } = useApi({
 		path: `/client/${path}s/${tempSave}`,
@@ -80,99 +83,109 @@ function ApplicationModal(props) {
 	const handleClickNext = () => {
 		const { detailAddress, ...restInputData } = inputData;
 
-		if (!detailAddress && !applyData.addressDetail) {
-			addressRef.current.focus();
-			setErrMsg('상세 주소를 입력해 주세요.');
-		} else {
-			setNextStep(true);
+		setNextStep(1);
 
-			setApplyData(prev => ({
-				...prev,
-				...restInputData,
-				addressDetail: detailAddress,
-			}));
-		}
+		setApplyData(prev => ({
+			...prev,
+			...restInputData,
+			addressDetail: detailAddress,
+		}));
 	};
+
+	useEffect(() => {
+		console.log(applyData);
+	}, [applyData]);
 
 	return (
 		<S.Background>
-			<S.Container>
-				<S.Header>
-					<S.Title>{title} 신청</S.Title>
-					<S.CloseBtn onClick={onClose} />
-				</S.Header>
+			{nextStep === 0 && (
+				<S.Container>
+					<S.Header>
+						<S.Title>{title} 신청</S.Title>
+						<S.CloseBtn onClick={onClose} />
+					</S.Header>
 
-				<S.Step $nextStep={nextStep}>
-					<img src={`/assets/icons/${nextStep ? 'form-fin' : 'form'}.svg`} />
+					<S.Step>
+						<img src={`/assets/icons/form.svg`} />
 
-					<div>
-						<span>업체 정보</span>
-						<p>{title} 신청</p>
-					</div>
-				</S.Step>
+						<div>
+							<span>업체 정보</span>
+							<p>{title} 신청</p>
+						</div>
+					</S.Step>
 
-				{!nextStep && (
-					<>
-						<S.Body $path={path}>
-							<InputBox
-								title="업체명"
-								name="companyName"
-								value={inputData.companyName}
-								onChange={handleChange}
-								message
+					<S.Body $path={path}>
+						<InputBox
+							title="업체명"
+							name="companyName"
+							value={inputData.companyName}
+							onChange={handleChange}
+							message
+							disabled={disabled}
+						/>
+						<InputBox
+							title="전화번호"
+							name="contactNumber"
+							value={inputData.contactNumber}
+							onChange={handleChange}
+							disabled={disabled}
+							message
+						/>
+						{pathname === LINK.TEAM && (
+							<Address
+								postalCode={inputData.postalCode}
+								place={inputData.address}
+								detail={inputData.detailAddress}
+								onChange={handleAddressChange}
 								disabled={disabled}
+								button={!disabled}
+								ref={addressRef}
+								message={errMsg || ' '}
 							/>
-							<InputBox
-								title="전화번호"
-								name="contactNumber"
-								value={inputData.contactNumber}
-								onChange={handleChange}
-								disabled={disabled}
-								message
-							/>
-							{pathname === LINK.TEAM && (
-								<Address
-									postalCode={inputData.postalCode}
-									place={inputData.address}
-									detail={inputData.detailAddress}
-									onChange={handleAddressChange}
-									disabled={disabled}
-									button={!disabled}
-									ref={addressRef}
-									message={errMsg || ' '}
-								/>
-							)}
+						)}
 
-							<InputBox
-								name="smartplaceLink"
-								title="스마트 플레이스 링크"
-								value={inputData.smartplaceLink}
-								onChange={handleChange}
-								disabled={disabled}
-								message
-							/>
-						</S.Body>
+						<InputBox
+							name="smartplaceLink"
+							title="스마트 플레이스 링크"
+							value={inputData.smartplaceLink}
+							onChange={handleChange}
+							disabled={disabled}
+							message
+						/>
+					</S.Body>
 
-						<S.ButtonBox>
-							<Button size="height" variant="default" onClick={handleClickNext}>
-								다음
-							</Button>
-						</S.ButtonBox>
-					</>
-				)}
+					<S.ButtonBox>
+						<Button size="height" variant="default" onClick={handleClickNext}>
+							다음
+						</Button>
+					</S.ButtonBox>
+				</S.Container>
+			)}
 
-				{nextStep && (
-					<ApplicationDetails
-						setNextStep={setNextStep}
-						tempSave={tempSave}
-						trigger={trigger}
-						disabled={disabled}
-						onClose={onClose}
-						listTrigger={listTrigger}
-						progress={progress}
-					/>
-				)}
-			</S.Container>
+			{nextStep === 1 && (
+				<ApplicationDetails
+					title={title}
+					onClose={onClose}
+					trigger={trigger}
+					progress={progress}
+					tempSave={tempSave}
+					disabled={disabled}
+					listTrigger={listTrigger}
+					nextStep={nextStep}
+					setNextStep={setNextStep}
+					setModal={setModalContent}
+				/>
+			)}
+
+			{nextStep === 2 && (
+				<Modal
+					img="modal-check.svg"
+					title="알림"
+					content={modalContent}
+					onClose={onClose}
+					otherTabs={nextStep}
+				/>
+			)}
 		</S.Background>
 	);
 }

@@ -86,13 +86,11 @@ export const Step = styled.div`
 		gap: 27px;
 
 		> span {
-			color: ${({ theme, $nextStep }) =>
-				$nextStep ? theme.PALETTE.gray[100] : theme.PALETTE.orange[100]};
+			color: ${({ theme }) => theme.PALETTE.orange[100]};
 		}
 
 		> p {
-			color: ${({ theme, $nextStep }) =>
-				$nextStep ? theme.PALETTE.orange[100] : theme.PALETTE.gray[100]};
+			color: ${({ theme }) => theme.PALETTE.gray[100]};
 		}
 	}
 
