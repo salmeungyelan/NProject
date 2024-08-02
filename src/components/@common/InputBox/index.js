@@ -15,11 +15,12 @@ function InputBox(props, ref) {
 		placeholder,
 		disabled,
 		password,
+		readOnly,
 		...rest
 	} = props;
 
 	return (
-		<S.InputBox {...rest} $register={register}>
+		<S.InputBox {...rest} $register={register} $readOnly={readOnly}>
 			<S.H1 $register={register} $message={message}>
 				{title}
 			</S.H1>

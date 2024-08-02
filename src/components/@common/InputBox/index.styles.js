@@ -3,6 +3,11 @@ import { flexAlignCenter } from 'styles/common';
 
 export const InputBox = styled.div`
 	width: ${({ $register }) => ($register ? '320px' : '100%')};
+	${({ $readOnly }) =>
+		$readOnly &&
+		css`
+			pointer-events: none;
+		`}
 `;
 
 export const H1 = styled.h1`
