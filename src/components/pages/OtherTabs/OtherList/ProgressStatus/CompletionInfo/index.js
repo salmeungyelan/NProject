@@ -51,16 +51,14 @@ function CompletionInfo({ id }) {
 
 			<S.TextBox>
 				<S.Status>링크</S.Status>
-				{resultLinks &&
-					resultLinks.map(link => (
-						<Input
-							key={link.id}
-							value={link.url}
-							size="height"
-							variant="default"
-							disabled
-						/>
-					))}
+				{resultLinks && (
+					<Input
+						value={resultLinks.url}
+						size="height"
+						variant="default"
+						disabled
+					/>
+				)}
 			</S.TextBox>
 
 			<S.TextBox>
@@ -77,7 +75,7 @@ function CompletionInfo({ id }) {
 								<S.ImgTitle
 									onClick={() => handleOpenModal(file.url, file.mimetype)}
 								>
-									<p>{file.originalname}</p>
+									<p>{file.originalname || 'img'}</p>
 									<img src="/assets/icons/search.svg" />
 								</S.ImgTitle>
 							</S.Img>
@@ -88,7 +86,7 @@ function CompletionInfo({ id }) {
 			<S.TextBox>
 				<S.Status>안내 사항</S.Status>
 				<Textarea
-					value={instruction}
+					value={instruction?.comment || '안내 사항이 없습니다.'}
 					size="completed"
 					variant="default"
 					disabled

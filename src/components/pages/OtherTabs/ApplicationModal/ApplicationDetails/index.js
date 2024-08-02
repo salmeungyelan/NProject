@@ -186,9 +186,7 @@ function ApplicationDetails(props) {
 
 			setModalContent(statusContent);
 
-			await listTrigger({
-				applyResult: true,
-			});
+			await listTrigger({ applyResult: true });
 		}
 	};
 
