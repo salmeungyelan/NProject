@@ -6,13 +6,7 @@ import useApi from 'hooks/useApi';
 import * as S from './index.styles';
 
 function MultiSelect(props) {
-	const {
-		selectedStatus,
-		setSelectedStatus,
-		statusSortBy,
-		setStatusSortBy,
-		updateQueryParams,
-	} = props;
+	const { selectedStatus, setSelectedStatus, updateQueryParams } = props;
 
 	const { path } = usePathname();
 
@@ -39,55 +33,36 @@ function MultiSelect(props) {
 
 	const handleChangeStatus = (label, value) => {
 		let updatedStatus;
-		let updatedStatusSort = statusSortBy; // Initialize with the current state
 
 		const isSelected = selectedStatus.some(stat => stat.codeLabel === label);
 
 		// '전체'가 선택되면 다른 모든 선택 해제하고 '전체'만 선택
 		if (label === '전체') {
 			updatedStatus = [{ codeLabel: '전체', sortBy: '' }];
-			if (path === 'review') {
-				updatedStatusSort = [{ sortBy: '' }];
-				setStatusSortBy(updatedStatusSort);
-			}
 			setSelectedStatus(updatedStatus);
 			return setExpanded(false);
 		}
 
 		if (isSelected) {
 			updatedStatus = selectedStatus.filter(stat => stat.codeLabel !== label); // 이미 선택된 상태를 해제
-			if (path === 'review') {
-				updatedStatusSort = statusSortBy.filter(stat => stat.sortBy !== value);
-			}
 		} else {
 			updatedStatus = selectedStatus.filter(stat => stat.codeLabel !== '전체');
-			if (path === 'review') {
-				updatedStatusSort = statusSortBy.filter(stat => stat.sortBy !== '');
-				updatedStatusSort = [...updatedStatusSort, { sortBy: value }];
-			}
 			updatedStatus = [...updatedStatus, { codeLabel: label, sortBy: value }];
 
 			// 4개가 선택되면 '전체'로 설정
 			if (updatedStatus.length === status.length) {
 				updatedStatus = [{ codeLabel: '전체', sortBy: '' }];
-				if (path === 'review') {
-					updatedStatusSort = [{ sortBy: '' }];
-				}
 			}
 		}
 
 		if (updatedStatus.length === 0) {
 			updatedStatus = [{ codeLabel: '전체', sortBy: '' }];
-			if (path === 'review') {
-				updatedStatusSort = [{ sortBy: '' }];
-			}
 		}
 
 		if (path === 'review') {
 			updateQueryParams({
 				status: updatedStatus.map(stat => stat.sortBy).join(','),
 			});
-			setStatusSortBy(updatedStatusSort);
 		}
 
 		setSelectedStatus(updatedStatus);
