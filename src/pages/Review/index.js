@@ -18,6 +18,14 @@ import NoPost from 'components/@common/NoPost';
 import Button from 'components/@common/Button';
 import Pagination from 'components/@common/Pagination';
 
+const reviewStatus = [
+	{ codeLabel: '전체', sortBy: '' },
+	{ codeLabel: '임시저장', sortBy: 'REVIEW_STATUS_01' },
+	{ codeLabel: '대기', sortBy: 'REVIEW_STATUS_02' },
+	{ codeLabel: '진행중', sortBy: 'REVIEW_STATUS_03' },
+	{ codeLabel: '완료', sortBy: 'REVIEW_STATUS_04' },
+];
+
 function Review() {
 	const { inputData, setInputData, handleChangeSearch } = useInput();
 
@@ -27,13 +35,22 @@ function Review() {
 	// 쿼리스트링에서 상태를 가져오는 함수
 	const getQueryParams = () => {
 		const params = new URLSearchParams(location.search);
+
+		const statusParam = params.get('status')
+			? params.get('status').split(',')
+			: null;
+
+		const additionalStatuses = statusParam
+			? statusParam.map(param =>
+					reviewStatus.find(status => status.sortBy === param),
+			  )
+			: [{ codeLabel: '전체', sortBy: '' }];
+
 		return {
 			inputData: params.get('title') || '',
 			currentPage: parseInt(params.get('page'), 10) || 1,
 			category: params.get('category') || '',
-			status: params.get('status')
-				? params.get('status').split(',')
-				: [{ sortBy: '' }],
+			status: additionalStatuses,
 			optionCode: params.get('optionCode') || '최신순',
 			sortBy: params.get('sortBy') || 'REVIEW_FILTER_01',
 		};
@@ -43,13 +60,7 @@ function Review() {
 	const [reviewList, setReviewList] = useState([]);
 	const [selectedCategory, setSelectedCategory] = useState(params.category);
 
-	const [statusSortBy, setStatusSortBy] = useState(params.status);
-	const [selectedStatus, setSelectedStatus] = useState([
-		{
-			codeLabel: '전체',
-			sortBy: '',
-		},
-	]);
+	const [selectedStatus, setSelectedStatus] = useState(params.status);
 
 	const [selectedOption, setSelectedOption] = useState({
 		codeLabel: params.optionCode,
@@ -102,7 +113,7 @@ function Review() {
 			codeLabel: params.optionCode,
 			sortBy: params.sortBy,
 		});
-		setStatusSortBy(params.status);
+		setSelectedStatus(params.status);
 		setInputData(params.inputData);
 		setCurrentPage(params.currentPage);
 	}, [location.search]);
@@ -203,8 +214,6 @@ function Review() {
 								<MultiSelect
 									selectedStatus={selectedStatus}
 									setSelectedStatus={setSelectedStatus}
-									statusSortBy={statusSortBy}
-									setStatusSortBy={setStatusSortBy}
 									updateQueryParams={updateQueryParams}
 								/>
 								<DropDown
