@@ -38,8 +38,9 @@ function Incomplete(props) {
 			{modalState && !modify && (
 				<CancelModal
 					id={id}
-					onClose={() => closeModal()}
+					onClose={closeModal}
 					remove={statusLabel === '취소'}
+					listTrigger={listTrigger}
 				/>
 			)}
 

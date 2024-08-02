@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import useModal from 'hooks/useModal';
 
@@ -22,7 +21,6 @@ function ProgressStatus(props) {
 	const { id, title, history, progress } = props;
 
 	const { modalState, openModal, closeModal } = useModal();
-	const navigate = useNavigate();
 
 	const [isCancel, setIsCancel] = useState(false);
 
@@ -45,9 +43,7 @@ function ProgressStatus(props) {
 			)}
 
 			{/* 대기 상태에서 취소할 경우 */}
-			{modalState && isCancel && (
-				<CancelModal id={id} onClose={() => closeModal(navigate(0))} />
-			)}
+			{modalState && isCancel && <CancelModal id={id} onClose={closeModal} />}
 
 			<S.Body>
 				<S.StatusBox>

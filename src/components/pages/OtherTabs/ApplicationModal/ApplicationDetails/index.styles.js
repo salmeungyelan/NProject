@@ -292,7 +292,7 @@ export const ButtonBox = styled.div`
 		}
 
 		> div {
-			width: 370px;
+			width: 180px;
 		}
 	}
 `;

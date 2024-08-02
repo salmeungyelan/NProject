@@ -30,7 +30,7 @@ function ApplicationModal(props) {
 	// 이전 / 다음
 	const [nextStep, setNextStep] = useState(0);
 
-	const [modalContent, setModalContent] = useState('');
+	const [modalContent, setModalContent] = useState(null);
 
 	const { result, trigger } = useApi({
 		path: `/client/${path}s/${tempSave}`,
@@ -173,7 +173,7 @@ function ApplicationModal(props) {
 					listTrigger={listTrigger}
 					nextStep={nextStep}
 					setNextStep={setNextStep}
-					setModal={setModalContent}
+					setModalContent={setModalContent}
 				/>
 			)}
 
