@@ -48,7 +48,7 @@ function ReviewPost() {
 		title,
 		username,
 		email,
-		submittedAt,
+		completeDate,
 		requirement,
 		mainKeyword,
 		subKeywords,
@@ -92,7 +92,7 @@ function ReviewPost() {
 								<div>
 									{username}ㅣ{email}
 								</div>
-								<div>{submittedAt}</div>
+								<div>{completeDate}</div>
 							</S.InfoSub>
 						</S.Info>
 

@@ -104,10 +104,6 @@ function Review() {
 	});
 
 	useEffect(() => {
-		console.log(fullPath);
-	}, [fullPath, status]);
-
-	useEffect(() => {
 		setSelectedCategory(params.category);
 		setSelectedOption({
 			codeLabel: params.optionCode,
