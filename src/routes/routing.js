@@ -23,7 +23,7 @@ const ReviewApply = lazy(() => import('pages/Review/ReviewApply'));
 
 const VisitExperience = lazy(() => import('pages/VisitExperience'));
 const WebsiteOutsourcing = lazy(() => import('pages/WebsiteOutsourcing'));
-const ViewTabInstagram = lazy(() => import('pages/ViewTabInstagram'));
+const ViewTabInstagram = lazy(() => import('pages/ViewTabInsta'));
 
 const router = createBrowserRouter([
 	{
