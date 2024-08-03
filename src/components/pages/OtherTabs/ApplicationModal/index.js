@@ -4,6 +4,7 @@ import { useRecoilState } from 'recoil';
 import usePathname from 'hooks/usePathname';
 import useInput from 'hooks/useInput';
 import { otherTabsState } from 'recoil/atom/otherTabs.atom';
+import decodeJWT from 'utils/token';
 import useApi from 'hooks/useApi';
 import LINK from 'constants/link';
 import { formatPhoneNum } from 'utils/formatNum';
@@ -24,8 +25,11 @@ function ApplicationModal(props) {
 
 	const { inputData, setInputData, handleChange } = useInput();
 
-	// 신청 데이터
+	// 신청할 데이터
 	const [applyData, setApplyData] = useRecoilState(otherTabsState);
+
+	const decodedPayload = decodeJWT('accessToken');
+	const { sub } = decodedPayload;
 
 	// 이전 / 다음
 	const [nextStep, setNextStep] = useState(0);
@@ -33,21 +37,25 @@ function ApplicationModal(props) {
 	const [modalContent, setModalContent] = useState(null);
 
 	const { result, trigger } = useApi({
-		path: `/client/${path}s/${tempSave}`,
-		shouldFetch: tempSave,
+		path: tempSave ? `/client/${path}s/${tempSave}` : `/users/${sub}`,
+		shouldFetch: true,
 	});
 
 	useEffect(() => {
-		if (applyData) {
-			setInputData(prev => ({
-				...prev,
-				postalCode: applyData.postalCode,
-				address: applyData.address,
-				detailAddress: applyData.addressDetail,
-				companyName: applyData.companyName,
-				contactNumber: formatPhoneNum(applyData.contactNumber),
-				smartplaceLink: applyData.smartplaceLink,
-			}));
+		if (result.data) {
+			setApplyData(result.data);
+
+			if (applyData) {
+				setInputData(prev => ({
+					...prev,
+					postalCode: applyData.postalCode,
+					address: applyData.address,
+					addressDetail: applyData.addressDetail,
+					companyName: applyData.companyName,
+					contactNumber: formatPhoneNum(applyData.contactNumber),
+					smartplaceLink: applyData.smartplaceLink,
+				}));
+			}
 		}
 	}, [result.data]);
 
@@ -114,7 +122,8 @@ function ApplicationModal(props) {
 						<InputBox
 							title="업체명"
 							name="companyName"
-							value={inputData.companyName}
+							value={inputData.companyName || ''}
+							placeholder="업체명을 입력해 주세요."
 							onChange={handleChange}
 							message
 							disabled={disabled}
@@ -122,7 +131,8 @@ function ApplicationModal(props) {
 						<InputBox
 							title="전화번호"
 							name="contactNumber"
-							value={inputData.contactNumber}
+							value={inputData.contactNumber || ''}
+							placeholder="전화번호를 입력해 주세요."
 							onChange={handleChange}
 							disabled={disabled}
 							message
@@ -131,7 +141,7 @@ function ApplicationModal(props) {
 							<Address
 								postalCode={inputData.postalCode}
 								place={inputData.address}
-								detail={inputData.detailAddress}
+								detail={inputData.addressDetail}
 								onChange={handleAddressChange}
 								disabled={disabled}
 								button={!disabled}
@@ -143,7 +153,8 @@ function ApplicationModal(props) {
 						<InputBox
 							name="smartplaceLink"
 							title="스마트 플레이스 링크"
-							value={inputData.smartplaceLink}
+							value={inputData.smartplaceLink || ''}
+							placeholder="스마트 플레이스 링크를 입력해 주세요."
 							onChange={handleChange}
 							disabled={disabled}
 							message
