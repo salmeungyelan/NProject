@@ -41,7 +41,7 @@ function Notice() {
 
 	const basePath = `/client/notices/all?size=${itemsPerPage}&page=${currentPage}&sortBy=${sort}`;
 	const noticeType =
-		navClicked !== '전체' ? `&noticeContentType=${navClicked}` : '';
+		navClicked !== '전체' ? `&noticeContentTypes[]=${navClicked}` : '';
 	const fullPath =
 		basePath + `&title=${inputData}&content=${inputData}&${noticeType}`;
 
@@ -94,7 +94,7 @@ function Notice() {
 		const { name } = e.target;
 		setNavClicked(name);
 
-		const noticeType = name === '전체' ? '' : `&noticeContentType=${name}`;
+		const noticeType = name === '전체' ? '' : `&noticeContentTypes[]=${name}`;
 		updateQueryParams({ page: 1, nav: name });
 		await trigger({ path: basePath + noticeType, applyResult: true });
 	};
@@ -135,6 +135,7 @@ function Notice() {
 									name="전체"
 									checked={navClicked === '전체'}
 									onClick={handleClickNav}
+									readOnly
 								/>
 								전체
 							</label>
@@ -146,6 +147,7 @@ function Notice() {
 									name="NOTICE_CONTENT_TYPE_01"
 									checked={navClicked === 'NOTICE_CONTENT_TYPE_01'}
 									onClick={handleClickNav}
+									readOnly
 								/>
 								중요
 							</label>
@@ -157,6 +159,7 @@ function Notice() {
 									name="NOTICE_CONTENT_TYPE_02"
 									checked={navClicked === 'NOTICE_CONTENT_TYPE_02'}
 									onClick={handleClickNav}
+									readOnly
 								/>
 								일반
 							</label>
