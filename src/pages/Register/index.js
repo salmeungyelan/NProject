@@ -69,7 +69,7 @@ function Register() {
 	});
 
 	// 약관 모달
-	const handleOpenModal = id => () => {
+	const handleOpenModal = id => {
 		openModal();
 		setTermsId(id);
 	};
@@ -332,7 +332,7 @@ function Register() {
 					<InputBox
 						title="이메일 입력"
 						name="email"
-						value={inputData.email}
+						value={inputData.email || ''}
 						placeholder="이메일을 입력해 주세요."
 						onChange={handleChange}
 						ref={emailRef}
@@ -343,7 +343,7 @@ function Register() {
 					<InputBox
 						title="아이디 입력"
 						name="username"
-						value={inputData.username}
+						value={inputData.username || ''}
 						placeholder="아이디는 영어와 숫자로만 입력해 주세요."
 						onChange={handleChange}
 						ref={idRef}
@@ -355,7 +355,7 @@ function Register() {
 						title="비밀번호 입력"
 						name="password"
 						type="password"
-						value={inputData.password}
+						value={inputData.password || ''}
 						placeholder="비밀번호를 입력해 주세요."
 						onChange={handleChange}
 						ref={pwRef}
@@ -367,7 +367,7 @@ function Register() {
 						title="비밀번호 확인"
 						type="password"
 						name="passwordCheck"
-						value={inputData.passwordCheck}
+						value={inputData.passwordCheck || ''}
 						placeholder="비밀번호를 입력해 주세요."
 						onChange={handleChange}
 						ref={pwCheckRef}
@@ -378,7 +378,7 @@ function Register() {
 					<InputBox
 						title="업체명"
 						name="companyName"
-						value={inputData.companyName}
+						value={inputData.companyName || ''}
 						placeholder="업체명을 입력해 주세요."
 						onChange={handleChange}
 						ref={companyRef}
@@ -389,7 +389,7 @@ function Register() {
 					<InputBox
 						title="전화번호"
 						name="contactNumber"
-						value={inputData.contactNumber}
+						value={inputData.contactNumber || ''}
 						placeholder="전화번호를 입력해 주세요."
 						onChange={handleChange}
 						ref={contactRef}
@@ -408,7 +408,7 @@ function Register() {
 					<InputBox
 						title="사업자 등록 번호"
 						name="businessNumber"
-						value={inputData.businessNumber}
+						value={inputData.businessNumber || ''}
 						placeholder="업체의 사업자 등록 번호를 입력해 주세요."
 						onChange={handleChange}
 						ref={businessRef}
@@ -439,7 +439,7 @@ function Register() {
 									checked={terms.privacy}
 								/>
 								<label htmlFor="privacy" />
-								<p onClick={handleOpenModal(2)}>
+								<p onClick={() => handleOpenModal(2)}>
 									개인정보 제공 및 활용에 동의합니다.
 								</p>
 								<span>(필수)</span>
@@ -452,7 +452,7 @@ function Register() {
 									checked={terms.service}
 								/>
 								<label htmlFor="service" />
-								<p onClick={handleOpenModal(1)}>
+								<p onClick={() => handleOpenModal(1)}>
 									서비스 이용 약관에 동의합니다.
 								</p>
 								<span>(필수)</span>

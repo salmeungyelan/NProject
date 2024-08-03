@@ -71,36 +71,31 @@ function Address(props, ref) {
 			<div>
 				<S.Input
 					type="text"
-					value={postcode}
+					value={postcode || ''}
 					placeholder="우편 번호"
 					ref={ref}
 					size={size}
-					{...rest}
+					readOnly
 				/>
 				{button && (
-					<Button
-						variant="default"
-						size={size}
-						onClick={() => handleClickPostCode()}
-					>
+					<Button variant="default" size={size} onClick={handleClickPostCode}>
 						주소 찾기
 					</Button>
 				)}
 			</div>
 			<S.Input
 				type="text"
-				value={address}
+				value={address || ''}
 				placeholder="주소"
 				size={size}
-				{...rest}
+				readOnly
 			/>
 			<S.Input
 				type="text"
-				value={detailAddress}
+				value={detailAddress || ''}
 				placeholder="상세 주소"
-				onChange={e => handleChangeDetail(e)}
+				onChange={handleChangeDetail}
 				size={size}
-				{...rest}
 			/>
 			{message && <p>{message}</p>}
 		</S.Address>
