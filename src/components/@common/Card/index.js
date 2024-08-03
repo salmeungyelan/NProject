@@ -21,8 +21,8 @@ function Card({ data }) {
 	const rate = [];
 
 	for (let i = 0; i < 5; i++) {
-		if (star > i) rate.push(<img src="/assets/icons/star-color.svg" />);
-		else rate.push(<img src="/assets/icons/star.svg" />);
+		if (star > i) rate.push(<img src="/assets/icons/star-color.svg" key={i} />);
+		else rate.push(<img src="/assets/icons/star.svg" key={i} />);
 	}
 
 	return (

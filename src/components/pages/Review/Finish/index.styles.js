@@ -32,14 +32,17 @@ export const Title = styled.span`
 	}
 `;
 
-export const ReadOnly = styled.div`
+export const ReadOnly = styled.pre`
 	padding: 7px 10px;
 	border: 1px solid ${({ theme }) => theme.PALETTE.gray[0]};
 	border-radius: 4px;
 	background-color: ${({ theme }) => theme.PALETTE.white[0]};
 	color: ${({ theme }) => theme.PALETTE.gray[200]};
 	font-size: ${({ theme }) => theme.FONT_SIZE.ms};
-	line-height: 18px;
+	line-height: 25px;
+	white-space: pre-wrap;
+	word-break: break-all;
+	overflow: auto;
 
 	@media screen and (min-width: 768px) {
 		font-size: ${({ theme }) => theme.FONT_SIZE.m};
@@ -48,13 +51,17 @@ export const ReadOnly = styled.div`
 `;
 
 export const ReadImg = styled(ReadOnly)`
-	line-height: 0px;
-	${flexLeftCenter}
-	gap: 8px;
-	overflow: hidden;
+	padding: 8px 10px 7px 10px;
+	line-height: normal;
+
+	> div {
+		${flexLeftCenter}
+		gap: 8px;
+		overflow: hidden;
+	}
 
 	@media screen and (min-width: 768px) {
-		padding: 12px;
+		padding: 13px 12px 12px 12px;
 	}
 `;
 
@@ -64,9 +71,6 @@ export const Img = styled.div`
 	position: relative;
 
 	> img {
-		border: ${({ $thumbnail, theme }) =>
-			$thumbnail ? `2px solid ${theme.PALETTE.navy}` : 'none'};
-
 		width: 64px;
 		height: 64px;
 		object-fit: cover;
@@ -74,21 +78,17 @@ export const Img = styled.div`
 		@media screen and (min-width: 768px) {
 			width: 100px;
 			height: 100px;
-			border: ${({ $thumbnail, theme }) =>
-				$thumbnail ? `4px solid ${theme.PALETTE.navy}` : 'none'};
 		}
 
 		@media screen and (min-width: 1200px) {
 			width: 120px;
 			height: 120px;
-			border: ${({ $thumbnail, theme }) =>
-				$thumbnail ? `4px solid ${theme.PALETTE.navy}` : 'none'};
 		}
 	}
 `;
 
 export const ImgTitle = styled.div`
-	${flexCenter}
+	${flexCenter};
 	gap: 4px;
 	height: 10px;
 	color: ${({ theme }) => theme.PALETTE.gray[100]};
@@ -96,22 +96,28 @@ export const ImgTitle = styled.div`
 
 	> p {
 		font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		text-align: center;
+		width: 50px;
 	}
 
-	> img {
-		width: 8px;
+	& img {
+		width: 10%;
 	}
 
 	@media screen and (min-width: 768px) {
 		height: 14px;
 		gap: 6px;
 
-		> p {
+		& p {
 			font-size: ${({ theme }) => theme.FONT_SIZE.ms};
+			width: 70px;
 		}
 
-		> img {
-			width: 12px;
+		& img {
+			width: 12%;
 		}
 	}
 
@@ -120,10 +126,7 @@ export const ImgTitle = styled.div`
 
 		> p {
 			font-size: ${({ theme }) => theme.FONT_SIZE.m};
-		}
-
-		> img {
-			width: 14px;
+			width: 85px;
 		}
 	}
 `;
@@ -190,10 +193,16 @@ const buttonBgReset = css`
 	box-shadow: 0 0 4px 0 #00000029;
 	background-repeat: 0;
 	position: absolute;
+
+	@media screen and (min-width: 768px) {
+		width: 18px;
+		height: 18px;
+		background-size: 12px 12px;
+	}
 `;
 
 export const LeftArrowImg = styled.button`
-	/* ${buttonBgReset}; */
+	${buttonBgReset};
 	z-index: 10;
 	left: -2%;
 	top: 50%;
@@ -201,9 +210,6 @@ export const LeftArrowImg = styled.button`
 	background-image: url('/assets/icons/left-arrow.svg');
 
 	@media screen and (min-width: 768px) {
-		width: 18px;
-		height: 18px;
-		background-size: 12px 12px;
 		left: -1%;
 	}
 

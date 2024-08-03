@@ -53,7 +53,9 @@ function Finish({ result }) {
 
 			<S.Box>
 				<S.Title>링크</S.Title>
-				{resultLinks && <S.ReadOnly>{resultLinks.url}</S.ReadOnly>}
+				<S.ReadOnly>
+					{resultLinks?.url || '등록된 링크가 존재하지 않습니다.'}
+				</S.ReadOnly>
 			</S.Box>
 
 			<S.Box>
@@ -62,28 +64,32 @@ function Finish({ result }) {
 				)}
 
 				<S.Title>첨부 파일</S.Title>
-				<S.ReadImg ref={containerRef}>
-					{adminFiles?.map((file, index) => (
-						<S.Img key={file.id} ref={el => (mediaRef.current[index] = el)}>
-							<img src={file.url} />
-							<S.ImgTitle
-								onClick={() => handleOpenModal(file.url, file.mimetype)}
-							>
-								<p>{file.originalname}</p>
-								<img src="/assets/icons/search.svg" />
-							</S.ImgTitle>
-						</S.Img>
-					))}
+				<S.ReadImg>
+					<div ref={containerRef}>
+						{adminFiles?.map((file, index) => (
+							<S.Img key={file.id} ref={el => (mediaRef.current[index] = el)}>
+								<img src={file.url} />
+								<S.ImgTitle
+									onClick={() => handleOpenModal(file.url, file.mimetype)}
+								>
+									<p>{file.originalname}</p>
+									<img src="/assets/icons/search.svg" />
+								</S.ImgTitle>
+							</S.Img>
+						))}
+
+						{!adminFiles.length && <p>등록된 첨부 파일이 존재하지 않습니다.</p>}
+					</div>
 				</S.ReadImg>
 
-				{slide + visibleItemsCount < adminFiles?.length && (
+				{visibleItemsCount < adminFiles?.length + 1 && (
 					<S.RightArrowImg onClick={handleNextClick} />
 				)}
 			</S.Box>
 
 			<S.Box>
 				<S.Title>안내</S.Title>
-				<S.ReadOnly>{comment}</S.ReadOnly>
+				<S.ReadOnly>{comment || '안내 사항이 없습니다.'}</S.ReadOnly>
 			</S.Box>
 
 			<S.RatingBox>

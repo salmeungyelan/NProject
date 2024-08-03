@@ -218,14 +218,25 @@ function ReviewApply() {
 			if (!selectedCategory.type) {
 				isValid = false;
 				setErrorMsg({ category: MESSAGE.REVIEW.CATEGORY });
-				categoryRef.current.focus();
+				categoryRef.current.scrollIntoView({
+					behavior: 'smooth',
+					block: 'center', // 요소를 스크롤의 중앙에 위치
+				});
 			} else if (!inputData.title || reviewPost.title) {
 				isValid = false;
 				setErrorMsg({ title: MESSAGE.REVIEW.TITLE });
 				titleRef.current.focus();
+				titleRef.current.scrollIntoView({
+					behavior: 'smooth',
+					block: 'center', // 요소를 스크롤의 중앙에 위치
+				});
 			} else if (!inputData.requirement) {
 				isValid = false;
 				desRef.current.focus();
+				desRef.current.scrollIntoView({
+					behavior: 'smooth',
+					block: 'center', // 요소를 스크롤의 중앙에 위치
+				});
 				setErrorMsg({ requirement: MESSAGE.REVIEW.REQ });
 			}
 		}
@@ -318,14 +329,8 @@ function ReviewApply() {
 	const { handlePrevClick, handleNextClick, slide, visibleItemsCount } =
 		useSlide(mediaRef, containerRef, fileList);
 
-	const {
-		title,
-		requirement,
-		mainKeyword,
-		subKeywords,
-		hashtags,
-		smartplaceLink,
-	} = reviewPost;
+	// mainKeyword,	subKeywords, hashtags,
+	const { title, requirement, smartplaceLink } = reviewPost;
 
 	return (
 		<S.Body>
@@ -358,7 +363,7 @@ function ReviewApply() {
 			<S.Content>
 				<S.Box>
 					<S.Title>리뷰 카테고리</S.Title>
-					<S.CategoryBox>
+					<S.CategoryBox ref={categoryRef}>
 						{categories &&
 							categories.map(category => (
 								<S.Category
@@ -367,8 +372,6 @@ function ReviewApply() {
 										handleClickCategory(category.codeValue, category.typeLabel)
 									}
 									$clicked={selectedCategory.type === category.codeValue}
-									ref={categoryRef}
-									tabIndex={0}
 								>
 									{category.codeLabel}
 								</S.Category>
@@ -438,8 +441,10 @@ function ReviewApply() {
 					<S.Title>스마트 플레이스 링크</S.Title>
 					<Input
 						value={smartplaceLink || ''}
+						placeholder="등록된 스마트 플레이스 링크가 없습니다."
 						size="height"
 						variant="default"
+						readOnly
 						disabled
 					/>
 					<p />
@@ -470,6 +475,7 @@ function ReviewApply() {
 									onChange={e => handleFileChange(e)}
 									ref={fileRef}
 									multiple
+									readOnly
 								/>
 								<S.MediaTitle onClick={() => handleClickImg()}>
 									<p>파일 선택</p>

@@ -7,8 +7,8 @@ import * as S from './index.styles';
 function Progress(props) {
 	const { variant, children } = props;
 
-	const { pathname } = usePathname();
-	const isReview = pathname === LINK.REVIEW;
+	const { path } = usePathname();
+	const isReview = path === 'review';
 
 	const variantSplit = variant?.split('_');
 	const status = variantSplit && variantSplit[variantSplit.length - 1];
