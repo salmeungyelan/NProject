@@ -34,7 +34,8 @@ function NoticeDetail() {
 		}
 	}, [result.data]);
 
-	const { noticeContentTypeLabel, title, author, content } = noticeDetail;
+	const { noticeContentTypeLabel, title, author, createDate, content } =
+		noticeDetail;
 
 	return (
 		<>
@@ -55,7 +56,7 @@ function NoticeDetail() {
 
 						<S.Info>
 							<span>{author}</span>
-							<p>2024년 04월 24일</p>
+							<p>{createDate}</p>
 						</S.Info>
 
 						<S.Description>{content}</S.Description>
