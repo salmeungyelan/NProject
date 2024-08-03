@@ -34,7 +34,7 @@ function GuideDetail() {
 		}
 	}, [result.data]);
 
-	const { title, author, content } = guideDetail;
+	const { title, author, createDate, content } = guideDetail;
 
 	return (
 		<>
@@ -47,7 +47,7 @@ function GuideDetail() {
 
 						<S.Info>
 							<span>{author}</span>
-							<p>2024년 04월 24일</p>
+							<p>{createDate}</p>
 						</S.Info>
 
 						<S.Description>{content}</S.Description>
