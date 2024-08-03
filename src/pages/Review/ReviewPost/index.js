@@ -50,7 +50,7 @@ function ReviewPost() {
 		email,
 		completeDate,
 		requirement,
-		mainKeyword,
+		mainKeywords,
 		subKeywords,
 		hashtags,
 		clientFiles,
@@ -85,8 +85,8 @@ function ReviewPost() {
 							<S.InfoMain>
 								<Progress variant={status}>{statusLabel}</Progress>
 								<S.Category>{typeLabel}</S.Category>
-								<S.Title>{title}</S.Title>
 							</S.InfoMain>
+							<S.Title>{title}</S.Title>
 
 							<S.InfoSub>
 								<div>
@@ -103,7 +103,7 @@ function ReviewPost() {
 
 							{!['대기', '임시저장'].includes(statusLabel) && (
 								<Keyword
-									main={mainKeyword}
+									main={mainKeywords}
 									sub={subKeywords}
 									hashtag={hashtags}
 								/>

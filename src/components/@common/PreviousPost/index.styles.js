@@ -5,8 +5,6 @@ export const NextBox = styled.div`
 	${flexColumn}
 	border-top: 1px solid ${({ theme }) => theme.PALETTE.gray[0]};
 	border-bottom: 1px solid ${({ theme }) => theme.PALETTE.gray[0]};
-	padding: 12px 8px;
-	gap: 12px;
 `;
 
 export const Next = styled.div`
@@ -16,6 +14,7 @@ export const Next = styled.div`
 	font-size: ${({ theme }) => theme.FONT_SIZE.s};
 	color: ${({ theme }) => theme.PALETTE.gray[200]};
 	cursor: ${({ $noPost }) => ($noPost ? 'default' : 'pointer')};
+	padding: 12px 8px;
 
 	& a,
 	:visited {
@@ -25,6 +24,10 @@ export const Next = styled.div`
 		white-space: nowrap;
 		text-overflow: ellipsis;
 		width: 87%;
+
+		@media screen and (min-width: 768px) {
+			width: 93%;
+		}
 	}
 
 	& div {

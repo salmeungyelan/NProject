@@ -45,7 +45,6 @@ export const Category = styled.div`
 
 	@media screen and (min-width: 768px) {
 		font-size: ${({ theme }) => theme.FONT_SIZE.m};
-		padding: 6px 16px;
 	}
 `;
 
