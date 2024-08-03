@@ -173,7 +173,7 @@ export const SideBarBackground = styled.div`
 	${ModalBackground}
 	${flexCenter}
 	display: ${({ $sideBar }) => !$sideBar && 'none'};
-	z-index: 2;
+	z-index: 4;
 	top: 80px;
 	height: calc(100vh - 80px);
 	justify-content: right;
