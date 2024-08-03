@@ -65,20 +65,24 @@ function ProgressStatus(props) {
 					</S.ImgBox>
 
 					<S.TableBox>
-						<tr>
-							<S.Th>일시</S.Th>
-							<S.Th>진행 상태</S.Th>
-						</tr>
+						<thead>
+							<tr>
+								<S.Th>일시</S.Th>
+								<S.Th>진행 상태</S.Th>
+							</tr>
+						</thead>
 						{history &&
 							history.map(data => (
-								<tr key={data.id}>
-									<S.Td>{data.createdAt}</S.Td>
-									<S.Td>
-										{data.detailStatusLabel === '제작 중'
-											? '제작 중입니다.'
-											: `${data.detailStatusLabel}되었습니다.`}
-									</S.Td>
-								</tr>
+								<tbody key={data.id}>
+									<tr>
+										<S.Td>{data.createdAt}</S.Td>
+										<S.Td>
+											{data.detailStatusLabel === '제작 중'
+												? '제작 중입니다.'
+												: `${data.detailStatusLabel}되었습니다.`}
+										</S.Td>
+									</tr>
+								</tbody>
 							))}
 					</S.TableBox>
 

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
 	flexCenter,
 	flexColumn,
@@ -200,26 +200,39 @@ export const Td = styled.td`
 export const TextBox = styled.div`
 	${flexColumn}
 	gap: 12px;
+	position: relative;
 `;
 
-export const ReadImg = styled.div`
+export const ReadOnly = styled.pre`
 	padding: 7px 10px;
 	border: 1px solid ${({ theme }) => theme.PALETTE.gray[0]};
 	border-radius: 4px;
-	background-color: ${({ theme }) => theme.PALETTE.white[100]};
+	background-color: ${({ theme }) => theme.PALETTE.white[0]};
 	color: ${({ theme }) => theme.PALETTE.gray[200]};
 	font-size: ${({ theme }) => theme.FONT_SIZE.ms};
-	line-height: 18px;
-
-	${flexLeftCenter}
-	gap: 8px;
-	overflow-x: scroll;
-	overflow-y: hidden;
-	box-sizing: border-box;
+	line-height: 25px;
+	white-space: pre-wrap;
+	word-break: break-all;
+	overflow: auto;
 
 	@media screen and (min-width: 768px) {
 		font-size: ${({ theme }) => theme.FONT_SIZE.m};
 		padding: 12px;
+	}
+`;
+
+export const ReadImg = styled(ReadOnly)`
+	padding: 8px 10px 7px 10px;
+	line-height: ${({ $adminFiles }) => ($adminFiles ? 'normal' : '25px')};
+
+	> div {
+		${flexLeftCenter}
+		gap: 8px;
+		overflow: hidden;
+	}
+
+	@media screen and (min-width: 768px) {
+		padding: 13px 12px 12px 12px;
 	}
 `;
 
@@ -289,5 +302,58 @@ export const ImgTitle = styled.div`
 		> img {
 			width: 14px;
 		}
+	}
+`;
+
+const buttonBgReset = css`
+	background: none;
+	width: 12px;
+	height: 12px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 8px 8px;
+	border-radius: 50%;
+	box-shadow: 0 0 4px 0 #00000029;
+	background-repeat: 0;
+	position: absolute;
+
+	@media screen and (min-width: 768px) {
+		width: 18px;
+		height: 18px;
+		background-size: 12px 12px;
+	}
+`;
+
+export const LeftArrowImg = styled.button`
+	${buttonBgReset};
+	z-index: 10;
+	left: -2%;
+	top: 55%;
+	background-color: ${({ theme }) => theme.PALETTE.white[100]};
+	background-image: url('/assets/icons/left-arrow.svg');
+
+	@media screen and (min-width: 768px) {
+		left: -1.5%;
+	}
+
+	@media screen and (min-width: 1200px) {
+		left: -0.7%;
+	}
+`;
+
+export const RightArrowImg = styled.button`
+	${buttonBgReset};
+	z-index: 10;
+	top: 55%;
+	background-color: ${({ theme }) => theme.PALETTE.white[100]};
+	left: 97.5%;
+	background-image: url('/assets/icons/right-arrow.svg');
+
+	@media screen and (min-width: 768px) {
+		left: 98%;
+	}
+
+	@media screen and (min-width: 1200px) {
+		left: 99.2%;
 	}
 `;
