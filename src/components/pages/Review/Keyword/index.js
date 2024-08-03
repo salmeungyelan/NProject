@@ -1,7 +1,7 @@
 import * as S from './index.styles';
 
 function Keyword(props) {
-	const { main, sub, hashTag } = props;
+	const { main, sub, hashtag } = props;
 
 	return (
 		<S.Body>
@@ -12,10 +12,10 @@ function Keyword(props) {
 				</S.HashTag>
 			)}
 
-			{hashTag && (
+			{hashtag && (
 				<S.HashTag>
-					{hashTag &&
-						hashTag.map(tag => <S.Word key={tag.id}>{tag.name}</S.Word>)}
+					{hashtag &&
+						hashtag.map(tag => <S.Word key={tag.id}>{tag.name}</S.Word>)}
 				</S.HashTag>
 			)}
 		</S.Body>

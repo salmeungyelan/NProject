@@ -17,6 +17,7 @@ function InputBox(props, ref) {
 		password,
 		readOnly,
 		onChange,
+		maxLength,
 		...rest
 	} = props;
 
@@ -34,9 +35,10 @@ function InputBox(props, ref) {
 				value={value}
 				defaultValue={defaultValue}
 				placeholder={placeholder}
+				readOnly={readOnly}
 				disabled={disabled}
 				onChange={onChange}
-				readOnly={readOnly}
+				maxLength={maxLength}
 				size={register ? 'default' : 'height'}
 			/>
 
