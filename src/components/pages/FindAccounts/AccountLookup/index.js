@@ -129,6 +129,8 @@ function AccountLookup({ password }) {
 		}
 	};
 
+	const inputName = password ? 'emailNId' : 'companyName';
+
 	return (
 		<>
 			{result ? (
@@ -141,10 +143,8 @@ function AccountLookup({ password }) {
 				<S.FormBox onSubmit={handleSubmitAccount}>
 					<InputBox
 						title={inputTitle}
-						name={password ? 'emailNId' : 'companyName'}
-						value={
-							(password ? inputData.emailNId : inputData.companyName) || ''
-						}
+						name={inputName}
+						value={inputData[inputName] || ''}
 						placeholder={`${inputPlaceHolder} 입력해 주세요.`}
 						onChange={handleChange}
 						ref={emailRef}
