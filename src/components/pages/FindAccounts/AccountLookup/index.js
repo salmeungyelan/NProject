@@ -16,7 +16,7 @@ import TempPwd from '../TempPwd';
 function AccountLookup({ password }) {
 	const { inputData, setInputData, handleChange } = useInput();
 
-	const input = password ? '이메일 또는 아이디' : '업체명';
+	const inputTitle = password ? '이메일 또는 아이디' : '업체명';
 	const inputPlaceHolder = password ? '이메일 또는 아이디를' : '업체명을';
 
 	const emailRef = useRef(null);
@@ -140,8 +140,11 @@ function AccountLookup({ password }) {
 			) : (
 				<S.FormBox onSubmit={handleSubmitAccount}>
 					<InputBox
-						title={input}
+						title={inputTitle}
 						name={password ? 'emailNId' : 'companyName'}
+						value={
+							(password ? inputData.emailNId : inputData.companyName) || ''
+						}
 						placeholder={`${inputPlaceHolder} 입력해 주세요.`}
 						onChange={handleChange}
 						ref={emailRef}
@@ -155,7 +158,7 @@ function AccountLookup({ password }) {
 					<InputBox
 						title="전화번호"
 						name="contactNumber"
-						value={inputData.contactNumber}
+						value={inputData.contactNumber || ''}
 						placeholder="전화번호를 입력해 주세요."
 						onChange={handleChange}
 						ref={phoneNumRef}
@@ -166,7 +169,7 @@ function AccountLookup({ password }) {
 					<InputBox
 						title="사업자 등록 번호"
 						name="businessNumber"
-						value={inputData.businessNumber}
+						value={inputData.businessNumber || ''}
 						placeholder="업체의 사업자 등록 번호를 입력해 주세요."
 						onChange={handleChange}
 						ref={businessNumRef}
