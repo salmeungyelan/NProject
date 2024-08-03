@@ -16,7 +16,7 @@ function More({ children }) {
 
 	// 공지사항 중요 2개
 	const { result: impResult, isLoading: impLoading } = useApi({
-		path: `/client/notices?size=2&noticeContentType=NOTICE_CONTENT_TYPE_01`,
+		path: `/client/notices?size=2&noticeContentTypes[]=NOTICE_CONTENT_TYPE_01`,
 		shouldFetch: true,
 	});
 
@@ -49,7 +49,7 @@ function More({ children }) {
 
 			const path = `/client/notices?size=${
 				5 - (impResult.data?.noticeList && impResult.data?.noticeList?.length)
-			}&noticeContentType=NOTICE_CONTENT_TYPE_02`;
+			}&noticeContentTypes[]=NOTICE_CONTENT_TYPE_02`;
 
 			genTrigger({
 				path,
@@ -108,12 +108,12 @@ function More({ children }) {
 
 				{/* 이용안내 없을 때 */}
 				{!title && !genData.length && (
-					<S.NoData>등록된 게시글이 없습니다.</S.NoData>
+					<S.NoData>등록된 이용안내가 없습니다.</S.NoData>
 				)}
 
 				{/* 공지사항 없을 때 */}
 				{title && !genData.length && !impData.length && (
-					<S.NoData>등록된 게시글이 없습니다.</S.NoData>
+					<S.NoData>등록된 공지사항이 없습니다.</S.NoData>
 				)}
 			</S.List>
 		</S.Body>
