@@ -99,7 +99,7 @@ function Login() {
 										<Input
 											id="username"
 											name="username"
-											value={inputData.username}
+											value={inputData.username || ''}
 											placeholder=""
 											onChange={handleChange}
 											size="default"
@@ -115,7 +115,7 @@ function Login() {
 											id="password"
 											type="password"
 											name="password"
-											value={inputData.password}
+											value={inputData.password || ''}
 											placeholder=""
 											onChange={handleChange}
 											size="default"
@@ -128,10 +128,10 @@ function Login() {
 
 									<S.Text>
 										{errorMessage.split('\n').map((line, index) => (
-											<>
+											<div key={index}>
 												{line}
 												{index < errorMessage.split('\n').length - 1 && <br />}
-											</>
+											</div>
 										))}
 									</S.Text>
 								</div>
