@@ -55,9 +55,6 @@ function List() {
 		}
 	}, [curResult.data, comResult.data, iResult.data]);
 
-	// 슬라이더 부분 못한 부분
-	// 1. 애니메이션 넣는 부분
-
 	// 현재 데이터 있고 태블릿 사이즈일 때 itemsPerPage 2
 	// 현재 데이터 있고 데스크탑 사이즈일 때 itemsPerPage 4
 	const calcItemsPerPage = () => {
@@ -174,7 +171,8 @@ function List() {
 							<S.LeftArrowImg onClick={() => handleSlider('current', 'left')} />
 						)}
 
-						{currentData.length > 2 && (
+						{((currentData.length > 2 && itemsPerPage === 2) ||
+							(currentData.length > 3 && itemsPerPage === 4)) && (
 							<S.RightArrowImg
 								onClick={() => handleSlider('current', 'right')}
 							/>
@@ -212,7 +210,8 @@ function List() {
 							/>
 						)}
 
-						{completedData.length > 2 && (
+						{((completedData.length > 2 && itemsPerPage === 2) ||
+							(completedData.length > 3 && itemsPerPage === 4)) && (
 							<S.RightArrowImg
 								onClick={() => handleSlider('completed', 'right')}
 							/>
