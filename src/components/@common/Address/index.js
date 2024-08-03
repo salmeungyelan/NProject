@@ -17,6 +17,7 @@ function Address(props, ref) {
 		detail,
 		onChange,
 		message,
+		disabled,
 		...rest
 	} = props;
 
@@ -75,6 +76,7 @@ function Address(props, ref) {
 					placeholder="우편 번호"
 					ref={ref}
 					size={size}
+					disabled={disabled}
 					readOnly
 				/>
 				{button && (
@@ -88,6 +90,7 @@ function Address(props, ref) {
 				value={address || ''}
 				placeholder="주소"
 				size={size}
+				disabled={disabled}
 				readOnly
 			/>
 			<S.Input
@@ -96,6 +99,7 @@ function Address(props, ref) {
 				placeholder="상세 주소"
 				onChange={handleChangeDetail}
 				size={size}
+				disabled={disabled}
 			/>
 			{message && <p>{message}</p>}
 		</S.Address>

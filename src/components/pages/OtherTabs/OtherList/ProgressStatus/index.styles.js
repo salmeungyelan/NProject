@@ -121,7 +121,8 @@ export const TableBox = styled.table`
 	font-size: ${({ theme }) => theme.FONT_SIZE.s};
 	border-collapse: collapse;
 
-	> tr {
+	> thead,
+	> tbody {
 		border-bottom: 1px solid ${({ theme }) => theme.PALETTE.gray[0]};
 	}
 

@@ -190,7 +190,7 @@ function ApplicationDetails(props) {
 		}
 	};
 
-	const { mainKeyword, subKeywords, hashtags } = applyData;
+	const { mainKeywords, subKeywords, hashtags } = applyData;
 
 	return (
 		<>
@@ -235,7 +235,7 @@ function ApplicationDetails(props) {
 												applyData.visitStartDate ||
 												'시작 일자'
 											}
-											defaultValue={inputData.visitStartDate || '시작 일자'}
+											// defaultValue={inputData.visitStartDate || '시작 일자'}
 											placeholder="시작일"
 											onClick={() => handleOpenCalendar('start')}
 											ref={startRef}
@@ -272,7 +272,7 @@ function ApplicationDetails(props) {
 												applyData.visitEndDate ||
 												'종료 일자'
 											}
-											defaultValue={inputData.visitEndDate || '종료 일자'}
+											// defaultValue={inputData.visitEndDate || '종료 일자'}
 											placeholder="종료일"
 											onClick={() => handleOpenCalendar('end')}
 											ref={endRef}
@@ -308,7 +308,7 @@ function ApplicationDetails(props) {
 							<InputBox
 								title="제공 서비스"
 								name="availableService"
-								value={inputData.availableService}
+								value={inputData.availableService || ''}
 								placeholder="제공 가능한 서비스를 입력해 주세요."
 								onChange={handleChange}
 								ref={serviceRef}
@@ -325,11 +325,11 @@ function ApplicationDetails(props) {
 								<S.InputBox>
 									<S.H1>메인 키워드</S.H1>
 									<S.WordBox>
-										{mainKeyword &&
-											mainKeyword.map(main => (
+										{mainKeywords &&
+											mainKeywords.map(main => (
 												<S.Word key={main.id}>
 													{main.name}
-													<img src="/assets/icons/modal-x.svg" />
+													{/* <img src="/assets/icons/modal-x.svg" /> */}
 												</S.Word>
 											))}
 									</S.WordBox>
@@ -343,7 +343,7 @@ function ApplicationDetails(props) {
 											subKeywords.map(sub => (
 												<S.Word key={sub.id}>
 													{sub.name}
-													<img src="/assets/icons/modal-x.svg" />
+													{/* <img src="/assets/icons/modal-x.svg" /> */}
 												</S.Word>
 											))}
 									</S.WordBox>
@@ -357,7 +357,7 @@ function ApplicationDetails(props) {
 											hashtags.map(tag => (
 												<S.Word key={tag.id}>
 													{tag.name}
-													<img src="/assets/icons/modal-x.svg" />
+													{/* <img src="/assets/icons/modal-x.svg" /> */}
 												</S.Word>
 											))}
 									</S.HashTag>
@@ -370,7 +370,7 @@ function ApplicationDetails(props) {
 						<S.H1>요청 사항</S.H1>
 						<Textarea
 							name="requirement"
-							value={inputData.requirement}
+							value={inputData.requirement || ''}
 							placeholder="내용을 입력해 주세요."
 							onChange={handleChange}
 							ref={reqRef}

@@ -61,8 +61,7 @@ function OtherList(props) {
 									<S.CoName>{list.companyName}</S.CoName>
 								</div>
 								<S.Date>
-									{list.picName && `${list.picName}ㅣ`}
-									{list.createdAt}
+									{list.picName || '지정된 담당자 없음'} | {list.createdAt}
 								</S.Date>
 								<S.DownBtn src="/assets/icons/down.svg" />
 							</S.List>

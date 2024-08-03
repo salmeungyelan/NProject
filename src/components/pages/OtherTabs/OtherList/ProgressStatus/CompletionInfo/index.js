@@ -1,13 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import usePathname from 'hooks/usePathname';
 import useModal from 'hooks/useModal';
 import useApi from 'hooks/useApi';
+import useSlide from 'hooks/useSlide';
 
 import * as S from './index.styles';
 
-import Input from 'components/@common/Input';
-import Textarea from 'components/@common/Textarea';
 import MediaModal from 'components/@common/MediaModal';
 
 function CompletionInfo({ id }) {
@@ -39,6 +38,14 @@ function CompletionInfo({ id }) {
 
 	const { resultLinks, adminFiles, instruction } = completedData;
 
+	console.log(adminFiles);
+
+	const mediaRef = useRef([]);
+	const containerRef = useRef(null);
+
+	const { handlePrevClick, handleNextClick, slide, visibleItemsCount } =
+		useSlide(mediaRef, containerRef, !adminFiles);
+
 	return (
 		<>
 			{modalState && (
@@ -51,46 +58,46 @@ function CompletionInfo({ id }) {
 
 			<S.TextBox>
 				<S.Status>링크</S.Status>
-				{resultLinks && (
-					<Input
-						value={resultLinks.url}
-						size="height"
-						variant="default"
-						disabled
-					/>
+				<S.ReadOnly>{resultLinks?.url || '등록된 링크가 없습니다.'}</S.ReadOnly>
+			</S.TextBox>
+
+			<S.TextBox>
+				{slide > 0 && slide !== adminFiles?.length - 1 && (
+					<S.LeftArrowImg onClick={handlePrevClick} />
+				)}
+
+				<S.Status>첨부 파일</S.Status>
+				<S.ReadImg $adminFiles={adminFiles?.length}>
+					<div ref={containerRef}>
+						{adminFiles?.length ? (
+							adminFiles.map((file, index) => (
+								<S.Img key={file.id} ref={el => (mediaRef.current[index] = el)}>
+									<img src={file.url} />
+									<S.ImgTitle
+										onClick={() => handleOpenModal(file.url, file.mimetype)}
+									>
+										<p>{file.originalname || 'img'}</p>
+										<img src="/assets/icons/search.svg" />
+									</S.ImgTitle>
+								</S.Img>
+							))
+						) : (
+							<p>등록된 첨부 파일이 존재하지 않습니다.</p>
+						)}
+					</div>
+				</S.ReadImg>
+
+				{visibleItemsCount < adminFiles?.length + 1 && (
+					<S.RightArrowImg onClick={handleNextClick} />
 				)}
 			</S.TextBox>
 
 			<S.TextBox>
-				<S.Status>첨부 파일</S.Status>
-				<S.ReadImg>
-					{adminFiles &&
-						adminFiles.map(file => (
-							<S.Img key={file.id}>
-								{file.mimetype.includes('image') ? (
-									<img src={file.url} />
-								) : (
-									<video src={file.url} />
-								)}
-								<S.ImgTitle
-									onClick={() => handleOpenModal(file.url, file.mimetype)}
-								>
-									<p>{file.originalname || 'img'}</p>
-									<img src="/assets/icons/search.svg" />
-								</S.ImgTitle>
-							</S.Img>
-						))}
-				</S.ReadImg>
-			</S.TextBox>
-
-			<S.TextBox>
 				<S.Status>안내 사항</S.Status>
-				<Textarea
-					value={instruction?.comment || '안내 사항이 없습니다.'}
-					size="completed"
-					variant="default"
-					disabled
-				/>
+
+				<S.ReadOnly>
+					{instruction?.comment || '안내 사항이 없습니다.'}
+				</S.ReadOnly>
 			</S.TextBox>
 		</>
 	);
