@@ -94,7 +94,11 @@ function MobileHeader(props) {
 				<S.BottomNavList>
 					<S.BottomNavContent>
 						<S.NavLabel>
-							<input type="radio" checked={LINK.REVIEW === navClicked} />
+							<input
+								type="radio"
+								checked={LINK.REVIEW === navClicked}
+								readOnly
+							/>
 							<Link
 								to={LINK.REVIEW}
 								onClick={() => handleClickNav(LINK.REVIEW)}
@@ -107,7 +111,11 @@ function MobileHeader(props) {
 
 					<S.BottomNavContent>
 						<S.NavLabel>
-							<input type="radio" checked={LINK.NOTICE === navClicked} />
+							<input
+								type="radio"
+								checked={LINK.NOTICE === navClicked}
+								readOnly
+							/>
 							<Link
 								to={LINK.NOTICE}
 								onClick={() => handleClickNav(LINK.NOTICE)}
@@ -120,7 +128,7 @@ function MobileHeader(props) {
 
 					<S.BottomNavContent>
 						<S.NavLabel>
-							<input type="radio" checked={LINK.HOME === navClicked} />
+							<input type="radio" checked={LINK.HOME === navClicked} readOnly />
 							<Link to={LINK.HOME} onClick={() => handleClickNav(LINK.HOME)}>
 								{navIconMapper(LINK.HOME)}
 								HOME
@@ -130,7 +138,11 @@ function MobileHeader(props) {
 
 					<S.BottomNavContent>
 						<S.NavLabel>
-							<input type="radio" checked={LINK.GUIDE === navClicked} />
+							<input
+								type="radio"
+								checked={LINK.GUIDE === navClicked}
+								readOnly
+							/>
 							<Link to={LINK.GUIDE} onClick={() => handleClickNav(LINK.GUIDE)}>
 								{navIconMapper(LINK.GUIDE)}
 								이용안내
@@ -140,7 +152,12 @@ function MobileHeader(props) {
 
 					<S.BottomNavContent>
 						<S.NavLabel>
-							<input type="radio" checked={navMore} onClick={handleClickMore} />
+							<input
+								type="radio"
+								checked={navMore}
+								onClick={handleClickMore}
+								readOnly
+							/>
 							<S.Svg
 								id="Layer-1"
 								data-name="Layer 1"
@@ -179,7 +196,7 @@ function MobileHeader(props) {
 				<S.MoreNavList>
 					<S.BottomNavContent>
 						<S.NavLabel>
-							<input type="radio" checked={LINK.TEAM === navClicked} />
+							<input type="radio" checked={LINK.TEAM === navClicked} readOnly />
 							<Link to={LINK.TEAM} onClick={() => setNavClicked(LINK.TEAM)}>
 								{navIconMapper(LINK.TEAM)}
 								체험단
@@ -189,7 +206,7 @@ function MobileHeader(props) {
 
 					<S.BottomNavContent>
 						<S.NavLabel>
-							<input type="radio" checked={LINK.VIEW === navClicked} />
+							<input type="radio" checked={LINK.VIEW === navClicked} readOnly />
 							<Link to={LINK.VIEW} onClick={() => setNavClicked(LINK.VIEW)}>
 								{navIconMapper(LINK.VIEW)}
 								뷰탭&인스타
@@ -199,7 +216,11 @@ function MobileHeader(props) {
 
 					<S.BottomNavContent>
 						<S.NavLabel>
-							<input type="radio" checked={LINK.DEVELOP === navClicked} />
+							<input
+								type="radio"
+								checked={LINK.DEVELOP === navClicked}
+								readOnly
+							/>
 							<Link
 								to={LINK.DEVELOP}
 								onClick={() => setNavClicked(LINK.DEVELOP)}
@@ -212,7 +233,7 @@ function MobileHeader(props) {
 
 					<S.BottomNavContent>
 						<S.NavLabel>
-							<input type="radio" checked={LINK.MY === navClicked} />
+							<input type="radio" checked={LINK.MY === navClicked} readOnly />
 							<Link to={LINK.MY} onClick={() => setNavClicked(LINK.MY)}>
 								{navIconMapper(LINK.MY)}
 								마이페이지
