@@ -337,6 +337,7 @@ function Register() {
 						onChange={handleChange}
 						ref={emailRef}
 						message={errorMsg.email}
+						maxLength="50"
 						register
 					/>
 
@@ -401,6 +402,7 @@ function Register() {
 						message={errorMsg.address}
 						onChange={handleAddressChange}
 						ref={addressRef}
+						maxLength="50"
 						register
 						button
 					/>
