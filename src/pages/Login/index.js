@@ -128,10 +128,10 @@ function Login() {
 
 									<S.Text>
 										{errorMessage.split('\n').map((line, index) => (
-											<div key={index}>
+											<p key={index}>
 												{line}
 												{index < errorMessage.split('\n').length - 1 && <br />}
-											</div>
+											</p>
 										))}
 									</S.Text>
 								</div>
