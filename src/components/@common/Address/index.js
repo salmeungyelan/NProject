@@ -18,6 +18,7 @@ function Address(props, ref) {
 		onChange,
 		message,
 		disabled,
+		maxLength,
 		...rest
 	} = props;
 
@@ -100,6 +101,7 @@ function Address(props, ref) {
 				onChange={handleChangeDetail}
 				size={size}
 				disabled={disabled}
+				maxLength={maxLength}
 			/>
 			{message && <p>{message}</p>}
 		</S.Address>
