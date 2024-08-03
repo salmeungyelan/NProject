@@ -92,10 +92,6 @@ function ApplicationModal(props) {
 		}));
 	};
 
-	useEffect(() => {
-		console.log(applyData);
-	}, [applyData]);
-
 	return (
 		<S.Background>
 			{nextStep === 0 && (
