@@ -1,5 +1,4 @@
-import { useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRef, useState } from 'react';
 
 import useModal from 'hooks/useModal';
 import useSlide from 'hooks/useSlide';
@@ -8,11 +7,10 @@ import * as S from './index.styles';
 
 import Button from 'components/@common/Button';
 import RatingSubModal from '../RatingSubModal';
+import MediaModal from 'components/@common/MediaModal';
 
 function Finish({ result }) {
 	const { modalState, openModal, closeModal } = useModal();
-
-	const navigate = useNavigate();
 
 	const { resultLinks, adminFiles, comment, star, isRatingable } = result;
 
@@ -20,8 +18,8 @@ function Finish({ result }) {
 	const rate = [];
 
 	for (let i = 0; i < 5; i++) {
-		if (star > i) rate.push(<img src="/assets/icons/star-color.svg" />);
-		else rate.push(<img src="/assets/icons/star.svg" />);
+		if (star > i) rate.push(<img src="/assets/icons/star-color.svg" key={i} />);
+		else rate.push(<img src="/assets/icons/star.svg" key={i} />);
 	}
 
 	const mediaRef = useRef([]);
@@ -30,17 +28,32 @@ function Finish({ result }) {
 	const { handlePrevClick, handleNextClick, slide, visibleItemsCount } =
 		useSlide(mediaRef, containerRef, adminFiles);
 
+	const [file, setFile] = useState({ url: '', type: '' });
+	const [isMediaModal, setIsMediaModal] = useState(false);
+
+	const handleOpenModal = (url, type) => {
+		setIsMediaModal(true);
+		setFile({ url, type });
+		openModal();
+	};
+
 	return (
 		<S.Body>
-			{modalState && (
-				<RatingSubModal onClose={() => closeModal(navigate(0))} star={star} />
+			{modalState && !isMediaModal && (
+				<RatingSubModal onClose={closeModal} star={star} />
+			)}
+
+			{modalState && isMediaModal && (
+				<MediaModal
+					src={file.url}
+					type={file.type}
+					onClose={() => closeModal(setIsMediaModal(false))}
+				/>
 			)}
 
 			<S.Box>
 				<S.Title>링크</S.Title>
-				{resultLinks?.map(link => (
-					<S.ReadOnly key={link.id}>{link.url}</S.ReadOnly>
-				))}
+				{resultLinks && <S.ReadOnly>{resultLinks.url}</S.ReadOnly>}
 			</S.Box>
 
 			<S.Box>
@@ -53,8 +66,10 @@ function Finish({ result }) {
 					{adminFiles?.map((file, index) => (
 						<S.Img key={file.id} ref={el => (mediaRef.current[index] = el)}>
 							<img src={file.url} />
-							<S.ImgTitle>
-								<p>{file.name}</p>
+							<S.ImgTitle
+								onClick={() => handleOpenModal(file.url, file.mimetype)}
+							>
+								<p>{file.originalname}</p>
 								<img src="/assets/icons/search.svg" />
 							</S.ImgTitle>
 						</S.Img>
@@ -82,16 +97,16 @@ function Finish({ result }) {
 
 					<div>
 						{isRatingable && (
-							<Button
-								size="height"
-								variant="default"
-								onClick={() => openModal()}
-							>
-								별점 등록하기
+							<Button size="height" variant="default" onClick={openModal}>
+								별점 {star ? '수정' : '등록'}하기
 							</Button>
 						)}
 					</div>
 				</div>
+
+				<S.RateNotice>
+					별점 등록은 리뷰 완료 이후 3일 이내로 등록해 주세요.
+				</S.RateNotice>
 			</S.RatingBox>
 		</S.Body>
 	);

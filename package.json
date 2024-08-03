@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^13.5.0",
     "aws-sdk": "^2.1602.0",
     "axios": "^1.7.2",
+    "babel-plugin-styled-components": "^2.1.4",
     "date-fns": "^3.6.0",
     "env-cmd": "^10.1.0",
     "js-cookie": "^3.0.5",
