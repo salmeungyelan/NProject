@@ -1,5 +1,4 @@
-import { css } from '@emotion/react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { flexCenter, flexColumn, flexLeftCenter } from 'styles/common';
 
 export const Body = styled.div`
@@ -173,6 +172,13 @@ export const Rate = styled.div`
 	}
 `;
 
+export const RateNotice = styled.p`
+	margin-top: 4px;
+	font-weight: 400;
+	font-size: ${({ theme }) => theme.FONT_SIZE.ms};
+	color: ${({ theme }) => theme.PALETTE.red[100]};
+`;
+
 const buttonBgReset = css`
 	background: none;
 	width: 12px;
@@ -187,7 +193,7 @@ const buttonBgReset = css`
 `;
 
 export const LeftArrowImg = styled.button`
-	${buttonBgReset}
+	/* ${buttonBgReset}; */
 	z-index: 10;
 	left: -2%;
 	top: 50%;
@@ -207,7 +213,7 @@ export const LeftArrowImg = styled.button`
 `;
 
 export const RightArrowImg = styled.button`
-	${buttonBgReset}
+	${buttonBgReset};
 	z-index: 10;
 	top: 50%;
 	background-color: ${({ theme }) => theme.PALETTE.white[100]};

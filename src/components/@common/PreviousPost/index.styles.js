@@ -1,11 +1,11 @@
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 import { flexCenter, flexColumn } from 'styles/common';
 
 export const NextBox = styled.div`
+	${flexColumn}
 	border-top: 1px solid ${({ theme }) => theme.PALETTE.gray[0]};
 	border-bottom: 1px solid ${({ theme }) => theme.PALETTE.gray[0]};
 	padding: 12px 8px;
-	${flexColumn}
 	gap: 12px;
 `;
 
