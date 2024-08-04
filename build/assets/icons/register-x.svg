@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 14.17 14.17">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #c00;
+      }
+
+      .cls-1, .cls-2 {
+        stroke-width: 0px;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g id="_그룹_40" data-name="그룹 40">
+    <g id="_타원_17" data-name="타원 17">
+      <circle class="cls-1" cx="7.09" cy="7.09" r="7.09"/>
+    </g>
+    <polygon class="cls-2" points="11.41 3.57 10.35 2.51 6.98 5.88 3.61 2.51 2.54 3.57 5.92 6.94 2.54 10.31 3.61 11.37 6.98 8 10.35 11.37 11.41 10.31 8.04 6.94 11.41 3.57"/>
+  </g>
+</svg>
