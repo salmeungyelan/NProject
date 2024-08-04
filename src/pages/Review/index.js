@@ -165,9 +165,17 @@ function Review() {
 	const handleReset = async () => {
 		setCurrentPage(1);
 		setInputData('');
-		updateQueryParams({ page: 1, title: '', requirement: '' });
+		updateQueryParams({
+			page: 1,
+			title: '',
+			requirement: '',
+			status: '',
+			optionCode: '',
+			sortBy: '',
+			category: '',
+		});
 		await trigger({
-			path: basePath + category + option + status,
+			path: basePath,
 			applyResult: true,
 		});
 	};
