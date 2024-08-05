@@ -171,7 +171,9 @@ function ReviewApply() {
 	// 파일 삭제
 	const handleDeleteFile = (url, name) => {
 		setFileList(prevList => prevList.filter(file => file.url !== url));
-		setClientFile(prev => prev.filter(file => file.originalname !== name));
+		setClientFile(prev =>
+			prev.filter(file => (file.name || file.originalname) !== name),
+		);
 	};
 
 	// 썸네일 지정
