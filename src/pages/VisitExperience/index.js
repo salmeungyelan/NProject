@@ -1,12 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useRecoilState } from 'recoil';
 
 import useFilter from 'hooks/useFilter';
 import useModal from 'hooks/useModal';
 import usePagination from 'hooks/usePagination';
 import useApi from 'hooks/useApi';
-import { otherTabsState } from 'recoil/atom/otherTabs.atom';
-import decodeJWT from 'utils/token';
 
 import * as S from './index.styles';
 
@@ -49,26 +46,12 @@ function VisitExperience() {
 		shouldFetch: true,
 	});
 
-	const decodedPayload = decodeJWT('accessToken');
-	const { sub } = decodedPayload;
-
-	const [applyData, setApplyData] = useRecoilState(otherTabsState);
-
-	const { result: userResult } = useApi({
-		path: `/users/${sub}`,
-		shouldFetch: true,
-	});
-
 	useEffect(() => {
-		if (userResult.data) {
-			setApplyData(userResult.data);
-		}
-
 		if (result.data) {
 			setOtherList(result.data.visitExperiences);
 			setTotal(result.data.total);
 		}
-	}, [result.data, userResult.data]);
+	}, [result.data]);
 
 	useEffect(() => {
 		trigger({ path: basePath + status, applyResult: true });
