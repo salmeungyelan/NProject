@@ -78,7 +78,7 @@ export const Nav = styled.nav`
 
 	> ul {
 		${flexCenter}
-		gap: 32px;
+
 		height: 100%;
 	}
 
@@ -92,6 +92,7 @@ export const Nav = styled.nav`
 
 export const Li = styled.li`
 	height: 100%;
+	padding: 0 20px;
 	${flexCenter}
 
 	&:hover {
