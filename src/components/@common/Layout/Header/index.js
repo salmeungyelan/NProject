@@ -32,142 +32,128 @@ function Header(props) {
 	};
 
 	return (
-		<>
-			<S.Header>
-				<S.TopBox>
-					<S.ImgBox>
-						<Link to={LINK.HOME}>
-							<Logo size="header" white />
-						</Link>
-					</S.ImgBox>
+		<S.Header>
+			<S.TopBox>
+				<S.ImgBox>
+					<Link to={LINK.HOME}>
+						<Logo size="header" white />
+					</Link>
+				</S.ImgBox>
 
-					<S.WelcomeText>
-						<p>
-							<strong>{name}</strong> 님 환영합니다!
-						</p>
-					</S.WelcomeText>
+				<S.WelcomeText>
+					<p>
+						<strong>{name}</strong> 님 환영합니다!
+					</p>
+				</S.WelcomeText>
 
-					<S.ButtonBox>
-						<S.Logout onClick={logout}>LOGOUT</S.Logout>
-						<S.MyPage onClick={handleMyPageNavigate}>MY PAGE</S.MyPage>
-					</S.ButtonBox>
-				</S.TopBox>
+				<S.ButtonBox>
+					<S.Logout onClick={logout}>LOGOUT</S.Logout>
+					<S.MyPage onClick={handleMyPageNavigate}>MY PAGE</S.MyPage>
+				</S.ButtonBox>
+			</S.TopBox>
 
-				<S.Nav>
-					<ul>
-						<S.Li>
-							<label>
-								<input
-									type="radio"
-									checked={LINK.HOME === navClicked}
-									readOnly
-								/>
-								<Link to={LINK.HOME} onClick={() => handleClickNav(LINK.HOME)}>
-									홈
-								</Link>
-							</label>
-						</S.Li>
-						<S.Li>
-							<label>
-								<input
-									type="radio"
-									checked={LINK.REVIEW === navClicked}
-									readOnly
-								/>
-								<Link
-									to={LINK.REVIEW}
-									onClick={() => handleClickNav(LINK.REVIEW)}
-								>
-									리뷰
-								</Link>
-							</label>
-						</S.Li>
-						<S.Li>
-							<label>
-								<input
-									type="radio"
-									checked={LINK.TEAM === navClicked}
-									readOnly
-								/>
-								<Link to={LINK.TEAM} onClick={() => handleClickNav(LINK.TEAM)}>
-									체험단
-								</Link>
-							</label>
-						</S.Li>
-						<S.Li>
-							<label>
-								<input
-									type="radio"
-									checked={LINK.VIEW === navClicked}
-									readOnly
-								/>
-								<Link to={LINK.VIEW} onClick={() => handleClickNav(LINK.VIEW)}>
-									뷰탭&인스타
-								</Link>
-							</label>
-						</S.Li>
-						<S.Li>
-							<label>
-								<input
-									type="radio"
-									checked={LINK.DEVELOP === navClicked}
-									readOnly
-								/>
-								<Link
-									to={LINK.DEVELOP}
-									onClick={() => handleClickNav(LINK.DEVELOP)}
-								>
-									홈페이지 제작
-								</Link>
-							</label>
-						</S.Li>
-						<S.Li>
-							<S.Help>
-								<input
-									type="radio"
-									checked={[LINK.NOTICE, LINK.GUIDE].includes(navClicked)}
-									readOnly
-								/>
-								<span>고객센터</span>
-							</S.Help>
+			<S.Nav>
+				<ul>
+					<S.Li>
+						<label>
+							<input type="radio" checked={LINK.HOME === navClicked} readOnly />
+							<Link to={LINK.HOME} onClick={() => handleClickNav(LINK.HOME)}>
+								홈
+							</Link>
+						</label>
+					</S.Li>
+					<S.Li>
+						<label>
+							<input
+								type="radio"
+								checked={LINK.REVIEW === navClicked}
+								readOnly
+							/>
+							<Link
+								to={LINK.REVIEW}
+								onClick={() => handleClickNav(LINK.REVIEW)}
+							>
+								리뷰
+							</Link>
+						</label>
+					</S.Li>
+					<S.Li>
+						<label>
+							<input type="radio" checked={LINK.TEAM === navClicked} readOnly />
+							<Link to={LINK.TEAM} onClick={() => handleClickNav(LINK.TEAM)}>
+								체험단
+							</Link>
+						</label>
+					</S.Li>
+					<S.Li>
+						<label>
+							<input type="radio" checked={LINK.VIEW === navClicked} readOnly />
+							<Link to={LINK.VIEW} onClick={() => handleClickNav(LINK.VIEW)}>
+								뷰탭&인스타
+							</Link>
+						</label>
+					</S.Li>
+					<S.Li>
+						<label>
+							<input
+								type="radio"
+								checked={LINK.DEVELOP === navClicked}
+								readOnly
+							/>
+							<Link
+								to={LINK.DEVELOP}
+								onClick={() => handleClickNav(LINK.DEVELOP)}
+							>
+								홈페이지 제작
+							</Link>
+						</label>
+					</S.Li>
+					<S.Li>
+						<S.Help>
+							<input
+								type="radio"
+								checked={[LINK.NOTICE, LINK.GUIDE].includes(navClicked)}
+								readOnly
+							/>
+							<span>고객센터</span>
+						</S.Help>
 
-							<S.MoreNav>
-								<S.MoreLi>
-									<label>
-										<input
-											type="radio"
-											checked={LINK.NOTICE === navClicked}
-											readOnly
-										/>
-										<Link
-											to={LINK.NOTICE}
-											onClick={() => setNavClicked(LINK.NOTICE)}
-										>
-											공지사항
-										</Link>
-									</label>
-								</S.MoreLi>
-								<S.MoreLi>
-									<label>
-										<input
-											type="radio"
-											checked={LINK.GUIDE === navClicked}
-											readOnly
-										/>
-										<Link
-											to={LINK.GUIDE}
-											onClick={() => setNavClicked(LINK.GUIDE)}
-										>
-											이용안내
-										</Link>
-									</label>
-								</S.MoreLi>
-							</S.MoreNav>
-						</S.Li>
-					</ul>
-				</S.Nav>
-			</S.Header>
-		</>
+						<S.MoreNav>
+							<S.MoreLi>
+								<label>
+									<input
+										type="radio"
+										checked={LINK.NOTICE === navClicked}
+										readOnly
+									/>
+									<Link
+										to={LINK.NOTICE}
+										onClick={() => setNavClicked(LINK.NOTICE)}
+									>
+										공지사항
+									</Link>
+								</label>
+							</S.MoreLi>
+							<S.MoreLi>
+								<label>
+									<input
+										type="radio"
+										checked={LINK.GUIDE === navClicked}
+										readOnly
+									/>
+									<Link
+										to={LINK.GUIDE}
+										onClick={() => setNavClicked(LINK.GUIDE)}
+									>
+										이용안내
+									</Link>
+								</label>
+							</S.MoreLi>
+						</S.MoreNav>
+					</S.Li>
+				</ul>
+			</S.Nav>
+		</S.Header>
 	);
 }
 
