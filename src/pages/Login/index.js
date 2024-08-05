@@ -63,9 +63,7 @@ function Login() {
 		const triggerResult = await trigger({ data });
 
 		if (triggerResult.error) {
-			if (triggerResult.error.response.data.message.includes('문의')) {
-				setErrorMessage(MESSAGE.LOGIN.AVAILABLE);
-			} else setErrorMessage(MESSAGE.LOGIN.FAILURE);
+			setErrorMessage(triggerResult.error.response.data.message);
 		} else {
 			const { accessToken, refreshToken } = triggerResult.data;
 			setCookie(accessToken, refreshToken);
