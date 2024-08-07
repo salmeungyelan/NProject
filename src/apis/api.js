@@ -54,7 +54,7 @@ api.interceptors.response.use(
 		const { response, config } = axiosError;
 		const refreshToken = Cookies.get('refreshToken');
 
-		if ([403, 410].includes(response.status) && refreshToken) {
+		if (response.status === 410 && refreshToken) {
 			try {
 				const response = await axios.post(`${apiBaseUrl}/auth/renew-token`, {
 					refreshToken,
@@ -71,7 +71,7 @@ api.interceptors.response.use(
 				const redirectUrl = queryParams.get('redirection') || LINK.HOME;
 				navigate(redirectUrl, { replace: true });
 
-				return Promise.reject(axiosError);
+				return Promise.reject(refreshError);
 			}
 		}
 		return Promise.reject(axiosError);
