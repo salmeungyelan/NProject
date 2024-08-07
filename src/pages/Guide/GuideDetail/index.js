@@ -37,30 +37,28 @@ function GuideDetail() {
 	const { title, author, createDate, content } = guideDetail;
 
 	return (
-		<>
+		<S.Body>
+			<Title title="GUIDE">넷플레이스 이용안내</Title>
+
 			{guideDetail && (
-				<S.Body>
-					<Title title="GUIDE">넷플레이스 이용안내</Title>
+				<S.Content>
+					<S.Title>{title}</S.Title>
 
-					<S.Content>
-						<S.Title>{title}</S.Title>
+					<S.Info>
+						<span>{author}</span>
+						<p>{createDate}</p>
+					</S.Info>
 
-						<S.Info>
-							<span>{author}</span>
-							<p>{createDate}</p>
-						</S.Info>
-
-						<S.Description>{content}</S.Description>
-					</S.Content>
-
-					<PreviousPost
-						trigger={trigger}
-						prev={prevPost.prev}
-						next={prevPost.next}
-					/>
-				</S.Body>
+					<S.Description>{content}</S.Description>
+				</S.Content>
 			)}
-		</>
+
+			<PreviousPost
+				trigger={trigger}
+				prev={prevPost.prev}
+				next={prevPost.next}
+			/>
+		</S.Body>
 	);
 }
 
