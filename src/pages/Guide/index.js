@@ -100,7 +100,6 @@ function Guide() {
 	const handlePageChange = async pageNumber => {
 		setCurrentPage(pageNumber);
 		updateQueryParams({ page: pageNumber });
-		await trigger({ path: fullPath, applyResult: true });
 	};
 
 	return (

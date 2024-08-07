@@ -38,38 +38,36 @@ function NoticeDetail() {
 		noticeDetail;
 
 	return (
-		<>
+		<S.Body>
+			<Title title="NOTICE">넷플레이스 공지사항 안내</Title>
+
 			{noticeDetail && (
-				<S.Body>
-					<Title title="NOTICE">넷플레이스 공지사항 안내</Title>
+				<S.Content>
+					<S.TitleBox>
+						{noticeContentTypeLabel === '중요' && (
+							<>
+								<img src="/assets/icons/pin.svg" />
+								<S.Important>중요</S.Important>
+							</>
+						)}
+						<S.Title>{title}</S.Title>
+					</S.TitleBox>
 
-					<S.Content>
-						<S.TitleBox>
-							{noticeContentTypeLabel === '중요' && (
-								<>
-									<img src="/assets/icons/pin.svg" />
-									<S.Important>중요</S.Important>
-								</>
-							)}
-							<S.Title>{title}</S.Title>
-						</S.TitleBox>
+					<S.Info>
+						<span>{author}</span>
+						<p>{createDate}</p>
+					</S.Info>
 
-						<S.Info>
-							<span>{author}</span>
-							<p>{createDate}</p>
-						</S.Info>
-
-						<S.Description>{content}</S.Description>
-					</S.Content>
-
-					<PreviousPost
-						trigger={trigger}
-						prev={prevPost.prev}
-						next={prevPost.next}
-					/>
-				</S.Body>
+					<S.Description>{content}</S.Description>
+				</S.Content>
 			)}
-		</>
+
+			<PreviousPost
+				trigger={trigger}
+				prev={prevPost.prev}
+				next={prevPost.next}
+			/>
+		</S.Body>
 	);
 }
 
