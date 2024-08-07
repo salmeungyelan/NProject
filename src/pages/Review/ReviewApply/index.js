@@ -44,7 +44,7 @@ function ReviewApply() {
 	const desRef = useRef(null);
 
 	const { result: positionResult } = useApi({
-		path: '/client/global-constants?typeValue=REVIEW_TYPE',
+		path: '/client/global-constants?typeValue[]=REVIEW_TYPE',
 		shouldFetch: true,
 	});
 
@@ -79,6 +79,15 @@ function ReviewApply() {
 
 	useEffect(() => {
 		if (result.data) {
+			if (result.data.statusLabel && result.data.statusLabel !== '임시저장') {
+				setModal(prev => ({
+					...prev,
+					content: '접근 권한이 없습니다.',
+				}));
+
+				openModal();
+			}
+
 			setReviewPost(result.data);
 			setSelectedCategory({
 				type: result.data.type,
@@ -174,7 +183,14 @@ function ReviewApply() {
 		setClientFile(prev =>
 			prev.filter(file => (file.name || file.originalname) !== name),
 		);
+
+		if (fileRef.current) fileRef.current.value = ''; // 파일 입력 요소 초기화
 	};
+
+	useEffect(() => {
+		console.log('1', fileList);
+		console.log('2', clientFile);
+	}, [fileList, clientFile]);
 
 	// 썸네일 지정
 	const handleClickThumbnail = (idx, name) => {
@@ -275,49 +291,51 @@ function ReviewApply() {
 
 		const finalData = _id ? { ...updatedData, id: _id } : { ...updatedData };
 
-		try {
-			const formData = new FormData();
-			for (const [key, value] of Object.entries(finalData)) {
+		const formData = new FormData();
+		for (const [key, value] of Object.entries(finalData)) {
+			formData.append(
+				key,
+				value instanceof Object ? JSON.stringify(value) : value,
+			);
+		}
+
+		if (clientFile.length > 0) {
+			for (const [key, value] of Object.entries(clientFile)) {
 				formData.append(
-					key,
-					value instanceof Object ? JSON.stringify(value) : value,
+					'clientFiles',
+					value instanceof File ? value : JSON.stringify(value),
 				);
 			}
+		}
 
-			if (clientFile.length > 0) {
-				for (const [key, value] of Object.entries(clientFile)) {
-					formData.append(
-						'clientFiles',
-						value instanceof File ? value : JSON.stringify(value),
-					);
-				}
-			}
+		const request = await trigger({
+			method: 'post',
+			path: '/client/reviews',
+			data: formData,
+		});
 
-			const request = await trigger({
-				method: 'post',
-				path: '/client/reviews',
-				data: formData,
-			});
+		const { error } = request || {};
 
-			const statusContent =
-				status === 'REVIEW_STATUS_01'
-					? '리뷰가 임시 저장되었습니다.'
-					: '리뷰 신청이 완료되었습니다.';
+		const statusContent =
+			status === 'REVIEW_STATUS_01'
+				? '리뷰가 임시 저장되었습니다.'
+				: '리뷰 신청이 완료되었습니다.';
 
+		if (error) {
+			setModal(prev => ({
+				...prev,
+				content: error.response.data.message,
+			}));
+		} else {
 			setModal({
 				img: 'modal-check.svg',
 				title: '리뷰 신청',
 				content: statusContent,
 			});
-			openModal();
 			setPostId(request.data.id);
-		} catch (error) {
-			setModal({
-				img: 'modal-excl.svg',
-				title: '알림',
-				content: '리뷰 신청을 다시 시도해 주세요.',
-			});
 		}
+
+		openModal();
 	};
 
 	// 리뷰 취소
@@ -342,7 +360,7 @@ function ReviewApply() {
 					title={modal.title}
 					content={modal.content}
 					onClose={() =>
-						closeModal(postId && navigate(LINK.REVIEW_POST + `/${postId}`))
+						closeModal(navigate(postId ? LINK.REVIEW_POST + `/${postId}` : -1))
 					}
 				/>
 			)}
