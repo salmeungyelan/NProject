@@ -11,21 +11,23 @@ import GlobalStyles from 'styles/global';
 import router from 'routes/routing';
 import Loading from 'components/@common/Loading/Loading';
 import ErrorFallback from 'components/@common/Error';
-import { LoadingProvider } from 'contexts/LoadingContext';
+import { GlobalProvider } from 'contexts/GlobalContext';
+import ErrorModal from 'components/@common/Error/Modal';
 
 function App() {
 	return (
 		<ErrorBoundary FallbackComponent={<ErrorFallback />}>
 			<Suspense fallback={<Loading />}>
 				<HelmetProvider>
-					<LoadingProvider>
+					<GlobalProvider>
 						<RecoilRoot>
 							<ThemeProvider theme={theme}>
 								<GlobalStyles />
 								<RouterProvider router={router} />
+								<ErrorModal />
 							</ThemeProvider>
 						</RecoilRoot>
-					</LoadingProvider>
+					</GlobalProvider>
 				</HelmetProvider>
 			</Suspense>
 		</ErrorBoundary>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import useModal from 'hooks/useModal';
@@ -12,33 +12,23 @@ import Modal from 'components/@common/Modal';
 function RatingSubModal(props) {
 	const { star, onClose } = props;
 
-	const { modalState, openModal } = useModal();
+	const navigate = useNavigate();
 
 	const params = useParams();
 	const id = params._id;
 
-	const [modal, setModal] = useState({
-		img: 'modal-check.svg',
-		title: '알림',
-		content: `별점 ${star ? '수정' : '등록'}이 완료되었습니다.`,
-	});
-
+	const { modalState, openModal } = useModal();
 	const [rate, setRate] = useState(star);
-	const [rateData, setRateData] = useState({
-		menuType: 'MENU_CHILD_03',
-		postId: id,
-	});
 
 	const { trigger } = useApi({
 		path: `/client/reviews/ratings/${id}`,
 		shouldFetch: false,
 	});
 
-	const navigate = useNavigate();
-
 	const handleSubmitRate = async () => {
 		const updatedData = {
-			...rateData,
+			menuType: 'MENU_CHILD_03',
+			postId: id,
 			star: rate,
 		};
 
@@ -47,17 +37,7 @@ function RatingSubModal(props) {
 			data: updatedData,
 		});
 
-		const { error } = request || {};
-
-		if (error) {
-			setModal({
-				img: 'modal-excl.svg',
-				title: '경고',
-				content: `${error.response.data.message}.`,
-			});
-		}
-
-		openModal();
+		if (request?.statusCode) openModal();
 	};
 
 	// 클릭 핸들러
@@ -108,9 +88,9 @@ function RatingSubModal(props) {
 
 			{modalState && (
 				<Modal
-					img={modal.img}
-					title={modal.title}
-					content={modal.content}
+					img="modal-check.svg"
+					title="알림"
+					content={`별점 ${star ? '수정' : '등록'}이 완료되었습니다.`}
 					onClose={() => onClose(navigate(0))}
 				/>
 			)}
