@@ -32,6 +32,7 @@ function MediaList({ clientFiles }) {
 					onClose={() => closeModal()}
 				/>
 			)}
+
 			<S.Background>
 				{slide > 0 && slide !== clientFiles?.length - 1 && (
 					<S.LeftArrowImg onClick={handlePrevClick} />
