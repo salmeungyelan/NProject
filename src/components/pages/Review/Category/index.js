@@ -1,19 +1,16 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import useApi from 'hooks/useApi';
 
 import * as S from './index.styles';
 
 function Category(props) {
-	const { selectedCategory, setSelectedCategory } = props;
+	const { selectedCategory, setSelectedCategory, updateQueryParams } = props;
 
 	const [categories, setCategories] = useState([]);
 
-	const navigate = useNavigate();
-
 	const { result } = useApi({
-		path: '/client/global-constants?typeValue[]=REVIEW_TYPE',
+		path: '/client/global-constants?typeValue=REVIEW_TYPE',
 		shouldFetch: true,
 	});
 
@@ -24,10 +21,7 @@ function Category(props) {
 	}, [result.data]);
 
 	const handleClickCategory = name => {
-		const params = new URLSearchParams(location.search);
-		params.set('category', name);
-		navigate(`?${params.toString()}`, { replace: true });
-
+		updateQueryParams({ page: 1, category: name });
 		setSelectedCategory(name);
 	};
 
@@ -39,16 +33,16 @@ function Category(props) {
 			>
 				전체
 			</S.Category>
-			{categories &&
-				categories.map(category => (
-					<S.Category
-						key={category.id}
-						$selected={selectedCategory === category.codeValue}
-						onClick={() => handleClickCategory(category.codeValue)}
-					>
-						{category.codeLabel}
-					</S.Category>
-				))}
+
+			{categories?.map(category => (
+				<S.Category
+					key={category.id}
+					$selected={selectedCategory === category.codeValue}
+					onClick={() => handleClickCategory(category.codeValue)}
+				>
+					{category.codeLabel}
+				</S.Category>
+			))}
 		</S.Body>
 	);
 }

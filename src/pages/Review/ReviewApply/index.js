@@ -44,7 +44,7 @@ function ReviewApply() {
 	const desRef = useRef(null);
 
 	const { result: positionResult } = useApi({
-		path: '/client/global-constants?typeValue[]=REVIEW_TYPE',
+		path: '/client/global-constants?typeValue=REVIEW_TYPE',
 		shouldFetch: true,
 	});
 
@@ -187,11 +187,6 @@ function ReviewApply() {
 		if (fileRef.current) fileRef.current.value = ''; // 파일 입력 요소 초기화
 	};
 
-	useEffect(() => {
-		console.log('1', fileList);
-		console.log('2', clientFile);
-	}, [fileList, clientFile]);
-
 	// 썸네일 지정
 	const handleClickThumbnail = (idx, name) => {
 		setIsThumbnail(idx);
@@ -308,34 +303,26 @@ function ReviewApply() {
 			}
 		}
 
-		const request = await trigger({
+		const triggerResult = await trigger({
 			method: 'post',
 			path: '/client/reviews',
 			data: formData,
 		});
 
-		const { error } = request || {};
+		if (triggerResult?.statusCode === 201) {
+			const statusContent =
+				status === 'REVIEW_STATUS_01'
+					? '리뷰가 임시 저장되었습니다.'
+					: '리뷰 신청이 완료되었습니다.';
 
-		const statusContent =
-			status === 'REVIEW_STATUS_01'
-				? '리뷰가 임시 저장되었습니다.'
-				: '리뷰 신청이 완료되었습니다.';
-
-		if (error) {
-			setModal(prev => ({
-				...prev,
-				content: error.response.data.message,
-			}));
-		} else {
 			setModal({
 				img: 'modal-check.svg',
 				title: '리뷰 신청',
 				content: statusContent,
 			});
-			setPostId(request.data.id);
+			setPostId(triggerResult.data.id);
+			openModal();
 		}
-
-		openModal();
 	};
 
 	// 리뷰 취소

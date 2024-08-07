@@ -73,79 +73,77 @@ function ReviewPost() {
 	};
 
 	return (
-		<>
-			{review && (
-				<S.Body>
-					<Title title="REVIEW">
-						자사 영업일 기준, 하루 한 번 신청 가능합니다.
-					</Title>
+		review && (
+			<S.Body>
+				<Title title="REVIEW">
+					자사 영업일 기준, 하루 한 번 신청 가능합니다.
+				</Title>
 
-					<S.Content>
-						<S.Info>
-							<S.InfoMain>
-								<Progress variant={status}>{statusLabel}</Progress>
-								<S.Category>{typeLabel}</S.Category>
-							</S.InfoMain>
-							<S.Title>{title}</S.Title>
+				<S.Content>
+					<S.Info>
+						<S.InfoMain>
+							<Progress variant={status}>{statusLabel}</Progress>
+							<S.Category>{typeLabel}</S.Category>
+						</S.InfoMain>
+						<S.Title>{title}</S.Title>
 
-							<S.InfoSub>
-								<div>
-									{username}ㅣ{email}
-								</div>
-								<div>{completeDate}</div>
-							</S.InfoSub>
-						</S.Info>
+						<S.InfoSub>
+							<div>
+								{username}ㅣ{email}
+							</div>
+							<div>{completeDate}</div>
+						</S.InfoSub>
+					</S.Info>
 
-						<S.Description $isList={clientFiles?.length}>
-							<S.DesTitle>요청 사항 및 내용</S.DesTitle>
+					<S.Description $isList={clientFiles?.length}>
+						<S.DesTitle>요청 사항 및 내용</S.DesTitle>
 
-							<pre>{requirement}</pre>
+						<pre>{requirement}</pre>
 
-							{!['대기', '임시저장'].includes(statusLabel) && (
-								<Keyword
-									main={mainKeywords}
-									sub={subKeywords}
-									hashtag={hashtags}
-								/>
-							)}
-						</S.Description>
-
-						{clientFiles?.length ? (
-							<MediaList clientFiles={clientFiles} />
-						) : (
-							<></>
+						{!['대기', '임시저장'].includes(statusLabel) && (
+							<Keyword
+								main={mainKeywords}
+								sub={subKeywords}
+								hashtag={hashtags}
+							/>
 						)}
+					</S.Description>
 
-						{completed && <Finish result={resultInfo} />}
-					</S.Content>
+					{clientFiles?.length ? (
+						<MediaList clientFiles={clientFiles} />
+					) : (
+						<></>
+					)}
 
-					<PreviousPost
-						next={nextReview}
-						prev={previousReview}
-						trigger={trigger}
-					/>
+					{completed && <Finish result={resultInfo} />}
+				</S.Content>
 
-					<S.ButtonBox>
+				<PreviousPost
+					next={nextReview}
+					prev={previousReview}
+					trigger={trigger}
+				/>
+
+				<S.ButtonBox>
+					<div>
+						<Button size="height" variant="white" onClick={handleClickBack}>
+							뒤로 가기
+						</Button>
+					</div>
+					{statusLabel === '임시저장' && (
 						<div>
-							<Button size="height" variant="white" onClick={handleClickBack}>
-								뒤로 가기
+							<Button
+								size="height"
+								variant="default"
+								onClick={handleClickModify}
+							>
+								임시 저장 수정
 							</Button>
 						</div>
-						{statusLabel === '임시저장' && (
-							<div>
-								<Button
-									size="height"
-									variant="default"
-									onClick={handleClickModify}
-								>
-									임시 저장 수정
-								</Button>
-							</div>
-						)}
-					</S.ButtonBox>
-				</S.Body>
-			)}
-		</>
+					)}
+				</S.ButtonBox>
+			</S.Body>
+		)
 	);
 }
 

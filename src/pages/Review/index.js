@@ -57,6 +57,17 @@ function Review() {
 	};
 	const params = getQueryParams();
 
+	useEffect(() => {
+		setSelectedCategory(params.category);
+		setSelectedOption({
+			codeLabel: params.optionCode,
+			sortBy: params.sortBy,
+		});
+		setSelectedStatus(params.status);
+		setInputData(params.inputData);
+		setCurrentPage(params.currentPage);
+	}, [location.search]);
+
 	const [reviewList, setReviewList] = useState([]);
 	const [selectedCategory, setSelectedCategory] = useState(params.category);
 
@@ -103,17 +114,6 @@ function Review() {
 		shouldFetch: true,
 	});
 
-	useEffect(() => {
-		setSelectedCategory(params.category);
-		setSelectedOption({
-			codeLabel: params.optionCode,
-			sortBy: params.sortBy,
-		});
-		setSelectedStatus(params.status);
-		setInputData(params.inputData);
-		setCurrentPage(params.currentPage);
-	}, [location.search]);
-
 	// 카테고리 / 옵션 / 상태만 변화했을 때 api 호출
 	useEffect(() => {
 		trigger({ path: fullPath, applyResult: true });
@@ -124,10 +124,6 @@ function Review() {
 		currentPage,
 		itemsPerPage,
 	]);
-
-	useEffect(() => {
-		setCurrentPage(1);
-	}, [selectedCategory, selectedStatus]);
 
 	useEffect(() => {
 		if (result.data) {
@@ -189,7 +185,6 @@ function Review() {
 	const handlePageChange = async page => {
 		setCurrentPage(page);
 		updateQueryParams({ page });
-		await trigger({ applyResult: true });
 	};
 
 	return (
@@ -212,6 +207,7 @@ function Review() {
 							<Category
 								selectedCategory={selectedCategory}
 								setSelectedCategory={setSelectedCategory}
+								updateQueryParams={updateQueryParams}
 							/>
 
 							<S.MultiSelect>
@@ -255,7 +251,6 @@ function Review() {
 					<></>
 				)}
 			</S.Body>
-
 			<S.ApplyBtnBox>
 				<Button size="height" variant="default" onClick={handleClickApply}>
 					리뷰 신청하기
