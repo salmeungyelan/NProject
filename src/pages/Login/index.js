@@ -14,9 +14,16 @@ import Logo from 'components/@common/Logo';
 import Input from 'components/@common/Input';
 import Button from 'components/@common/Button';
 import Line from 'components/@common/Line';
+import { useGlobalState } from 'contexts/GlobalContext';
 
 function Login() {
 	const { handleChange, inputData } = useInput();
+
+	const { hasErrorMessage, setHasErrorMessage } = useGlobalState();
+
+	useEffect(() => {
+		setHasErrorMessage('');
+	}, [hasErrorMessage]);
 
 	const navigate = useNavigate();
 
@@ -74,92 +81,89 @@ function Login() {
 		}
 	};
 
-	return (
-		<>
+	return showStartImg ? (
+		<S.StartImg>
+			<img src="/assets/images/start.gif" />
+		</S.StartImg>
+	) : (
+		<S.Body>
 			<Seo />
-			{showStartImg ? (
-				<S.StartImg>
-					<img src="/assets/images/start.gif" />
-				</S.StartImg>
-			) : (
-				<S.Body>
-					<S.LoginBox>
+
+			<S.LoginBox>
+				<div>
+					<Link to={LINK.LOGIN}>
+						<Logo size="default" />
+					</Link>
+				</div>
+
+				<div>
+					<S.FormBox onSubmit={handleSubmitLogin}>
 						<div>
-							<Link to={LINK.LOGIN}>
-								<Logo size="default" />
-							</Link>
+							<S.InputBox>
+								<Input
+									id="username"
+									name="username"
+									value={inputData.username || ''}
+									placeholder=""
+									onChange={handleChange}
+									size="default"
+									variant="login"
+								/>
+								<S.Label htmlFor="username" ref={idRef}>
+									이메일 또는 아이디 입력
+								</S.Label>
+							</S.InputBox>
+
+							<S.InputBox>
+								<Input
+									id="password"
+									type="password"
+									name="password"
+									value={inputData.password || ''}
+									placeholder=""
+									onChange={handleChange}
+									size="default"
+									variant="login"
+								/>
+								<S.Label htmlFor="password" ref={pwRef}>
+									비밀번호 입력
+								</S.Label>
+							</S.InputBox>
+
+							<S.Text>
+								{errorMessage.split('\n').map((line, index) => (
+									<p key={index}>
+										{line}
+										{index < errorMessage.split('\n').length - 1 && <br />}
+									</p>
+								))}
+							</S.Text>
 						</div>
 
 						<div>
-							<S.FormBox onSubmit={handleSubmitLogin}>
-								<div>
-									<S.InputBox>
-										<Input
-											id="username"
-											name="username"
-											value={inputData.username || ''}
-											placeholder=""
-											onChange={handleChange}
-											size="default"
-											variant="login"
-										/>
-										<S.Label htmlFor="username" ref={idRef}>
-											이메일 또는 아이디 입력
-										</S.Label>
-									</S.InputBox>
+							<Button size="default" variant="default" type="submit">
+								로그인
+							</Button>
 
-									<S.InputBox>
-										<Input
-											id="password"
-											type="password"
-											name="password"
-											value={inputData.password || ''}
-											placeholder=""
-											onChange={handleChange}
-											size="default"
-											variant="login"
-										/>
-										<S.Label htmlFor="password" ref={pwRef}>
-											비밀번호 입력
-										</S.Label>
-									</S.InputBox>
-
-									<S.Text>
-										{errorMessage.split('\n').map((line, index) => (
-											<p key={index}>
-												{line}
-												{index < errorMessage.split('\n').length - 1 && <br />}
-											</p>
-										))}
-									</S.Text>
-								</div>
-
-								<div>
-									<Button size="default" variant="default" type="submit">
-										로그인
-									</Button>
-
-									<S.LinkBox>
-										<Link to={LINK.FIND_ID}>아이디 찾기</Link>
-										<Line size="login" variant="gray" />
-										<Link to={LINK.FIND_PW}>비밀번호 찾기</Link>
-										<Line size="login" variant="gray" />
-										<Link to={LINK.REGISTER}>회원가입</Link>
-									</S.LinkBox>
-								</div>
-							</S.FormBox>
+							<S.LinkBox>
+								<Link to={LINK.FIND_ID}>아이디 찾기</Link>
+								<Line size="login" variant="gray" />
+								<Link to={LINK.FIND_PW}>비밀번호 찾기</Link>
+								<Line size="login" variant="gray" />
+								<Link to={LINK.REGISTER}>회원가입</Link>
+							</S.LinkBox>
 						</div>
-					</S.LoginBox>
+					</S.FormBox>
+				</div>
+			</S.LoginBox>
 
-					<S.Bottom>
-						<img
-							src="./assets/images/login-bottom-img.png"
-							alt="login bottom image"
-						/>
-					</S.Bottom>
-				</S.Body>
-			)}
-		</>
+			<S.Bottom>
+				<img
+					src="./assets/images/login-bottom-img.png"
+					alt="login bottom image"
+				/>
+			</S.Bottom>
+		</S.Body>
 	);
 }
 
