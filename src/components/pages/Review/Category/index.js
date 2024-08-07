@@ -13,7 +13,7 @@ function Category(props) {
 	const navigate = useNavigate();
 
 	const { result } = useApi({
-		path: '/client/global-constants?typeValue=REVIEW_TYPE',
+		path: '/client/global-constants?typeValue[]=REVIEW_TYPE',
 		shouldFetch: true,
 	});
 
