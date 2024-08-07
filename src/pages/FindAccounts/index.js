@@ -14,24 +14,23 @@ function FindAccounts() {
 	const accounts = pathname.includes('password');
 
 	return (
-		<>
+		<S.Body>
 			<Seo />
-			<S.Body>
-				<S.Top>
-					<S.LogoBox>
-						<Link to={LINK.LOGIN}>
-							<Logo size="default" />
-						</Link>
-					</S.LogoBox>
 
-					<AccountLookup password={!!accounts} />
-				</S.Top>
+			<S.Top>
+				<S.LogoBox>
+					<Link to={LINK.LOGIN}>
+						<Logo size="default" />
+					</Link>
+				</S.LogoBox>
 
-				<S.Bottom>
-					<img src="/assets/images/id-bottom-img.png" />
-				</S.Bottom>
-			</S.Body>
-		</>
+				<AccountLookup password={!!accounts} />
+			</S.Top>
+
+			<S.Bottom>
+				<img src="/assets/images/id-bottom-img.png" />
+			</S.Bottom>
+		</S.Body>
 	);
 }
 
