@@ -21,7 +21,6 @@ function ProgressStatus(props) {
 	const { id, title, history, progress } = props;
 
 	const { modalState, openModal, closeModal } = useModal();
-
 	const [isCancel, setIsCancel] = useState(false);
 
 	const handleClickCancel = () => {
@@ -53,7 +52,8 @@ function ProgressStatus(props) {
 							<S.ImgStatus key={step.id}>
 								<img
 									src={`/assets/icons/${
-										history[history.length - 1].detailStatusLabel === step.label
+										history[history.length - 1]?.detailStatusLabel ===
+										step.label
 											? `${step.id}-color`
 											: step.id
 									}.svg`}
