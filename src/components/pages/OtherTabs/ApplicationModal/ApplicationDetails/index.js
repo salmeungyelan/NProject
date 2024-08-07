@@ -235,7 +235,6 @@ function ApplicationDetails(props) {
 												applyData.visitStartDate ||
 												'시작 일자'
 											}
-											// defaultValue={inputData.visitStartDate || '시작 일자'}
 											placeholder="시작일"
 											onClick={() => handleOpenCalendar('start')}
 											ref={startRef}
@@ -272,7 +271,6 @@ function ApplicationDetails(props) {
 												applyData.visitEndDate ||
 												'종료 일자'
 											}
-											// defaultValue={inputData.visitEndDate || '종료 일자'}
 											placeholder="종료일"
 											onClick={() => handleOpenCalendar('end')}
 											ref={endRef}
@@ -371,7 +369,11 @@ function ApplicationDetails(props) {
 						<Textarea
 							name="requirement"
 							value={inputData.requirement || ''}
-							placeholder="내용을 입력해 주세요."
+							placeholder={
+								disabled
+									? '등록된 요청 사항이 없습니다.'
+									: '내용을 입력해 주세요.'
+							}
 							onChange={handleChange}
 							ref={reqRef}
 							disabled={disabled}

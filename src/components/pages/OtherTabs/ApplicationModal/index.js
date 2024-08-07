@@ -154,7 +154,11 @@ function ApplicationModal(props) {
 							name="smartplaceLink"
 							title="스마트 플레이스 링크"
 							value={inputData.smartplaceLink || ''}
-							placeholder="스마트 플레이스 링크를 입력해 주세요."
+							placeholder={
+								disabled
+									? '등록된 스마트 플레이스 링크가 없습니다.'
+									: '스마트 플레이스 링크를 입력해 주세요.'
+							}
 							onChange={handleChange}
 							disabled={disabled}
 							message
