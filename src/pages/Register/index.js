@@ -19,10 +19,17 @@ import Line from 'components/@common/Line';
 import Button from 'components/@common/Button';
 import Modal from 'components/@common/Modal';
 import TermsModal from 'components/pages/Register/TermsModal';
+import { useGlobalState } from 'contexts/GlobalContext';
 
 function Register() {
 	const { modalState, openModal, closeModal } = useModal();
 	const { inputData, setInputData, handleChange } = useInput();
+
+	const { hasErrorMessage, setHasErrorMessage } = useGlobalState();
+
+	useEffect(() => {
+		setHasErrorMessage('');
+	}, [hasErrorMessage]);
 
 	const navigate = useNavigate();
 
@@ -278,12 +285,7 @@ function Register() {
 			})),
 		};
 
-		const triggerResult = await trigger({
-			method: 'post',
-			data: newData,
-			showBoundary: false,
-		});
-
+		const triggerResult = await trigger({ method: 'post', data: newData });
 		const { error } = triggerResult || {};
 
 		if (error) {
@@ -295,6 +297,8 @@ function Register() {
 			} else if (error.response.data.message.includes('사업자')) {
 				businessRef.current.focus();
 			}
+
+			termsRef.current.focus();
 		} else setRegisterSuccess(true);
 	};
 
@@ -305,7 +309,6 @@ function Register() {
 
 	return (
 		<S.Body>
-			<Seo />
 			{registerSuccess && (
 				<Modal
 					img="modal-check.svg"
@@ -314,6 +317,8 @@ function Register() {
 					onClose={handleCloseSuccessModal}
 				/>
 			)}
+
+			<Seo />
 
 			<S.LogoBox>
 				<Link to={LINK.LOGIN}>
@@ -444,7 +449,7 @@ function Register() {
 							</S.CheckItem>
 						))}
 					</S.Check>
-					<span>{errorMsg.terms || ' '}</span>
+					<S.TermMsg>{errorMsg.terms}</S.TermMsg>
 				</S.CheckBox>
 
 				{modalState && (
