@@ -184,6 +184,7 @@ function ApplicationModal(props) {
 					listTrigger={listTrigger}
 					nextStep={nextStep}
 					setNextStep={setNextStep}
+					modalContent={modalContent}
 					setModalContent={setModalContent}
 				/>
 			)}
