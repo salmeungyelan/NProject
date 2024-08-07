@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { flexColumn, flexColumnCenter } from 'styles/common';
+import { flexCenter, flexColumn, flexColumnCenter } from 'styles/common';
 
 export const FormBox = styled.form`
 	width: 320px;
@@ -8,6 +8,25 @@ export const FormBox = styled.form`
 
 	> div:nth-child(3) {
 		margin-bottom: -20px;
+	}
+`;
+
+export const Notice = styled.div`
+	${flexCenter}
+
+	width: 100%;
+	margin-top: 2px;
+	gap: 8px;
+
+	> p {
+		color: ${({ theme }) => theme.PALETTE.gray[200]};
+		font-size: ${({ theme }) => theme.FONT_SIZE.ms};
+		font-weight: 400;
+	}
+
+	> img {
+		width: 14px;
+		height: 14px;
 	}
 `;
 
