@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 
 import Layout from 'components/@common/Layout';
 import Loading from 'components/@common/Loading/Loading';
-import { useLoading } from 'contexts/LoadingContext';
+import { useGlobalState } from 'contexts/GlobalContext';
 import { setCookie } from 'utils/cookie';
 import decodeJWT from 'utils/token';
 
@@ -14,7 +14,7 @@ const ProtectedRoute = () => {
 	const [authenticated, setAuthenticated] = useState(null);
 
 	const redirectionPath = location?.pathname ?? null;
-	const { setIsLoading } = useLoading();
+	const { setIsLoading } = useGlobalState();
 
 	useEffect(() => {
 		const checkAuth = async () => {
