@@ -38,14 +38,15 @@ export const CheckBox = styled.div`
 		font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 		color: ${({ theme }) => theme.PALETTE.red[100]};
 	}
+`;
 
-	> span {
-		height: 12px;
-		margin-top: 4px;
-		font-weight: 400;
-		font-size: ${({ theme }) => theme.FONT_SIZE.ms};
-		color: ${({ theme }) => theme.PALETTE.red[100]};
-	}
+export const TermMsg = styled.p`
+	height: 12px;
+	margin-top: 4px;
+	font-weight: 400;
+	font-size: ${({ theme }) => theme.FONT_SIZE.ms};
+	color: ${({ theme }) => theme.PALETTE.red[100]};
+	white-space: pre-line;
 `;
 
 export const H1 = styled.h1`

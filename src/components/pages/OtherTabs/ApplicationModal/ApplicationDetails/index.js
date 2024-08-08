@@ -31,6 +31,7 @@ function ApplicationDetails(props) {
 		progress,
 		nextStep,
 		title,
+		modalContent,
 		setModalContent,
 	} = props;
 
@@ -167,25 +168,19 @@ function ApplicationDetails(props) {
 			);
 		}
 
-		const request = await trigger({
+		const triggerResult = await trigger({
 			method: 'post',
 			path: `/client/${path}s`,
 			data: formData,
 		});
 
-		const { error } = request || {};
-
-		if (error) {
-			openModal();
-		} else {
+		if (triggerResult?.statusCode === 201) {
 			const statusContent = status
 				? '임시 저장되었습니다.'
 				: '신청이 완료되었습니다.';
 
 			setNextStep(2);
-
 			setModalContent(statusContent);
-
 			await listTrigger({ applyResult: true });
 		}
 	};
@@ -198,7 +193,7 @@ function ApplicationDetails(props) {
 				<Modal
 					img="modal-excl.svg"
 					title="알림"
-					content="모든 정보를 입력한 후에 다시 신청해 주세요."
+					content={modalContent}
 					onClose={closeModal}
 					otherTabs={nextStep}
 				/>
@@ -235,7 +230,6 @@ function ApplicationDetails(props) {
 												applyData.visitStartDate ||
 												'시작 일자'
 											}
-											// defaultValue={inputData.visitStartDate || '시작 일자'}
 											placeholder="시작일"
 											onClick={() => handleOpenCalendar('start')}
 											ref={startRef}
@@ -272,7 +266,6 @@ function ApplicationDetails(props) {
 												applyData.visitEndDate ||
 												'종료 일자'
 											}
-											// defaultValue={inputData.visitEndDate || '종료 일자'}
 											placeholder="종료일"
 											onClick={() => handleOpenCalendar('end')}
 											ref={endRef}
@@ -371,7 +364,11 @@ function ApplicationDetails(props) {
 						<Textarea
 							name="requirement"
 							value={inputData.requirement || ''}
-							placeholder="내용을 입력해 주세요."
+							placeholder={
+								disabled
+									? '등록된 요청 사항이 없습니다.'
+									: '내용을 입력해 주세요.'
+							}
 							onChange={handleChange}
 							ref={reqRef}
 							disabled={disabled}

@@ -19,10 +19,17 @@ import Line from 'components/@common/Line';
 import Button from 'components/@common/Button';
 import Modal from 'components/@common/Modal';
 import TermsModal from 'components/pages/Register/TermsModal';
+import { useGlobalState } from 'contexts/GlobalContext';
 
 function Register() {
 	const { modalState, openModal, closeModal } = useModal();
 	const { inputData, setInputData, handleChange } = useInput();
+
+	const { hasErrorMessage, setHasErrorMessage } = useGlobalState();
+
+	useEffect(() => {
+		setHasErrorMessage('');
+	}, [hasErrorMessage]);
 
 	const navigate = useNavigate();
 
@@ -38,14 +45,6 @@ function Register() {
 
 	// 보낼 데이터
 	const [data, setData] = useState({});
-
-	// 약관 동의 및 약관 아이디
-	const [termsId, setTermsId] = useState('');
-	const [terms, setTerms] = useState({
-		allChecked: false,
-		service: false,
-		privacy: false,
-	});
 
 	// 띄울 에러 메시지
 	const [errorMsg, setErrorMsg] = useState({
@@ -63,58 +62,76 @@ function Register() {
 	const [registerSuccess, setRegisterSuccess] = useState(false);
 
 	// api
-	const { result, trigger } = useApi({
+	const { trigger } = useApi({
 		path: '/users',
 		shouldFetch: false,
 	});
 
-	// 약관 모달
-	const handleOpenModal = id => {
-		openModal();
-		setTermsId(id);
-	};
+	// 약관 동의 및 약관 아이디
+	const [termsContent, setTermsContent] = useState({
+		name: '',
+		description: '',
+	});
+
+	const [termsData, setTermsData] = useState([]);
+
+	const { result: termsResult } = useApi({
+		path: `/client/terms?termCode=SERVICE_TERM`,
+		shouldFetch: true,
+	});
+
+	useEffect(() => {
+		if (termsResult.data) {
+			const updatedTermsData = termsResult.data.termList.map(term => ({
+				...term,
+				isAgreed: false,
+			}));
+
+			setTermsData(updatedTermsData);
+		}
+	}, [termsResult.data]);
 
 	// 약관 모달
+	const handleOpenModal = (name, description) => {
+		openModal();
+		setTermsContent({ name, description });
+	};
+
+	// 약관 모달 닫기
 	const handleCloseModal = agreed => {
 		closeModal(false);
 
 		if (agreed) {
-			setTerms(prevState => {
-				const newTerms = { ...prevState };
-				if (termsId === 1) {
-					newTerms.service = true;
-				} else if (termsId === 2) {
-					newTerms.privacy = true;
-				}
-				newTerms.allChecked = newTerms.service && newTerms.privacy;
-				return newTerms;
-			});
+			setTermsData(prevTermsData =>
+				prevTermsData.map(term =>
+					term.name === termsContent.name ? { ...term, isAgreed: true } : term,
+				),
+			);
 		}
-		setTermsId('');
+
+		setTermsContent({});
 	};
 
-	// 약관 전체 동의
-	const handleAllCheckedChange = () => {
-		const newCheckedStatus = !terms.allChecked;
+	// 전체 동의 체크박스 상태 변경
+	const handleAllCheckedChange = event => {
+		const { checked } = event.target;
 
-		setTerms({
-			allChecked: newCheckedStatus,
-			service: newCheckedStatus,
-			privacy: newCheckedStatus,
-		});
+		setTermsData(prevTermsData =>
+			prevTermsData.map(term => ({ ...term, isAgreed: checked })),
+		);
 	};
 
-	// 약관 모달 내에서 동의
+	// 개별 동의 체크박스 상태 변경
 	const handleIndividualChange = name => {
-		setTerms(prevState => {
-			const newTerms = {
-				...prevState,
-				[name]: !prevState[name],
-			};
-			newTerms.allChecked = newTerms.service && newTerms.privacy;
-			return newTerms;
-		});
+		setTermsData(prevTermsData =>
+			prevTermsData.map(term =>
+				term.name === name ? { ...term, isAgreed: !term.isAgreed } : term,
+			),
+		);
 	};
+
+	// 전체 동의 체크박스 상태
+	const allChecked = termsData?.every(term => term.isAgreed);
 
 	// 핸드폰 / 사업자 번호 포맷
 	useEffect(() => {
@@ -160,20 +177,13 @@ function Register() {
 			address: location.address,
 			addressDetail: location.detailAddress,
 			businessNumber: inputData.businessNumber.replace(/-/g, ''),
-			userTerms: [
-				{
-					termId: 1,
-					isAgreed: terms.privacy,
-				},
-				{
-					termId: 2,
-					isAgreed: terms.service,
-				},
-			],
+			userTerms: termsData.map(el => ({
+				termId: el.id,
+				isAgreed: el.isAgreed,
+			})),
 		}));
 	};
 
-	// 회원가입 로직 미친 거 아님? 뒤져라...
 	const handleSubmit = async e => {
 		e.preventDefault();
 
@@ -248,7 +258,7 @@ function Register() {
 			newErrorMessages.businessNumber = MESSAGE.JOIN.CO_NUMBER;
 			isValid = false;
 			businessRef.current.focus();
-		} else if (!terms.allChecked) {
+		} else if (!allChecked) {
 			newErrorMessages.terms = MESSAGE.JOIN.TERMS;
 			isValid = false;
 			termsRef.current.focus();
@@ -269,38 +279,26 @@ function Register() {
 			address: location.address,
 			addressDetail: location.detailAddress,
 			businessNumber: inputData.businessNumber.replace(/-/g, ''),
-			userTerms: [
-				{
-					termId: 1,
-					isAgreed: terms.privacy,
-				},
-				{
-					termId: 2,
-					isAgreed: terms.service,
-				},
-			],
+			userTerms: termsData.map(el => ({
+				termId: el.id,
+				isAgreed: el.isAgreed,
+			})),
 		};
 
-		const triggerResult = await trigger({
-			method: 'post',
-			data: newData,
-			showBoundary: false,
-			applyResult: true,
-		});
-
+		const triggerResult = await trigger({ method: 'post', data: newData });
 		const { error } = triggerResult || {};
 
 		if (error) {
+			newErrorMessages.email = error.response.data.message;
 			if (error.response.data.message.includes('이메일')) {
-				newErrorMessages.email = MESSAGE.JOIN.DUP_EMAIL;
 				emailRef.current.focus();
 			} else if (error.response.data.message.includes('아이디')) {
-				newErrorMessages.username = MESSAGE.JOIN.DUP_USERNAME;
 				idRef.current.focus();
 			} else if (error.response.data.message.includes('사업자')) {
-				newErrorMessages.businessNumber = MESSAGE.JOIN.DUP_COMPANY;
 				businessRef.current.focus();
 			}
+
+			termsRef.current.focus();
 		} else setRegisterSuccess(true);
 	};
 
@@ -310,169 +308,161 @@ function Register() {
 	};
 
 	return (
-		<>
+		<S.Body>
+			{registerSuccess && (
+				<Modal
+					img="modal-check.svg"
+					title="알림"
+					content="회원가입이 완료되었습니다."
+					onClose={handleCloseSuccessModal}
+				/>
+			)}
+
 			<Seo />
-			<S.Body>
-				{registerSuccess && (
-					<Modal
-						img="modal-check.svg"
-						title="알림"
-						content="회원가입이 완료되었습니다."
-						onClose={handleCloseSuccessModal}
-					/>
+
+			<S.LogoBox>
+				<Link to={LINK.LOGIN}>
+					<Logo size="default" />
+				</Link>
+			</S.LogoBox>
+
+			<S.FormBox onSubmit={handleSubmit}>
+				<InputBox
+					title="이메일 입력"
+					name="email"
+					value={inputData.email || ''}
+					placeholder="이메일을 입력해 주세요."
+					onChange={handleChange}
+					ref={emailRef}
+					message={errorMsg.email}
+					maxLength="50"
+					register
+				/>
+
+				<InputBox
+					title="아이디 입력"
+					name="username"
+					value={inputData.username || ''}
+					placeholder="아이디는 영어와 숫자로만 입력해 주세요."
+					onChange={handleChange}
+					ref={idRef}
+					message={errorMsg.username}
+					register
+				/>
+
+				<InputBox
+					title="비밀번호 입력"
+					name="password"
+					type="password"
+					value={inputData.password || ''}
+					placeholder="비밀번호를 입력해 주세요."
+					onChange={handleChange}
+					ref={pwRef}
+					message={errorMsg.password}
+					register
+				/>
+
+				<InputBox
+					title="비밀번호 확인"
+					type="password"
+					name="passwordCheck"
+					value={inputData.passwordCheck || ''}
+					placeholder="비밀번호를 입력해 주세요."
+					onChange={handleChange}
+					ref={pwCheckRef}
+					message={errorMsg.passwordCheck}
+					register
+				/>
+
+				<InputBox
+					title="업체명"
+					name="companyName"
+					value={inputData.companyName || ''}
+					placeholder="업체명을 입력해 주세요."
+					onChange={handleChange}
+					ref={companyRef}
+					message={errorMsg.companyName}
+					register
+				/>
+
+				<InputBox
+					title="전화번호"
+					name="contactNumber"
+					value={inputData.contactNumber || ''}
+					placeholder="전화번호를 입력해 주세요."
+					onChange={handleChange}
+					ref={contactRef}
+					message={errorMsg.contactNumber}
+					register
+				/>
+
+				<Address
+					message={errorMsg.address}
+					onChange={handleAddressChange}
+					ref={addressRef}
+					maxLength="50"
+					register
+					button
+				/>
+
+				<InputBox
+					title="사업자 등록 번호"
+					name="businessNumber"
+					value={inputData.businessNumber || ''}
+					placeholder="업체의 사업자 등록 번호를 입력해 주세요."
+					onChange={handleChange}
+					ref={businessRef}
+					message={errorMsg.businessNumber}
+					register
+				/>
+
+				<S.CheckBox>
+					<S.H1>약관동의</S.H1>
+					<S.Check>
+						<S.CheckAll>
+							<input
+								id="allCheck"
+								type="checkbox"
+								onChange={handleAllCheckedChange}
+								ref={termsRef}
+								checked={allChecked}
+							/>
+							<label htmlFor="allCheck" />
+							<h1>전체동의</h1>
+						</S.CheckAll>
+
+						<Line size="width" variant="lightGray" />
+
+						{termsData?.map((term, i) => (
+							<S.CheckItem key={i}>
+								<input
+									id={term.name}
+									type="checkbox"
+									onChange={() => handleIndividualChange(term.name)}
+									checked={term.isAgreed}
+								/>
+								<label htmlFor={term.name} />
+								<p onClick={() => handleOpenModal(term.name, term.description)}>
+									{term.termLabel || '약관'}에 동의합니다.
+								</p>
+								<span>(필수)</span>
+							</S.CheckItem>
+						))}
+					</S.Check>
+					<S.TermMsg>{errorMsg.terms}</S.TermMsg>
+				</S.CheckBox>
+
+				{modalState && (
+					<TermsModal content={termsContent} onClose={handleCloseModal} />
 				)}
 
-				<S.LogoBox>
-					<Link to={LINK.LOGIN}>
-						<Logo size="default" />
-					</Link>
-				</S.LogoBox>
-
-				<S.FormBox onSubmit={handleSubmit}>
-					<InputBox
-						title="이메일 입력"
-						name="email"
-						value={inputData.email || ''}
-						placeholder="이메일을 입력해 주세요."
-						onChange={handleChange}
-						ref={emailRef}
-						message={errorMsg.email}
-						maxLength="50"
-						register
-					/>
-
-					<InputBox
-						title="아이디 입력"
-						name="username"
-						value={inputData.username || ''}
-						placeholder="아이디는 영어와 숫자로만 입력해 주세요."
-						onChange={handleChange}
-						ref={idRef}
-						message={errorMsg.username}
-						register
-					/>
-
-					<InputBox
-						title="비밀번호 입력"
-						name="password"
-						type="password"
-						value={inputData.password || ''}
-						placeholder="비밀번호를 입력해 주세요."
-						onChange={handleChange}
-						ref={pwRef}
-						message={errorMsg.password}
-						register
-					/>
-
-					<InputBox
-						title="비밀번호 확인"
-						type="password"
-						name="passwordCheck"
-						value={inputData.passwordCheck || ''}
-						placeholder="비밀번호를 입력해 주세요."
-						onChange={handleChange}
-						ref={pwCheckRef}
-						message={errorMsg.passwordCheck}
-						register
-					/>
-
-					<InputBox
-						title="업체명"
-						name="companyName"
-						value={inputData.companyName || ''}
-						placeholder="업체명을 입력해 주세요."
-						onChange={handleChange}
-						ref={companyRef}
-						message={errorMsg.companyName}
-						register
-					/>
-
-					<InputBox
-						title="전화번호"
-						name="contactNumber"
-						value={inputData.contactNumber || ''}
-						placeholder="전화번호를 입력해 주세요."
-						onChange={handleChange}
-						ref={contactRef}
-						message={errorMsg.contactNumber}
-						register
-					/>
-
-					<Address
-						message={errorMsg.address}
-						onChange={handleAddressChange}
-						ref={addressRef}
-						maxLength="50"
-						register
-						button
-					/>
-
-					<InputBox
-						title="사업자 등록 번호"
-						name="businessNumber"
-						value={inputData.businessNumber || ''}
-						placeholder="업체의 사업자 등록 번호를 입력해 주세요."
-						onChange={handleChange}
-						ref={businessRef}
-						message={errorMsg.businessNumber}
-						register
-					/>
-
-					<S.CheckBox>
-						<S.H1>약관동의</S.H1>
-						<S.Check>
-							<S.CheckAll>
-								<input
-									id="allCheck"
-									type="checkbox"
-									onChange={handleAllCheckedChange}
-									ref={termsRef}
-									checked={terms.allChecked}
-								/>
-								<label htmlFor="allCheck" />
-								<h1>전체동의</h1>
-							</S.CheckAll>
-							<Line size="width" variant="lightGray" />
-							<S.CheckItem>
-								<input
-									id="privacy"
-									type="checkbox"
-									onChange={() => handleIndividualChange('privacy')}
-									checked={terms.privacy}
-								/>
-								<label htmlFor="privacy" />
-								<p onClick={() => handleOpenModal(2)}>
-									개인정보 제공 및 활용에 동의합니다.
-								</p>
-								<span>(필수)</span>
-							</S.CheckItem>
-							<S.CheckItem>
-								<input
-									id="service"
-									type="checkbox"
-									onChange={() => handleIndividualChange('service')}
-									checked={terms.service}
-								/>
-								<label htmlFor="service" />
-								<p onClick={() => handleOpenModal(1)}>
-									서비스 이용 약관에 동의합니다.
-								</p>
-								<span>(필수)</span>
-							</S.CheckItem>
-						</S.Check>
-						<span>{errorMsg.terms || ' '}</span>
-					</S.CheckBox>
-
-					{modalState && <TermsModal id={termsId} onClose={handleCloseModal} />}
-
-					<S.ButtonBox>
-						<Button size="default" variant="default" type="submit">
-							회원가입
-						</Button>
-					</S.ButtonBox>
-				</S.FormBox>
-			</S.Body>
-		</>
+				<S.ButtonBox>
+					<Button size="default" variant="default" type="submit">
+						회원가입
+					</Button>
+				</S.ButtonBox>
+			</S.FormBox>
+		</S.Body>
 	);
 }
 

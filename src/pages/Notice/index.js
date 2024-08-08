@@ -33,6 +33,14 @@ function Notice() {
 		};
 	};
 
+	useEffect(() => {
+		const params = getQueryParams();
+		setSort(params.sort);
+		setInputData(params.inputData);
+		setCurrentPage(params.currentPage);
+		setNavClicked(params.navClicked);
+	}, [location.search]);
+
 	const [noticeList, setNoticeList] = useState([]);
 	const [navClicked, setNavClicked] = useState(getQueryParams().navClicked);
 
@@ -49,14 +57,6 @@ function Notice() {
 		path: fullPath,
 		shouldFetch: true,
 	});
-
-	useEffect(() => {
-		const params = getQueryParams();
-		setSort(params.sort);
-		setInputData(params.inputData);
-		setCurrentPage(params.currentPage);
-		setNavClicked(params.navClicked);
-	}, [location.search]);
 
 	useEffect(() => {
 		trigger({ path: fullPath, applyResult: true });
@@ -110,7 +110,7 @@ function Notice() {
 	const handleReset = async () => {
 		setInputData('');
 		setCurrentPage(1);
-		updateQueryParams({ page: 1, title: '', content: '' });
+		updateQueryParams({ page: 1, title: '', content: '', sort: '' });
 		await trigger({ path: basePath + noticeType, applyResult: true });
 	};
 
@@ -118,7 +118,7 @@ function Notice() {
 	const handlePageChange = async pageNumber => {
 		setCurrentPage(pageNumber);
 		updateQueryParams({ page: pageNumber });
-		await trigger({ path: fullPath, applyResult: true });
+		// await trigger({ path: fullPath, applyResult: true });
 	};
 
 	return (

@@ -92,7 +92,7 @@ function Guide() {
 	const handleClickReset = async () => {
 		setCurrentPage(1);
 		setInputData('');
-		updateQueryParams({ page: 1, title: '', content: '' });
+		updateQueryParams({ page: 1, title: '', content: '', sort: '' });
 		await trigger({ path: basePath, applyResult: true });
 	};
 
@@ -100,7 +100,6 @@ function Guide() {
 	const handlePageChange = async pageNumber => {
 		setCurrentPage(pageNumber);
 		updateQueryParams({ page: pageNumber });
-		await trigger({ path: fullPath, applyResult: true });
 	};
 
 	return (
