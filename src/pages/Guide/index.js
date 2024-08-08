@@ -63,10 +63,6 @@ function Guide() {
 		}
 	}, [result.data]);
 
-	useEffect(() => {
-		console.log('input', inputData);
-	}, [inputData]);
-
 	// 상태를 쿼리스트링에 반영하는 함수
 	const updateQueryParams = newParams => {
 		const params = new URLSearchParams(location.search);
