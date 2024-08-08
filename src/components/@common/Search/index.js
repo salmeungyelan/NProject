@@ -5,6 +5,10 @@ import Button from '../Button';
 function Search(props) {
 	const { onClick, onChange, search, reset } = props;
 
+	const handleKeyDown = e => {
+		if (e.key === 'Enter') onClick();
+	};
+
 	return (
 		<S.Body>
 			<S.SearchBox>
@@ -12,8 +16,10 @@ function Search(props) {
 				<S.Input
 					name="search"
 					value={search}
+					type="text"
 					placeholder="검색어를 입력해 주세요."
 					onChange={onChange}
+					onKeyDown={handleKeyDown}
 				/>
 			</S.SearchBox>
 

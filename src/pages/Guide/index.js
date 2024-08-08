@@ -63,6 +63,10 @@ function Guide() {
 		}
 	}, [result.data]);
 
+	useEffect(() => {
+		console.log('input', inputData);
+	}, [inputData]);
+
 	// 상태를 쿼리스트링에 반영하는 함수
 	const updateQueryParams = newParams => {
 		const params = new URLSearchParams(location.search);
@@ -92,7 +96,12 @@ function Guide() {
 	const handleClickReset = async () => {
 		setCurrentPage(1);
 		setInputData('');
-		updateQueryParams({ page: 1, title: '', content: '', sort: '' });
+		updateQueryParams({
+			page: 1,
+			title: '',
+			content: '',
+			sort: 'GUIDE_FILTER_01',
+		});
 		await trigger({ path: basePath, applyResult: true });
 	};
 

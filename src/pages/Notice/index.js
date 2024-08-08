@@ -110,7 +110,13 @@ function Notice() {
 	const handleReset = async () => {
 		setInputData('');
 		setCurrentPage(1);
-		updateQueryParams({ page: 1, title: '', content: '', sort: '' });
+		updateQueryParams({
+			page: 1,
+			title: '',
+			content: '',
+			nav: '',
+			sort: 'NOTICE_FILTER_01',
+		});
 		await trigger({ path: basePath + noticeType, applyResult: true });
 	};
 
@@ -118,7 +124,6 @@ function Notice() {
 	const handlePageChange = async pageNumber => {
 		setCurrentPage(pageNumber);
 		updateQueryParams({ page: pageNumber });
-		// await trigger({ path: fullPath, applyResult: true });
 	};
 
 	return (
