@@ -73,13 +73,6 @@ api.interceptors.response.use(
 
 				return Promise.reject(refreshError);
 			}
-		} else if (!refreshToken) {
-			Cookies.remove('accessToken');
-			Cookies.remove('refreshToken');
-			const navigate = useNavigate();
-			const queryParams = new URLSearchParams(location.search);
-			const redirectUrl = queryParams.get('redirection') || LINK.HOME;
-			navigate(redirectUrl, { replace: true });
 		}
 
 		return Promise.reject(axiosError);
