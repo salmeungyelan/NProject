@@ -443,7 +443,7 @@ function Register() {
 								/>
 								<label htmlFor={term.name} />
 								<p onClick={() => handleOpenModal(term.name, term.description)}>
-									{term.termLabel || '약관'}에 동의합니다.
+									{term.termLabel}
 								</p>
 								<span>(필수)</span>
 							</S.CheckItem>
