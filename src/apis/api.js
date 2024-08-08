@@ -53,6 +53,12 @@ api.interceptors.response.use(
 	async axiosError => {
 		const { response, config } = axiosError;
 		const refreshToken = Cookies.get('refreshToken');
+		const navigate = useNavigate();
+		const redirectToHome = () => {
+			const queryParams = new URLSearchParams(location.search);
+			const redirectUrl = queryParams.get('redirection') || LINK.HOME;
+			navigate(redirectUrl, { replace: true });
+		};
 
 		if (response.status === 410 && refreshToken) {
 			try {
@@ -66,14 +72,10 @@ api.interceptors.response.use(
 
 				return api(config); // 기존 요청을 재요청
 			} catch (refreshError) {
-				const navigate = useNavigate();
-				const queryParams = new URLSearchParams(location.search);
-				const redirectUrl = queryParams.get('redirection') || LINK.HOME;
-				navigate(redirectUrl, { replace: true });
-
+				redirectToHome();
 				return Promise.reject(refreshError);
 			}
-		}
+		} else if (!refreshToken) redirectToHome();
 
 		return Promise.reject(axiosError);
 	},
