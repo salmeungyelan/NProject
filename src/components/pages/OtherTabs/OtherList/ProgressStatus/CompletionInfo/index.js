@@ -38,8 +38,6 @@ function CompletionInfo({ id }) {
 
 	const { resultLinks, adminFiles, instruction } = completedData;
 
-	console.log(adminFiles);
-
 	const mediaRef = useRef([]);
 	const containerRef = useRef(null);
 

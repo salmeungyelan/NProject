@@ -264,13 +264,13 @@ export const ImgTitle = styled.div`
 	height: 10px;
 	color: ${({ theme }) => theme.PALETTE.gray[100]};
 	cursor: pointer;
+	width: 64px;
 
 	> p {
 		font-size: ${({ theme }) => theme.FONT_SIZE.xs};
 		overflow: hidden;
 		white-space: nowrap;
 		text-overflow: ellipsis;
-		width: 50px;
 	}
 
 	> img {
@@ -280,10 +280,10 @@ export const ImgTitle = styled.div`
 	@media screen and (min-width: 768px) {
 		height: 14px;
 		gap: 6px;
+		width: 100px;
 
 		> p {
 			font-size: ${({ theme }) => theme.FONT_SIZE.ms};
-			width: 80px;
 		}
 
 		> img {
@@ -293,10 +293,10 @@ export const ImgTitle = styled.div`
 
 	@media screen and (min-width: 1200px) {
 		height: 16px;
+		width: 120px;
 
 		> p {
 			font-size: ${({ theme }) => theme.FONT_SIZE.m};
-			width: 90px;
 		}
 
 		> img {
