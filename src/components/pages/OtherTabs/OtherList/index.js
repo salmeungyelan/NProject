@@ -66,8 +66,7 @@ function OtherList(props) {
 								<S.DownBtn src="/assets/icons/down.svg" />
 							</S.List>
 
-							{(list.statusLabel === '취소' ||
-								list.statusLabel === '임시저장') &&
+							{['취소', '임시저장'].includes(list.statusLabel) &&
 								display === list.id && (
 									<Incomplete
 										id={list.id}
@@ -77,9 +76,7 @@ function OtherList(props) {
 									/>
 								)}
 
-							{!(
-								list.statusLabel === '취소' || list.statusLabel === '임시저장'
-							) &&
+							{!['취소', '임시저장'].includes(list.statusLabel) &&
 								display === list.id && (
 									<ProgressStatus
 										id={list.id}
