@@ -33,7 +33,8 @@ function Filter(props) {
 						selected={sort === flt.codeValue}
 						onClick={onClick}
 					>
-						• {flt.codeLabel}
+						<span>• </span>
+						<p> {flt.codeLabel}</p>
 					</S.Sort>
 				))}
 		</S.Body>

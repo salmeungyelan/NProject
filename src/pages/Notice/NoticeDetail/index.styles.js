@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import {
 	bodyContainer,
 	flexColumn,
-	flexAlignCenter,
-	flexCenter,
 	flexSpaceBetweenCenter,
 } from 'styles/common';
 
@@ -25,18 +23,20 @@ export const Content = styled.div`
 `;
 
 export const TitleBox = styled.div`
-	${flexAlignCenter}
+	display: inline-table;
 	gap: 6px;
+	line-height: 24px;
 
 	> img {
 		width: 18px;
-	}
+		display: inline-block;
+		vertical-align: middle;
+		margin-right: 6px;
 
-	@media screen and (min-width: 768px) {
-		gap: 8px;
-
-		> img {
+		@media screen and (min-width: 768px) {
 			width: 25px;
+			margin-right: 8px;
+			vertical-align: middle;
 		}
 	}
 `;
@@ -44,27 +44,40 @@ export const TitleBox = styled.div`
 export const Important = styled.div`
 	width: 36px;
 	height: 18px;
-	${flexCenter}
+	display: inline-flex;
 	background-color: ${({ theme }) => theme.PALETTE.orange[100]};
 	color: ${({ theme }) => theme.PALETTE.white[100]};
 	border-radius: 26px;
 	font-weight: 500;
 	font-size: ${({ theme }) => theme.FONT_SIZE.xs};
+	line-height: 24px;
+	text-align: center;
+	vertical-align: middle;
+	flex-direction: column;
+	justify-content: center;
+	margin-right: 6px;
 
 	@media screen and (min-width: 768px) {
 		width: 50px;
 		height: 25px;
 		font-size: ${({ theme }) => theme.FONT_SIZE.ms};
+		line-height: 32px;
+		margin-right: 8px;
+		vertical-align: middle;
 	}
 `;
 
 export const Title = styled.span`
 	font-weight: 500;
+	/* display: inline-flex; */
 	font-size: ${({ theme }) => theme.FONT_SIZE.ml};
 	color: ${({ theme }) => theme.PALETTE.gray[300]};
+	line-height: 24px;
 
 	@media screen and (min-width: 768px) {
 		font-size: ${({ theme }) => theme.FONT_SIZE.j};
+		line-height: 32px;
+		vertical-align: middle;
 	}
 `;
 

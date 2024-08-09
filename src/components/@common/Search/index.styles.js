@@ -108,9 +108,21 @@ export const Button = styled.button`
 	border-radius: 4px;
 	background-color: ${({ theme }) => theme.PALETTE.white[100]};
 	color: ${({ theme }) => theme.PALETTE.gray[100]};
+	cursor: pointer;
 
-	> img {
-		width: 10px;
+	&:hover {
+		border: 1px solid ${({ theme }) => theme.PALETTE.gray[100]};
+		color: ${({ theme }) => theme.PALETTE.gray[200]};
+
+		> svg {
+			fill: ${({ theme }) => theme.PALETTE.gray[200]};
+		}
+	}
+
+	> svg {
+		fill: ${({ theme }) => theme.PALETTE.gray[100]};
+		stroke-width: 0px;
+		width: 12px;
 		margin-right: 4px;
 	}
 

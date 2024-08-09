@@ -23,6 +23,7 @@ const PALETTE = {
 		0: '#FAFAFA',
 		100: '#FFFFFF',
 		150: '#EEEEEE',
+		170: '#EFEFEF',
 		200: '#E0E0E0',
 	},
 
