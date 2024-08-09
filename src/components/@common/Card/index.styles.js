@@ -1,5 +1,9 @@
 import styled from 'styled-components';
-import { flexColumn, flexSpaceBetweenCenter } from 'styles/common';
+import {
+	flexColumn,
+	flexSpaceBetweenCenter,
+	textOverflowEllipsis,
+} from 'styles/common';
 
 export const Card = styled.div`
 	width: 143px;
@@ -61,10 +65,6 @@ export const MainBox = styled.div`
 		padding: 0 16px;
 		gap: 12px;
 	}
-
-	@media screen and (min-width: 1200px) {
-		padding: 0 16px;
-	}
 `;
 
 export const Title = styled.div`
@@ -76,9 +76,7 @@ export const Title = styled.div`
 
 	> div:first-child {
 		width: ${({ $isReview }) => ($isReview ? '70%' : '78px')};
-		overflow: hidden;
-		white-space: nowrap;
-		text-overflow: ellipsis;
+		${textOverflowEllipsis}
 	}
 
 	@media screen and (min-width: 768px) {

@@ -4,6 +4,7 @@ import {
 	flexCenter,
 	flexColumn,
 	flexLeftCenter,
+	textOverflowEllipsis,
 } from 'styles/common';
 
 export const Body = styled.div`
@@ -291,6 +292,7 @@ export const XBtn = styled.img`
 	height: 10px;
 	top: 5%;
 	right: 7%;
+	cursor: pointer;
 
 	@media screen and (min-width: 768px) {
 		width: 16px;
@@ -312,9 +314,7 @@ export const MediaTitle = styled.div`
 
 	> p {
 		font-size: ${({ theme }) => theme.FONT_SIZE.xs};
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
+		${textOverflowEllipsis};
 		width: 54px;
 		text-align: center;
 	}
