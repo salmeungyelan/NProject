@@ -1,5 +1,10 @@
 import styled, { css } from 'styled-components';
-import { flexCenter, flexColumn, flexLeftCenter } from 'styles/common';
+import {
+	flexCenter,
+	flexColumn,
+	flexLeftCenter,
+	textOverflowEllipsis,
+} from 'styles/common';
 
 export const Body = styled.div`
 	${flexColumn}
@@ -97,9 +102,8 @@ export const ImgTitle = styled.div`
 
 	> p {
 		font-size: ${({ theme }) => theme.FONT_SIZE.xs};
-		overflow: hidden;
-		white-space: nowrap;
-		text-overflow: ellipsis;
+		${textOverflowEllipsis}
+		text-align: center;
 	}
 
 	& img {

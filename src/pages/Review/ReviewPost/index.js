@@ -22,7 +22,7 @@ function ReviewPost() {
 
 	const [review, setReview] = useState({});
 
-	const { result, trigger } = useApi({
+	const { result, trigger, isLoading } = useApi({
 		path: `/client/reviews/${_id}`,
 		shouldFetch: true,
 	});
@@ -63,7 +63,6 @@ function ReviewPost() {
 		previousReview,
 	} = review;
 
-	const completed = statusLabel === '완료';
 	const resultInfo = {
 		resultLinks,
 		adminFiles,
@@ -73,12 +72,12 @@ function ReviewPost() {
 	};
 
 	return (
-		review && (
-			<S.Body>
-				<Title title="REVIEW">
-					자사 영업일 기준, 하루 한 번 신청 가능합니다.
-				</Title>
+		<S.Body>
+			<Title title="REVIEW">
+				자사 영업일 기준, 하루 한 번 신청 가능합니다.
+			</Title>
 
+			{!isLoading && review && (
 				<S.Content>
 					<S.Info>
 						<S.InfoMain>
@@ -115,35 +114,27 @@ function ReviewPost() {
 						<></>
 					)}
 
-					{completed && <Finish result={resultInfo} />}
+					{statusLabel === '완료' && <Finish result={resultInfo} />}
 				</S.Content>
+			)}
 
-				<PreviousPost
-					next={nextReview}
-					prev={previousReview}
-					trigger={trigger}
-				/>
+			<PreviousPost next={nextReview} prev={previousReview} trigger={trigger} />
 
-				<S.ButtonBox>
+			<S.ButtonBox>
+				<div>
+					<Button size="height" variant="white" onClick={handleClickBack}>
+						뒤로 가기
+					</Button>
+				</div>
+				{statusLabel === '임시저장' && (
 					<div>
-						<Button size="height" variant="white" onClick={handleClickBack}>
-							뒤로 가기
+						<Button size="height" variant="default" onClick={handleClickModify}>
+							임시 저장 수정
 						</Button>
 					</div>
-					{statusLabel === '임시저장' && (
-						<div>
-							<Button
-								size="height"
-								variant="default"
-								onClick={handleClickModify}
-							>
-								임시 저장 수정
-							</Button>
-						</div>
-					)}
-				</S.ButtonBox>
-			</S.Body>
-		)
+				)}
+			</S.ButtonBox>
+		</S.Body>
 	);
 }
 

@@ -522,7 +522,7 @@ function ReviewApply() {
 											)}
 
 											<S.XBtn
-												src="/assets/icons/white-x.svg"
+												src="/assets/icons/x-shadow.png"
 												onClick={() =>
 													handleDeleteFile(file.url, file.originalname)
 												}
