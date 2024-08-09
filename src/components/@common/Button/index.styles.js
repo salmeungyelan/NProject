@@ -54,7 +54,7 @@ export const Button = styled.button`
 	${({ $variant }) => variantCSS[$variant]};
 
 	&:hover {
-		transform: scale(1.02);
+		transform: ${({ $scale }) => ($scale ? 'none' : 'scale(1.02)')};
 	}
 
 	@media screen and (min-width: 768px) {

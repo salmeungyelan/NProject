@@ -1,5 +1,5 @@
 import { styled } from 'styled-components';
-import { flexCenter, flexColumn } from 'styles/common';
+import { flexCenter, flexColumn, textOverflowEllipsis } from 'styles/common';
 
 export const NextBox = styled.div`
 	${flexColumn}
@@ -20,9 +20,7 @@ export const Next = styled.div`
 	:visited {
 		text-decoration: none;
 		color: ${({ theme }) => theme.PALETTE.gray[200]};
-		overflow: hidden;
-		white-space: nowrap;
-		text-overflow: ellipsis;
+		${textOverflowEllipsis}
 		width: 87%;
 
 		@media screen and (min-width: 768px) {

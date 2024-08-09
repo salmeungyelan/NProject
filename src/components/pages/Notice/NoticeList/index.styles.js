@@ -1,5 +1,10 @@
 import styled from 'styled-components';
-import { flexCenter, flexColumn, flexSpaceBetweenCenter } from 'styles/common';
+import {
+	flexCenter,
+	flexColumn,
+	flexSpaceBetweenCenter,
+	textOverflowEllipsis,
+} from 'styles/common';
 
 export const Body = styled.div`
 	> div:last-child {
@@ -24,9 +29,7 @@ export const Box = styled.div`
 export const Title = styled.span`
 	font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 	color: ${({ theme }) => theme.PALETTE.gray[300]};
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
+	${textOverflowEllipsis};
 	width: 80%;
 
 	@media screen and (min-width: 768px) {
@@ -74,9 +77,7 @@ export const Content = styled.div`
 export const Description = styled.div`
 	font-size: ${({ theme }) => theme.FONT_SIZE.s};
 	width: calc(100% - 80px);
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
+	${textOverflowEllipsis}
 	color: ${({ theme }) => theme.PALETTE.gray[100]};
 
 	@media screen and (min-width: 768px) {

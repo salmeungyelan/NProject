@@ -22,7 +22,7 @@ export const Select = styled.div`
 	> ul {
 		${flexAlignCenter}
 		border-bottom: 1px solid ${({ theme }) => theme.PALETTE.gray[0]};
-		position: relative; /* 자식 요소가 절대 위치를 사용할 수 있도록 설정 */
+		position: relative;
 	}
 `;
 
@@ -32,7 +32,7 @@ export const after = css`
 		position: absolute;
 		left: 0;
 		right: 0;
-		bottom: -1px; /* ul의 border-bottom과 겹치도록 설정 */
+		bottom: -1px;
 		border-bottom: 2px solid ${({ theme }) => theme.PALETTE.orange[100]};
 		z-index: -1;
 	}
@@ -56,8 +56,11 @@ export const Li = styled.li`
 		cursor: pointer;
 	}
 
-	&:has(input:checked),
 	&:hover {
+		color: ${({ theme }) => theme.PALETTE.orange[100]};
+	}
+
+	&:has(input:checked) {
 		color: ${({ theme }) => theme.PALETTE.orange[100]};
 		${after}
 	}

@@ -26,9 +26,11 @@ export const Title = styled.span`
 	font-weight: 500;
 	font-size: ${({ theme }) => theme.FONT_SIZE.ml};
 	color: ${({ theme }) => theme.PALETTE.gray[300]};
+	line-height: 24px;
 
 	@media screen and (min-width: 768px) {
 		font-size: ${({ theme }) => theme.FONT_SIZE.j};
+		line-height: 32px;
 	}
 `;
 
