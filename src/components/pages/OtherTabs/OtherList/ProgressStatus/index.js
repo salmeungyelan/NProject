@@ -90,14 +90,14 @@ function ProgressStatus(props) {
 				</S.StatusBox>
 
 				<S.ButtonBox>
-					<Button size="height" variant="default" onClick={openModal}>
-						신청 내역 확인
-					</Button>
 					{progress === '신규' && (
 						<Button size="height" variant="white" onClick={handleClickCancel}>
 							신청 취소
 						</Button>
 					)}
+					<Button size="height" variant="default" onClick={openModal}>
+						신청 내역 확인
+					</Button>
 				</S.ButtonBox>
 			</S.Body>
 		</>

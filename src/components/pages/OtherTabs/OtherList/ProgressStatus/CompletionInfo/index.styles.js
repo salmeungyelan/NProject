@@ -4,6 +4,7 @@ import {
 	flexColumn,
 	flexLeftCenter,
 	flexSpaceBetweenCenter,
+	textOverflowEllipsis,
 } from 'styles/common';
 
 export const Body = styled.div`
@@ -268,9 +269,7 @@ export const ImgTitle = styled.div`
 
 	> p {
 		font-size: ${({ theme }) => theme.FONT_SIZE.xs};
-		overflow: hidden;
-		white-space: nowrap;
-		text-overflow: ellipsis;
+		${textOverflowEllipsis}
 	}
 
 	> img {
