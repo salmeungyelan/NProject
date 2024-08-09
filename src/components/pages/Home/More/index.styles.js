@@ -1,5 +1,10 @@
 import styled from 'styled-components';
-import { flexCenter, flexColumn, flexSpaceBetweenCenter } from 'styles/common';
+import {
+	flexCenter,
+	flexColumn,
+	flexSpaceBetweenCenter,
+	textOverflowEllipsis,
+} from 'styles/common';
 
 export const Body = styled.div`
 	width: 294px;
@@ -26,9 +31,7 @@ export const Title = styled.div`
 	color: ${({ theme }) => theme.PALETTE.gray[300]};
 	font-size: ${({ theme }) => theme.FONT_SIZE.m};
 	font-weight: 600;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
+	${textOverflowEllipsis};
 
 	@media screen and (min-width: 768px) {
 		font-size: ${({ theme }) => theme.FONT_SIZE.l};
@@ -66,14 +69,16 @@ export const ListTitle = styled.div`
 	font-weight: 400;
 	font-size: ${({ theme }) => theme.FONT_SIZE.ms};
 	color: ${({ theme }) => theme.PALETTE.gray[200]};
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
+	${textOverflowEllipsis};
 	width: 65%;
 
 	@media screen and (min-width: 768px) {
 		width: 77%;
 		font-size: ${({ theme }) => theme.FONT_SIZE.ml};
+	}
+
+	@media screen and (min-width: 1200px) {
+		width: 90%;
 	}
 `;
 
@@ -90,6 +95,10 @@ export const Date = styled(ListTitle)`
 	@media screen and (min-width: 768px) {
 		width: 18%;
 		font-size: ${({ theme }) => theme.FONT_SIZE.m};
+	}
+
+	@media screen and (min-width: 1200px) {
+		width: 8%;
 	}
 `;
 
@@ -109,6 +118,10 @@ export const Important = styled(Commons)`
 		@media screen and (min-width: 768px) {
 			width: 77%;
 			gap: 7px;
+		}
+
+		@media screen and (min-width: 1200px) {
+			width: 90%;
 		}
 	}
 `;

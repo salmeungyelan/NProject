@@ -2,63 +2,30 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import LINK from 'constants/link';
-import useApi from 'hooks/useApi';
 
 import * as S from './index.styles';
 
-import Iphone from '../Iphone';
+import Iphone from './Iphone';
 import Card from 'components/@common/Card';
 import NoPost from 'components/@common/NoPost';
 
-function List() {
-	// 가장 최신 리뷰 -------------------------------------------
-	const [newestData, setNewestData] = useState([]);
-
-	const { result: iResult } = useApi({
-		path: '/client/reviews?size=1',
-		shouldFetch: true,
-	});
-
-	// 현재 진행 중인 리뷰 ----------------------------------------
-	const [currentData, setCurrentData] = useState([]);
+function List({ reviewData }) {
+	const {
+		lastestReviewOne: iphoneReview,
+		notCompletedReviewList: currentReview,
+		completedReviewList: completedReview,
+	} = reviewData;
 
 	// 진행 중인 리뷰 현재 인덱스 상태 추가
 	const [currentIndex, setCurrentIndex] = useState(0);
 
-	const { result: curResult } = useApi({
-		path: '/client/reviews?size=8&status=REVIEW_STATUS_01&status=REVIEW_STATUS_02&status=REVIEW_STATUS_03',
-		shouldFetch: true,
-	});
-
-	// 완료된 리뷰 ----------------------------------------------
-	const [completedData, setCompletedData] = useState([]);
-
 	// 완료된 리뷰 현재 인덱스 상태 추가
 	const [completedIndex, setCompletedIndex] = useState(0);
-
-	const { result: comResult } = useApi({
-		path: '/client/reviews?size=8&status=REVIEW_STATUS_04',
-		shouldFetch: true,
-	});
-
-	useEffect(() => {
-		if (curResult.data) {
-			setCurrentData(curResult.data.reviews);
-		}
-
-		if (comResult.data) {
-			setCompletedData(comResult.data.reviews);
-		}
-
-		if (iResult.data) {
-			setNewestData(iResult.data.reviews);
-		}
-	}, [curResult.data, comResult.data, iResult.data]);
 
 	// 현재 데이터 있고 태블릿 사이즈일 때 itemsPerPage 2
 	// 현재 데이터 있고 데스크탑 사이즈일 때 itemsPerPage 4
 	const calcItemsPerPage = () => {
-		if (newestData?.length && window.innerWidth >= 1200) return 4;
+		if (iphoneReview && window.innerWidth >= 1200) return 4;
 		else return 2;
 	};
 
@@ -73,7 +40,7 @@ function List() {
 
 		handleResize();
 		window.addEventListener('resize', handleResize);
-	}, [newestData, itemsPerPage]);
+	}, [iphoneReview, itemsPerPage]);
 
 	// 슬라이더 버튼 클릭 시
 	const handleSlider = (type, button) => {
@@ -87,11 +54,11 @@ function List() {
 
 		if (current) {
 			setCurrentIndex(prevIndex =>
-				calculateNewIndex(prevIndex, currentData.length),
+				calculateNewIndex(prevIndex, currentReview.length),
 			);
 		} else {
 			setCompletedIndex(prevIndex =>
-				calculateNewIndex(prevIndex, completedData.length),
+				calculateNewIndex(prevIndex, completedReview.length),
 			);
 		}
 	};
@@ -143,8 +110,8 @@ function List() {
 	};
 
 	return (
-		<S.Body $data={newestData}>
-			{newestData?.length ? <Iphone data={newestData[0]} /> : <></>}
+		<S.Body $data={iphoneReview}>
+			{iphoneReview ? <Iphone data={iphoneReview} /> : <></>}
 
 			<S.ReviewIng>
 				<S.Title>
@@ -159,20 +126,20 @@ function List() {
 					</Link>
 				</S.Title>
 
-				{currentData?.length ? (
+				{currentReview?.length ? (
 					<>
-						<S.CardList $current={currentData.length}>
-							{getCurrentItems(currentData, currentIndex).map((data, idx) => (
+						<S.CardList $current={currentReview.length}>
+							{getCurrentItems(currentReview, currentIndex).map((data, idx) => (
 								<Card key={idx} data={data} />
 							))}
 						</S.CardList>
 
-						{currentData.length > 2 && currentIndex !== 0 && (
+						{currentReview.length > 2 && currentIndex !== 0 && (
 							<S.LeftArrowImg onClick={() => handleSlider('current', 'left')} />
 						)}
 
-						{((currentData.length > 2 && itemsPerPage === 2) ||
-							(currentData.length > 3 && itemsPerPage === 4)) && (
+						{((currentReview.length > 2 && itemsPerPage === 2) ||
+							(currentReview.length > 3 && itemsPerPage === 4)) && (
 							<S.RightArrowImg
 								onClick={() => handleSlider('current', 'right')}
 							/>
@@ -193,25 +160,25 @@ function List() {
 					</Link>
 				</S.Title>
 
-				{completedData?.length ? (
+				{completedReview?.length ? (
 					<>
-						<S.CardList $completed={completedData.length}>
-							{getCurrentItems(completedData, completedIndex).map(
+						<S.CardList $completed={completedReview.length}>
+							{getCurrentItems(completedReview, completedIndex).map(
 								(data, idx) => (
 									<Card key={idx} data={data} />
 								),
 							)}
 						</S.CardList>
 
-						{completedData.length > 2 && completedIndex !== 0 && (
+						{completedReview.length > 2 && completedIndex !== 0 && (
 							<S.LeftArrowImg
-								$completedData={completedData.length}
+								$completedReview={completedReview.length}
 								onClick={() => handleSlider('completed', 'left')}
 							/>
 						)}
 
-						{((completedData.length > 2 && itemsPerPage === 2) ||
-							(completedData.length > 3 && itemsPerPage === 4)) && (
+						{((completedReview.length > 2 && itemsPerPage === 2) ||
+							(completedReview.length > 3 && itemsPerPage === 4)) && (
 							<S.RightArrowImg
 								onClick={() => handleSlider('completed', 'right')}
 							/>
