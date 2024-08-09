@@ -20,7 +20,7 @@ const useSlide = (mediaRef, containerRef, files) => {
 		const target = [...mediaRef.current].map(
 			v => v.getBoundingClientRect().left,
 		);
-		const num = target.reverse().findIndex(left => left < boundaryLeft); // 왼쪽으로 가야 하므로 역순으로 탐색합니다.
+		const num = target.reverse().findIndex(left => left < boundaryLeft); // 왼쪽으로 가야 하므로 역순으로 탐색
 
 		if (num !== -1) {
 			containerRef.current.scrollTo({
