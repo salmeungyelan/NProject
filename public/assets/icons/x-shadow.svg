@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 100 100">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        filter: url(#drop-shadow-1);
+        stroke-width: 0px;
+      }
+    </style>
+    <filter id="drop-shadow-1" filterUnits="userSpaceOnUse">
+      <feOffset dx="0" dy="0"/>
+      <feGaussianBlur result="blur" stdDeviation="2"/>
+      <feFlood flood-color="#000" flood-opacity=".8"/>
+      <feComposite in2="blur" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <path id="_패스_104-2" data-name="패스 104-2" class="cls-1" d="M83.2053,7.306l-33.2053,33.2106L16.7894,7.306l-9.4834,9.4888,33.2053,33.2053L7.306,83.2106l9.4834,9.4834,33.2106-33.2053,33.2053,33.2053,9.4887-9.4834-33.2106-33.2106,33.2106-33.2053-9.4887-9.4888Z"/>
+</svg>
