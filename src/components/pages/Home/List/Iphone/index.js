@@ -33,8 +33,7 @@ function Iphone({ data }) {
 					</S.Title>
 
 					<S.Rate>
-						{(status === 'REVIEW_STATUS_03' ||
-							status === 'REVIEW_STATUS_04') && (
+						{['REVIEW_STATUS_03', 'REVIEW_STATUS_04'].includes(status) && (
 							<S.Writer>{adminname}</S.Writer>
 						)}
 

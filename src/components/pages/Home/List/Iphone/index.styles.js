@@ -4,6 +4,7 @@ import {
 	flexColumn,
 	flexColumnCenter,
 	flexSpaceBetweenCenter,
+	textOverflowEllipsis,
 } from 'styles/common';
 
 export const Iphone = styled.div`
@@ -102,9 +103,7 @@ export const Title = styled.div`
 	gap: 10px;
 
 	> div:first-child {
-		overflow: hidden;
-		white-space: nowrap;
-		text-overflow: ellipsis;
+		${textOverflowEllipsis}
 	}
 
 	@media screen and (min-width: 768px) {

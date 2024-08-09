@@ -7,8 +7,8 @@ import {
 } from 'styles/common';
 
 export const Body = styled.div`
-	display: ${({ $data }) => ($data.length ? 'grid' : 'flex')};
-	flex-direction: ${({ $data }) => !$data.length && 'column'};
+	display: ${({ $data }) => ($data ? 'grid' : 'flex')};
+	flex-direction: ${({ $data }) => !$data && 'column'};
 	grid-template-areas: ${({ $data }) =>
 		$data &&
 		`
@@ -47,8 +47,12 @@ export const Title = styled.div`
 	height: 27px;
 	padding: 3px 7px;
 	border-radius: 8px;
-	background-color: ${({ theme }) => theme.PALETTE.white[200]};
+	background-color: ${({ theme }) => theme.PALETTE.white[170]};
 	width: fit-content;
+
+	&:hover {
+		background-color: ${({ theme }) => theme.PALETTE.gray[0]};
+	}
 
 	& a,
 	:visited {
