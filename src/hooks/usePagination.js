@@ -60,22 +60,3 @@ const usePagination = (totalItems, itemsPerPage) => {
 };
 
 export default usePagination;
-
-// const onClickPrev = useCallback(() => {
-// 	if (currentPage > 1) setCurrentPage(currentPage - 1);
-// }, [currentPage]);
-
-// const onClickPrevGroup = useCallback(() => {
-// 	const prevPage = startPage - displayPageCount;
-// 	if (prevPage >= 1) setCurrentPage(prevPage);
-// 	else setCurrentPage(1);
-// }, [startPage]);
-
-// const onClickNext = useCallback(() => {
-// 	if (currentPage < totalPages) setCurrentPage(currentPage + 1);
-// }, [currentPage, totalPages]);
-
-// const onClickNextGroup = useCallback(() => {
-// 	const nextPage = endPage + 1;
-// 	setCurrentPage(nextPage <= totalPages ? nextPage : totalPages);
-// }, [endPage, totalPages]);

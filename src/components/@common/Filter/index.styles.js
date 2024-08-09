@@ -14,12 +14,23 @@ export const Sort = styled.div`
 	font-size: ${({ theme }) => theme.FONT_SIZE.s};
 	${flexCenter}
 	gap: 3px;
-	color: ${({ theme, selected }) =>
-		selected ? theme.PALETTE.orange[100] : theme.PALETTE.gray[100]};
 	cursor: pointer;
 
+	> span {
+		color: ${({ theme, selected }) =>
+			selected ? theme.PALETTE.orange[100] : theme.PALETTE.gray[100]};
+	}
+
+	> p {
+		color: ${({ theme, selected }) =>
+			selected ? theme.PALETTE.gray[300] : theme.PALETTE.gray[100]};
+	}
+
 	&:hover {
-		color: ${({ theme }) => theme.PALETTE.orange[100]};
+		& p,
+		span {
+			color: ${({ theme }) => theme.PALETTE.gray[200]};
+		}
 	}
 
 	@media screen and (min-width: 768px) {

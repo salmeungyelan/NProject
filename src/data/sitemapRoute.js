@@ -36,6 +36,7 @@ export const sitemapRoutes = [
 		desc: '넷플레이스 메타 비밀번호 찾기 페이지입니다.',
 		keywords: ['find', 'password', 'netplace', '넷플레이스'],
 	},
+
 	{
 		path: '/main',
 		disable: true,
@@ -43,6 +44,7 @@ export const sitemapRoutes = [
 		desc: '넷플레이스 메타 메인 홈 페이지입니다.',
 		keywords: ['netplace', '넷플레이스'],
 	},
+
 	{
 		path: '/guide',
 		disable: true,
@@ -57,6 +59,7 @@ export const sitemapRoutes = [
 		desc: '넷플레이스 메타 이용안내 페이지입니다.',
 		keywords: ['guide', 'netplace', '넷플레이스'],
 	},
+
 	{
 		path: '/notice',
 		disable: true,
@@ -71,6 +74,7 @@ export const sitemapRoutes = [
 		desc: '넷플레이스 메타 공지사항 페이지입니다.',
 		keywords: ['notice', 'netplace', '넷플레이스'],
 	},
+
 	{
 		path: '/mypage',
 		disable: true,
@@ -78,6 +82,7 @@ export const sitemapRoutes = [
 		desc: '넷플레이스 메타 마이 페이지입니다.',
 		keywords: ['mypage', 'netplace', '넷플레이스'],
 	},
+
 	{
 		path: '/review',
 		disable: true,
@@ -99,6 +104,7 @@ export const sitemapRoutes = [
 		desc: '넷플레이스 메타 리뷰 신청 페이지입니다.',
 		keywords: ['review', 'netplace', '넷플레이스'],
 	},
+
 	{
 		path: '/visit-experience',
 		disable: true,
@@ -106,7 +112,6 @@ export const sitemapRoutes = [
 		desc: '넷플레이스 메타 체험단 페이지입니다.',
 		keywords: ['visit-experience', 'netplace', '넷플레이스'],
 	},
-	// 멘토 신청 페이지
 	{
 		path: '/viewtab-instagram',
 		disable: true,
@@ -114,7 +119,6 @@ export const sitemapRoutes = [
 		desc: '넷플레이스 메타 뷰탭&인스타 페이지입니다.',
 		keywords: ['viewtab-instagram', 'netplace', '넷플레이스'],
 	},
-	// 마이 페이지
 	{
 		path: '/website-outsourcing',
 		disable: true,
