@@ -36,6 +36,10 @@ function Address(props, ref) {
 		setDetailAddress(detail);
 	}, [postalCode, place, detail]);
 
+	const handleClickPostCode = () => {
+		open({ onComplete: handleComplete });
+	};
+
 	const handleComplete = data => {
 		let fullAddress = data.address;
 		let extraAddress = '';
@@ -44,6 +48,7 @@ function Address(props, ref) {
 			if (data.bname !== '') {
 				extraAddress += data.bname;
 			}
+
 			if (data.buildingName !== '') {
 				extraAddress +=
 					extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName;
@@ -58,10 +63,6 @@ function Address(props, ref) {
 		onChange('address', fullAddress);
 	};
 
-	const handleClickPostCode = () => {
-		open({ onComplete: handleComplete });
-	};
-
 	const handleChangeDetail = e => {
 		setDetailAddress(e.target.value);
 		onChange('detailAddress', e.target.value);
@@ -70,6 +71,7 @@ function Address(props, ref) {
 	return (
 		<S.Address {...rest}>
 			<S.H1 $register={register}>주소</S.H1>
+
 			<div>
 				<S.Input
 					type="text"
@@ -81,11 +83,17 @@ function Address(props, ref) {
 					readOnly
 				/>
 				{button && (
-					<Button variant="default" size={size} onClick={handleClickPostCode}>
+					<Button
+						variant="default"
+						scale
+						size={size}
+						onClick={handleClickPostCode}
+					>
 						주소 찾기
 					</Button>
 				)}
 			</div>
+
 			<S.Input
 				type="text"
 				value={address || ''}
@@ -94,6 +102,7 @@ function Address(props, ref) {
 				disabled={disabled}
 				readOnly
 			/>
+
 			<S.Input
 				type="text"
 				value={detailAddress || ''}
@@ -103,6 +112,7 @@ function Address(props, ref) {
 				disabled={disabled}
 				maxLength={maxLength}
 			/>
+
 			{message && <p>{message}</p>}
 		</S.Address>
 	);
