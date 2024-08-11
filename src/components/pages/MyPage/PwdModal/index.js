@@ -161,11 +161,7 @@ function PwdModal(props) {
 					<Button size="height" variant="white" onClick={onClose}>
 						취소
 					</Button>
-					<Button
-						size="height"
-						variant="default"
-						onClick={() => handleChangePw()}
-					>
+					<Button size="height" variant="default" onClick={handleChangePw}>
 						확인
 					</Button>
 				</S.ButtonBox>

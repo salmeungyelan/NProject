@@ -68,11 +68,7 @@ function MyPage() {
 						<InputBox title="비밀번호" value="00000" type="password" readOnly />
 
 						<S.PwBtn>
-							<Button
-								size="height"
-								variant="default"
-								onClick={() => openModal()}
-							>
+							<Button size="height" variant="default" onClick={openModal}>
 								비밀번호 변경하기
 							</Button>
 						</S.PwBtn>

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { flexCenter, flexColumn } from 'styles/common';
+import { flexCenter, flexColumn, textOverflowEllipsis } from 'styles/common';
 
 export const Background = styled.div`
 	position: relative;
@@ -55,9 +55,7 @@ export const MediaTitle = styled.div`
 
 	> p {
 		font-size: ${({ theme }) => theme.FONT_SIZE.xs};
-		overflow: hidden;
-		white-space: nowrap;
-		text-overflow: ellipsis;
+		${textOverflowEllipsis};
 		text-align: center;
 		width: 50px;
 	}

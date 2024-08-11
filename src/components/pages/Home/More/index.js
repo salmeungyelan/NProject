@@ -1,72 +1,21 @@
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import useApi from 'hooks/useApi';
 import LINK from 'constants/link';
 
 import * as S from './index.styles';
 
 import Line from 'components/@common/Line';
 
-function More({ children }) {
-	// 공지사항이면 true / 이용안내 false
-	const title = children === '공지사항';
+function More(props) {
+	const { children, data } = props;
 
-	const [impData, setImpData] = useState([]);
+	const isNotice = children === '공지사항';
 
-	// 공지사항 중요 2개
-	const { result: impResult, isLoading: impLoading } = useApi({
-		path: `/client/notices?size=2&noticeContentTypes[]=NOTICE_CONTENT_TYPE_01`,
-		shouldFetch: true,
-	});
+	const importantList = isNotice ? data.importantNoticeList : [];
+	const generalList = isNotice ? data.noticeList : data;
 
-	const [genData, setGenData] = useState([]);
-
-	// 공지사항 일반 3개 & 이용안내 5개
-	const {
-		result: genResult,
-		trigger: genTrigger,
-		isLoading: genLoading,
-	} = useApi({
-		path: '/client/guides?size=5',
-		shouldFetch: !title,
-	});
-
-	useEffect(() => {
-		if (genResult.data) {
-			const data = title ? genResult.data.noticeList : genResult.data.guideList;
-			setGenData(data);
-		}
-
-		if (
-			title &&
-			impResult.data?.noticeList &&
-			!impLoading &&
-			!genResult.data?.noticeList &&
-			!genLoading
-		) {
-			setImpData(impResult.data.noticeList);
-
-			const path = `/client/notices?size=${
-				5 - (impResult.data?.noticeList && impResult.data?.noticeList?.length)
-			}&noticeContentTypes[]=NOTICE_CONTENT_TYPE_02`;
-
-			genTrigger({
-				path,
-				applyResult: true,
-			});
-		}
-	}, [
-		genResult.data?.noticeList,
-		impResult.data?.noticeList,
-		impLoading,
-		genLoading,
-		genTrigger,
-	]);
-
-	// 더보기 주소
-	const link = title ? LINK.NOTICE : LINK.GUIDE;
-	const detail = title ? LINK.NOTICE_POST : LINK.GUIDE_POST;
+	const link = isNotice ? LINK.NOTICE : LINK.GUIDE;
+	const detailLink = isNotice ? LINK.NOTICE_POST : LINK.GUIDE_POST;
 
 	return (
 		<S.Body>
@@ -79,13 +28,12 @@ function More({ children }) {
 
 			<Line size="width" variant="lightGray" />
 
-			<S.List $genData={genData}>
+			<S.List>
 				{/* 공지사항 중요 2개 */}
-				{title &&
-					impData &&
-					impData.map((notice, idx) => (
+				{isNotice &&
+					importantList?.map((notice, idx) => (
 						<S.Important key={idx}>
-							<Link to={detail + `/${notice.id}`}>
+							<Link to={detailLink + `/${notice.id}`}>
 								<img src="/assets/icons/pin.svg" alt="pin" />
 								<S.ImportantBtn>중요</S.ImportantBtn>
 								<S.ImpTitle>{notice.title}</S.ImpTitle>
@@ -96,23 +44,20 @@ function More({ children }) {
 					))}
 
 				{/* 공지사항 일반 3개 & 이용안내 5개 */}
-				{genData &&
-					genData.map((guide, idx) => (
-						<S.Commons key={idx}>
-							<Link to={detail + `/${guide.id}`}>
-								<S.ListTitle>{guide.title}</S.ListTitle>
-								<S.Date>{guide.createDate}</S.Date>
-							</Link>
-						</S.Commons>
-					))}
+				{generalList?.map((item, idx) => (
+					<S.Commons key={idx}>
+						<Link to={`${detailLink}/${item.id}`}>
+							<S.ListTitle>{item.title}</S.ListTitle>
+							<S.Date>{item.createDate}</S.Date>
+						</Link>
+					</S.Commons>
+				))}
 
-				{/* 이용안내 없을 때 */}
-				{!title && !genData.length && (
+				{!isNotice && !generalList?.length && (
 					<S.NoData>등록된 이용안내가 없습니다.</S.NoData>
 				)}
 
-				{/* 공지사항 없을 때 */}
-				{title && !genData.length && !impData.length && (
+				{isNotice && !generalList?.length && !importantList?.length && (
 					<S.NoData>등록된 공지사항이 없습니다.</S.NoData>
 				)}
 			</S.List>

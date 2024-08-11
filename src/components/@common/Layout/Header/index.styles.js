@@ -61,10 +61,18 @@ export const Logout = styled.button`
 	width: 74px;
 	height: 23px;
 	font-size: 500;
+
+	&:hover {
+		background-color: ${({ theme }) => theme.PALETTE.orange[300]};
+	}
 `;
 
 export const MyPage = styled(Logout)`
 	background-color: ${({ theme }) => theme.PALETTE.navy};
+
+	&:hover {
+		background-color: ${({ theme }) => theme.PALETTE.navyHover};
+	}
 `;
 
 export const Nav = styled.nav`
@@ -114,6 +122,12 @@ export const Li = styled.li`
 			display: none;
 
 			&:checked {
+				color: ${({ theme }) => theme.PALETTE.orange[100]};
+			}
+		}
+
+		> a {
+			&:hover {
 				color: ${({ theme }) => theme.PALETTE.orange[100]};
 			}
 		}

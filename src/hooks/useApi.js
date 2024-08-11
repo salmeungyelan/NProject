@@ -22,7 +22,6 @@ const useApi = ({
 	showBoundary = true, // 비동기 에러 표시 여부
 }) => {
 	const navigate = useNavigate();
-	/* const [isLoading, setIsLoading] = useState(false); */
 	const [error, setError] = useState(null);
 	const [result, setResult] = useState({});
 	const [_, occurredError] = useState({});

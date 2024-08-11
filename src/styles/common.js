@@ -60,3 +60,9 @@ export const flexSpaceBetweenCenter = css`
 	align-items: center;
 	justify-content: space-between;
 `;
+
+export const textOverflowEllipsis = css`
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+`;
