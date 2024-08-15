@@ -1,42 +1,21 @@
-import { useEffect, useState } from 'react';
-
-import useFilter from 'hooks/useFilter';
-import useApi from 'hooks/useApi';
-
 import * as S from './index.styles';
 
 function Filter(props) {
-	const { onClick, sort } = props;
-
-	const { filterName } = useFilter();
-
-	const { result } = useApi({
-		path: `/client/global-constants?typeValue=${filterName}_FILTER`,
-		shouldFetch: true,
-	});
-
-	const [filter, setFilter] = useState([]);
-
-	useEffect(() => {
-		if (result.data) {
-			setFilter(result.data.globalConstantList);
-		}
-	}, [result.data]);
+	const { filter, onClick, sort } = props;
 
 	return (
 		<S.Body>
-			{filter &&
-				filter.map(flt => (
-					<S.Sort
-						key={flt.id}
-						data-value={flt.codeValue}
-						selected={sort === flt.codeValue}
-						onClick={onClick}
-					>
-						<span>• </span>
-						<p> {flt.codeLabel}</p>
-					</S.Sort>
-				))}
+			{filter?.map((flt, i) => (
+				<S.Sort
+					key={i}
+					data-value={flt.codeValue}
+					selected={sort === flt.codeValue}
+					onClick={onClick}
+				>
+					<span>• </span>
+					<p> {flt.codeLabel}</p>
+				</S.Sort>
+			))}
 		</S.Body>
 	);
 }
