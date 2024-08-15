@@ -1,24 +1,12 @@
-import { useEffect, useState } from 'react';
-
-import useApi from 'hooks/useApi';
-
 import * as S from './index.styles';
 
 function Category(props) {
-	const { selectedCategory, setSelectedCategory, updateQueryParams } = props;
-
-	const [categories, setCategories] = useState([]);
-
-	const { result } = useApi({
-		path: '/client/global-constants?typeValue=REVIEW_TYPE',
-		shouldFetch: true,
-	});
-
-	useEffect(() => {
-		if (result.data) {
-			setCategories(result.data.globalConstantList);
-		}
-	}, [result.data]);
+	const {
+		categories,
+		selectedCategory,
+		setSelectedCategory,
+		updateQueryParams,
+	} = props;
 
 	const handleClickCategory = name => {
 		updateQueryParams({ page: 1, category: name });
@@ -34,9 +22,9 @@ function Category(props) {
 				전체
 			</S.Category>
 
-			{categories?.map(category => (
+			{categories?.map((category, i) => (
 				<S.Category
-					key={category.id}
+					key={i}
 					$selected={selectedCategory === category.codeValue}
 					onClick={() => handleClickCategory(category.codeValue)}
 				>
