@@ -18,6 +18,8 @@ function VisitExperience() {
 	const { modalState, openModal, closeModal } = useModal();
 
 	const [otherList, setOtherList] = useState([]);
+	const [globalConstants, setGlobalConstants] = useState([]);
+
 	const [checkHistory, setCheckHistory] = useState(false);
 
 	const [selectedStatus, setSelectedStatus] = useState([
@@ -50,6 +52,7 @@ function VisitExperience() {
 		if (result.data) {
 			setOtherList(result.data.visitExperiences);
 			setTotal(result.data.total);
+			setGlobalConstants(result.data.visitExperienceConstant);
 		}
 	}, [result.data]);
 
@@ -101,6 +104,8 @@ function VisitExperience() {
 					<OtherList
 						title="체험단"
 						sort={sort}
+						filter={globalConstants.filter}
+						status={globalConstants.status}
 						otherList={otherList}
 						selectedStatus={selectedStatus}
 						setSelectedStatus={setSelectedStatus}
