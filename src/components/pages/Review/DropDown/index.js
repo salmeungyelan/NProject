@@ -1,28 +1,14 @@
-import { useEffect, useState } from 'react';
-
-import useApi from 'hooks/useApi';
-
-import * as S from './index.styles';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import * as S from './index.styles';
+
 function DropDown(props) {
-	const { selectedOption, setSelectedOption } = props;
+	const { option, selectedOption, setSelectedOption } = props;
 
 	const [isOpen, setIsOpen] = useState(false);
-	const [option, setOption] = useState([]);
 
 	const navigate = useNavigate();
-
-	const { result } = useApi({
-		path: '/client/global-constants?typeValue=REVIEW_FILTER',
-		shouldFetch: true,
-	});
-
-	useEffect(() => {
-		if (result.data) {
-			setOption(result.data.globalConstantList);
-		}
-	}, [result.data]);
 
 	const handleClickOption = (codeLabel, codeValue) => {
 		const params = new URLSearchParams(location.search);
@@ -49,9 +35,9 @@ function DropDown(props) {
 			{isOpen && (
 				<S.OptionsContainer>
 					{option &&
-						option.map(option => (
+						option.map((option, i) => (
 							<S.Option
-								key={option.id}
+								key={i}
 								$selected={option.codeLabel === selectedOption.codeLabel}
 								onClick={() =>
 									handleClickOption(option.codeLabel, option.codeValue)
