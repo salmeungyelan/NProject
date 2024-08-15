@@ -19,6 +19,15 @@ function Notice() {
 	const { sort, setSort, handelSelectFilter } = useFilter();
 	const { inputData, setInputData, handleChangeSearch } = useInput();
 
+	// 공지사항 리스트 및 네브 / 필터
+	const [noticeList, setNoticeList] = useState([]);
+	const [globalConstants, setGlobalConstants] = useState([]);
+	const [navClicked, setNavClicked] = useState('전체');
+
+	// 페이지
+	const itemsPerPage = 8;
+	const { currentPage, setCurrentPage, total, setTotal } = usePagination();
+
 	const location = useLocation();
 	const navigate = useNavigate();
 
@@ -29,24 +38,11 @@ function Notice() {
 			sort: params.get('sort') || sort,
 			inputData: params.get('title') || '',
 			currentPage: parseInt(params.get('page'), 10) || 1,
-			navClicked: params.get('nav') || '전체',
+			navClicked: params.get('nav'),
 		};
 	};
 
-	useEffect(() => {
-		const params = getQueryParams();
-		setSort(params.sort);
-		setInputData(params.inputData);
-		setCurrentPage(params.currentPage);
-		setNavClicked(params.navClicked);
-	}, [location.search]);
-
-	const [noticeList, setNoticeList] = useState([]);
-	const [navClicked, setNavClicked] = useState(getQueryParams().navClicked);
-
-	const itemsPerPage = 8;
-	const { currentPage, setCurrentPage, total, setTotal } = usePagination();
-
+	// 기본 주소 + 쿼리스트링으로 들어간 api path
 	const basePath = `/client/notices/all?size=${itemsPerPage}&page=${currentPage}&sortBy=${sort}`;
 	const noticeType =
 		navClicked !== '전체' ? `&noticeContentTypes[]=${navClicked}` : '';
@@ -59,6 +55,15 @@ function Notice() {
 	});
 
 	useEffect(() => {
+		const params = getQueryParams();
+
+		setSort(params.sort);
+		setInputData(params.inputData);
+		setCurrentPage(params.currentPage);
+		setNavClicked(params.navClicked || '전체');
+	}, [location.search]);
+
+	useEffect(() => {
 		trigger({ path: fullPath, applyResult: true });
 	}, [sort, navClicked, currentPage]);
 
@@ -66,6 +71,7 @@ function Notice() {
 		if (result.data) {
 			setNoticeList(result.data.noticeList);
 			setTotal(result.data.total);
+			setGlobalConstants(result.data.noticeConstant);
 		}
 	}, [result.data]);
 
@@ -179,7 +185,11 @@ function Notice() {
 					reset={handleReset}
 				/>
 
-				<Filter sort={sort} onClick={handelSelectFilter} />
+				<Filter
+					filter={globalConstants.noticeFilters}
+					sort={sort}
+					onClick={handelSelectFilter}
+				/>
 
 				{noticeList?.length ? (
 					<NoticeList list={noticeList} />
