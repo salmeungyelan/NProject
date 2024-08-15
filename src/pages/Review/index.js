@@ -32,6 +32,7 @@ function Review() {
 	// 리뷰 리스트 및 각종 필터, status
 	const [reviewList, setReviewList] = useState([]);
 	const [globalConstants, setGlobalConstants] = useState([]);
+	const [shouldFetchList, setShouldFetchList] = useState(false);
 
 	const location = useLocation();
 	const navigate = useNavigate();
@@ -103,7 +104,7 @@ function Review() {
 
 	const { result, trigger } = useApi({
 		path: fullPath,
-		shouldFetch: true,
+		shouldFetch: false,
 	});
 
 	useEffect(() => {
@@ -115,17 +116,20 @@ function Review() {
 		setSelectedStatus(params.status);
 		setInputData(params.inputData);
 		setCurrentPage(params.currentPage);
+		setShouldFetchList((prev) => (prev = !prev));
 	}, [location.search]);
 
 	// 카테고리 / 옵션 / 상태만 변화했을 때 api 호출
+	/**
+	 * @author hwangdo
+	 * @date 2024. 8. 15.
+	 * @comment 최초 렌더링 및, 이후 리스트 검색조건 변경 시 shouldFetchList에 의해서 서버 API로 리스트 GET 요청을 호출
+	 * 			아래 useEffect를 통해서만 리스트를 가져옴
+	 */
 	useEffect(() => {
 		trigger({ path: fullPath, applyResult: true });
 	}, [
-		selectedCategory,
-		selectedOption,
-		selectedStatus,
-		currentPage,
-		itemsPerPage,
+		shouldFetchList
 	]);
 
 	useEffect(() => {
