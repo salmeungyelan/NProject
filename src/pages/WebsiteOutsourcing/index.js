@@ -18,6 +18,8 @@ function WebsiteOutsourcing() {
 	const { modalState, openModal, closeModal } = useModal();
 
 	const [otherList, setOtherList] = useState([]);
+	const [globalConstants, setGlobalConstants] = useState([]);
+
 	const [checkHistory, setCheckHistory] = useState(false);
 
 	const [selectedStatus, setSelectedStatus] = useState([
@@ -50,6 +52,7 @@ function WebsiteOutsourcing() {
 		if (result.data) {
 			setOtherList(result.data.websiteOutsourcings);
 			setTotal(result.data.total);
+			setGlobalConstants(result.data.websiteOutsourcingConstant);
 		}
 	}, [result.data]);
 
@@ -103,6 +106,8 @@ function WebsiteOutsourcing() {
 					<OtherList
 						title="홈페이지 제작"
 						sort={sort}
+						filter={globalConstants.filter}
+						status={globalConstants.status}
 						otherList={otherList}
 						selectedStatus={selectedStatus}
 						setSelectedStatus={setSelectedStatus}

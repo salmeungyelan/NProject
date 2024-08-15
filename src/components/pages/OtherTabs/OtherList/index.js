@@ -15,6 +15,8 @@ function OtherList(props) {
 	const {
 		title,
 		otherList,
+		filter,
+		status,
 		selectedStatus,
 		setSelectedStatus,
 		sort,
@@ -44,8 +46,9 @@ function OtherList(props) {
 	return (
 		<S.Body>
 			<S.FilterBox>
-				<Filter sort={sort} onClick={onSelect} />
+				<Filter filter={filter} sort={sort} onClick={onSelect} />
 				<MultiSelect
+					status={status}
 					selectedStatus={selectedStatus}
 					setSelectedStatus={setSelectedStatus}
 				/>
