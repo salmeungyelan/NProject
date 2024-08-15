@@ -1,31 +1,17 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 
 import usePathname from 'hooks/usePathname';
-import useApi from 'hooks/useApi';
 
 import * as S from './index.styles';
 
 function MultiSelect(props) {
-	const { selectedStatus, setSelectedStatus, updateQueryParams } = props;
+	const { status, selectedStatus, setSelectedStatus, updateQueryParams } =
+		props;
 
 	const { path } = usePathname();
 
 	const checkBox = useRef(null);
 	const [expanded, setExpanded] = useState(false);
-	const [status, setStatus] = useState([]);
-
-	const paths = path.toUpperCase().replace(/-/g, '_');
-
-	const { result } = useApi({
-		path: `/client/global-constants?typeValue=${paths}_STATUS`,
-		shouldFetch: true,
-	});
-
-	useEffect(() => {
-		if (result.data) {
-			setStatus(result.data.globalConstantList);
-		}
-	}, [result.data]);
 
 	const showCheckboxes = () => {
 		setExpanded(!expanded);
@@ -103,8 +89,8 @@ function MultiSelect(props) {
 				</S.Label>
 
 				{status &&
-					status.map(stat => (
-						<S.Label key={stat.id}>
+					status.map((stat, i) => (
+						<S.Label key={i}>
 							<input
 								id={stat.codeValue}
 								type="checkbox"

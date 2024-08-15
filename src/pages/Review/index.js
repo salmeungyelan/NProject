@@ -29,6 +29,10 @@ const reviewStatus = [
 function Review() {
 	const { inputData, setInputData, handleChangeSearch } = useInput();
 
+	// 리뷰 리스트 및 각종 필터, status
+	const [reviewList, setReviewList] = useState([]);
+	const [globalConstants, setGlobalConstants] = useState([]);
+
 	const location = useLocation();
 	const navigate = useNavigate();
 
@@ -55,36 +59,25 @@ function Review() {
 			sortBy: params.get('sortBy') || 'REVIEW_FILTER_01',
 		};
 	};
+
 	const params = getQueryParams();
 
-	useEffect(() => {
-		setSelectedCategory(params.category);
-		setSelectedOption({
-			codeLabel: params.optionCode,
-			sortBy: params.sortBy,
-		});
-		setSelectedStatus(params.status);
-		setInputData(params.inputData);
-		setCurrentPage(params.currentPage);
-	}, [location.search]);
-
-	const [reviewList, setReviewList] = useState([]);
+	// 선택된 카테고리, 상태, 옵션
 	const [selectedCategory, setSelectedCategory] = useState(params.category);
-
 	const [selectedStatus, setSelectedStatus] = useState(params.status);
-
 	const [selectedOption, setSelectedOption] = useState({
 		codeLabel: params.optionCode,
 		sortBy: params.sortBy,
 	});
 
+	// 한 번에 보여줄 아이템 수
 	const calcItemsPerPage = () => {
 		if (window.innerWidth >= 768 && window.innerWidth < 1200) return 9;
 		else return 10;
 	};
 
-	// 한 번에 보여줄 아이템 수
 	const [itemsPerPage, setItemsPerPage] = useState(calcItemsPerPage);
+	const { currentPage, setCurrentPage, total, setTotal } = usePagination();
 
 	// 화면 사이즈 변경에 따른 보여질 갯수 변경
 	useEffect(() => {
@@ -96,8 +89,7 @@ function Review() {
 		window.addEventListener('resize', handleResize);
 	}, [itemsPerPage]);
 
-	const { currentPage, setCurrentPage, total, setTotal } = usePagination();
-
+	// api path
 	const basePath = `/client/reviews?size=${itemsPerPage}&page=${currentPage}`;
 	const category = selectedCategory && `&type=${selectedCategory}`;
 	const option = `&sortBy=${selectedOption.sortBy}`;
@@ -114,6 +106,17 @@ function Review() {
 		shouldFetch: true,
 	});
 
+	useEffect(() => {
+		setSelectedCategory(params.category);
+		setSelectedOption({
+			codeLabel: params.optionCode,
+			sortBy: params.sortBy,
+		});
+		setSelectedStatus(params.status);
+		setInputData(params.inputData);
+		setCurrentPage(params.currentPage);
+	}, [location.search]);
+
 	// 카테고리 / 옵션 / 상태만 변화했을 때 api 호출
 	useEffect(() => {
 		trigger({ path: fullPath, applyResult: true });
@@ -129,6 +132,7 @@ function Review() {
 		if (result.data) {
 			setReviewList(result.data.reviews);
 			setTotal(result.data.total);
+			setGlobalConstants(result.data.reviewConstant);
 		}
 	}, [result.data]);
 
@@ -154,7 +158,8 @@ function Review() {
 	const handleClickSearch = async () => {
 		setCurrentPage(1);
 		updateQueryParams({ page: 1, title: inputData, requirement: inputData });
-		await trigger({ path: fullPath, applyResult: true });
+
+		// await trigger({ path: fullPath, applyResult: true });
 	};
 
 	// 검색 초기화
@@ -170,10 +175,7 @@ function Review() {
 			sortBy: '',
 			category: '',
 		});
-		await trigger({
-			path: basePath,
-			applyResult: true,
-		});
+		// await trigger({ path: basePath, applyResult: true });
 	};
 
 	// 신청 페이지 이동
@@ -205,6 +207,7 @@ function Review() {
 					<S.Main>
 						<S.SelectBox>
 							<Category
+								categories={globalConstants.type}
 								selectedCategory={selectedCategory}
 								setSelectedCategory={setSelectedCategory}
 								updateQueryParams={updateQueryParams}
@@ -212,11 +215,13 @@ function Review() {
 
 							<S.MultiSelect>
 								<MultiSelect
+									status={globalConstants.status}
 									selectedStatus={selectedStatus}
 									setSelectedStatus={setSelectedStatus}
 									updateQueryParams={updateQueryParams}
 								/>
 								<DropDown
+									option={globalConstants.filter}
 									selectedOption={selectedOption}
 									setSelectedOption={setSelectedOption}
 								/>
@@ -251,6 +256,7 @@ function Review() {
 					<></>
 				)}
 			</S.Body>
+
 			<S.ApplyBtnBox>
 				<Button size="height" variant="default" onClick={handleClickApply}>
 					리뷰 신청하기
