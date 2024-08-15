@@ -19,14 +19,18 @@ function Guide() {
 	const { sort, setSort, handelSelectFilter } = useFilter();
 	const { inputData, setInputData, handleChangeSearch } = useInput();
 
+	// 이용안내 리스트 및 이용안내 필터
 	const [guideList, setGuideList] = useState([]);
+	const [globalConstant, setGlobalConstant] = useState([]);
 
+	// 페이지
 	const itemsPerPage = 8;
 	const { currentPage, setCurrentPage, total, setTotal } = usePagination();
 
 	const location = useLocation();
 	const navigate = useNavigate();
 
+	// 기본 주소 + 인풋 데이터가 들어간 api path
 	const basePath = `/client/guides?size=${itemsPerPage}&page=${currentPage}&sortBy=${sort}`;
 	const fullPath = basePath + `&title=${inputData}&content=${inputData}`;
 
@@ -47,6 +51,7 @@ function Guide() {
 
 	useEffect(() => {
 		const params = getQueryParams();
+
 		setSort(params.sort);
 		setInputData(params.inputData);
 		setCurrentPage(params.currentPage);
@@ -60,6 +65,7 @@ function Guide() {
 		if (result.data) {
 			setGuideList(result.data.guideList);
 			setTotal(result.data.total);
+			setGlobalConstant(result.data.guideFilters);
 		}
 	}, [result.data]);
 
@@ -119,7 +125,11 @@ function Guide() {
 					reset={handleClickReset}
 				/>
 
-				<Filter sort={sort} onClick={handelSelectFilter} />
+				<Filter
+					filter={globalConstant}
+					sort={sort}
+					onClick={handelSelectFilter}
+				/>
 
 				{guideList?.length ? (
 					<GuideList list={guideList} />
