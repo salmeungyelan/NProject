@@ -127,7 +127,9 @@ function Review() {
 	 * 			아래 useEffect를 통해서만 리스트를 가져옴
 	 */
 	useEffect(() => {
-		trigger({ path: fullPath, applyResult: true });
+		return (() => {
+			trigger({ path: fullPath, applyResult: true });
+		});
 	}, [
 		shouldFetchList
 	]);
