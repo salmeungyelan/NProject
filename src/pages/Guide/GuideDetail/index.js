@@ -26,7 +26,6 @@ function GuideDetail() {
 	useEffect(() => {
 		if (result.data) {
 			setGuideDetail(result.data.guide);
-
 			setPrevPost({
 				prev: result.data.previousGuide,
 				next: result.data.nextGuide,
