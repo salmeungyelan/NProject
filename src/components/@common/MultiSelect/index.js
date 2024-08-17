@@ -25,7 +25,7 @@ function MultiSelect(props) {
 		// '전체'가 선택되면 다른 모든 선택 해제하고 '전체'만 선택
 		if (label === '전체') {
 			updatedStatus = [{ codeLabel: '전체', sortBy: '' }];
-			if (path === 'review') updateQueryParams({ page: 1, status: '' });
+			updateQueryParams({ page: 1, status: '' });
 			setSelectedStatus(updatedStatus);
 			return setExpanded(false);
 		}
@@ -39,21 +39,19 @@ function MultiSelect(props) {
 			// 4개가 선택되면 '전체'로 설정
 			if (updatedStatus.length === status.length) {
 				updatedStatus = [{ codeLabel: '전체', sortBy: '' }];
-				if (path === 'review') updateQueryParams({ page: 1, status: '' });
+				updateQueryParams({ page: 1, status: '' });
 			}
 		}
 
 		if (updatedStatus.length === 0) {
 			updatedStatus = [{ codeLabel: '전체', sortBy: '' }];
-			if (path === 'review') updateQueryParams({ page: 1, status: '' });
+			updateQueryParams({ page: 1, status: '' });
 		}
 
-		if (path === 'review') {
-			updateQueryParams({
-				page: 1,
-				status: updatedStatus.map(stat => stat.sortBy).join(','),
-			});
-		}
+		updateQueryParams({
+			page: 1,
+			status: updatedStatus.map(stat => stat.sortBy).join(','),
+		});
 
 		setSelectedStatus(updatedStatus);
 	};
