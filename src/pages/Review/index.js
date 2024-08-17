@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import useInput from 'hooks/useInput';
 import usePagination from 'hooks/usePagination';
+import { REVIEW_STATUS } from 'constants/status';
 import useApi from 'hooks/useApi';
 import LINK from 'constants/link';
 
@@ -17,14 +18,6 @@ import Card from 'components/@common/Card';
 import NoPost from 'components/@common/NoPost';
 import Button from 'components/@common/Button';
 import Pagination from 'components/@common/Pagination';
-
-const reviewStatus = [
-	{ codeLabel: '전체', sortBy: '' },
-	{ codeLabel: '임시저장', sortBy: 'REVIEW_STATUS_01' },
-	{ codeLabel: '대기', sortBy: 'REVIEW_STATUS_02' },
-	{ codeLabel: '진행중', sortBy: 'REVIEW_STATUS_03' },
-	{ codeLabel: '완료', sortBy: 'REVIEW_STATUS_04' },
-];
 
 function Review() {
 	const { inputData, setInputData, handleChangeSearch } = useInput();
@@ -47,7 +40,7 @@ function Review() {
 
 		const additionalStatuses = statusParam
 			? statusParam.map(param =>
-					reviewStatus.find(status => status.sortBy === param),
+					REVIEW_STATUS.find(status => status.sortBy === param),
 			  )
 			: [{ codeLabel: '전체', sortBy: '' }];
 
@@ -116,23 +109,13 @@ function Review() {
 		setSelectedStatus(params.status);
 		setInputData(params.inputData);
 		setCurrentPage(params.currentPage);
-		setShouldFetchList((prev) => (prev = !prev));
+		setShouldFetchList(prev => !prev);
 	}, [location.search]);
 
 	// 카테고리 / 옵션 / 상태만 변화했을 때 api 호출
-	/**
-	 * @author hwangdo
-	 * @date 2024. 8. 15.
-	 * @comment 최초 렌더링 및, 이후 리스트 검색조건 변경 시 shouldFetchList에 의해서 서버 API로 리스트 GET 요청을 호출
-	 * 			아래 useEffect를 통해서만 리스트를 가져옴
-	 */
 	useEffect(() => {
-		return (() => {
-			trigger({ path: fullPath, applyResult: true });
-		});
-	}, [
-		shouldFetchList
-	]);
+		trigger({ path: fullPath, applyResult: true });
+	}, [shouldFetchList]);
 
 	useEffect(() => {
 		if (result.data) {
