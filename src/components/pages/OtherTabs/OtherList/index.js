@@ -10,6 +10,7 @@ import Progress from 'components/@common/Progress';
 import Incomplete from './Incomplete';
 import ProgressStatus from './ProgressStatus';
 import NoPost from 'components/@common/NoPost';
+import { useNavigate } from 'react-router-dom';
 
 function OtherList(props) {
 	const {
@@ -25,6 +26,7 @@ function OtherList(props) {
 	} = props;
 
 	const { path } = usePathname();
+	const navigate = useNavigate();
 
 	const [display, setDisplay] = useState(null);
 
@@ -43,6 +45,23 @@ function OtherList(props) {
 		);
 	}, [path]);
 
+	const updateQueryParams = newParams => {
+		const params = new URLSearchParams(location.search);
+
+		Object.keys(newParams).forEach(key => {
+			if (newParams[key] !== undefined && newParams[key] !== null) {
+				if (newParams[key] === '') {
+					params.delete(key); // 빈 문자열인 경우 쿼리스트링에서 삭제
+				} else {
+					params.set(key, newParams[key]);
+				}
+			} else {
+				params.delete(key); // null 또는 undefined인 경우 쿼리스트링에서 삭제
+			}
+		});
+		navigate(`?${params.toString()}`, { replace: true });
+	};
+
 	return (
 		<S.Body>
 			<S.FilterBox>
@@ -51,6 +70,7 @@ function OtherList(props) {
 					status={status}
 					selectedStatus={selectedStatus}
 					setSelectedStatus={setSelectedStatus}
+					updateQueryParams={updateQueryParams}
 				/>
 			</S.FilterBox>
 
