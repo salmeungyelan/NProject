@@ -22,6 +22,7 @@ function Guide() {
 	// 이용안내 리스트 및 이용안내 필터
 	const [guideList, setGuideList] = useState([]);
 	const [globalConstant, setGlobalConstant] = useState([]);
+	const [shouldFetchList, setShouldFetchList] = useState(false);
 
 	// 페이지
 	const itemsPerPage = 8;
@@ -36,7 +37,7 @@ function Guide() {
 
 	const { result, trigger } = useApi({
 		path: fullPath,
-		shouldFetch: true,
+		shouldFetch: false,
 	});
 
 	// 쿼리스트링에서 상태를 가져오는 함수
@@ -55,11 +56,12 @@ function Guide() {
 		setSort(params.sort);
 		setInputData(params.inputData);
 		setCurrentPage(params.currentPage);
+		setShouldFetchList(prev => !prev);
 	}, [location.search]);
 
 	useEffect(() => {
 		trigger({ path: fullPath, applyResult: true });
-	}, [sort, currentPage]);
+	}, [shouldFetchList]);
 
 	useEffect(() => {
 		if (result.data) {
