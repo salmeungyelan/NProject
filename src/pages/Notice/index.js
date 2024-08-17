@@ -23,6 +23,7 @@ function Notice() {
 	const [noticeList, setNoticeList] = useState([]);
 	const [globalConstants, setGlobalConstants] = useState([]);
 	const [navClicked, setNavClicked] = useState('전체');
+	const [shouldFetchList, setShouldFetchList] = useState(false);
 
 	// 페이지
 	const itemsPerPage = 8;
@@ -51,7 +52,7 @@ function Notice() {
 
 	const { result, trigger } = useApi({
 		path: fullPath,
-		shouldFetch: true,
+		shouldFetch: false,
 	});
 
 	useEffect(() => {
@@ -61,11 +62,12 @@ function Notice() {
 		setInputData(params.inputData);
 		setCurrentPage(params.currentPage);
 		setNavClicked(params.navClicked || '전체');
+		setShouldFetchList(prev => !prev);
 	}, [location.search]);
 
 	useEffect(() => {
 		trigger({ path: fullPath, applyResult: true });
-	}, [sort, navClicked, currentPage]);
+	}, [shouldFetchList]);
 
 	useEffect(() => {
 		if (result.data) {

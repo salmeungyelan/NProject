@@ -26,7 +26,6 @@ function NoticeDetail() {
 	useEffect(() => {
 		if (result.data) {
 			setNoticeDetail(result.data.notice);
-
 			setPrevPost({
 				prev: result.data.previousNotice,
 				next: result.data.nextNotice,
