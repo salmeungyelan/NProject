@@ -1,7 +1,9 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import useFilter from 'hooks/useFilter';
 import useModal from 'hooks/useModal';
+import { VIEWTAB_INSTAGRAM_STATUS } from 'constants/status';
 import usePagination from 'hooks/usePagination';
 import useApi from 'hooks/useApi';
 
@@ -14,39 +16,62 @@ import Button from 'components/@common/Button';
 import Pagination from 'components/@common/Pagination';
 
 function ViewTabInstagram() {
-	const { sort, handelSelectFilter } = useFilter();
+	const { sort, setSort, handelSelectFilter } = useFilter();
 	const { modalState, openModal, closeModal } = useModal();
 
 	const [otherList, setOtherList] = useState([]);
 	const [globalConstants, setGlobalConstants] = useState([]);
+	const [shouldFetchList, setShouldFetchList] = useState(false);
+
+	const location = useLocation();
+	const navigate = useNavigate();
+
+	// 쿼리스트링에서 상태를 가져오는 함수
+	const getQueryParams = () => {
+		const params = new URLSearchParams(location.search);
+
+		const statusParam = params.get('status')
+			? params.get('status').split(',')
+			: null;
+
+		const additionalStatuses = statusParam
+			? statusParam.map(param =>
+					VIEWTAB_INSTAGRAM_STATUS.find(status => status.sortBy === param),
+			  )
+			: [{ codeLabel: '전체', sortBy: '' }];
+
+		return {
+			// checkHistory: params.get('list') || false,
+			currentPage: parseInt(params.get('page'), 10) || 1,
+			sort: params.get('sort') || sort,
+			status: additionalStatuses,
+		};
+	};
+
+	const params = getQueryParams();
 
 	const [checkHistory, setCheckHistory] = useState(false);
-
-	const [selectedStatus, setSelectedStatus] = useState([
-		{
-			codeLabel: '전체',
-			sortBy: '',
-		},
-	]);
+	const [selectedStatus, setSelectedStatus] = useState(params.status);
 
 	const itemsPerPage = 8;
 	const { currentPage, setCurrentPage, total, setTotal } = usePagination();
 
-	const paths = useMemo(() => {
-		const basePath = `/client/viewtab-instagrams?page=${currentPage}&size=${itemsPerPage}&sortBy=${sort}`;
-		const status =
-			selectedStatus[0].sortBy &&
-			selectedStatus.map(stat => `&status=${stat.sortBy}`).join('');
-
-		return { basePath, status };
-	}, [currentPage, sort, selectedStatus]);
-
-	const { basePath, status } = paths;
+	const basePath = `/client/viewtab-instagrams?page=${currentPage}&size=${itemsPerPage}&sortBy=${sort}`;
+	const status =
+		selectedStatus[0].sortBy &&
+		selectedStatus.map(stat => `&status=${stat.sortBy}`).join('');
 
 	const { result, trigger } = useApi({
 		path: basePath,
-		shouldFetch: true,
+		shouldFetch: false,
 	});
+
+	useEffect(() => {
+		setSelectedStatus(params.status);
+		setSort(params.sort);
+		setCurrentPage(params.currentPage);
+		setShouldFetchList(prev => !prev);
+	}, [location.search]);
 
 	useEffect(() => {
 		if (result.data) {
@@ -58,11 +83,28 @@ function ViewTabInstagram() {
 
 	useEffect(() => {
 		trigger({ path: basePath + status, applyResult: true });
-	}, [selectedStatus, sort, currentPage]);
+	}, [shouldFetchList]);
 
-	useEffect(() => {
-		setCurrentPage(1);
-	}, [selectedStatus]);
+	const updateQueryParams = newParams => {
+		const params = new URLSearchParams(location.search);
+
+		Object.keys(newParams).forEach(key => {
+			if (newParams[key] !== undefined && newParams[key] !== null) {
+				if (newParams[key] === '') {
+					params.delete(key); // 빈 문자열인 경우 쿼리스트링에서 삭제
+				} else {
+					params.set(key, newParams[key]);
+				}
+			} else {
+				params.delete(key); // null 또는 undefined인 경우 쿼리스트링에서 삭제
+			}
+		});
+		navigate(`?${params.toString()}`, { replace: true });
+	};
+
+	// useEffect(() => {
+	// 	updateQueryParams({ list: checkHistory });
+	// }, [checkHistory]);
 
 	// 제안서 & 리스트
 	const handleSuggestBtn = () => {
@@ -75,9 +117,9 @@ function ViewTabInstagram() {
 	};
 
 	// 페이지 변경
-	const handlePageChange = async pageNumber => {
+	const handlePageChange = pageNumber => {
 		setCurrentPage(pageNumber);
-		await trigger({ applyResult: true });
+		updateQueryParams({ page: pageNumber });
 	};
 
 	return (
