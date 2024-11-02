@@ -1,70 +1,37 @@
-# Getting Started with Create React App
+# NetPlace-Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 프로젝트 소개
 
-## Available Scripts
+이 프로젝트는 **(주)넷플레이스 메타**의 외주 의뢰를 받아 개발되었습니다. 본 프로젝트의 주요 목표는 넷플레이스 메타의 클라이언트들이 이용할 수 있는 **웹 페이지**를 제작하는 것입니다. 해당 페이지는 핸드폰, 태블릿, 컴퓨터 등 다양한 기기에서 원활히 동작하도록 최적화되었습니다. <br />
 
-In the project directory, you can run:
+## 진행 기간
 
-### `npm start`
+2024.04.24 - 2024.08.19 <br />
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 주요 역할
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- 디자이너 보조 : 시안 피드백 반영 및 리소스 전달 지원
+- 클라이언트 페이지 프론트엔드 개발 총괄 <br />
 
-### `npm test`
+## 기술 스택
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[![React.js]][React-url] [![JavaScript]][JavaScript-url] [![Styled-components]][Styled-components-url] [![Recoil]][Recoil-url] [![date-fns]][Date-fns-url]
 
-### `npm run build`
+## 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<!-- 기술 스택 -->
+[React.js]: https://img.shields.io/badge/React.js-61DAFB?style=for-the-badge&logo=react&logoColor=20232A
+[React-url]: https://reactjs.org/
+[JavaScript]: https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=20232A
+[JavaScript-url]: https://developer.mozilla.org/ko/docs/Web/JavaScript
+[Styled-components]: https://img.shields.io/badge/StyledComponents-DB7093?style=for-the-badge&logo=styled-components&logoColor=white
+[Styled-components-url]: https://styled-components.com/
+[Recoil]: https://img.shields.io/badge/Recoil-3578E5?style=for-the-badge&logo=recoil&logoColor=white
+[Recoil-url]: https://recoiljs.org/ko/
+[date-fns]: https://img.shields.io/badge/DateFns-770C56?style=for-the-badge&logo=date-fns&logoColor=white
+[Date-fns-url]: https://date-fns.org/
